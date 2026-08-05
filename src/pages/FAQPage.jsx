@@ -1,0 +1,25 @@
+import Seo from '../components/layout/Seo'
+import PageHeader from '../components/layout/PageHeader'
+import FAQ from '../components/sections/FAQ'
+import CTABand from '../components/sections/CTABand'
+
+export default function FAQPage() {
+  return (
+    <>
+      <Seo
+        title="Frequently Asked Questions"
+        description="How Merit Ledger works: fees, timelines, eligibility, ethics, success rates and what happens after you book a consultation."
+      />
+
+      <PageHeader
+        eyebrow="Before you ask"
+        title="The questions students ask us"
+        accent="most."
+        lede="Straight answers on fees, timelines, eligibility and where our involvement stops. If yours is not here, ask an advisor directly — we answer within one working day."
+      />
+
+      <FAQ />
+      <CTABand />
+    </>
+  )
+}

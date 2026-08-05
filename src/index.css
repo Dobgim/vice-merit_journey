@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --nav-offset: 96px;
+  }
+
+  html {
+    scroll-padding-top: var(--nav-offset);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply font-sans;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    @apply bg-navy-900 text-gold-200;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-gold-400 ring-offset-2 ring-offset-white rounded-lg;
+  }
+
+  /* Elegant, unobtrusive scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-navy-50;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-navy-200 rounded-full border-2 border-navy-50;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-navy-300;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/70 backdrop-blur-xl border border-white/60;
+  }
+
+  .glass-dark {
+    @apply bg-white/[0.06] backdrop-blur-xl border border-white/10;
+  }
+
+  /* Text that fades from navy into gold — used sparingly on headline accents */
+  .text-gradient {
+    @apply bg-gradient-to-r from-gold-300 via-gold-400 to-gold-200 bg-clip-text text-transparent;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em];
+  }
+
+  .card-hover {
+    @apply transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-lift;
+  }
+
+  /* Hairline gradient border used on premium cards */
+  .ring-hairline {
+    @apply ring-1 ring-navy-900/[0.06];
+  }
+}
+
+@layer utilities {
+  .mask-fade-x {
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+
+  .balance {
+    text-wrap: balance;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
