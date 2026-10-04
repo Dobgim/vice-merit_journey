@@ -339,7 +339,7 @@ export default function Scholarships({ variant = 'featured' }) {
                   Browse all awards
                 </Button>
               )}
-              <Button to="/contact" size="md" icon="arrowRight">
+              <Button to="/book-consultation" size="md" icon="arrowRight">
                 Request my shortlist
               </Button>
             </div>

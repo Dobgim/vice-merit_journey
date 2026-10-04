@@ -2,7 +2,6 @@ import Seo from '../components/layout/Seo'
 import PageHeader from '../components/layout/PageHeader'
 import Services from '../components/sections/Services'
 import HowItWorks from '../components/sections/HowItWorks'
-import CTABand from '../components/sections/CTABand'
 import Button from '../components/ui/Button'
 
 export default function ServicesPage() {
@@ -20,7 +19,7 @@ export default function ServicesPage() {
         lede="Seven services that cover the full application arc. Take the whole programme or the single piece you are stuck on — advisors work to the same standard either way."
       >
         <div className="flex flex-col gap-3 sm:flex-row">
-          <Button to="/contact" variant="gold" size="lg" icon="arrowRight">
+          <Button to="/book-consultation" variant="gold" size="lg" icon="arrowRight">
             Book a free consultation
           </Button>
           <Button to="/packages" variant="ghostLight" size="lg" icon="wallet" iconRight={false}>
@@ -31,7 +30,6 @@ export default function ServicesPage() {
 
       <Services />
       <HowItWorks />
-      <CTABand />
     </>
   )
 }

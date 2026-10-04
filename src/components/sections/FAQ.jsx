@@ -97,7 +97,7 @@ export default function FAQ() {
                   Bring your transcript and a rough goal. In twenty minutes you will know whether a
                   funded place is realistic this cycle.
                 </p>
-                <Button to="/contact" variant="gold" size="sm" icon="arrowRight" className="mt-5">
+                <Button to="/book-consultation" variant="gold" size="sm" icon="arrowRight" className="mt-5">
                   Book the call
                 </Button>
               </div>

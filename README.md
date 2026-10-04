@@ -1,4 +1,4 @@
-# Merit Ledger
+# Merit Leaders
 
 A premium, responsive marketing site for a scholarship consultancy serving undergraduate,
 graduate, postgraduate and international students.
@@ -32,7 +32,8 @@ npm run preview  # serve the production build locally
 | `/scholarships/:slug` | Full award page — quick facts, overview, eligibility, benefits, documents, step-by-step application, key dates, FAQ, share buttons, related awards |
 | `/countries` | Study destinations |
 | `/faq` | Accordion FAQ |
-| `/contact` | Consultation form, WhatsApp and email |
+| `/packages` | Application-writing packages and prices (USD / FCFA) |
+| `/book-consultation` | Consultation form, WhatsApp and email (`/contact` redirects here) |
 
 Unknown paths render a styled 404.
 

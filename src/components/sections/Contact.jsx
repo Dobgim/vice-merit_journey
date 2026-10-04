@@ -11,7 +11,7 @@ import Button from '../ui/Button'
 import Icon from '../ui/Icon'
 
 const whatsappHref = `https://wa.me/${company.whatsapp}?text=${encodeURIComponent(
-  'Hi Merit Ledger — I would like to book a scholarship consultation.'
+  'Hi Merit Leaders — I would like to book a scholarship consultation.'
 )}`
 
 /* --------------------------------------------------------------- Field shell */
@@ -22,7 +22,7 @@ const fieldBase =
 function Field({ label, error, required, children, className = '' }) {
   return (
     <div className={className}>
-      <label className="mb-2 block text-[0.82rem] font-semibold text-navy-800">
+      <label className="mb-2 block text-[0.82rem] font-semibold text-navy-100">
         {label} {required && <span className="text-gold-600">*</span>}
       </label>
       {children}
@@ -65,7 +65,7 @@ export default function Contact() {
       phone: '',
       studyLevel: '',
       country: '',
-      // Arriving from a scholarship page (/contact?scholarship=Name) pre-fills the brief.
+      // Arriving from a scholarship page (/book-consultation?scholarship=Name) pre-fills the brief.
       message: params.get('scholarship')
         ? `I would like help applying for the ${params.get('scholarship')}. `
         : params.get('package')
@@ -320,13 +320,6 @@ export default function Contact() {
                   href: `tel:${company.phone.replace(/[^\d+]/g, '')}`,
                   hint: company.hours,
                 },
-                {
-                  icon: 'mapPin',
-                  label: 'Visit us',
-                  value: company.address,
-                  href: '#contact',
-                  hint: 'By appointment only',
-                },
               ].map((c) => (
                 <a
                   key={c.label}
@@ -345,20 +338,6 @@ export default function Contact() {
                   </div>
                 </a>
               ))}
-
-              <div className="mt-auto rounded-2xl border border-gold-300/20 bg-gold-400/[0.07] p-5">
-                <div className="flex items-center gap-2.5">
-                  <Icon name="calendar" className="h-4 w-4 text-gold-300" />
-                  <span className="text-[0.78rem] font-semibold uppercase tracking-wider text-gold-200">
-                    Next intake deadline
-                  </span>
-                </div>
-                <p className="mt-2.5 text-[0.92rem] leading-[1.7] text-navy-100/75">
-                  Most 2027 awards close between{' '}
-                  <span className="font-semibold text-white">November and February</span>. Advisor
-                  slots for this cycle are limited — book early.
-                </p>
-              </div>
             </div>
           </Reveal>
         </div>

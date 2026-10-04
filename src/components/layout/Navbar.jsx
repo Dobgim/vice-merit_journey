@@ -13,9 +13,9 @@ export default function Navbar() {
   const scrolled = useScrolled(20)
   const { pathname } = useLocation()
 
-  // Only the home page opens on a dark hero, so only there does the
-  // un-scrolled navbar invert to stay legible.
-  const overHero = pathname === '/' && !scrolled
+  // Every page opens on a dark header, so the un-scrolled navbar always
+  // inverts to stay legible.
+  const overHero = !scrolled
 
   // Never leave the drawer open across a navigation.
   useEffect(() => {
@@ -90,7 +90,7 @@ export default function Navbar() {
 
             <div className="flex items-center gap-2.5">
               <Button
-                to="/contact"
+                to="/book-consultation"
                 size="sm"
                 variant={overHero ? 'gold' : 'primary'}
                 icon="calendar"
@@ -189,7 +189,7 @@ export default function Navbar() {
               </ul>
 
               <div className="mt-auto space-y-3 pt-8">
-                <Button to="/contact" onClick={() => setOpen(false)} size="md" icon="calendar" iconRight={false} className="w-full">
+                <Button to="/book-consultation" onClick={() => setOpen(false)} size="md" icon="calendar" iconRight={false} className="w-full">
                   Book Consultation
                 </Button>
                 <p className="text-center text-xs text-navy-500">

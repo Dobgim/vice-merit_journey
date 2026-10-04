@@ -121,7 +121,7 @@ export default function Hero() {
               transition={{ duration: 0.8, ease: EASE, delay: 0.4 }}
               className="mx-auto mt-7 max-w-2xl text-[1.05rem] leading-[1.75] text-navy-100/85 [text-shadow:0_1px_16px_rgba(4,10,28,0.6)] sm:text-[1.15rem]"
             >
-              Merit Ledger matches undergraduate, graduate, postgraduate and international students
+              Merit Leaders matches undergraduate, graduate, postgraduate and international students
               with the funding they are genuinely competitive for — then works through every essay,
               form and interview with them until it is won.
             </motion.p>
@@ -132,7 +132,7 @@ export default function Hero() {
               transition={{ duration: 0.8, ease: EASE, delay: 0.5 }}
               className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center"
             >
-              <Button to="/contact" variant="gold" size="lg" icon="arrowRight">
+              <Button to="/book-consultation" variant="gold" size="lg" icon="arrowRight">
                 Book a free consultation
               </Button>
               <Button to="/scholarships" variant="ghostLight" size="lg" icon="search" iconRight={false}>

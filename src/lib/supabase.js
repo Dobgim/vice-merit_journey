@@ -62,7 +62,7 @@ export async function submitConsultation(payload) {
   if (!supabase) {
     // Demo mode: pretend the network exists so the success state is reachable.
     await new Promise((resolve) => setTimeout(resolve, 900))
-    if (import.meta.env.DEV) console.info('[Merit Ledger] Demo submission:', row)
+    if (import.meta.env.DEV) console.info('[Merit Leaders] Demo submission:', row)
     return { ok: true, mode: 'demo' }
   }
 
@@ -77,7 +77,7 @@ export async function subscribeToAlerts({ email, studyLevel }) {
 
   if (!supabase) {
     await new Promise((resolve) => setTimeout(resolve, 700))
-    if (import.meta.env.DEV) console.info('[Merit Ledger] Demo subscription:', row)
+    if (import.meta.env.DEV) console.info('[Merit Leaders] Demo subscription:', row)
     return { ok: true, mode: 'demo' }
   }
 

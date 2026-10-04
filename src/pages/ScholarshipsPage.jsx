@@ -3,7 +3,6 @@ import PageHeader from '../components/layout/PageHeader'
 import Scholarships from '../components/sections/Scholarships'
 import Newsletter from '../components/sections/Newsletter'
 import Categories from '../components/sections/Categories'
-import CTABand from '../components/sections/CTABand'
 import Button from '../components/ui/Button'
 
 export default function ScholarshipsPage() {
@@ -21,7 +20,7 @@ export default function ScholarshipsPage() {
         lede="Search the funding we track by level, country and funding type. Every listing has a full breakdown — eligibility, benefits, documents and a step-by-step guide — verified against the awarding body."
       >
         <div className="flex flex-col gap-3 sm:flex-row">
-          <Button to="/contact" variant="gold" size="lg" icon="arrowRight">
+          <Button to="/book-consultation" variant="gold" size="lg" icon="arrowRight">
             Check my eligibility
           </Button>
           <Button href="#alerts" variant="ghostLight" size="lg" icon="bell" iconRight={false}>
@@ -35,7 +34,6 @@ export default function ScholarshipsPage() {
         <Newsletter />
       </div>
       <Categories />
-      <CTABand />
     </>
   )
 }

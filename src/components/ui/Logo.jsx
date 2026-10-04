@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { company } from '../../data/site'
 
-/** Wordmark + graduation-cap monogram. `tone` flips it for dark backgrounds. */
+/** Emblem + wordmark. `tone` flips the text colours for dark backgrounds. */
 export default function Logo({ tone = 'dark', className = '', onClick }) {
   const onDark = tone === 'light'
 
@@ -12,24 +12,13 @@ export default function Logo({ tone = 'dark', className = '', onClick }) {
       className={`group inline-flex items-center gap-2.5 ${className}`}
       aria-label={`${company.name} — home`}
     >
+      {/* The emblem is navy-on-white artwork, so it always sits on a white tile */}
       <span
-        className={`relative flex h-10 w-10 items-center justify-center rounded-xl transition-transform duration-500 group-hover:-rotate-6 ${
-          onDark
-            ? 'bg-white/10 ring-1 ring-white/20'
-            : 'bg-gradient-to-br from-navy-800 to-navy-950 ring-1 ring-navy-900/20'
+        className={`flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white p-0.5 transition-transform duration-500 group-hover:-rotate-3 ${
+          onDark ? 'ring-1 ring-white/30' : 'ring-1 ring-navy-900/10 shadow-soft'
         }`}
       >
-        <svg viewBox="0 0 24 24" className="h-[1.35rem] w-[1.35rem]" aria-hidden>
-          <path d="M12 4 2.8 8.4 12 12.8l9.2-4.4L12 4Z" fill="#dcbf72" />
-          <path
-            d="M6.4 10.9v4.3c0 1.9 2.5 3.4 5.6 3.4s5.6-1.5 5.6-3.4v-4.3"
-            fill="none"
-            stroke="#dcbf72"
-            strokeWidth="1.7"
-            strokeLinecap="round"
-            opacity=".75"
-          />
-        </svg>
+        <img src="/logo-mark.png" alt="" width="40" height="40" className="h-full w-full object-contain" />
       </span>
 
       <span className="flex flex-col leading-none">
@@ -38,7 +27,7 @@ export default function Logo({ tone = 'dark', className = '', onClick }) {
             onDark ? 'text-white' : 'text-navy-950'
           }`}
         >
-          Merit<span className="text-gold-500">Ledger</span>
+          Merit <span className="text-gold-500">Leaders</span>
         </span>
         <span
           className={`mt-1 text-[0.6rem] font-semibold uppercase tracking-[0.22em] ${

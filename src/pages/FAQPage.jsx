@@ -1,14 +1,13 @@
 import Seo from '../components/layout/Seo'
 import PageHeader from '../components/layout/PageHeader'
 import FAQ from '../components/sections/FAQ'
-import CTABand from '../components/sections/CTABand'
 
 export default function FAQPage() {
   return (
     <>
       <Seo
         title="Frequently Asked Questions"
-        description="How Merit Ledger works: fees, timelines, eligibility, ethics, success rates and what happens after you book a consultation."
+        description="How Merit Leaders works: fees, timelines, eligibility, ethics, success rates and what happens after you book a consultation."
       />
 
       <PageHeader
@@ -19,7 +18,6 @@ export default function FAQPage() {
       />
 
       <FAQ />
-      <CTABand />
     </>
   )
 }

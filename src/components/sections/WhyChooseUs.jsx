@@ -11,7 +11,7 @@ export default function WhyChooseUs() {
 
       <div className="container relative">
         <SectionHeading
-          eyebrow="Why Merit Ledger"
+          eyebrow="Why Merit Leaders"
           title="Guidance built on judgement,"
           accent="not guesswork"
           lede="Most students do not lose scholarships because they are unqualified. They lose them to weak targeting, a flat personal statement and a missed deadline. We fix all three."

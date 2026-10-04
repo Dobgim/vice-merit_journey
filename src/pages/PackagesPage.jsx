@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Seo from '../components/layout/Seo'
 import PageHeader from '../components/layout/PageHeader'
-import CTABand from '../components/sections/CTABand'
 import { Badge, Card, IconTile, Section } from '../components/ui/Primitives'
 import SectionHeading from '../components/ui/SectionHeading'
 import Reveal, { Stagger, StaggerItem } from '../components/ui/Reveal'
@@ -110,7 +109,7 @@ function PackageCard({ pkg, currency }) {
           Order on WhatsApp
         </Button>
         <Button
-          to={`/contact?package=${encodeURIComponent(pkg.name)}`}
+          to={`/book-consultation?package=${encodeURIComponent(pkg.name)}`}
           variant={featured ? 'ghostLight' : 'outline'}
           size="md"
           className="w-full"
@@ -247,8 +246,6 @@ export default function PackagesPage() {
           </div>
         </div>
       </Section>
-
-      <CTABand />
     </>
   )
 }

@@ -36,7 +36,7 @@ export default function Countries() {
                   Destination choice is a funding decision as much as an academic one. We compare
                   your shortlist on award density, living costs and work rights before you commit.
                 </p>
-                <Button to="/contact" variant="outline" size="sm" icon="arrowRight" className="mt-5">
+                <Button to="/book-consultation" variant="outline" size="sm" icon="arrowRight" className="mt-5">
                   Compare destinations
                 </Button>
               </div>
@@ -48,7 +48,7 @@ export default function Countries() {
             {countries.map((c) => (
               <StaggerItem key={c.name}>
                 <MotionLink
-                  to="/contact"
+                  to="/book-consultation"
                   whileHover={{ y: -4 }}
                   transition={{ type: 'spring', stiffness: 320, damping: 24 }}
                   className="group flex h-full items-center gap-4 rounded-xl border border-navy-900/[0.07] bg-white p-4 shadow-soft transition-colors duration-300 hover:border-gold-300/60"

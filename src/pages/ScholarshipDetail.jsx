@@ -102,7 +102,7 @@ export default function ScholarshipDetail() {
   if (!s) return <NotFound />
 
   const status = deadlineStatus(s.deadline)
-  const helpHref = `/contact?scholarship=${encodeURIComponent(s.name)}`
+  const helpHref = `/book-consultation?scholarship=${encodeURIComponent(s.name)}`
   const pageUrl = typeof window !== 'undefined' ? window.location.href : ''
 
   const facts = [

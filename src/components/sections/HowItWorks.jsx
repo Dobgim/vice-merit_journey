@@ -61,7 +61,7 @@ export default function HowItWorks() {
         </div>
 
         <Reveal delay={0.2} className="mt-14 flex justify-center">
-          <Button to="/contact" size="lg" icon="arrowRight">
+          <Button to="/book-consultation" size="lg" icon="arrowRight">
             Start with a free call
           </Button>
         </Reveal>

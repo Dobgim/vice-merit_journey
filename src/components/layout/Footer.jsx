@@ -119,10 +119,6 @@ export default function Footer() {
                 </a>
               </li>
               <li className="flex items-start gap-3 text-navy-100/65">
-                <Icon name="mapPin" className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" />
-                {company.address}
-              </li>
-              <li className="flex items-start gap-3 text-navy-100/65">
                 <Icon name="clock" className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" />
                 {company.hours}
               </li>
@@ -133,7 +129,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="mt-14 flex flex-col items-center gap-5 border-t border-white/[0.08] pt-8 sm:flex-row sm:justify-between">
           <p className="text-center text-[0.82rem] text-navy-100/45 sm:text-left">
-            © {year} {company.name}. All rights reserved. Merit Ledger is an independent
+            © {year} {company.name}. All rights reserved. Merit Leaders is an independent
             consultancy and is not affiliated with any government or awarding body.
           </p>
 

@@ -6,7 +6,7 @@ import { useScrolled } from '../../hooks/useScroll'
 import Icon from '../ui/Icon'
 
 const whatsappHref = `https://wa.me/${company.whatsapp}?text=${encodeURIComponent(
-  'Hi Merit Ledger — I would like to book a scholarship consultation.'
+  'Hi Merit Leaders — I would like to book a scholarship consultation.'
 )}`
 
 /** Persistent WhatsApp shortcut + back-to-top, revealed after the hero. */

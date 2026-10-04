@@ -4,19 +4,20 @@
  */
 
 export const company = {
-  name: 'Merit Ledger',
-  tagline: 'Scholarship Consultancy',
-  email: 'advisors@meritledger.com',
+  name: 'Merit Leaders',
+  tagline: 'Scholarship & Education Consultancy',
+  domain: 'meritleaders.com',
+  email: 'advisors@meritleaders.com',
   phone: '+1 (202) 555-0148',
   whatsapp: '237679554114', // digits only (country code, no +), used to build wa.me links
   whatsappDisplay: '+237 6 79 55 41 14',
   address: '1200 Kingsway Avenue, Suite 410, Toronto, ON',
   hours: 'Mon – Sat · 9:00 – 18:00 (GMT)',
   socials: [
-    { label: 'LinkedIn', href: 'https://linkedin.com/company/meritledger', icon: 'linkedin' },
-    { label: 'Instagram', href: 'https://instagram.com/meritledger', icon: 'instagram' },
-    { label: 'X', href: 'https://x.com/meritledger', icon: 'x' },
-    { label: 'YouTube', href: 'https://youtube.com/@meritledger', icon: 'youtube' },
+    { label: 'LinkedIn', href: 'https://linkedin.com/company/meritleaders', icon: 'linkedin' },
+    { label: 'Instagram', href: 'https://instagram.com/meritleaders', icon: 'instagram' },
+    { label: 'X', href: 'https://x.com/meritleaders', icon: 'x' },
+    { label: 'YouTube', href: 'https://youtube.com/@meritleaders', icon: 'youtube' },
   ],
 }
 
@@ -28,7 +29,6 @@ export const navLinks = [
   { label: 'Scholarships', to: '/scholarships' },
   { label: 'Countries', to: '/countries' },
   { label: 'FAQ', to: '/faq' },
-  { label: 'Contact', to: '/contact' },
 ]
 
 export const stats = [
@@ -235,7 +235,7 @@ export const countries = [
 export const testimonials = [
   {
     quote:
-      'I had been rejected twice before Merit Ledger. My advisor rebuilt my statement around the one story I kept leaving out — the community lab I ran at home. Chevening called eight weeks later.',
+      'I had been rejected twice before Merit Leaders. My advisor rebuilt my statement around the one story I kept leaving out — the community lab I ran at home. Chevening called eight weeks later.',
     name: 'Amara Okonkwo',
     role: 'MSc Public Policy · LSE',
     award: 'Chevening Scholar 2025',
@@ -415,9 +415,9 @@ export const packages = [
 ]
 
 export const packageAddons = [
-  { name: 'Extra essay', price: { USD: 39, XAF: 22000 } },
-  { name: 'Academic CV only', price: { USD: 49, XAF: 28000 } },
-  { name: 'Research proposal', price: { USD: 89, XAF: 50000 } },
+  { name: 'Extra essay', price: { USD: 210, XAF: 120000 } },
+  { name: 'Academic CV only', price: { USD: 15, XAF: 8000 } },
+  { name: 'Research proposal', price: { USD: 55, XAF: 30000 } },
   { name: 'Mock interview (recorded)', price: { USD: 39, XAF: 22000 } },
   { name: 'Visa document review', price: { USD: 59, XAF: 33000 } },
   { name: 'Express delivery (72 hours)', price: null, note: '+30% of package price' },

@@ -3,7 +3,6 @@ import PageHeader from '../components/layout/PageHeader'
 import WhyChooseUs from '../components/sections/WhyChooseUs'
 import HowItWorks from '../components/sections/HowItWorks'
 import Testimonials from '../components/sections/Testimonials'
-import CTABand from '../components/sections/CTABand'
 import Button from '../components/ui/Button'
 
 export default function About() {
@@ -11,16 +10,16 @@ export default function About() {
     <>
       <Seo
         title="About Us"
-        description="Merit Ledger is an independent scholarship consultancy. Meet the advisors, the method and the standards behind 2,400+ funded students."
+        description="Merit Leaders is an independent scholarship consultancy. Meet the advisors, the method and the standards behind 2,400+ funded students."
       />
 
       <PageHeader
         eyebrow="Who we are"
         title="An independent consultancy built around one"
         accent="outcome."
-        lede="We are former admissions readers, scholarship panellists and academic writers who got tired of watching strong students lose funding to weak applications. Merit Ledger exists to close that gap — ethically, and in the open."
+        lede="We are former admissions readers, scholarship panellists and academic writers who got tired of watching strong students lose funding to weak applications. Merit Leaders exists to close that gap — ethically, and in the open."
       >
-        <Button to="/contact" variant="gold" size="lg" icon="arrowRight">
+        <Button to="/book-consultation" variant="gold" size="lg" icon="arrowRight">
           Talk to an advisor
         </Button>
       </PageHeader>
@@ -28,7 +27,6 @@ export default function About() {
       <WhyChooseUs />
       <HowItWorks />
       <Testimonials />
-      <CTABand />
     </>
   )
 }

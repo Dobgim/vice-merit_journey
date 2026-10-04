@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import RootLayout from './components/layout/RootLayout'
 
 import Home from './pages/Home'
@@ -9,7 +9,7 @@ import ScholarshipsPage from './pages/ScholarshipsPage'
 import ScholarshipDetail from './pages/ScholarshipDetail'
 import CountriesPage from './pages/CountriesPage'
 import FAQPage from './pages/FAQPage'
-import ContactPage from './pages/ContactPage'
+import BookConsultationPage from './pages/BookConsultationPage'
 import NotFound from './pages/NotFound'
 
 /**
@@ -29,7 +29,9 @@ export default function App() {
         <Route path="scholarships/:slug" element={<ScholarshipDetail />} />
         <Route path="countries" element={<CountriesPage />} />
         <Route path="faq" element={<FAQPage />} />
-        <Route path="contact" element={<ContactPage />} />
+        <Route path="book-consultation" element={<BookConsultationPage />} />
+        {/* Old links and bookmarks */}
+        <Route path="contact" element={<Navigate to="/book-consultation" replace />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

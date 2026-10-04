@@ -20,7 +20,7 @@ export default function Services() {
             lede="Take the full journey with an advisor, or pick only the pieces you need. Each service is delivered by a specialist, not a generalist."
           />
           <Reveal direction="left" delay={0.2} className="hidden lg:block">
-            <Button to="/contact" variant="outline" size="md" icon="arrowRight">
+            <Button to="/book-consultation" variant="outline" size="md" icon="arrowRight">
               Discuss your package
             </Button>
           </Reveal>
@@ -55,7 +55,7 @@ export default function Services() {
                 </div>
               </div>
 
-              <Button to="/contact" variant="gold" size="sm" icon="arrowRight" className="relative mt-9 self-start">
+              <Button to="/book-consultation" variant="gold" size="sm" icon="arrowRight" className="relative mt-9 self-start">
                 Get matched
               </Button>
             </Card>
@@ -95,7 +95,7 @@ export default function Services() {
         </div>
 
         <Reveal delay={0.15} className="mt-10 lg:hidden">
-          <Button to="/contact" variant="outline" size="md" icon="arrowRight" className="w-full">
+          <Button to="/book-consultation" variant="outline" size="md" icon="arrowRight" className="w-full">
             Discuss your package
           </Button>
         </Reveal>
