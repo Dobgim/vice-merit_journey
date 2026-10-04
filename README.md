@@ -28,7 +28,8 @@ npm run preview  # serve the production build locally
 | `/` | Home — hero, benefits, services, categories, process, featured scholarships, testimonials |
 | `/about` | Who we are, method, testimonials |
 | `/services` | The seven consultancy services |
-| `/scholarships` | Filterable award listings and categories |
+| `/scholarships` | Searchable award database — level, country and funding filters, sort, live deadline status (filters are kept in the URL, e.g. `?type=Undergraduate`) |
+| `/scholarships/:slug` | Full award page — quick facts, overview, eligibility, benefits, documents, step-by-step application, key dates, FAQ, share buttons, related awards |
 | `/countries` | Study destinations |
 | `/faq` | Accordion FAQ |
 | `/contact` | Consultation form, WhatsApp and email |
@@ -49,7 +50,9 @@ src/
   pages/        One file per route
 ```
 
-All content lives in `src/data/site.js` — company details, navigation, services,
+Scholarship listings live in `src/data/scholarships.js`. Use ISO dates (`YYYY-MM-DD`) for `deadline` and `verified`; open, closing-soon and closed status is computed from them automatically.
+
+All other content lives in `src/data/site.js` — company details, navigation, services,
 scholarships, countries, testimonials and FAQs. Edit there rather than in components.
 
 ## Backend
@@ -57,6 +60,8 @@ scholarships, countries, testimonials and FAQs. Edit there rather than in compon
 The contact form works without a backend. To persist submissions, copy `.env.example`
 to `.env` and fill in your Supabase project URL and anon key; the client picks them up
 automatically.
+
+Tables used: `consultations` (contact form), `subscribers` (scholarship alerts sign-up, unique `email`) and `scholarships` (optional — replaces the bundled list; see the column list in `src/lib/supabase.js`).
 
 ## Deployment
 

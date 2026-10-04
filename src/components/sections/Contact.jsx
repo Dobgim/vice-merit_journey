@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useSearchParams } from 'react-router-dom'
 import { company, countryOptions, studyLevels } from '../../data/site'
 import { submitConsultation } from '../../lib/supabase'
 import { Aurora, Section } from '../ui/Primitives'
@@ -50,6 +51,7 @@ const borderFor = (error) =>
 export default function Contact() {
   const [sent, setSent] = useState(false)
   const [serverError, setServerError] = useState(null)
+  const [params] = useSearchParams()
 
   const {
     register,
@@ -63,7 +65,10 @@ export default function Contact() {
       phone: '',
       studyLevel: '',
       country: '',
-      message: '',
+      // Arriving from a scholarship page (/contact?scholarship=Name) pre-fills the brief.
+      message: params.get('scholarship')
+        ? `I would like help applying for the ${params.get('scholarship')}. `
+        : '',
     },
   })
 

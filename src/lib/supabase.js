@@ -13,7 +13,11 @@
  *
  * Expected schema (see README):
  *   consultations(id, full_name, email, phone, study_level, country, message, created_at)
- *   scholarships(id, name, org, country, flag, level, funding, amount, deadline, urgent, summary, tags)
+ *   scholarships(id, slug, name, org, country, flag, level, funding, amount, deadline date,
+ *                verified date, duration, nationalities, fields, official_url, summary, tags,
+ *                overview, eligibility, benefits, documents, how_to_apply, timeline, faqs)
+ *                — list/detail columns are text[] or jsonb; snake_case is mapped below
+ *   subscribers(id, email unique, study_level, created_at)
  */
 
 const url = import.meta.env.VITE_SUPABASE_URL
@@ -24,6 +28,7 @@ export const isSupabaseConfigured = Boolean(url && anonKey)
 const TABLES = {
   consultations: 'consultations',
   scholarships: 'scholarships',
+  subscribers: 'subscribers',
 }
 
 let clientPromise = null
@@ -65,6 +70,23 @@ export async function submitConsultation(payload) {
   return error ? { ok: false, mode: 'live', error } : { ok: true, mode: 'live' }
 }
 
+/** Subscribe an email to scholarship alerts. Resolves to { ok, mode, error }. */
+export async function subscribeToAlerts({ email, studyLevel }) {
+  const row = { email: email.trim().toLowerCase(), study_level: studyLevel || null }
+  const supabase = await getSupabase()
+
+  if (!supabase) {
+    await new Promise((resolve) => setTimeout(resolve, 700))
+    if (import.meta.env.DEV) console.info('[Merit Ledger] Demo subscription:', row)
+    return { ok: true, mode: 'demo' }
+  }
+
+  const { error } = await supabase.from(TABLES.subscribers).insert(row)
+  // 23505 = unique violation: already subscribed, which is a success to the visitor.
+  if (error && error.code !== '23505') return { ok: false, mode: 'live', error }
+  return { ok: true, mode: 'live' }
+}
+
 /** Fetch scholarships, falling back to the bundled placeholder list. */
 export async function fetchScholarships(fallback = []) {
   const supabase = await getSupabase()
@@ -76,5 +98,9 @@ export async function fetchScholarships(fallback = []) {
     .order('deadline', { ascending: true })
 
   if (error || !data?.length) return fallback
-  return data
+  return data.map(({ official_url, how_to_apply, ...row }) => ({
+    ...row,
+    officialUrl: official_url,
+    howToApply: how_to_apply,
+  }))
 }

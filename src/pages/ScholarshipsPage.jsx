@@ -1,6 +1,7 @@
 import Seo from '../components/layout/Seo'
 import PageHeader from '../components/layout/PageHeader'
 import Scholarships from '../components/sections/Scholarships'
+import Newsletter from '../components/sections/Newsletter'
 import Categories from '../components/sections/Categories'
 import CTABand from '../components/sections/CTABand'
 import Button from '../components/ui/Button'
@@ -10,21 +11,29 @@ export default function ScholarshipsPage() {
     <>
       <Seo
         title="Scholarships"
-        description="Browse fully funded and partially funded scholarships for undergraduate, graduate, postgraduate and international students, with deadlines and eligibility at a glance."
+        description="Search fully funded and partially funded scholarships for undergraduate, graduate, PhD and postdoctoral applicants — with eligibility, benefits, required documents and live deadlines."
       />
 
       <PageHeader
         eyebrow="Open opportunities"
         title="Awards our students are applying to"
         accent="right now."
-        lede="A live sample of the funding we track — filtered by level, country and funding type. Every listing is verified against the awarding body before it reaches this page."
+        lede="Search the funding we track by level, country and funding type. Every listing has a full breakdown — eligibility, benefits, documents and a step-by-step guide — verified against the awarding body."
       >
-        <Button to="/contact" variant="gold" size="lg" icon="arrowRight">
-          Check my eligibility
-        </Button>
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <Button to="/contact" variant="gold" size="lg" icon="arrowRight">
+            Check my eligibility
+          </Button>
+          <Button href="#alerts" variant="ghostLight" size="lg" icon="bell" iconRight={false}>
+            Get deadline alerts
+          </Button>
+        </div>
       </PageHeader>
 
-      <Scholarships />
+      <Scholarships variant="full" />
+      <div id="alerts" className="scroll-mt-24">
+        <Newsletter />
+      </div>
       <Categories />
       <CTABand />
     </>

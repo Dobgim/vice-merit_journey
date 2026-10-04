@@ -26,7 +26,11 @@ export default function Categories() {
           {categories.map((c) => (
             <StaggerItem key={c.title}>
               <MotionLink
-                to="/scholarships"
+                to={
+                  c.filter && c.filter !== 'All'
+                    ? `/scholarships?type=${encodeURIComponent(c.filter)}`
+                    : '/scholarships'
+                }
                 whileHover={{ y: -6 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 24 }}
                 className="group relative block h-full overflow-hidden rounded-2xl border border-white/[0.09] bg-white/[0.04] p-7 backdrop-blur-sm transition-colors duration-500 hover:border-gold-300/30 hover:bg-white/[0.07]"

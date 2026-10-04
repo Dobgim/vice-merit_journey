@@ -141,6 +141,7 @@ export const services = [
 export const categories = [
   {
     title: 'Undergraduate',
+    filter: 'Undergraduate',
     body: 'First-degree awards, merit entrance scholarships and need-based bursaries for school leavers.',
     count: '480+ awards',
     icon: 'cap',
@@ -148,6 +149,7 @@ export const categories = [
   },
   {
     title: 'Graduate',
+    filter: 'Graduate',
     body: 'Master’s funding, assistantships and departmental tuition waivers across taught and research routes.',
     count: '620+ awards',
     icon: 'book',
@@ -155,6 +157,7 @@ export const categories = [
   },
   {
     title: 'Postgraduate & PhD',
+    filter: 'Postgraduate & PhD',
     body: 'Doctoral fellowships, research grants and stipend-backed positions with named supervisors.',
     count: '310+ awards',
     icon: 'flask',
@@ -162,6 +165,7 @@ export const categories = [
   },
   {
     title: 'International Students',
+    filter: 'All',
     body: 'Awards explicitly open to non-citizens, including full-tuition and living-cost packages.',
     count: '900+ awards',
     icon: 'globe',
@@ -169,6 +173,7 @@ export const categories = [
   },
   {
     title: 'Fully Funded',
+    filter: 'Fully Funded',
     body: 'Tuition, stipend, travel and insurance covered — the awards worth building a year around.',
     count: '240+ awards',
     icon: 'star',
@@ -176,6 +181,7 @@ export const categories = [
   },
   {
     title: 'Partially Funded',
+    filter: 'Partially Funded',
     body: 'Tuition discounts and living-cost top-ups that make a self-funded plan realistic.',
     count: '540+ awards',
     icon: 'half',
@@ -207,134 +213,7 @@ export const steps = [
   },
 ]
 
-export const scholarships = [
-  {
-    name: 'Chevening Scholarship',
-    org: 'UK Government',
-    country: 'United Kingdom',
-    flag: '🇬🇧',
-    level: 'Graduate',
-    funding: 'Fully Funded',
-    amount: 'Full tuition + stipend',
-    deadline: '5 Nov 2026',
-    urgent: true,
-    summary:
-      'One-year master’s funding for emerging leaders, covering tuition, living costs and return flights.',
-    tags: ['Leadership', 'One-year Masters'],
-  },
-  {
-    name: 'DAAD EPOS Scholarship',
-    org: 'DAAD Germany',
-    country: 'Germany',
-    flag: '🇩🇪',
-    level: 'Graduate',
-    funding: 'Fully Funded',
-    amount: '€992 / month + tuition',
-    deadline: '31 Aug 2026',
-    urgent: false,
-    summary:
-      'Development-focused master’s and PhD funding for professionals from developing countries.',
-    tags: ['Development', 'Work experience'],
-  },
-  {
-    name: 'Vanier Canada Graduate Scholarship',
-    org: 'Government of Canada',
-    country: 'Canada',
-    flag: '🇨🇦',
-    level: 'PhD',
-    funding: 'Fully Funded',
-    amount: 'CA$50,000 / year',
-    deadline: '1 Nov 2026',
-    urgent: true,
-    summary:
-      'Three years of doctoral funding for world-class students with strong research leadership.',
-    tags: ['Research', '3 years'],
-  },
-  {
-    name: 'Erasmus Mundus Joint Masters',
-    org: 'European Commission',
-    country: 'Europe (multi-country)',
-    flag: '🇪🇺',
-    level: 'Graduate',
-    funding: 'Fully Funded',
-    amount: '€1,400 / month + tuition',
-    deadline: '15 Jan 2027',
-    urgent: false,
-    summary:
-      'Study across two or more European universities with full tuition, travel and monthly support.',
-    tags: ['Multi-campus', 'Travel covered'],
-  },
-  {
-    name: 'University of Toronto Lester B. Pearson',
-    org: 'University of Toronto',
-    country: 'Canada',
-    flag: '🇨🇦',
-    level: 'Undergraduate',
-    funding: 'Fully Funded',
-    amount: 'Tuition + books + residence',
-    deadline: '15 Jan 2027',
-    urgent: false,
-    summary:
-      'Canada’s flagship international undergraduate award, covering four years of study in full.',
-    tags: ['First degree', '4 years'],
-  },
-  {
-    name: 'Australia Awards Scholarship',
-    org: 'Australian Government',
-    country: 'Australia',
-    flag: '🇦🇺',
-    level: 'Graduate',
-    funding: 'Fully Funded',
-    amount: 'Tuition + AU$30,000 stipend',
-    deadline: '30 Apr 2027',
-    urgent: false,
-    summary:
-      'Long-term development awards for students from partner countries, including health cover.',
-    tags: ['Development', 'Health cover'],
-  },
-  {
-    name: 'Holland Scholarship',
-    org: 'Dutch Ministry of Education',
-    country: 'Netherlands',
-    flag: '🇳🇱',
-    level: 'Undergraduate',
-    funding: 'Partially Funded',
-    amount: '€5,000 first year',
-    deadline: '1 Feb 2027',
-    urgent: false,
-    summary:
-      'A first-year grant for non-EEA students entering Dutch research universities and universities of applied sciences.',
-    tags: ['First year', 'Non-EEA'],
-  },
-  {
-    name: 'MEXT Japanese Government Scholarship',
-    org: 'Government of Japan',
-    country: 'Japan',
-    flag: '🇯🇵',
-    level: 'Postgraduate',
-    funding: 'Fully Funded',
-    amount: '¥144,000 / month + tuition',
-    deadline: '20 May 2027',
-    urgent: false,
-    summary:
-      'Embassy-recommended funding including airfare, tuition waiver and a monthly living allowance.',
-    tags: ['Embassy route', 'Airfare'],
-  },
-  {
-    name: 'Swiss Government Excellence Scholarship',
-    org: 'Swiss Confederation',
-    country: 'Switzerland',
-    flag: '🇨🇭',
-    level: 'PhD',
-    funding: 'Fully Funded',
-    amount: 'CHF 1,920 / month',
-    deadline: '30 Nov 2026',
-    urgent: true,
-    summary:
-      'Research and doctoral funding for postgraduate researchers, with housing and insurance support.',
-    tags: ['Research', 'Housing help'],
-  },
-]
+export { scholarships } from './scholarships'
 
 export const countries = [
   { name: 'United Kingdom', flag: '🇬🇧', awards: '210+ awards', note: 'Chevening · Commonwealth · GREAT' },

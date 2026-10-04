@@ -7,6 +7,7 @@ import HowItWorks from '../components/sections/HowItWorks'
 import CTABand from '../components/sections/CTABand'
 import Scholarships from '../components/sections/Scholarships'
 import Testimonials from '../components/sections/Testimonials'
+import Newsletter from '../components/sections/Newsletter'
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
       <CTABand />
       <Scholarships />
       <Testimonials />
+      <Newsletter />
     </>
   )
 }

@@ -8,7 +8,7 @@ import { EASE } from '../ui/Reveal'
  * The compact dark banner every inner page opens with. Gives each route its
  * own identity while keeping the navbar's dark-on-hero treatment consistent.
  */
-export default function PageHeader({ eyebrow, title, accent, lede, children }) {
+export default function PageHeader({ eyebrow, title, accent, lede, crumbs = [], children }) {
   return (
     <section className="relative isolate overflow-hidden bg-navy-950 pb-16 pt-32 text-white sm:pb-20 sm:pt-36 lg:pb-24 lg:pt-40">
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
@@ -28,12 +28,17 @@ export default function PageHeader({ eyebrow, title, accent, lede, children }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: EASE }}
           aria-label="Breadcrumb"
-          className="flex items-center gap-2 text-[0.8rem] text-navy-100/55"
+          className="flex flex-wrap items-center gap-2 text-[0.8rem] text-navy-100/55"
         >
-          <Link to="/" className="transition-colors hover:text-white">
-            Home
-          </Link>
-          <Icon name="arrowRight" className="h-3.5 w-3.5 text-navy-100/35" />
+          {/* `crumbs` are the intermediate levels between Home and this page */}
+          {[{ label: 'Home', to: '/' }, ...crumbs].map((c) => (
+            <span key={c.to} className="flex items-center gap-2">
+              <Link to={c.to} className="transition-colors hover:text-white">
+                {c.label}
+              </Link>
+              <Icon name="arrowRight" className="h-3.5 w-3.5 text-navy-100/35" />
+            </span>
+          ))}
           <span className="text-navy-100/85">{title}</span>
         </motion.nav>
 
