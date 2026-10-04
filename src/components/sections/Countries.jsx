@@ -6,6 +6,7 @@ import SectionHeading from '../ui/SectionHeading'
 import Reveal, { Stagger, StaggerItem } from '../ui/Reveal'
 import Button from '../ui/Button'
 import Icon from '../ui/Icon'
+import Flag from '../ui/Flag'
 
 const MotionLink = motion.create(Link)
 
@@ -57,7 +58,7 @@ export default function Countries() {
                     className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-mist text-xl ring-1 ring-navy-900/[0.06] transition-transform duration-500 group-hover:scale-110"
                     aria-hidden
                   >
-                    {c.flag}
+                    <Flag emoji={c.flag} className="h-5 w-7" emojiClassName="text-xl" />
                   </span>
 
                   <div className="min-w-0 flex-1">

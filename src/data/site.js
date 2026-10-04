@@ -13,11 +13,16 @@ export const company = {
   whatsappDisplay: '+237 6 79 55 41 14',
   address: '1200 Kingsway Avenue, Suite 410, Toronto, ON',
   hours: 'Mon – Sat · 9:00 – 18:00 (GMT)',
+  // Paste each profile link into `href` once the account exists. Empty ones
+  // are hidden; WhatsApp is always shown.
   socials: [
-    { label: 'LinkedIn', href: 'https://linkedin.com/company/meritleaders', icon: 'linkedin' },
-    { label: 'Instagram', href: 'https://instagram.com/meritleaders', icon: 'instagram' },
-    { label: 'X', href: 'https://x.com/meritleaders', icon: 'x' },
-    { label: 'YouTube', href: 'https://youtube.com/@meritleaders', icon: 'youtube' },
+    { label: 'Facebook', href: '', icon: 'facebook' },
+    { label: 'Instagram', href: '', icon: 'instagram' },
+    { label: 'TikTok', href: '', icon: 'tiktok' },
+    { label: 'LinkedIn', href: '', icon: 'linkedin' },
+    { label: 'X', href: '', icon: 'x' },
+    { label: 'YouTube', href: '', icon: 'youtube' },
+    { label: 'Telegram', href: '', icon: 'telegram' },
   ],
 }
 
@@ -26,14 +31,20 @@ export const navLinks = [
   { label: 'About', to: '/about' },
   { label: 'Services', to: '/services' },
   { label: 'Packages', to: '/packages' },
-  { label: 'Scholarships', to: '/scholarships' },
+  {
+    label: 'Opportunities',
+    children: [
+      { label: 'Scholarships', to: '/scholarships', hint: 'Fully and partially funded study' },
+      { label: 'Grants', to: '/grants', hint: 'Seed capital, research and prizes' },
+      { label: 'Internships', to: '/internships', hint: 'Paid and stipend-supported roles' },
+    ],
+  },
   { label: 'Countries', to: '/countries' },
   { label: 'FAQ', to: '/faq' },
 ]
 
 export const stats = [
-  { value: 2400, suffix: '+', label: 'Students advised', hint: 'Since 2016' },
-  { value: 68, suffix: 'M', prefix: '$', label: 'Funding secured', hint: 'Awarded to our students' },
+  { value: 200, suffix: '+', label: 'Students advised', hint: 'Since 2025' },
   { value: 92, suffix: '%', label: 'Shortlist rate', hint: 'On advisor-reviewed applications' },
   { value: 34, suffix: '', label: 'Countries covered', hint: 'Across 6 continents' },
 ]

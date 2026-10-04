@@ -149,8 +149,8 @@ export default function Hero() {
             >
               {[
                 { icon: 'checkCircle', label: 'No upfront fee for discovery' },
-                { icon: 'shield', label: 'Ethical, no ghostwriting' },
-                { icon: 'award', label: '2,400+ students advised' },
+                { icon: 'shield', label: 'Written from your real story' },
+                { icon: 'award', label: '200+ students advised' },
               ].map((t) => (
                 <span
                   key={t.label}
@@ -165,7 +165,7 @@ export default function Hero() {
         </div>
 
         {/* -------------------------------------------------------- Stat bar */}
-        <div className="mx-auto mt-16 grid max-w-5xl grid-cols-2 gap-8 border-t border-white/[0.08] pt-10 text-center sm:mt-20 lg:grid-cols-4 lg:gap-6">
+        <div className="mx-auto mt-16 grid max-w-4xl grid-cols-3 gap-4 border-t border-white/[0.08] pt-10 text-center sm:mt-20 sm:gap-8">
           {stats.map((s, i) => (
             <Stat key={s.label} item={s} delay={0.9 + i * 0.1} />
           ))}
@@ -175,7 +175,7 @@ export default function Hero() {
       {/* ---------------------------------------------------- Partner marquee */}
       <div className="relative mt-16 border-t border-white/[0.06] pt-9">
         <p className="container text-center text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-navy-100/35">
-          Our students have been funded by
+          Scholarships offered by
         </p>
         <div className="mask-fade-x mt-6 flex overflow-hidden">
           <div className="flex shrink-0 animate-marquee items-center gap-14 pr-14">

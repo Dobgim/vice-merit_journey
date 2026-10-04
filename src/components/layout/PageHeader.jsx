@@ -9,7 +9,7 @@ import useGoBack from '../../hooks/useGoBack'
  * The compact dark banner every inner page opens with. Gives each route its
  * own identity while keeping the navbar's dark-on-hero treatment consistent.
  */
-export default function PageHeader({ eyebrow, title, accent, lede, crumbs = [], children }) {
+export default function PageHeader({ eyebrow, title, accent, lede, crumb, crumbs = [], children }) {
   const goBack = useGoBack(crumbs.at(-1)?.to ?? '/')
 
   return (
@@ -54,7 +54,7 @@ export default function PageHeader({ eyebrow, title, accent, lede, crumbs = [], 
               <Icon name="arrowRight" className="h-3.5 w-3.5 text-navy-100/35" />
             </span>
           ))}
-          <span className="text-navy-100/85">{title}</span>
+          <span className="text-navy-100/85">{crumb ?? title}</span>
         </motion.nav>
 
         <motion.p

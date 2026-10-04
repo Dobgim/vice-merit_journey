@@ -9,7 +9,8 @@ export default function Logo({ tone = 'dark', className = '', onClick }) {
     <Link
       to="/"
       onClick={onClick}
-      className={`group inline-flex items-center gap-2.5 ${className}`}
+      className={`notranslate group inline-flex items-center gap-2.5 ${className}`}
+      translate="no"
       aria-label={`${company.name} — home`}
     >
       {/* The emblem is navy-on-white artwork, so it always sits on a white tile */}

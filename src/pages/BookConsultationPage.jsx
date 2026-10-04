@@ -11,6 +11,7 @@ export default function BookConsultationPage() {
       />
 
       <PageHeader
+        crumb="Book a consultation"
         eyebrow="Book a consultation"
         title="Start with a free"
         accent="discovery call."

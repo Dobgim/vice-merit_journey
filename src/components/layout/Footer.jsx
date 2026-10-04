@@ -26,7 +26,10 @@ export default function Footer() {
             </p>
 
             <div className="mt-7 flex gap-2.5">
-              {company.socials.map((s) => (
+              {[
+                { label: 'WhatsApp', href: `https://wa.me/${company.whatsapp}`, icon: 'whatsapp' },
+                ...company.socials.filter((s) => s.href),
+              ].map((s) => (
                 <motion.a
                   key={s.label}
                   href={s.href}
@@ -49,7 +52,7 @@ export default function Footer() {
               Navigate
             </h3>
             <ul className="mt-5 space-y-3">
-              {navLinks.map((l) => (
+              {navLinks.flatMap((l) => l.children ?? [l]).map((l) => (
                 <li key={l.to}>
                   <Link
                     to={l.to}

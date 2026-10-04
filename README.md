@@ -30,6 +30,8 @@ npm run preview  # serve the production build locally
 | `/services` | The seven consultancy services |
 | `/scholarships` | Searchable award database — level, country and funding filters, sort, live deadline status (filters are kept in the URL, e.g. `?type=Undergraduate`) |
 | `/scholarships/:slug` | Full award page — quick facts, overview, eligibility, benefits, documents, step-by-step application, key dates, FAQ, share buttons, related awards |
+| `/grants`, `/grants/:slug` | Grants listing and detail pages (same layout as scholarships) |
+| `/internships`, `/internships/:slug` | Internships listing and detail pages |
 | `/countries` | Study destinations |
 | `/faq` | Accordion FAQ |
 | `/packages` | Application-writing packages and prices (USD / FCFA) |
@@ -51,7 +53,7 @@ src/
   pages/        One file per route
 ```
 
-Scholarship listings live in `src/data/scholarships.js`. Use ISO dates (`YYYY-MM-DD`) for `deadline` and `verified`; open, closing-soon and closed status is computed from them automatically.
+Listings live in `src/data/scholarships.js`, `grants.js` and `internships.js`; `src/data/opportunities.js` holds the per-type copy and filters. Add `image: '/flyers/<name>.jpg'` to any listing to show an official flyer instead of the generated one. Social links go in `company.socials` in `site.js` (empty ones stay hidden). The language menu uses Google Translate (`src/lib/translate.js`). Use ISO dates (`YYYY-MM-DD`) for `deadline` and `verified`; open, closing-soon and closed status is computed from them automatically.
 
 All other content lives in `src/data/site.js` — company details, navigation, services,
 scholarships, countries, testimonials and FAQs. Edit there rather than in components.

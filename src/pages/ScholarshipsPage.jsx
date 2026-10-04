@@ -14,6 +14,7 @@ export default function ScholarshipsPage() {
       />
 
       <PageHeader
+        crumb="Scholarships"
         eyebrow="Open opportunities"
         title="Awards our students are applying to"
         accent="right now."
@@ -29,7 +30,7 @@ export default function ScholarshipsPage() {
         </div>
       </PageHeader>
 
-      <Scholarships variant="full" />
+      <Scholarships kind="scholarships" />
       <div id="alerts" className="scroll-mt-24">
         <Newsletter />
       </div>

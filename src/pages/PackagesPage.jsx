@@ -132,6 +132,7 @@ export default function PackagesPage() {
       />
 
       <PageHeader
+        crumb="Packages"
         eyebrow="Packages & pricing"
         title="Let us write your scholarship application"
         accent="for you."

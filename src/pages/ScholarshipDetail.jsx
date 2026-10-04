@@ -10,7 +10,9 @@ import Button from '../components/ui/Button'
 import DeadlineChip from '../components/ui/DeadlineChip'
 import ShareBar from '../components/ui/ShareBar'
 import Icon from '../components/ui/Icon'
-import useScholarships from '../hooks/useScholarships'
+import { useOpportunities } from '../hooks/useScholarships'
+import { kinds } from '../data/opportunities'
+import Flyer from '../components/ui/Flyer'
 import { byDeadline, deadlineStatus, formatDate } from '../lib/deadline'
 import { company } from '../data/site'
 import NotFound from './NotFound'
@@ -70,9 +72,10 @@ function Checklist({ items, icon = 'check', tone = 'text-emerald-600' }) {
 
 /* -------------------------------------------------------------------- Page */
 
-export default function ScholarshipDetail() {
+export default function ScholarshipDetail({ kind = 'scholarships' }) {
+  const config = kinds[kind]
   const { slug } = useParams()
-  const items = useScholarships()
+  const items = useOpportunities(kind)
   const s = items.find((i) => i.slug === slug)
 
   const related = useMemo(() => {
@@ -107,14 +110,14 @@ export default function ScholarshipDetail() {
 
   const facts = [
     { label: 'Host / provider', value: s.org, icon: 'building' },
-    { label: 'Host country', value: `${s.flag} ${s.country}`, icon: 'globe' },
-    { label: 'Study level', value: s.level, icon: 'cap' },
-    { label: 'Funding type', value: s.funding, icon: 'wallet' },
-    { label: 'Award value', value: s.amount, icon: 'award' },
+    { label: 'Host country', value: s.country, icon: 'globe' },
+    { label: config.labels.level, value: s.level, icon: 'cap' },
+    { label: config.labels.funding, value: s.funding, icon: 'wallet' },
+    { label: config.labels.amount, value: s.amount, icon: 'award' },
     { label: 'Duration', value: s.duration, icon: 'clock' },
     { label: 'Eligible applicants', value: s.nationalities, icon: 'users' },
     { label: 'Fields of study', value: s.fields, icon: 'book' },
-    { label: 'Application deadline', value: formatDate(s.deadline), icon: 'calendar' },
+    { label: 'Application deadline', value: s.deadline ? formatDate(s.deadline) : s.deadlineNote ?? 'Rolling', icon: 'calendar' },
     { label: 'Last verified', value: s.verified ? formatDate(s.verified) : null, icon: 'shield' },
   ].filter((f) => f.value)
 
@@ -125,7 +128,7 @@ export default function ScholarshipDetail() {
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: `${window.location.origin}/` },
-          { '@type': 'ListItem', position: 2, name: 'Scholarships', item: `${window.location.origin}/scholarships` },
+          { '@type': 'ListItem', position: 2, name: config.title, item: `${window.location.origin}${config.path}` },
           { '@type': 'ListItem', position: 3, name: s.name, item: pageUrl },
         ],
       },
@@ -160,18 +163,18 @@ export default function ScholarshipDetail() {
       />
 
       <PageHeader
-        eyebrow={`${s.country} · ${s.level}`}
+        eyebrow={`${config.flyerLabel} · ${s.country}`}
         title={s.name}
         lede={s.summary}
-        crumbs={[{ label: 'Scholarships', to: '/scholarships' }]}
+        crumbs={[{ label: config.title, to: config.path }]}
       >
         <div className="flex flex-wrap items-center gap-2">
-          <Badge variant={s.funding === 'Fully Funded' ? 'gold' : 'dark'} icon={s.funding === 'Fully Funded' ? 'star' : 'half'}>
+          <Badge variant={/fully|paid|seed|prize|grant/i.test(s.funding ?? '') ? 'gold' : 'dark'} icon="star">
             {s.funding}
           </Badge>
           <DeadlineChip deadline={s.deadline} tone="dark" />
           <Badge variant="dark" icon="calendar">
-            Deadline {formatDate(s.deadline)}
+            {s.deadline ? `Deadline ${formatDate(s.deadline)}` : 'Rolling deadline'}
           </Badge>
         </div>
 
@@ -191,11 +194,31 @@ export default function ScholarshipDetail() {
         <div className="container grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_320px]">
           {/* Main column */}
           <div className="grid min-w-0 gap-6">
+            <Reveal blur={false}>
+              <div className="overflow-hidden rounded-2xl shadow-lift ring-1 ring-navy-900/10">
+                <Flyer item={s} kind={kind} label={config.flyerLabel} size="hero" />
+              </div>
+            </Reveal>
+
+            {!s.deadline && s.deadlineNote && (
+              <div className="flex gap-3 rounded-2xl border border-navy-900/[0.08] bg-white p-5 text-[0.92rem] leading-[1.65] text-navy-800">
+                <Icon name="clock" className="mt-0.5 h-5 w-5 shrink-0 text-gold-600" />
+                <p>{s.deadlineNote}</p>
+              </div>
+            )}
+
+            {s.deadline && s.deadlineNote && (
+              <p className="flex gap-2 text-[0.85rem] text-navy-600">
+                <Icon name="clock" className="mt-0.5 h-4 w-4 shrink-0 text-gold-600" />
+                {s.deadlineNote}
+              </p>
+            )}
+
             {status.state === 'closed' && (
               <div className="flex gap-3 rounded-2xl border border-gold-300/60 bg-gold-50 p-5 text-[0.92rem] leading-[1.65] text-gold-900">
                 <Icon name="clock" className="mt-0.5 h-5 w-5 shrink-0 text-gold-600" />
                 <p>
-                  <span className="font-semibold">This cycle has closed.</span> Most awards reopen on a similar
+                  <span className="font-semibold">This cycle has closed.</span> Most opportunities reopen on a similar
                   timetable each year — use the details below to prepare early, or{' '}
                   <a href="#alerts" className="font-semibold underline underline-offset-2">
                     get an alert
@@ -239,7 +262,7 @@ export default function ScholarshipDetail() {
             )}
 
             {s.benefits?.length > 0 && (
-              <Block id="benefits" icon="award" title="What the award covers">
+              <Block id="benefits" icon="award" title="What you get">
                 <Checklist items={s.benefits} icon="star" tone="text-gold-500" />
               </Block>
             )}
@@ -356,7 +379,7 @@ export default function ScholarshipDetail() {
                 <div className="relative">
                   <IconTile name="users" tone="glass" />
                   <h3 className="mt-4 font-display text-[1.25rem] font-semibold leading-snug">
-                    Want a stronger shot at this award?
+                    Want a stronger shot at this one?
                   </h3>
                   <p className="mt-2 text-[0.88rem] leading-[1.65] text-navy-100/70">
                     An advisor will check your eligibility, review your essays and run a mock interview for this
@@ -378,7 +401,7 @@ export default function ScholarshipDetail() {
               </div>
 
               <Card hover={false} className="p-5">
-                <p className="eyebrow text-navy-500">Share this scholarship</p>
+                <p className="eyebrow text-navy-500">Share this {config.singular}</p>
                 <p className="mt-2 text-[0.85rem] leading-[1.6] text-navy-600">
                   Know someone who should apply? Send it to them.
                 </p>
@@ -397,15 +420,15 @@ export default function ScholarshipDetail() {
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div>
                 <p className="eyebrow text-navy-500">Keep exploring</p>
-                <h2 className="mt-3 font-display text-[1.9rem] font-semibold text-navy-950">Similar scholarships</h2>
+                <h2 className="mt-3 font-display text-[1.9rem] font-semibold text-navy-950">Similar {config.plural}</h2>
               </div>
-              <Button to="/scholarships" variant="outline" size="sm" icon="arrowRight">
-                All scholarships
+              <Button to={config.path} variant="outline" size="sm" icon="arrowRight">
+                All {config.plural}
               </Button>
             </div>
             <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((item) => (
-                <ScholarshipCard key={item.slug} item={item} />
+                <ScholarshipCard key={item.slug} item={item} kind={kind} />
               ))}
             </div>
           </div>

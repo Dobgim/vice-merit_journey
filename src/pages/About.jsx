@@ -10,10 +10,11 @@ export default function About() {
     <>
       <Seo
         title="About Us"
-        description="Merit Leaders is an independent scholarship consultancy. Meet the advisors, the method and the standards behind 2,400+ funded students."
+        description="Merit Leaders is an independent scholarship consultancy. Meet the advisors, the method and the standards behind 200+ students advised since 2025."
       />
 
       <PageHeader
+        crumb="About"
         eyebrow="Who we are"
         title="An independent consultancy built around one"
         accent="outcome."

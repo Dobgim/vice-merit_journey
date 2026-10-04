@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { scholarships as fallback } from '../data/site'
+import { kinds } from '../data/opportunities'
 import { fetchScholarships } from '../lib/supabase'
 import { slugify } from '../lib/deadline'
 
@@ -25,4 +26,10 @@ export default function useScholarships() {
   }, [])
 
   return items
+}
+
+/** Listings for any opportunity type. Only scholarships come from Supabase. */
+export function useOpportunities(kind = 'scholarships') {
+  const scholarships = useScholarships()
+  return kind === 'scholarships' ? scholarships : withSlug(kinds[kind].items)
 }

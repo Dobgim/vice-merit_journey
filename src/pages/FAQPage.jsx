@@ -11,6 +11,7 @@ export default function FAQPage() {
       />
 
       <PageHeader
+        crumb="FAQ"
         eyebrow="Before you ask"
         title="The questions students ask us"
         accent="most."

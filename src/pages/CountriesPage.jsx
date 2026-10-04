@@ -12,6 +12,7 @@ export default function CountriesPage() {
       />
 
       <PageHeader
+        crumb="Countries"
         eyebrow="Where you could study"
         title="Destinations we know"
         accent="inside out."
