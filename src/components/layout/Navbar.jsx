@@ -58,7 +58,7 @@ export default function Navbar() {
                     to={link.to}
                     end={link.to === '/'}
                     className={({ isActive }) =>
-                      `relative rounded-full px-4 py-2 text-[0.9rem] font-medium transition-colors duration-300 ${
+                      `relative rounded-full px-2.5 py-2 text-[0.88rem] font-medium xl:px-4 xl:text-[0.9rem] transition-colors duration-300 ${
                         overHero
                           ? isActive
                             ? 'text-white'
@@ -95,7 +95,7 @@ export default function Navbar() {
                 variant={overHero ? 'gold' : 'primary'}
                 icon="calendar"
                 iconRight={false}
-                className="hidden sm:inline-flex"
+                className="hidden whitespace-nowrap sm:inline-flex"
               >
                 Book Consultation
               </Button>

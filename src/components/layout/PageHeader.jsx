@@ -3,12 +3,15 @@ import { Link } from 'react-router-dom'
 import { Aurora } from '../ui/Primitives'
 import Icon from '../ui/Icon'
 import { EASE } from '../ui/Reveal'
+import useGoBack from '../../hooks/useGoBack'
 
 /**
  * The compact dark banner every inner page opens with. Gives each route its
  * own identity while keeping the navbar's dark-on-hero treatment consistent.
  */
 export default function PageHeader({ eyebrow, title, accent, lede, crumbs = [], children }) {
+  const goBack = useGoBack(crumbs.at(-1)?.to ?? '/')
+
   return (
     <section className="relative isolate overflow-hidden bg-navy-950 pb-16 pt-32 text-white sm:pb-20 sm:pt-36 lg:pb-24 lg:pt-40">
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
@@ -23,6 +26,18 @@ export default function PageHeader({ eyebrow, title, accent, lede, crumbs = [], 
       <Aurora />
 
       <div className="container relative">
+        <motion.button
+          type="button"
+          onClick={goBack}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: EASE }}
+          className="group mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-2 text-[0.82rem] font-semibold text-white backdrop-blur transition-colors hover:border-white/30 hover:bg-white/[0.12]"
+        >
+          <Icon name="arrowLeft" className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-0.5" />
+          Back
+        </motion.button>
+
         <motion.nav
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}

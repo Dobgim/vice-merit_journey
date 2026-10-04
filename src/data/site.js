@@ -8,7 +8,8 @@ export const company = {
   tagline: 'Scholarship Consultancy',
   email: 'advisors@meritledger.com',
   phone: '+1 (202) 555-0148',
-  whatsapp: '12025550148', // digits only, used to build wa.me links
+  whatsapp: '237679554114', // digits only (country code, no +), used to build wa.me links
+  whatsappDisplay: '+237 6 79 55 41 14',
   address: '1200 Kingsway Avenue, Suite 410, Toronto, ON',
   hours: 'Mon – Sat · 9:00 – 18:00 (GMT)',
   socials: [
@@ -23,6 +24,7 @@ export const navLinks = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: 'Services', to: '/services' },
+  { label: 'Packages', to: '/packages' },
   { label: 'Scholarships', to: '/scholarships' },
   { label: 'Countries', to: '/countries' },
   { label: 'FAQ', to: '/faq' },
@@ -70,7 +72,7 @@ export const benefits = [
     icon: 'shield',
     title: 'Transparent and ethical',
     body:
-      'We never write your story for you and never guarantee outcomes. We sharpen your case, keep your voice, and tell you the honest odds.',
+      'Everything we write is built from your real story and approved by you before it is submitted. We never invent achievements and never guarantee outcomes — we tell you the honest odds.',
   },
   {
     icon: 'clock',
@@ -302,7 +304,7 @@ export const faqs = [
   },
   {
     q: 'Do you write my personal statement for me?',
-    a: 'We never write it for you. We run a narrative strategy session, help you structure the argument, and edit for clarity and impact. The story, the voice and the evidence stay yours — committees notice ghostwriting, and several awards disqualify for it.',
+    a: 'On our Complete Application and Premium packages, yes — we draft it from in-depth interviews with you, in your voice, using only your real experiences, and you approve every word. Some awards ask you to declare the statement is your own work; for those we tell you up front and switch to a coaching-and-editing approach so your application stays within the rules.',
   },
   {
     q: 'How much do your services cost?',
@@ -343,4 +345,110 @@ export const countryOptions = [
   'France',
   'Ireland',
   'Other / Undecided',
+]
+
+/* ------------------------------------------------------------------ Packages */
+
+/**
+ * Prices are set per currency (not converted live) so each can be rounded to a
+ * sensible local figure. Edit freely — the Packages page reads only from here.
+ */
+export const currencies = {
+  USD: { label: 'USD', format: (n) => '$' + n.toLocaleString('en-US') },
+  XAF: { label: 'FCFA', format: (n) => n.toLocaleString('fr-FR') + ' FCFA' },
+}
+
+export const packages = [
+  {
+    id: 'essay',
+    name: 'Essay Package',
+    tagline: 'One standout statement, written for you.',
+    price: { USD: 99, XAF: 55000 },
+    unit: 'per essay',
+    delivery: '5 working days',
+    icon: 'pen',
+    features: [
+      'Personal statement, SOP or motivation letter',
+      'Written from a 45-minute interview with you',
+      'Tailored to one scholarship or programme',
+      'Two rounds of revisions',
+      'Word-limit and prompt compliance check',
+    ],
+  },
+  {
+    id: 'complete',
+    name: 'Complete Application',
+    tagline: 'We write and prepare your full scholarship application.',
+    price: { USD: 299, XAF: 170000 },
+    unit: 'per scholarship',
+    delivery: '10 – 14 working days',
+    icon: 'file',
+    popular: true,
+    features: [
+      'Every essay the application asks for',
+      'Academic CV rebuilt to committee standard',
+      'Online application form completed with you',
+      'Study plan / research proposal (where required)',
+      'Referee briefing pack so your letters match your story',
+      'Full document checklist and quality review',
+      'Three rounds of revisions',
+      'Final check before you press submit',
+    ],
+  },
+  {
+    id: 'premium',
+    name: 'Premium Multi-Application',
+    tagline: 'Up to three applications, plus interview and visa support.',
+    price: { USD: 699, XAF: 400000 },
+    unit: 'up to 3 applications',
+    delivery: 'Priority — schedule agreed with you',
+    icon: 'award',
+    features: [
+      'Everything in Complete Application, for up to 3 scholarships or universities',
+      'Personal scholarship shortlist matched to your profile',
+      'Two recorded mock interviews with feedback',
+      'Visa document review after you win',
+      'Priority WhatsApp support from one dedicated advisor',
+      'Unlimited revisions until submission',
+    ],
+  },
+]
+
+export const packageAddons = [
+  { name: 'Extra essay', price: { USD: 39, XAF: 22000 } },
+  { name: 'Academic CV only', price: { USD: 49, XAF: 28000 } },
+  { name: 'Research proposal', price: { USD: 89, XAF: 50000 } },
+  { name: 'Mock interview (recorded)', price: { USD: 39, XAF: 22000 } },
+  { name: 'Visa document review', price: { USD: 59, XAF: 33000 } },
+  { name: 'Express delivery (72 hours)', price: null, note: '+30% of package price' },
+]
+
+export const packageSteps = [
+  { title: 'Choose & message us', body: 'Pick a package and send us a WhatsApp message. We reply within a few hours.' },
+  { title: 'Intake interview', body: 'A call to capture your story, achievements and goals. A 50% deposit confirms your slot.' },
+  { title: 'We write, you review', body: 'Your advisor drafts everything. You review each document and request changes.' },
+  { title: 'Final file & submission', body: 'Pay the balance, receive the final documents and submit with our checklist beside you.' },
+]
+
+export const packageFaqs = [
+  {
+    q: 'Is it allowed to have someone write my application?',
+    a: 'Most scholarships allow professional help as long as the content is true and reflects you. We write only from your real experiences and you approve every word. Some awards ask you to declare the essays are your own work — we flag those before you pay and switch to coaching and editing for them.',
+  },
+  {
+    q: 'How do I pay?',
+    a: 'We accept MTN Mobile Money, Orange Money and bank transfer, and card or transfer for international clients. Payment details are sent on WhatsApp once we agree on the scope. You pay a 50% deposit to start and the balance before final delivery.',
+  },
+  {
+    q: 'Can you guarantee I will win?',
+    a: 'No one honestly can — committees make the final decision. What we guarantee is a complete, polished, on-time application that presents you at your strongest.',
+  },
+  {
+    q: 'What if I am not happy with the draft?',
+    a: 'Every package includes revision rounds. If we have not started writing yet, your deposit is refunded in full.',
+  },
+  {
+    q: 'My deadline is very close. Can you still help?',
+    a: 'Often, yes. Add Express delivery and message us on WhatsApp with the deadline so we can confirm before you pay.',
+  },
 ]

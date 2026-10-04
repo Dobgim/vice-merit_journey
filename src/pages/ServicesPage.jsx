@@ -19,9 +19,14 @@ export default function ServicesPage() {
         accent="award letter."
         lede="Seven services that cover the full application arc. Take the whole programme or the single piece you are stuck on — advisors work to the same standard either way."
       >
-        <Button to="/contact" variant="gold" size="lg" icon="arrowRight">
-          Book a free consultation
-        </Button>
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <Button to="/contact" variant="gold" size="lg" icon="arrowRight">
+            Book a free consultation
+          </Button>
+          <Button to="/packages" variant="ghostLight" size="lg" icon="wallet" iconRight={false}>
+            See packages & prices
+          </Button>
+        </div>
       </PageHeader>
 
       <Services />

@@ -4,6 +4,7 @@ import RootLayout from './components/layout/RootLayout'
 import Home from './pages/Home'
 import About from './pages/About'
 import ServicesPage from './pages/ServicesPage'
+import PackagesPage from './pages/PackagesPage'
 import ScholarshipsPage from './pages/ScholarshipsPage'
 import ScholarshipDetail from './pages/ScholarshipDetail'
 import CountriesPage from './pages/CountriesPage'
@@ -23,6 +24,7 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="services" element={<ServicesPage />} />
+        <Route path="packages" element={<PackagesPage />} />
         <Route path="scholarships" element={<ScholarshipsPage />} />
         <Route path="scholarships/:slug" element={<ScholarshipDetail />} />
         <Route path="countries" element={<CountriesPage />} />

@@ -107,6 +107,17 @@ export default function Footer() {
                   {company.phone}
                 </a>
               </li>
+              <li>
+                <a
+                  href={`https://wa.me/${company.whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-3 text-navy-100/65 transition-colors hover:text-white"
+                >
+                  <Icon name="whatsapp" className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" />
+                  WhatsApp: {company.whatsappDisplay}
+                </a>
+              </li>
               <li className="flex items-start gap-3 text-navy-100/65">
                 <Icon name="mapPin" className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" />
                 {company.address}

@@ -68,7 +68,9 @@ export default function Contact() {
       // Arriving from a scholarship page (/contact?scholarship=Name) pre-fills the brief.
       message: params.get('scholarship')
         ? `I would like help applying for the ${params.get('scholarship')}. `
-        : '',
+        : params.get('package')
+          ? `I am interested in the ${params.get('package')} package. My question: `
+          : '',
     },
   })
 

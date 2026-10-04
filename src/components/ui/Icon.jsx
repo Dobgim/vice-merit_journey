@@ -119,6 +119,7 @@ const paths = {
     </>
   ),
   arrowRight: <path d="M4.5 12h15m0 0-5.5-5.5M19.5 12 14 17.5" />,
+  arrowLeft: <path d="M19.5 12h-15m0 0 5.5-5.5M4.5 12l5.5 5.5" />,
   arrowUpRight: <path d="M7 17 17 7m0 0H8.5M17 7v8.5" />,
   check: <path d="m4.5 12.5 5 5 10-11" />,
   checkCircle: (

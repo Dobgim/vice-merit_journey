@@ -1,27 +1,43 @@
-import { useEffect } from 'react'
+import { useEffect, useLayoutEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Outlet, useLocation } from 'react-router-dom'
+import { Outlet, useLocation, useNavigationType } from 'react-router-dom'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import FloatingActions from './FloatingActions'
 
-/**
- * Jump to the top on every navigation. Done synchronously in a layout effect
- * so the new page never paints at the old scroll offset.
- */
-function useScrollToTop() {
-  const { pathname } = useLocation()
+// Scroll offsets per history entry, so Back returns you to where you were.
+const positions = new Map()
 
-  // Block body, not a concise arrow — an implicit return here would be read
-  // by React as an effect cleanup function.
+/**
+ * New page (link click): start at the top. Back / Forward (a POP navigation):
+ * restore the scroll position that history entry had when you left it.
+ */
+function useScrollRestoration() {
+  const { pathname, key } = useLocation()
+  const navType = useNavigationType()
+
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' })
+    if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual'
+  }, [])
+
+  // Keep the current entry's offset up to date while the visitor scrolls.
+  useEffect(() => {
+    const save = () => positions.set(key, window.scrollY)
+    window.addEventListener('scroll', save, { passive: true })
+    return () => window.removeEventListener('scroll', save)
+  }, [key])
+
+  useLayoutEffect(() => {
+    const top = navType === 'POP' ? (positions.get(key) ?? 0) : 0
+    window.scrollTo({ top, behavior: 'instant' })
+    // Pathname, not key: query-string updates (e.g. filters) must not jump the page.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
 }
 
 export default function RootLayout() {
   const { pathname } = useLocation()
-  useScrollToTop()
+  useScrollRestoration()
 
   return (
     <div className="min-h-screen overflow-x-clip bg-mist">
