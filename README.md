@@ -58,13 +58,32 @@ Listings live in `src/data/scholarships.js`, `grants.js` and `internships.js`; `
 All other content lives in `src/data/site.js` — company details, navigation, services,
 scholarships, countries, testimonials and FAQs. Edit there rather than in components.
 
-## Backend
+## Admin dashboard
 
-The contact form works without a backend. To persist submissions, copy `.env.example`
-to `.env` and fill in your Supabase project URL and anon key; the client picks them up
-automatically.
+Open `/admin` (for example `https://meritleaders.com/admin`). From there you can:
 
-Tables used: `consultations` (contact form), `subscribers` (scholarship alerts sign-up, unique `email`) and `scholarships` (optional — replaces the bundled list; see the column list in `src/lib/supabase.js`).
+- read and reply to consultation requests (WhatsApp / email), set their status and keep notes
+- see and export alert subscribers
+- add, edit, hide or delete scholarships, grants and internships, including uploading flyers
+- change package prices and add-ons
+- change contact details and social media links
+
+Without Supabase the dashboard runs in **demo mode**: any email and password signs in and
+everything is saved only in that browser. To go live:
+
+1. Create a free project at [supabase.com](https://supabase.com).
+2. In **SQL Editor**, paste and run `supabase/schema.sql`. It creates the tables, the flyer
+   storage bucket and the security rules.
+3. In the same editor run, with your own email:
+   `insert into public.admins (email) values ('you@example.com');`
+4. In **Authentication → Users → Add user**, create that email with a password.
+5. Copy `.env.example` to `.env` (and add the same two variables in your hosting provider)
+   using the values from **Project Settings → API**, then rebuild and redeploy.
+6. Sign in at `/admin`, then in Scholarships, Grants and Internships click
+   **Import the built-in…** so the existing listings become editable.
+
+Only emails in the `admins` table can read requests or change anything; this is enforced by
+the database, not just the dashboard.
 
 ## Deployment
 

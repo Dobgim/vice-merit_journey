@@ -1,35 +1,45 @@
 import { useEffect, useState } from 'react'
-import { scholarships as fallback } from '../data/site'
 import { kinds } from '../data/opportunities'
-import { fetchScholarships } from '../lib/supabase'
+import { fetchOpportunities } from '../lib/supabase'
 import { slugify } from '../lib/deadline'
 
 const withSlug = (list) => list.map((s) => (s.slug ? s : { ...s, slug: slugify(s.name) }))
 
-// Fetched once per session and shared, so moving between the listing and a
-// detail page never re-requests or flashes placeholder data.
-let cache = null
-let pending = null
+// Fetched once per type per session and shared, so moving between a listing
+// and a detail page never re-requests or flashes the bundled data.
+const cache = {}
+const pending = {}
 
-/** Scholarships from Supabase when configured, the bundled list otherwise. */
-export default function useScholarships() {
-  const [items, setItems] = useState(() => cache ?? withSlug(fallback))
+/**
+ * Listings for one opportunity type: what the admin has published, or the
+ * bundled list in src/data/ until anything of that type has been added.
+ */
+export function useOpportunities(kind = 'scholarships') {
+  const bundled = kinds[kind].items
+  const [items, setItems] = useState(() => cache[kind] ?? withSlug(bundled))
 
   useEffect(() => {
-    if (cache) return
+    if (cache[kind]) {
+      setItems(cache[kind])
+      return
+    }
     let alive = true
-    pending ??= fetchScholarships(fallback).then((data) => (cache = withSlug(data)))
-    pending.then((data) => alive && setItems(data))
+    pending[kind] ??= fetchOpportunities(kind, bundled).then((data) => (cache[kind] = withSlug(data)))
+    pending[kind].then((data) => alive && setItems(data))
     return () => {
       alive = false
     }
-  }, [])
+  }, [kind, bundled])
 
   return items
 }
 
-/** Listings for any opportunity type. Only scholarships come from Supabase. */
-export function useOpportunities(kind = 'scholarships') {
-  const scholarships = useScholarships()
-  return kind === 'scholarships' ? scholarships : withSlug(kinds[kind].items)
+/** Admin calls this after saving so the public pages pick up the change. */
+export function clearOpportunityCache() {
+  for (const k of Object.keys(cache)) delete cache[k]
+  for (const k of Object.keys(pending)) delete pending[k]
+}
+
+export default function useScholarships() {
+  return useOpportunities('scholarships')
 }

@@ -29,7 +29,8 @@ export default function Services() {
         <div className="mt-16 grid gap-6 lg:grid-cols-3">
           {/* Feature card — the entry service, given extra visual weight */}
           <Reveal className="lg:row-span-2">
-            <Card className="group flex h-full flex-col justify-between bg-navy-950 p-8 text-white" hover>
+            {/* `!` beats the base Card's bg-white, which otherwise wins and hides the white text */}
+            <Card className="group flex h-full flex-col justify-between !border-navy-900 !bg-navy-950 p-8 text-white" hover>
               <div>
                 <div
                   aria-hidden

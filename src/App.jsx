@@ -1,3 +1,4 @@
+import { Suspense, lazy } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import RootLayout from './components/layout/RootLayout'
 
@@ -14,6 +15,9 @@ import FAQPage from './pages/FAQPage'
 import BookConsultationPage from './pages/BookConsultationPage'
 import NotFound from './pages/NotFound'
 
+// The dashboard is a separate download, so visitors never load it.
+const AdminApp = lazy(() => import('./admin/AdminApp'))
+
 /**
  * Every page is imported eagerly on purpose. The whole site is ~120 kB gzipped,
  * so bundling it once buys instant route changes — no chunk request, no
@@ -22,6 +26,14 @@ import NotFound from './pages/NotFound'
 export default function App() {
   return (
     <Routes>
+      <Route
+        path="admin/*"
+        element={
+          <Suspense fallback={<div className="min-h-screen bg-navy-950" />}>
+            <AdminApp />
+          </Suspense>
+        }
+      />
       <Route element={<RootLayout />}>
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
