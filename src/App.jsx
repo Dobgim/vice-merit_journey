@@ -14,6 +14,7 @@ import CountriesPage from './pages/CountriesPage'
 import FAQPage from './pages/FAQPage'
 import BookConsultationPage from './pages/BookConsultationPage'
 import NotFound from './pages/NotFound'
+import LegalPage from './pages/LegalPage'
 
 // The dashboard is a separate download, so visitors never load it.
 const AdminApp = lazy(() => import('./admin/AdminApp'))
@@ -48,6 +49,8 @@ export default function App() {
         <Route path="countries" element={<CountriesPage />} />
         <Route path="faq" element={<FAQPage />} />
         <Route path="book-consultation" element={<BookConsultationPage />} />
+        <Route path="privacy" element={<LegalPage key="privacy" doc="privacy" />} />
+        <Route path="terms" element={<LegalPage key="terms" doc="terms" />} />
         {/* Old links and bookmarks */}
         <Route path="contact" element={<Navigate to="/book-consultation" replace />} />
         <Route path="*" element={<NotFound />} />

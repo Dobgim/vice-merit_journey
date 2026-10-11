@@ -137,12 +137,12 @@ export default function Footer() {
           </p>
 
           <div className="flex items-center gap-6 text-[0.82rem] text-navy-100/45">
-            <a href="#" className="transition-colors hover:text-white">
+            <Link to="/privacy" className="transition-colors hover:text-white">
               Privacy
-            </a>
-            <a href="#" className="transition-colors hover:text-white">
+            </Link>
+            <Link to="/terms" className="transition-colors hover:text-white">
               Terms
-            </a>
+            </Link>
             <button
               type="button"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}

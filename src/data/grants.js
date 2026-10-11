@@ -80,7 +80,7 @@ export const grants = [
     duration: '8-month business accelerator',
     nationalities: 'Citizens and residents of sub-Saharan African countries',
     fields: 'Engineering innovations that solve local challenges',
-    officialUrl: 'https://raeng.org.uk/africa-prize',
+    officialUrl: 'https://africaprize.raeng.org.uk/',
     summary:
       'Africa’s biggest engineering-innovation prize: a funded accelerator for 16 innovators and £85,000 in prizes.',
     tags: ['Engineering', 'Accelerator'],
@@ -137,7 +137,7 @@ export const grants = [
     duration: 'Usually up to 1 year',
     nationalities: 'All nationalities',
     fields: 'Science, conservation, education, technology and storytelling',
-    officialUrl: 'https://www.nationalgeographic.org/society/grants-and-investments/',
+    officialUrl: 'https://www.nationalgeographic.org/explore/grants-investments',
     summary:
       'Funding for bold projects in science, conservation, education, technology and storytelling, open worldwide.',
     tags: ['Open worldwide', 'Early career'],

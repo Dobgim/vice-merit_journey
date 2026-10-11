@@ -120,7 +120,7 @@ export const internships = [
     duration: '10 weeks (1 Jun – 9 Aug 2027)',
     nationalities: 'Nationals of World Bank member countries',
     fields: 'Finance, economics, quantitative fields',
-    officialUrl: 'https://www.worldbank.org/en/about/careers',
+    officialUrl: 'https://www.worldbank.org/ext/en/careers',
     summary:
       'A paid, in-person summer internship rotating through three World Bank Treasury teams.',
     tags: ['Paid', 'In person'],

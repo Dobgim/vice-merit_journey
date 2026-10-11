@@ -264,7 +264,7 @@ export const scholarships = [
     duration: '4 years',
     nationalities: 'International students',
     fields: 'Any undergraduate programme at U of T',
-    officialUrl: 'https://future.utoronto.ca/pearson/about/',
+    officialUrl: 'https://future.utoronto.ca/pearson-scholarships',
     summary:
       'Canada’s flagship international undergraduate award, covering four years of study in full.',
     tags: ['First degree', '4 years'],
@@ -364,7 +364,7 @@ export const scholarships = [
   },
   {
     slug: 'holland-scholarship',
-    name: 'Holland Scholarship',
+    name: 'NL Scholarship (formerly Holland Scholarship)',
     org: 'Dutch Ministry of Education',
     country: 'Netherlands',
     flag: '🇳🇱',
@@ -376,12 +376,12 @@ export const scholarships = [
     duration: 'First year of study',
     nationalities: 'Students from outside the EEA',
     fields: 'Bachelor’s and master’s at participating Dutch institutions',
-    officialUrl: 'https://www.studyinnl.org/finances/holland-scholarship',
+    officialUrl: 'https://www.studyinnl.org/finances/nl-scholarship',
     summary:
       'A first-year grant for non-EEA students entering Dutch research universities and universities of applied sciences.',
     tags: ['First year', 'Non-EEA'],
     overview: [
-      'The Holland Scholarship is funded by the Dutch Ministry of Education, Culture and Science and participating Dutch institutions. It is a one-off grant toward the first year of a full-time bachelor’s or master’s programme.',
+      'The NL Scholarship (previously called the Holland Scholarship) is funded by the Dutch Ministry of Education, Culture and Science and participating Dutch institutions. It is a one-off grant toward the first year of a full-time bachelor’s or master’s programme.',
       'You apply through the university, not a central portal. Deadlines are either 1 February or 1 May depending on the institution.',
     ],
     eligibility: [
@@ -400,7 +400,7 @@ export const scholarships = [
     howToApply: [
       'Pick a participating institution and programme.',
       'Apply for admission to the programme.',
-      'Submit the Holland Scholarship application through that institution by its deadline.',
+      'Submit the NL Scholarship application through that institution by its deadline.',
     ],
     timeline: [
       { date: '1 Feb 2027', label: 'Deadline (most universities)' },
@@ -478,8 +478,7 @@ export const scholarships = [
     duration: 'Up to 12 months (research) · up to 36 months (PhD)',
     nationalities: '180+ eligible countries',
     fields: 'All disciplines at Swiss public universities',
-    officialUrl:
-      'https://www.sbfi.admin.ch/sbfi/en/home/education/scholarships-and-grants/swiss-government-excellence-scholarships.html',
+    officialUrl: 'https://www.sbfi.admin.ch/en/swiss-government-excellence-scholarships',
     summary:
       'Research and doctoral funding for postgraduate researchers, with housing and insurance support.',
     tags: ['Research', 'Housing help'],

@@ -8,7 +8,7 @@ export const company = {
   tagline: 'Scholarship & Education Consultancy',
   domain: 'meritleaders.com',
   email: 'advisors@meritleaders.com',
-  phone: '+1 (202) 555-0148',
+  phone: '+237 6 79 55 41 14',
   whatsapp: '237679554114', // digits only (country code, no +), used to build wa.me links
   whatsappDisplay: '+237 6 79 55 41 14',
   address: '1200 Kingsway Avenue, Suite 410, Toronto, ON',
