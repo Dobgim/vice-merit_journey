@@ -2,7 +2,6 @@ import Seo from '../components/layout/Seo'
 import PageHeader from '../components/layout/PageHeader'
 import WhyChooseUs from '../components/sections/WhyChooseUs'
 import HowItWorks from '../components/sections/HowItWorks'
-import Testimonials from '../components/sections/Testimonials'
 import Button from '../components/ui/Button'
 
 export default function About() {
@@ -27,7 +26,6 @@ export default function About() {
 
       <WhyChooseUs />
       <HowItWorks />
-      <Testimonials />
     </>
   )
 }

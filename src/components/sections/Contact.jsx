@@ -152,7 +152,7 @@ export default function Contact() {
                     <Field label="Full name" required error={errors.fullName}>
                       <input
                         type="text"
-                        placeholder="Amara Okonkwo"
+                        placeholder="Your full name"
                         autoComplete="name"
                         className={`${fieldBase} ${borderFor(errors.fullName)} h-12`}
                         {...register('fullName', {

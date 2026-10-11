@@ -25,8 +25,8 @@ npm run preview  # serve the production build locally
 
 | Route | Page |
 | --- | --- |
-| `/` | Home — hero, benefits, services, categories, process, featured scholarships, testimonials |
-| `/about` | Who we are, method, testimonials |
+| `/` | Home — hero, benefits, services, categories, process, alerts sign-up |
+| `/about` | Who we are and how we work |
 | `/services` | The seven consultancy services |
 | `/scholarships` | Searchable award database — level, country and funding filters, sort, live deadline status (filters are kept in the URL, e.g. `?type=Undergraduate`) |
 | `/scholarships/:slug` | Full award page — quick facts, overview, eligibility, benefits, documents, step-by-step application, key dates, FAQ, share buttons, related awards |

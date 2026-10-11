@@ -28,7 +28,6 @@ export const company = {
 
 export const navLinks = [
   { label: 'Home', to: '/' },
-  { label: 'About', to: '/about' },
   { label: 'Services', to: '/services' },
   { label: 'Packages', to: '/packages' },
   {
@@ -37,10 +36,11 @@ export const navLinks = [
       { label: 'Scholarships', to: '/scholarships', hint: 'Fully and partially funded study' },
       { label: 'Grants', to: '/grants', hint: 'Seed capital, research and prizes' },
       { label: 'Internships', to: '/internships', hint: 'Paid and stipend-supported roles' },
+      { label: 'Countries', to: '/countries', hint: 'Study destinations we cover' },
     ],
   },
-  { label: 'Countries', to: '/countries' },
   { label: 'FAQ', to: '/faq' },
+  { label: 'About', to: '/about' },
 ]
 
 export const stats = [
@@ -236,68 +236,12 @@ export const countries = [
   { name: 'Australia', flag: '🇦🇺', awards: '120+ awards', note: 'Australia Awards · RTP' },
   { name: 'Netherlands', flag: '🇳🇱', awards: '90+ awards', note: 'Holland · Orange Knowledge' },
   { name: 'Japan', flag: '🇯🇵', awards: '70+ awards', note: 'MEXT · JASSO · ADB' },
+  { name: 'China', flag: '🇨🇳', awards: '80+ awards', note: 'CSC · Confucius Institute · Provincial' },
   { name: 'Sweden', flag: '🇸🇪', awards: '60+ awards', note: 'SI Global · Lund Global' },
   { name: 'Switzerland', flag: '🇨🇭', awards: '45+ awards', note: 'Excellence · ETH Zürich' },
   { name: 'France', flag: '🇫🇷', awards: '85+ awards', note: 'Eiffel · Émile Boutmy' },
   { name: 'Ireland', flag: '🇮🇪', awards: '40+ awards', note: 'Government of Ireland · Walsh' },
   { name: 'United Arab Emirates', flag: '🇦🇪', awards: '35+ awards', note: 'Khalifa · MBZUAI' },
-]
-
-export const testimonials = [
-  {
-    quote:
-      'I had been rejected twice before Merit Leaders. My advisor rebuilt my statement around the one story I kept leaving out — the community lab I ran at home. Chevening called eight weeks later.',
-    name: 'Amara Okonkwo',
-    role: 'MSc Public Policy · LSE',
-    award: 'Chevening Scholar 2025',
-    rating: 5,
-    initials: 'AO',
-  },
-  {
-    quote:
-      'What I valued most was the honesty. They told me two of my six targets were unrealistic and why. That saved me a semester of wasted effort — and I won one of the four that remained.',
-    name: 'Rafael Duarte',
-    role: 'PhD Materials Science · ETH Zürich',
-    award: 'Swiss Excellence 2025',
-    rating: 5,
-    initials: 'RD',
-  },
-  {
-    quote:
-      'The mock interviews were harder than the real panel. By the time I sat in front of the committee I had already answered every difficult question twice.',
-    name: 'Nadia Rahman',
-    role: 'MA Development Studies · Sussex',
-    award: 'Commonwealth Scholar 2024',
-    rating: 5,
-    initials: 'NR',
-  },
-  {
-    quote:
-      'As a first-generation student, I did not know a funded master’s was even possible. My advisor walked me through every form, including the visa file. I start in Toronto this autumn.',
-    name: 'Kwame Mensah',
-    role: 'MEng Civil Engineering · U of T',
-    award: 'Pearson Scholar 2025',
-    rating: 5,
-    initials: 'KM',
-  },
-  {
-    quote:
-      'The deadline tracker alone was worth it. Three applications, three different reference formats, one calendar. Nothing slipped.',
-    name: 'Ji-woo Park',
-    role: 'MSc Data Science · TU Delft',
-    award: 'Holland Scholarship 2025',
-    rating: 5,
-    initials: 'JP',
-  },
-  {
-    quote:
-      'They edited my CV without stripping my voice out of it. Committees could still tell a person wrote it — that mattered more than I expected.',
-    name: 'Fatima Al-Sayed',
-    role: 'MPhil Economics · Cambridge',
-    award: 'Gates Cambridge 2024',
-    rating: 5,
-    initials: 'FA',
-  },
 ]
 
 export const faqs = [
@@ -351,6 +295,7 @@ export const countryOptions = [
   'Australia',
   'Netherlands',
   'Japan',
+  'China',
   'Sweden',
   'Switzerland',
   'France',

@@ -115,15 +115,3 @@ export function GridBackdrop({ className = '' }) {
     />
   )
 }
-
-/* --------------------------------------------------------------- Star rating */
-
-export function Stars({ count = 5, className = '' }) {
-  return (
-    <div className={`flex gap-0.5 ${className}`} aria-label={`${count} out of 5 stars`}>
-      {Array.from({ length: count }).map((_, i) => (
-        <Icon key={i} name="star" className="h-4 w-4 fill-gold-400 text-gold-400" />
-      ))}
-    </div>
-  )
-}
