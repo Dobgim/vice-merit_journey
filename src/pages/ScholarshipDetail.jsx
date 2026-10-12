@@ -55,7 +55,7 @@ function Block({ id, icon, title, children }) {
       <Card hover={false} className="p-6 sm:p-8">
         <div className="flex items-center gap-4">
           <IconTile name={icon} tone="light" />
-          <h2 className="font-display text-[1.45rem] font-semibold text-navy-950">{title}</h2>
+          <h2 className="font-display text-xl font-semibold text-navy-950">{title}</h2>
         </div>
         <div className="mt-6">{children}</div>
       </Card>
@@ -67,7 +67,7 @@ function Checklist({ items, icon = 'check', tone = 'text-emerald-600' }) {
   return (
     <ul className="grid gap-3">
       {items.map((item) => (
-        <li key={item} className="flex gap-3 text-[0.95rem] leading-[1.65] text-navy-800">
+        <li key={item} className="flex gap-3 text-base leading-[1.65] text-navy-800">
           <Icon name={icon} className={`mt-1 h-4 w-4 shrink-0 ${tone}`} />
           {item}
         </li>
@@ -137,7 +137,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
           <Section tone="light" className="!py-16 sm:!py-20">
             <div className="container">
               <p className="eyebrow text-navy-500">Still open</p>
-              <h2 className="mt-3 font-display text-[1.9rem] font-semibold text-navy-950">Similar {config.plural} you can apply for now</h2>
+              <h2 className="mt-3 font-display text-3xl font-semibold text-navy-950">Similar {config.plural} you can apply for now</h2>
               <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {related.map((item) => (
                   <ScholarshipCard key={item.slug} item={item} kind={kind} />
@@ -249,7 +249,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
                 <Flyer item={s} kind={kind} label={config.flyerLabel} size="hero" />
               </div>
               {!s.image && photos[s.slug] && (
-                <p className="mt-2 text-right text-[0.72rem] text-navy-500">
+                <p className="mt-2 text-right text-xs text-navy-500">
                   Photo: {photos[s.slug].subject} —{' '}
                   <a href={photos[s.slug].page} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-navy-800">
                     {photos[s.slug].credit}, {photos[s.slug].license}
@@ -260,21 +260,21 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
             </Reveal>
 
             {!s.deadline && s.deadlineNote && (
-              <div className="flex gap-3 rounded-2xl border border-navy-900/[0.08] bg-white p-5 text-[0.92rem] leading-[1.65] text-navy-800">
+              <div className="flex gap-3 rounded-2xl border border-navy-900/[0.08] bg-white p-5 text-base leading-[1.65] text-navy-800">
                 <Icon name="clock" className="mt-0.5 h-5 w-5 shrink-0 text-gold-600" />
                 <p>{s.deadlineNote}</p>
               </div>
             )}
 
             {s.deadline && s.deadlineNote && (
-              <p className="flex gap-2 text-[0.85rem] text-navy-600">
+              <p className="flex gap-2 text-sm text-navy-600">
                 <Icon name="clock" className="mt-0.5 h-4 w-4 shrink-0 text-gold-600" />
                 {s.deadlineNote}
               </p>
             )}
 
             {status.state === 'closed' && (
-              <div className="flex gap-3 rounded-2xl border border-gold-300/60 bg-gold-50 p-5 text-[0.92rem] leading-[1.65] text-gold-900">
+              <div className="flex gap-3 rounded-2xl border border-gold-300/60 bg-gold-50 p-5 text-base leading-[1.65] text-gold-900">
                 <Icon name="clock" className="mt-0.5 h-5 w-5 shrink-0 text-gold-600" />
                 <p>
                   <span className="font-semibold">This cycle has closed.</span> Most opportunities reopen on a similar
@@ -293,9 +293,9 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
               <div className="flex min-w-0 items-center gap-4 rounded-2xl border border-navy-900/[0.07] bg-white p-4 shadow-soft">
                 <OrgLogo item={s} size="lg" />
                 <div className="min-w-0">
-                  <p className="text-[0.72rem] font-semibold uppercase tracking-wider text-navy-500">Offered by</p>
-                  <p className="font-display text-[1.15rem] font-semibold leading-snug text-navy-950">{s.org}</p>
-                  <p className="text-[0.85rem] text-navy-600">{s.country}</p>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-navy-500">Offered by</p>
+                  <p className="font-display text-lg font-semibold leading-snug text-navy-950">{s.org}</p>
+                  <p className="text-sm text-navy-600">{s.country}</p>
                 </div>
               </div>
             )}
@@ -309,8 +309,8 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
                   >
                     <Icon name={f.icon} className="mt-0.5 h-4 w-4 shrink-0 text-gold-600" />
                     <div className="min-w-0">
-                      <dt className="text-[0.7rem] font-semibold uppercase tracking-wider text-navy-500">{f.label}</dt>
-                      <dd className="mt-1 text-[0.93rem] font-semibold leading-snug text-navy-900">{f.value}</dd>
+                      <dt className="text-xs font-semibold uppercase tracking-wider text-navy-500">{f.label}</dt>
+                      <dd className="mt-1 text-base font-semibold leading-snug text-navy-900">{f.value}</dd>
                     </div>
                   </div>
                 ))}
@@ -321,16 +321,16 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
               <div className="grid gap-7">
                 {buildOverview(s, kind, config).map((part) => (
                   <div key={part.heading}>
-                    <h3 className="font-display text-[1.12rem] font-semibold text-navy-950">{part.heading}</h3>
+                    <h3 className="font-display text-lg font-semibold text-navy-950">{part.heading}</h3>
                     {part.paragraphs?.map((p) => (
-                      <p key={p.slice(0, 48)} className="mt-2.5 text-[0.98rem] leading-[1.8] text-navy-800">
+                      <p key={p.slice(0, 48)} className="mt-2.5 text-base leading-[1.8] text-navy-800">
                         {p}
                       </p>
                     ))}
                     {part.bullets && (
                       <ul className="mt-2.5 grid gap-2">
                         {part.bullets.map((b) => (
-                          <li key={b} className="flex gap-3 text-[0.96rem] leading-[1.7] text-navy-800">
+                          <li key={b} className="flex gap-3 text-base leading-[1.7] text-navy-800">
                             <Icon name="check" className="mt-1.5 h-4 w-4 shrink-0 text-gold-500" />
                             {b}
                           </li>
@@ -360,7 +360,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
                   {s.documents.map((d) => (
                     <li
                       key={d}
-                      className="flex gap-3 rounded-xl border border-navy-900/[0.07] bg-mist/60 p-3.5 text-[0.9rem] leading-[1.55] text-navy-800"
+                      className="flex gap-3 rounded-xl border border-navy-900/[0.07] bg-mist/60 p-3.5 text-base leading-[1.55] text-navy-800"
                     >
                       <Icon name="doc" className="mt-0.5 h-4 w-4 shrink-0 text-navy-500" />
                       {d}
@@ -378,7 +378,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
                       <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-navy-900 font-display text-sm font-semibold text-gold-200">
                         {i + 1}
                       </span>
-                      <p className="pt-1 text-[0.95rem] leading-[1.65] text-navy-800">{step}</p>
+                      <p className="pt-1 text-base leading-[1.65] text-navy-800">{step}</p>
                     </li>
                   ))}
                 </ol>
@@ -401,8 +401,8 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
                   {s.timeline.map((t) => (
                     <li key={t.label} className="relative">
                       <span className="absolute -left-[1.81rem] top-1.5 h-3 w-3 rounded-full border-2 border-white bg-gold-400 ring-1 ring-gold-400/40" />
-                      <div className="text-[0.78rem] font-semibold uppercase tracking-wider text-gold-700">{t.date}</div>
-                      <div className="mt-0.5 text-[0.95rem] font-medium text-navy-900">{t.label}</div>
+                      <div className="text-sm font-semibold uppercase tracking-wider text-gold-700">{t.date}</div>
+                      <div className="mt-0.5 text-base font-medium text-navy-900">{t.label}</div>
                     </li>
                   ))}
                 </ol>
@@ -421,14 +421,14 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
                         {f.q}
                         <Icon name="plus" className="mt-0.5 h-4 w-4 shrink-0 transition-transform duration-300 group-open:rotate-45" />
                       </summary>
-                      <p className="mt-3 text-[0.93rem] leading-[1.7] text-navy-700">{f.a}</p>
+                      <p className="mt-3 text-base leading-[1.7] text-navy-700">{f.a}</p>
                     </details>
                   ))}
                 </div>
               </Block>
             )}
 
-            <p className="flex gap-3 rounded-2xl border border-navy-900/[0.07] bg-white p-5 text-[0.82rem] leading-[1.65] text-navy-600">
+            <p className="flex gap-3 rounded-2xl border border-navy-900/[0.07] bg-white p-5 text-sm leading-[1.65] text-navy-600">
               <Icon name="shield" className="mt-0.5 h-4 w-4 shrink-0 text-navy-400" />
               <span>
                 {s.source
@@ -446,7 +446,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
             <div className="grid gap-5">
               <Card hover={false} id="flyer" className="scroll-mt-28 p-5">
                 <p className="eyebrow text-navy-500">Flyer to share</p>
-                <p className="mt-2 text-[0.85rem] leading-[1.6] text-navy-600">
+                <p className="mt-2 text-sm leading-[1.6] text-navy-600">
                   A ready-made image with the key details and the apply link — post it on WhatsApp, Facebook or
                   Instagram.
                 </p>
@@ -460,10 +460,10 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
                 <div aria-hidden className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-gold-400/25 blur-[60px]" />
                 <div className="relative">
                   <IconTile name="users" tone="glass" />
-                  <h3 className="mt-4 font-display text-[1.25rem] font-semibold leading-snug">
+                  <h3 className="mt-4 font-display text-xl font-semibold leading-snug">
                     Want a stronger shot at this one?
                   </h3>
-                  <p className="mt-2 text-[0.88rem] leading-[1.65] text-navy-100/70">
+                  <p className="mt-2 text-sm leading-[1.65] text-navy-100/70">
                     An advisor will check your eligibility, review your essays and run a mock interview for this
                     exact scholarship.
                   </p>
@@ -474,7 +474,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
                     href={`https://wa.me/${company.whatsapp}?text=${encodeURIComponent(`Hi ${company.name} — I need help applying for the ${s.name}.`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-3 flex items-center justify-center gap-2 text-[0.83rem] font-semibold text-navy-100/80 hover:text-white"
+                    className="mt-3 flex items-center justify-center gap-2 text-sm font-semibold text-navy-100/80 hover:text-white"
                   >
                     <Icon name="whatsapp" className="h-4 w-4" />
                     Or ask on WhatsApp
@@ -484,7 +484,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
 
               <Card hover={false} className="p-5">
                 <p className="eyebrow text-navy-500">Share this {config.singular}</p>
-                <p className="mt-2 text-[0.85rem] leading-[1.6] text-navy-600">
+                <p className="mt-2 text-sm leading-[1.6] text-navy-600">
                   Know someone who should apply? Send it to them.
                 </p>
                 <div className="mt-4">
@@ -499,7 +499,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
                     <a
                       key={x.id}
                       href={`#${x.id}`}
-                      className={`rounded-lg border-l-2 px-3 py-1.5 text-[0.88rem] transition-colors ${
+                      className={`rounded-lg border-l-2 px-3 py-1.5 text-sm transition-colors ${
                         active === x.id
                           ? 'border-gold-400 bg-mist font-semibold text-navy-950'
                           : 'border-transparent text-navy-600 hover:text-navy-950'
@@ -521,7 +521,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div>
                 <p className="eyebrow text-navy-500">Keep exploring</p>
-                <h2 className="mt-3 font-display text-[1.9rem] font-semibold text-navy-950">Similar {config.plural}</h2>
+                <h2 className="mt-3 font-display text-3xl font-semibold text-navy-950">Similar {config.plural}</h2>
               </div>
               <Button to={config.path} variant="outline" size="sm" icon="arrowRight">
                 All {config.plural}

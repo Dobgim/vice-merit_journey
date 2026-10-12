@@ -60,13 +60,13 @@ export default function UpdateBanner() {
 
   return (
     <div className="fixed inset-x-0 top-0 z-[90] flex justify-center px-3 pt-3" role="status">
-      <div className="flex items-center gap-3 rounded-full bg-navy-950 py-2 pl-4 pr-2 text-[0.85rem] text-white shadow-lift">
+      <div className="flex items-center gap-3 rounded-full bg-navy-950 py-2 pl-4 pr-2 text-sm text-white shadow-lift">
         <Icon name="sparkle" className="h-4 w-4 text-gold-300" />
         New version available
         <button
           type="button"
           onClick={() => window.location.reload()}
-          className="rounded-full bg-gradient-to-br from-gold-300 to-gold-500 px-3.5 py-1.5 text-[0.8rem] font-semibold text-navy-950"
+          className="rounded-full bg-gradient-to-br from-gold-300 to-gold-500 px-3.5 py-1.5 text-sm font-semibold text-navy-950"
         >
           Refresh
         </button>

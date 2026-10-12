@@ -84,7 +84,7 @@ export default function Listings() {
           <p className="font-semibold text-gold-900">
             Your website is currently showing the {config.items.length} built-in {config.plural}.
           </p>
-          <p className="mt-1 text-[0.88rem] text-gold-900/80">
+          <p className="mt-1 text-sm text-gold-900/80">
             Import them first so you can edit them here. Once you add or import anything, the website shows only what
             is listed on this page.
           </p>
@@ -112,15 +112,15 @@ export default function Listings() {
                       {r.data.name}
                     </Link>
                     {!r.published && (
-                      <span className="rounded-full bg-navy-900/[0.06] px-2 py-0.5 text-[0.7rem] font-semibold text-navy-600">Hidden</span>
+                      <span className="rounded-full bg-navy-900/[0.06] px-2 py-0.5 text-xs font-semibold text-navy-600">Hidden</span>
                     )}
                   </div>
-                  <p className="mt-0.5 truncate text-[0.8rem] text-navy-500">
+                  <p className="mt-0.5 truncate text-sm text-navy-500">
                     {[r.data.org, r.data.country, r.data.deadline ? `Deadline ${formatDate(r.data.deadline)}` : 'Rolling'].filter(Boolean).join(' · ')}
                   </p>
                   <div className="mt-2">
                     <DeadlineChip deadline={r.data.deadline} />
-                    {closed && <span className="ml-2 text-[0.75rem] text-navy-500">Update the deadline for the next cycle.</span>}
+                    {closed && <span className="ml-2 text-xs text-navy-500">Update the deadline for the next cycle.</span>}
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-2">

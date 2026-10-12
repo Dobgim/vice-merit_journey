@@ -20,13 +20,13 @@ function Stat({ item, delay }) {
       transition={{ duration: 0.7, delay, ease: EASE }}
       className="group"
     >
-      <div className="font-display text-[1.85rem] font-semibold text-white sm:text-[2.15rem]">
+      <div className="font-display text-3xl font-semibold text-white sm:text-4xl">
         {item.prefix}
         {value.toLocaleString()}
         <span className="text-gold-300">{item.suffix}</span>
       </div>
-      <div className="mt-1 text-[0.82rem] font-medium text-navy-100/70">{item.label}</div>
-      <div className="text-[0.72rem] text-navy-100/40">{item.hint}</div>
+      <div className="mt-1 text-sm font-medium text-navy-100/70">{item.label}</div>
+      <div className="text-xs text-navy-100/40">{item.hint}</div>
     </motion.div>
   )
 }
@@ -90,7 +90,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 28, filter: 'blur(8px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               transition={{ duration: 1, ease: EASE, delay: 0.25 }}
-              className="mt-7 font-display text-[2.7rem] font-semibold leading-[1.04] tracking-tight balance [text-shadow:0_2px_28px_rgba(4,10,28,0.55)] sm:text-[3.7rem] lg:text-[4.6rem]"
+              className="mt-7 font-display text-4xl font-semibold leading-[1.1] balance [text-shadow:0_2px_28px_rgba(4,10,28,0.55)] sm:text-5xl lg:text-[3.5rem]"
             >
               Win the scholarship
               <br className="hidden sm:block" /> you actually{' '}
@@ -119,7 +119,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: EASE, delay: 0.4 }}
-              className="mx-auto mt-7 max-w-2xl text-[1.05rem] leading-[1.75] text-navy-100/85 [text-shadow:0_1px_16px_rgba(4,10,28,0.6)] sm:text-[1.15rem]"
+              className="mx-auto mt-7 max-w-2xl text-lg leading-[1.75] text-navy-100/85 [text-shadow:0_1px_16px_rgba(4,10,28,0.6)] sm:text-lg"
             >
               Merit Leaders matches undergraduate, graduate, postgraduate and international students
               with the funding they are genuinely competitive for — then works through every essay,
@@ -145,7 +145,7 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.9, delay: 0.7 }}
-              className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-[0.85rem] text-navy-100/75"
+              className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-navy-100/75"
             >
               {[
                 { icon: 'checkCircle', label: 'No upfront fee for discovery' },
@@ -174,7 +174,7 @@ export default function Hero() {
 
       {/* ---------------------------------------------------- Partner marquee */}
       <div className="relative mt-16 border-t border-white/[0.06] pt-9">
-        <p className="container text-center text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-navy-100/35">
+        <p className="container text-center text-xs font-semibold uppercase tracking-[0.2em] text-navy-100/35">
           Scholarships offered by
         </p>
         <div className="mask-fade-x mt-6 flex overflow-hidden">

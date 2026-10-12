@@ -27,7 +27,7 @@ export default function WhyChooseUs() {
                 <div className="relative">
                   <IconTile name={b.icon} className="transition-transform duration-500 group-hover:scale-105" />
                   <h3 className="mt-6 font-display text-xl font-semibold text-navy-950">{b.title}</h3>
-                  <p className="mt-3 text-[0.94rem] leading-[1.7] text-navy-700/80">{b.body}</p>
+                  <p className="mt-3 text-base leading-[1.7] text-navy-700/80">{b.body}</p>
                 </div>
 
                 <span className="pointer-events-none absolute -bottom-px left-7 right-7 h-px bg-gradient-to-r from-transparent via-gold-400 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -45,10 +45,10 @@ export default function WhyChooseUs() {
             />
             <div className="relative grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:items-center">
               <div>
-                <h3 className="font-display text-[1.7rem] font-semibold leading-tight balance sm:text-[2.1rem]">
+                <h3 className="font-display text-2xl font-semibold leading-tight balance sm:text-3xl">
                   We tell students the truth about their chances — even when it costs us the sale.
                 </h3>
-                <p className="mt-5 max-w-xl text-[0.98rem] leading-[1.75] text-navy-100/70">
+                <p className="mt-5 max-w-xl text-base leading-[1.75] text-navy-100/70">
                   Nine years advising applicants has taught us that a realistic shortlist beats an
                   ambitious one. Every engagement opens with a candid profile audit: where you are
                   competitive, where you are not, and what would have to change.
@@ -66,7 +66,7 @@ export default function WhyChooseUs() {
                     className="flex items-start gap-3.5 rounded-xl bg-white/[0.05] p-4 ring-1 ring-white/10"
                   >
                     <Icon name={icon} className="mt-0.5 h-5 w-5 shrink-0 text-gold-300" />
-                    <span className="text-[0.9rem] leading-snug text-navy-100/85">{label}</span>
+                    <span className="text-base leading-snug text-navy-100/85">{label}</span>
                   </li>
                 ))}
               </ul>

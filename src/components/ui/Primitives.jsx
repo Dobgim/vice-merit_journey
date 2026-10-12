@@ -38,7 +38,7 @@ export function Badge({ children, variant = 'neutral', icon, className = '' }) {
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[0.72rem] font-semibold tracking-wide ring-1 ${variants[variant]} ${className}`}
+      className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold tracking-wide ring-1 ${variants[variant]} ${className}`}
     >
       {icon && <Icon name={icon} className="h-3.5 w-3.5" />}
       {children}

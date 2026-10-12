@@ -18,7 +18,7 @@ function Request({ r, onChange, onDelete }) {
       <button type="button" onClick={() => setOpen((o) => !o)} className="flex w-full items-center justify-between gap-4 p-4 text-left sm:p-5">
         <div className="min-w-0">
           <p className="truncate font-semibold text-navy-950">{r.full_name}</p>
-          <p className="truncate text-[0.8rem] text-navy-500">
+          <p className="truncate text-sm text-navy-500">
             {[r.study_level, r.country, fmtDateTime(r.created_at)].filter(Boolean).join(' · ')}
           </p>
         </div>
@@ -30,7 +30,7 @@ function Request({ r, onChange, onDelete }) {
 
       {open && (
         <div className="space-y-4 border-t border-navy-900/[0.07] p-4 sm:p-5">
-          <div className="grid gap-3 text-[0.88rem] sm:grid-cols-2">
+          <div className="grid gap-3 text-sm sm:grid-cols-2">
             <p>
               <span className="text-navy-500">Email: </span>
               <a href={`mailto:${r.email}`} className="font-semibold text-navy-900 underline-offset-2 hover:underline">{r.email}</a>
@@ -40,11 +40,11 @@ function Request({ r, onChange, onDelete }) {
               <span className="font-semibold text-navy-900">{r.phone || '—'}</span>
             </p>
           </div>
-          <p className="whitespace-pre-wrap rounded-xl bg-mist p-4 text-[0.92rem] leading-relaxed text-navy-800">{r.message}</p>
+          <p className="whitespace-pre-wrap rounded-xl bg-mist p-4 text-base leading-relaxed text-navy-800">{r.message}</p>
 
           <div className="grid gap-3 sm:grid-cols-[200px_1fr]">
             <label className="block">
-              <span className="mb-1.5 block text-[0.8rem] font-semibold text-navy-800">Status</span>
+              <span className="mb-1.5 block text-sm font-semibold text-navy-800">Status</span>
               <select value={r.status} onChange={(e) => onChange({ status: e.target.value })} className={inputCls}>
                 {api.CONSULTATION_STATUSES.map((s) => (
                   <option key={s} value={s}>{s}</option>
@@ -52,7 +52,7 @@ function Request({ r, onChange, onDelete }) {
               </select>
             </label>
             <label className="block">
-              <span className="mb-1.5 block text-[0.8rem] font-semibold text-navy-800">Private notes</span>
+              <span className="mb-1.5 block text-sm font-semibold text-navy-800">Private notes</span>
               <textarea
                 rows={2}
                 value={notes}
@@ -138,7 +138,7 @@ export default function Consultations() {
                 key={s}
                 type="button"
                 onClick={() => setFilter(s)}
-                className={`rounded-full px-3.5 py-2 text-[0.8rem] font-semibold capitalize transition-colors ${
+                className={`rounded-full px-3.5 py-2 text-sm font-semibold capitalize transition-colors ${
                   filter === s ? 'bg-navy-900 text-white' : 'bg-white text-navy-700 ring-1 ring-navy-900/10 hover:text-navy-950'
                 }`}
               >

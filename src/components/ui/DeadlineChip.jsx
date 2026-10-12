@@ -25,7 +25,7 @@ export default function DeadlineChip({ deadline, tone = 'light', className = '' 
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[0.72rem] font-semibold tracking-wide ring-1 ${palette[state]} ${className}`}
+      className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold tracking-wide ring-1 ${palette[state]} ${className}`}
     >
       {state === 'closing' ? (
         <span className="relative flex h-1.5 w-1.5">

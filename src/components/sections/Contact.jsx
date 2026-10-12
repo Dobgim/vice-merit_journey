@@ -17,12 +17,12 @@ const whatsappHref = `https://wa.me/${company.whatsapp}?text=${encodeURIComponen
 /* --------------------------------------------------------------- Field shell */
 
 const fieldBase =
-  'w-full rounded-xl border bg-white px-4 text-[0.95rem] text-navy-950 placeholder:text-navy-400 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-gold-400/60'
+  'w-full rounded-xl border bg-white px-4 text-base text-navy-950 placeholder:text-navy-400 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-gold-400/60'
 
 function Field({ label, error, required, children, className = '' }) {
   return (
     <div className={className}>
-      <label className="mb-2 block text-[0.82rem] font-semibold text-navy-100">
+      <label className="mb-2 block text-sm font-semibold text-navy-100">
         {label} {required && <span className="text-gold-600">*</span>}
       </label>
       {children}
@@ -32,7 +32,7 @@ function Field({ label, error, required, children, className = '' }) {
             initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            className="mt-1.5 flex items-center gap-1.5 text-[0.78rem] font-medium text-rose-600"
+            className="mt-1.5 flex items-center gap-1.5 text-sm font-medium text-rose-600"
           >
             <Icon name="close" className="h-3 w-3" />
             {error.message}
@@ -126,7 +126,7 @@ export default function Contact() {
                     <h3 className="mt-6 font-display text-2xl font-semibold text-white">
                       Request received
                     </h3>
-                    <p className="mt-3 max-w-sm text-[0.95rem] leading-[1.7] text-navy-100/70">
+                    <p className="mt-3 max-w-sm text-base leading-[1.7] text-navy-100/70">
                       An advisor will email you within one working day to arrange your free
                       discovery call. Check your spam folder if you do not see us.
                     </p>
@@ -134,7 +134,7 @@ export default function Contact() {
                     <button
                       type="button"
                       onClick={() => setSent(false)}
-                      className="mt-7 text-[0.88rem] font-semibold text-gold-300 underline-offset-4 hover:underline"
+                      className="mt-7 text-sm font-semibold text-gold-300 underline-offset-4 hover:underline"
                     >
                       Send another request
                     </button>
@@ -256,7 +256,7 @@ export default function Contact() {
                     </Field>
 
                     {serverError && (
-                      <p className="sm:col-span-2 rounded-xl bg-rose-500/10 p-3.5 text-[0.85rem] text-rose-200 ring-1 ring-rose-400/25">
+                      <p className="sm:col-span-2 rounded-xl bg-rose-500/10 p-3.5 text-sm text-rose-200 ring-1 ring-rose-400/25">
                         {serverError}
                       </p>
                     )}
@@ -272,7 +272,7 @@ export default function Contact() {
                       >
                         {isSubmitting ? 'Sending…' : 'Request my consultation'}
                       </Button>
-                      <p className="text-[0.78rem] leading-relaxed text-navy-100/50">
+                      <p className="text-sm leading-relaxed text-navy-100/50">
                         No fee for the discovery call.
                         <br className="hidden sm:block" /> Your details stay confidential.
                       </p>
@@ -297,7 +297,7 @@ export default function Contact() {
                 </span>
                 <div className="min-w-0 flex-1">
                   <div className="font-semibold text-white">Chat on WhatsApp</div>
-                  <div className="text-[0.82rem] text-white/75">Typical reply in under 2 hours</div>
+                  <div className="text-sm text-white/75">Typical reply in under 2 hours</div>
                 </div>
                 <Icon
                   name="arrowUpRight"
@@ -330,11 +330,11 @@ export default function Contact() {
                     <Icon name={c.icon} className="h-5 w-5" />
                   </span>
                   <div className="min-w-0">
-                    <div className="text-[0.78rem] uppercase tracking-wider text-navy-100/45">
+                    <div className="text-sm uppercase tracking-wider text-navy-100/45">
                       {c.label}
                     </div>
                     <div className="mt-1 break-words font-semibold text-white">{c.value}</div>
-                    <div className="mt-0.5 text-[0.78rem] text-navy-100/50">{c.hint}</div>
+                    <div className="mt-0.5 text-sm text-navy-100/50">{c.hint}</div>
                   </div>
                 </a>
               ))}

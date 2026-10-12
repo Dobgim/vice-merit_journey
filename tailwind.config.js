@@ -38,8 +38,20 @@ export default {
         mist: '#f7f9fc',
       },
       fontFamily: {
-        display: ['"Fraunces"', 'Georgia', 'serif'],
-        sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+        display: ['"Source Serif 4"', 'Georgia', 'serif'],
+        sans: ['"Source Sans 3"', 'system-ui', '-apple-system', '"Segoe UI"', 'Roboto', 'sans-serif'],
+      },
+      // One type scale for the whole site (sized for Source Sans 3, which runs small).
+      fontSize: {
+        xs: ['0.8125rem', { lineHeight: '1.25rem' }],
+        sm: ['0.9375rem', { lineHeight: '1.4rem' }],
+        base: ['1.0625rem', { lineHeight: '1.65rem' }],
+        lg: ['1.1875rem', { lineHeight: '1.75rem' }],
+        xl: ['1.375rem', { lineHeight: '1.85rem' }],
+        '2xl': ['1.625rem', { lineHeight: '2.1rem' }],
+        '3xl': ['2rem', { lineHeight: '2.45rem' }],
+        '4xl': ['2.5rem', { lineHeight: '2.9rem' }],
+        '5xl': ['3.125rem', { lineHeight: '3.4rem' }],
       },
       boxShadow: {
         soft: '0 1px 2px rgba(15,27,61,.04), 0 8px 24px -12px rgba(15,27,61,.18)',

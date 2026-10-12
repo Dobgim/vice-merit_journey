@@ -24,7 +24,7 @@ export default function FloatingActions() {
             whileHover={{ y: -3 }}
             transition={{ type: 'spring', stiffness: 380, damping: 24 }}
             aria-label="Go back to the previous page"
-            className="fixed bottom-5 left-5 z-40 inline-flex h-11 items-center gap-2 rounded-full border border-navy-900/10 bg-white/90 px-4 text-[0.85rem] font-semibold text-navy-900 shadow-soft backdrop-blur transition-colors hover:bg-white sm:bottom-7 sm:left-7"
+            className="fixed bottom-5 left-5 z-40 inline-flex h-11 items-center gap-2 rounded-full border border-navy-900/10 bg-white/90 px-4 text-sm font-semibold text-navy-900 shadow-soft backdrop-blur transition-colors hover:bg-white sm:bottom-7 sm:left-7"
           >
             <Icon name="arrowLeft" className="h-4 w-4" />
             Back

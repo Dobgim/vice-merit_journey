@@ -4,14 +4,14 @@ import Icon from '../components/ui/Icon'
 /* Small, consistent building blocks for the dashboard screens. */
 
 export const inputCls =
-  'w-full rounded-xl border border-navy-900/[0.12] bg-white px-3.5 py-2.5 text-[0.92rem] text-navy-950 placeholder:text-navy-400 transition-colors hover:border-navy-900/25 focus:outline-none focus:ring-2 focus:ring-gold-400/60'
+  'w-full rounded-xl border border-navy-900/[0.12] bg-white px-3.5 py-2.5 text-base text-navy-950 placeholder:text-navy-400 transition-colors hover:border-navy-900/25 focus:outline-none focus:ring-2 focus:ring-gold-400/60'
 
 export function PageTitle({ title, sub, children }) {
   return (
     <div className="flex flex-wrap items-end justify-between gap-4">
       <div>
-        <h1 className="font-display text-[1.8rem] font-semibold leading-tight text-navy-950">{title}</h1>
-        {sub && <p className="mt-1 text-[0.92rem] text-navy-600">{sub}</p>}
+        <h1 className="font-display text-3xl font-semibold leading-tight text-navy-950">{title}</h1>
+        {sub && <p className="mt-1 text-base text-navy-600">{sub}</p>}
       </div>
       {children && <div className="flex flex-wrap gap-2">{children}</div>}
     </div>
@@ -35,9 +35,9 @@ export function Panel({ title, children, className = '', actions }) {
 export function Field({ label, hint, children, className = '' }) {
   return (
     <label className={`block ${className}`}>
-      <span className="mb-1.5 block text-[0.8rem] font-semibold text-navy-800">{label}</span>
+      <span className="mb-1.5 block text-sm font-semibold text-navy-800">{label}</span>
       {children}
-      {hint && <span className="mt-1 block text-[0.75rem] text-navy-500">{hint}</span>}
+      {hint && <span className="mt-1 block text-xs text-navy-500">{hint}</span>}
     </label>
   )
 }
@@ -55,7 +55,7 @@ export function Btn({ variant = 'primary', icon, children, className = '', as: T
     <Tag
       {...(Tag === 'button' ? { type: 'button' } : {})}
       {...rest}
-      className={`inline-flex h-10 items-center justify-center gap-2 rounded-full px-4 text-[0.85rem] font-semibold transition disabled:pointer-events-none disabled:opacity-50 ${btnVariants[variant]} ${className}`}
+      className={`inline-flex h-10 items-center justify-center gap-2 rounded-full px-4 text-sm font-semibold transition disabled:pointer-events-none disabled:opacity-50 ${btnVariants[variant]} ${className}`}
     >
       {icon && <Icon name={icon} className="h-4 w-4" />}
       {children}
@@ -67,11 +67,11 @@ export function Stat({ label, value, hint, icon }) {
   return (
     <div className="rounded-2xl border border-navy-900/[0.07] bg-white p-5 shadow-soft">
       <div className="flex items-center justify-between">
-        <span className="text-[0.75rem] font-semibold uppercase tracking-wider text-navy-500">{label}</span>
+        <span className="text-xs font-semibold uppercase tracking-wider text-navy-500">{label}</span>
         {icon && <Icon name={icon} className="h-5 w-5 text-gold-600" />}
       </div>
-      <div className="mt-2 font-display text-[2rem] font-semibold leading-none text-navy-950">{value}</div>
-      {hint && <div className="mt-1.5 text-[0.8rem] text-navy-500">{hint}</div>}
+      <div className="mt-2 font-display text-3xl font-semibold leading-none text-navy-950">{value}</div>
+      {hint && <div className="mt-1.5 text-sm text-navy-500">{hint}</div>}
     </div>
   )
 }
@@ -86,7 +86,7 @@ const statusStyles = {
 
 export function StatusBadge({ status }) {
   return (
-    <span className={`inline-flex rounded-full px-2.5 py-0.5 text-[0.72rem] font-semibold capitalize ring-1 ${statusStyles[status] ?? statusStyles.closed}`}>
+    <span className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold capitalize ring-1 ${statusStyles[status] ?? statusStyles.closed}`}>
       {status}
     </span>
   )
@@ -97,7 +97,7 @@ export function Empty({ icon = 'search', title, children }) {
     <div className="flex flex-col items-center rounded-2xl border border-dashed border-navy-900/15 bg-white px-6 py-14 text-center">
       <Icon name={icon} className="h-8 w-8 text-navy-300" />
       <p className="mt-3 font-semibold text-navy-900">{title}</p>
-      {children && <div className="mt-1.5 max-w-md text-[0.88rem] text-navy-600">{children}</div>}
+      {children && <div className="mt-1.5 max-w-md text-sm text-navy-600">{children}</div>}
     </div>
   )
 }
@@ -105,7 +105,7 @@ export function Empty({ icon = 'search', title, children }) {
 export function ErrorNote({ error }) {
   if (!error) return null
   return (
-    <p className="rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-[0.88rem] text-rose-700" role="alert">
+    <p className="rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700" role="alert">
       {String(error.message ?? error)}
     </p>
   )
@@ -120,7 +120,7 @@ export function useFlash() {
     return () => clearTimeout(t)
   }, [msg])
   const node = msg && (
-    <div className="fixed bottom-6 left-1/2 z-[90] -translate-x-1/2 rounded-full bg-navy-950 px-5 py-2.5 text-[0.88rem] font-semibold text-white shadow-lift" role="status">
+    <div className="fixed bottom-6 left-1/2 z-[90] -translate-x-1/2 rounded-full bg-navy-950 px-5 py-2.5 text-sm font-semibold text-white shadow-lift" role="status">
       <Icon name="check" className="mr-2 inline h-4 w-4 text-gold-300" />
       {msg}
     </div>

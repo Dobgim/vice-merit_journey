@@ -35,7 +35,7 @@ export default function SectionHeading({
 
       <Reveal delay={0.08}>
         <h2
-          className={`mt-5 font-display text-[2rem] font-semibold leading-[1.12] tracking-tight balance sm:text-[2.6rem] lg:text-[3.05rem] ${
+          className={`mt-5 font-display text-3xl font-semibold leading-tight balance sm:text-4xl ${
             dark ? 'text-white' : 'text-navy-950'
           }`}
         >
@@ -49,7 +49,7 @@ export default function SectionHeading({
       {lede && (
         <Reveal delay={0.16}>
           <p
-            className={`mt-5 text-[1.02rem] leading-[1.75] balance sm:text-[1.08rem] ${
+            className={`mt-5 text-lg leading-[1.75] balance sm:text-lg ${
               dark ? 'text-navy-100/70' : 'text-navy-700/80'
             }`}
           >

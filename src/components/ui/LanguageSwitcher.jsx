@@ -31,7 +31,7 @@ export default function LanguageSwitcher({ tone = 'dark', className = '' }) {
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label={`Language: ${active.label}. Change language`}
-        className={`inline-flex h-10 items-center gap-1.5 rounded-full border px-3 text-[0.82rem] font-semibold backdrop-blur transition-colors ${
+        className={`inline-flex h-10 items-center gap-1.5 rounded-full border px-3 text-sm font-semibold backdrop-blur transition-colors ${
           onDark
             ? 'border-white/20 bg-white/10 text-white hover:bg-white/20'
             : 'border-navy-900/10 bg-white/70 text-navy-900 hover:bg-white'
@@ -63,7 +63,7 @@ export default function LanguageSwitcher({ tone = 'dark', className = '' }) {
                       setOpen(false)
                       setLanguage(l.code)
                     }}
-                    className={`flex w-full items-center justify-between rounded-xl px-3 py-2 text-left text-[0.88rem] transition-colors ${
+                    className={`flex w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm transition-colors ${
                       selected ? 'bg-navy-50 font-semibold' : 'hover:bg-navy-50'
                     }`}
                   >
@@ -71,7 +71,7 @@ export default function LanguageSwitcher({ tone = 'dark', className = '' }) {
                     {selected ? (
                       <Icon name="check" className="h-4 w-4 text-gold-600" />
                     ) : (
-                      <span className="text-[0.7rem] font-semibold text-navy-400">{l.short}</span>
+                      <span className="text-xs font-semibold text-navy-400">{l.short}</span>
                     )}
                   </button>
                 </li>

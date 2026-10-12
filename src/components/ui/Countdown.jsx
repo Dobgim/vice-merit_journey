@@ -32,17 +32,17 @@ export default function Countdown({ deadline }) {
       role="timer"
       aria-label={`${parts[0][1]} days, ${parts[1][1]} hours and ${parts[2][1]} minutes left to apply`}
     >
-      <p className={`flex items-center gap-2 text-[0.75rem] font-semibold uppercase tracking-wider ${urgent ? 'text-rose-700' : 'text-navy-500'}`}>
+      <p className={`flex items-center gap-2 text-xs font-semibold uppercase tracking-wider ${urgent ? 'text-rose-700' : 'text-navy-500'}`}>
         <Icon name="clock" className="h-4 w-4" />
         Time left to apply · closes {formatDate(deadline)}
       </p>
       <div className="mt-3 grid grid-cols-4 gap-2">
         {parts.map(([label, value]) => (
           <div key={label} className={`rounded-xl px-1 py-2.5 text-center ${urgent ? 'bg-white' : 'bg-mist'}`}>
-            <div className={`font-display text-[1.6rem] font-semibold leading-none tabular-nums sm:text-[1.9rem] ${urgent ? 'text-rose-700' : 'text-navy-950'}`}>
+            <div className={`font-display text-2xl font-semibold leading-none tabular-nums sm:text-3xl ${urgent ? 'text-rose-700' : 'text-navy-950'}`}>
               {String(value).padStart(2, '0')}
             </div>
-            <div className="mt-1 text-[0.65rem] font-semibold uppercase tracking-wider text-navy-500 sm:text-[0.7rem]">{label}</div>
+            <div className="mt-1 text-xs font-semibold uppercase tracking-wider text-navy-500 sm:text-xs">{label}</div>
           </div>
         ))}
       </div>

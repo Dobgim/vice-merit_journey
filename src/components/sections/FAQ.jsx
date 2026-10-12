@@ -29,7 +29,7 @@ function AccordionItem({ item, index, isOpen, onToggle }) {
           className="flex w-full items-center justify-between gap-5 px-6 py-5 text-left"
         >
           <span
-            className={`font-display text-[1.05rem] font-semibold leading-snug transition-colors duration-300 sm:text-[1.13rem] ${
+            className={`font-display text-lg font-semibold leading-snug transition-colors duration-300 sm:text-lg ${
               isOpen ? 'text-navy-950' : 'text-navy-800'
             }`}
           >
@@ -59,7 +59,7 @@ function AccordionItem({ item, index, isOpen, onToggle }) {
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.45, ease: EASE }}
           >
-            <p className="px-6 pb-6 text-[0.95rem] leading-[1.8] text-navy-700/85 sm:pr-16">
+            <p className="px-6 pb-6 text-base leading-[1.8] text-navy-700/85 sm:pr-16">
               {item.a}
             </p>
           </motion.div>
@@ -93,7 +93,7 @@ export default function FAQ() {
                   </span>
                   <h3 className="font-display text-lg font-semibold">Still deciding?</h3>
                 </div>
-                <p className="mt-3.5 text-[0.92rem] leading-[1.7] text-navy-100/70">
+                <p className="mt-3.5 text-base leading-[1.7] text-navy-100/70">
                   Bring your transcript and a rough goal. In twenty minutes you will know whether a
                   funded place is realistic this cycle.
                 </p>

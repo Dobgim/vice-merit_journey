@@ -24,14 +24,14 @@ export default function Logo({ tone = 'dark', className = '', onClick }) {
 
       <span className="flex flex-col leading-none">
         <span
-          className={`font-display text-[1.28rem] font-semibold tracking-tight ${
+          className={`font-display text-xl font-semibold ${
             onDark ? 'text-white' : 'text-navy-950'
           }`}
         >
           Merit <span className="text-gold-500">Leaders</span>
         </span>
         <span
-          className={`mt-1 text-[0.6rem] font-semibold uppercase tracking-[0.22em] ${
+          className={`mt-1 text-[0.6rem] font-semibold uppercase tracking-[0.08em] ${
             onDark ? 'text-navy-100/50' : 'text-navy-500/70'
           }`}
         >

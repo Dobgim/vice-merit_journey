@@ -38,16 +38,16 @@ export default function Services() {
                 />
                 <div className="relative">
                   <IconTile name={lead.icon} tone="glass" />
-                  <span className="ml-3 inline-flex -translate-y-3 items-center rounded-full bg-gold-400/15 px-2.5 py-1 text-[0.66rem] font-semibold uppercase tracking-[0.14em] text-gold-200 ring-1 ring-gold-300/25">
+                  <span className="ml-3 inline-flex -translate-y-3 items-center rounded-full bg-gold-400/15 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-gold-200 ring-1 ring-gold-300/25">
                     Start here
                   </span>
 
                   <h3 className="mt-6 font-display text-2xl font-semibold">{lead.title}</h3>
-                  <p className="mt-3.5 text-[0.96rem] leading-[1.75] text-navy-100/70">{lead.body}</p>
+                  <p className="mt-3.5 text-base leading-[1.75] text-navy-100/70">{lead.body}</p>
 
                   <ul className="mt-7 space-y-3">
                     {lead.points.map((p) => (
-                      <li key={p} className="flex items-center gap-3 text-[0.9rem] text-navy-100/85">
+                      <li key={p} className="flex items-center gap-3 text-base text-navy-100/85">
                         <Icon name="check" className="h-4 w-4 shrink-0 text-gold-300" />
                         {p}
                       </li>
@@ -72,10 +72,10 @@ export default function Services() {
                       className="transition-colors duration-500 group-hover:bg-navy-900 group-hover:text-gold-200"
                     />
                     <div>
-                      <h3 className="font-display text-[1.15rem] font-semibold text-navy-950">
+                      <h3 className="font-display text-lg font-semibold text-navy-950">
                         {s.title}
                       </h3>
-                      <p className="mt-2.5 text-[0.9rem] leading-[1.7] text-navy-700/80">{s.body}</p>
+                      <p className="mt-2.5 text-base leading-[1.7] text-navy-700/80">{s.body}</p>
                     </div>
                   </div>
 
@@ -83,7 +83,7 @@ export default function Services() {
                     {s.points.map((p) => (
                       <li
                         key={p}
-                        className="inline-flex items-center gap-1.5 text-[0.78rem] font-medium text-navy-600"
+                        className="inline-flex items-center gap-1.5 text-sm font-medium text-navy-600"
                       >
                         <Icon name="check" className="h-3.5 w-3.5 text-gold-500" />
                         {p}

@@ -65,7 +65,7 @@ function NavGroup({ group, overHero, pathname }) {
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         aria-haspopup="true"
-        className={`relative inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-2 text-[0.88rem] font-medium transition-colors duration-300 xl:px-4 xl:text-[0.9rem] ${linkTone(overHero, isActive)}`}
+        className={`relative inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-2 text-sm font-medium transition-colors duration-300 xl:px-4 xl:text-base ${linkTone(overHero, isActive)}`}
       >
         {isActive && <ActivePill overHero={overHero} />}
         <MenuLabel label={group.label} />
@@ -90,8 +90,8 @@ function NavGroup({ group, overHero, pathname }) {
                       pathname.startsWith(c.to) ? 'bg-navy-50' : ''
                     }`}
                   >
-                    <span className="block text-[0.92rem] font-semibold text-navy-950"><MenuLabel label={c.label} /></span>
-                    {c.hint && <span className="mt-0.5 block text-[0.78rem] text-navy-500">{c.hint}</span>}
+                    <span className="block text-base font-semibold text-navy-950"><MenuLabel label={c.label} /></span>
+                    {c.hint && <span className="mt-0.5 block text-sm text-navy-500">{c.hint}</span>}
                   </Link>
                 </li>
               ))}
@@ -156,7 +156,7 @@ export default function Navbar() {
                       to={link.to}
                       end={link.to === '/'}
                       className={({ isActive }) =>
-                        `relative whitespace-nowrap rounded-full px-2.5 py-2 text-[0.88rem] font-medium transition-colors duration-300 xl:px-4 xl:text-[0.9rem] ${linkTone(overHero, isActive)}`
+                        `relative whitespace-nowrap rounded-full px-2.5 py-2 text-sm font-medium transition-colors duration-300 xl:px-4 xl:text-base ${linkTone(overHero, isActive)}`
                       }
                     >
                       {({ isActive }) => (
@@ -269,7 +269,7 @@ export default function Navbar() {
                   >
                     {link.children ? (
                       <div className="rounded-xl bg-mist/80 px-2 py-2">
-                        <p className="px-2 pb-1 pt-1 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-navy-500">
+                        <p className="px-2 pb-1 pt-1 text-xs font-semibold uppercase tracking-[0.08em] text-navy-500">
                           <MenuLabel label={link.label} />
                         </p>
                         {link.children.map((c) => (

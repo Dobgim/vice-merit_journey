@@ -55,8 +55,8 @@ export default function Subscribers() {
         <p className="text-navy-500">Loading…</p>
       ) : rows.length ? (
         <div className="overflow-x-auto rounded-2xl border border-navy-900/[0.07] bg-white shadow-soft">
-          <table className="w-full min-w-[520px] text-left text-[0.88rem]">
-            <thead className="border-b border-navy-900/[0.07] text-[0.75rem] uppercase tracking-wider text-navy-500">
+          <table className="w-full min-w-[520px] text-left text-sm">
+            <thead className="border-b border-navy-900/[0.07] text-xs uppercase tracking-wider text-navy-500">
               <tr>
                 <th className="px-5 py-3 font-semibold">Email</th>
                 <th className="px-5 py-3 font-semibold">Study level</th>
@@ -71,7 +71,7 @@ export default function Subscribers() {
                   <td className="px-5 py-3 text-navy-700">{r.study_level || 'All levels'}</td>
                   <td className="px-5 py-3 text-navy-500">{fmtDateTime(r.created_at)}</td>
                   <td className="px-5 py-3 text-right">
-                    <button type="button" onClick={() => remove(r)} className="text-[0.8rem] font-semibold text-rose-600 hover:text-rose-800">
+                    <button type="button" onClick={() => remove(r)} className="text-sm font-semibold text-rose-600 hover:text-rose-800">
                       Remove
                     </button>
                   </td>
@@ -85,7 +85,7 @@ export default function Subscribers() {
           Sign-ups from the “Get alerts” forms on the website appear here.
         </Empty>
       )}
-      <p className="text-[0.8rem] text-navy-500">{data?.length ?? 0} subscribers in total.</p>
+      <p className="text-sm text-navy-500">{data?.length ?? 0} subscribers in total.</p>
       {flashNode}
     </div>
   )

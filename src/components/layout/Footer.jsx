@@ -20,7 +20,7 @@ export default function Footer() {
           {/* Brand */}
           <Reveal>
             <Logo tone="light" />
-            <p className="mt-6 max-w-sm text-[0.93rem] leading-[1.75] text-navy-100/60">
+            <p className="mt-6 max-w-sm text-base leading-[1.75] text-navy-100/60">
               An independent scholarship consultancy helping students at every level find funding
               they are genuinely competitive for — and win it.
             </p>
@@ -48,7 +48,7 @@ export default function Footer() {
 
           {/* Navigate */}
           <Reveal delay={0.08}>
-            <h3 className="font-display text-[0.95rem] font-semibold uppercase tracking-[0.14em] text-gold-200/80">
+            <h3 className="font-display text-base font-semibold uppercase tracking-[0.08em] text-gold-200/80">
               Navigate
             </h3>
             <ul className="mt-5 space-y-3">
@@ -56,7 +56,7 @@ export default function Footer() {
                 <li key={l.to}>
                   <Link
                     to={l.to}
-                    className="group inline-flex items-center gap-1.5 text-[0.92rem] text-navy-100/65 transition-colors duration-300 hover:text-white"
+                    className="group inline-flex items-center gap-1.5 text-base text-navy-100/65 transition-colors duration-300 hover:text-white"
                   >
                     <span className="h-px w-0 bg-gold-300 transition-all duration-300 group-hover:w-3" />
                     {l.label}
@@ -68,7 +68,7 @@ export default function Footer() {
 
           {/* Services */}
           <Reveal delay={0.14}>
-            <h3 className="font-display text-[0.95rem] font-semibold uppercase tracking-[0.14em] text-gold-200/80">
+            <h3 className="font-display text-base font-semibold uppercase tracking-[0.08em] text-gold-200/80">
               Services
             </h3>
             <ul className="mt-5 space-y-3">
@@ -76,7 +76,7 @@ export default function Footer() {
                 <li key={s.title}>
                   <Link
                     to="/services"
-                    className="group inline-flex items-center gap-1.5 text-[0.92rem] text-navy-100/65 transition-colors duration-300 hover:text-white"
+                    className="group inline-flex items-center gap-1.5 text-base text-navy-100/65 transition-colors duration-300 hover:text-white"
                   >
                     <span className="h-px w-0 bg-gold-300 transition-all duration-300 group-hover:w-3" />
                     {s.title}
@@ -88,10 +88,10 @@ export default function Footer() {
 
           {/* Contact */}
           <Reveal delay={0.2}>
-            <h3 className="font-display text-[0.95rem] font-semibold uppercase tracking-[0.14em] text-gold-200/80">
+            <h3 className="font-display text-base font-semibold uppercase tracking-[0.08em] text-gold-200/80">
               Get in touch
             </h3>
-            <ul className="mt-5 space-y-4 text-[0.92rem]">
+            <ul className="mt-5 space-y-4 text-base">
               <li>
                 <a
                   href={`mailto:${company.email}`}
@@ -131,12 +131,12 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-14 flex flex-col items-center gap-5 border-t border-white/[0.08] pt-8 sm:flex-row sm:justify-between">
-          <p className="text-center text-[0.82rem] text-navy-100/45 sm:text-left">
+          <p className="text-center text-sm text-navy-100/45 sm:text-left">
             © {year} {company.name}. All rights reserved. Merit Leaders is an independent
             consultancy and is not affiliated with any government or awarding body.
           </p>
 
-          <div className="flex items-center gap-6 text-[0.82rem] text-navy-100/45">
+          <div className="flex items-center gap-6 text-sm text-navy-100/45">
             <Link to="/privacy" className="transition-colors hover:text-white">
               Privacy
             </Link>

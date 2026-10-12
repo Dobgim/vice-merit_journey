@@ -11,10 +11,10 @@ export default function NotFound() {
         <Aurora />
         <div className="container relative">
           <p className="eyebrow text-gold-200">Error 404</p>
-          <h1 className="mt-5 font-display text-[3rem] font-semibold leading-none tracking-tight sm:text-[4.5rem]">
+          <h1 className="mt-5 font-display text-4xl font-semibold leading-none sm:text-5xl">
             This page has no <span className="text-gradient italic">funding.</span>
           </h1>
-          <p className="mx-auto mt-6 max-w-lg text-[1.02rem] leading-[1.75] text-navy-100/70">
+          <p className="mx-auto mt-6 max-w-lg text-lg leading-[1.75] text-navy-100/70">
             The page you were looking for has moved or never existed. The scholarships, however,
             are very much still open.
           </p>

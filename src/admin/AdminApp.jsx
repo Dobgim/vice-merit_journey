@@ -42,18 +42,18 @@ function Login({ onSignedIn, notAdminEmail }) {
           <img src="/logo-mark.png" alt="" className="h-11 w-11 rounded-xl ring-1 ring-navy-900/10" />
           <div>
             <p className="font-display text-lg font-semibold text-navy-950">{company.name}</p>
-            <p className="text-[0.78rem] text-navy-500">Admin dashboard</p>
+            <p className="text-sm text-navy-500">Admin dashboard</p>
           </div>
         </div>
 
         {!api.isLive && (
-          <p className="mt-5 rounded-xl bg-gold-50 px-4 py-3 text-[0.82rem] leading-relaxed text-gold-900 ring-1 ring-gold-300/60">
+          <p className="mt-5 rounded-xl bg-gold-50 px-4 py-3 text-sm leading-relaxed text-gold-900 ring-1 ring-gold-300/60">
             <strong>Demo mode.</strong> Supabase is not connected yet, so any email and password will
             sign you in and changes are saved only in this browser.
           </p>
         )}
         {notAdminEmail && (
-          <p className="mt-5 rounded-xl bg-rose-50 px-4 py-3 text-[0.82rem] text-rose-700 ring-1 ring-rose-200">
+          <p className="mt-5 rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-700 ring-1 ring-rose-200">
             {notAdminEmail} is signed in but is not an admin. Add it to the <code>admins</code> table in Supabase.
           </p>
         )}
@@ -70,7 +70,7 @@ function Login({ onSignedIn, notAdminEmail }) {
             {busy ? 'Signing in…' : 'Sign in'}
           </Btn>
         </div>
-        <Link to="/" className="mt-5 block text-center text-[0.82rem] text-navy-500 hover:text-navy-900">
+        <Link to="/" className="mt-5 block text-center text-sm text-navy-500 hover:text-navy-900">
           ← Back to website
         </Link>
       </form>
@@ -100,7 +100,7 @@ function Sidebar({ session, onSignOut, onNavigate }) {
         <img src="/logo-mark.png" alt="" className="h-10 w-10 rounded-xl bg-white p-0.5" />
         <div className="leading-tight">
           <p className="font-display font-semibold">{company.name}</p>
-          <p className="text-[0.72rem] text-navy-100/55">Admin</p>
+          <p className="text-xs text-navy-100/55">Admin</p>
         </div>
       </Link>
 
@@ -112,7 +112,7 @@ function Sidebar({ session, onSignOut, onNavigate }) {
             end={n.end}
             onClick={onNavigate}
             className={({ isActive }) =>
-              `flex items-center gap-3 rounded-xl px-3 py-2.5 text-[0.88rem] font-medium transition-colors ${
+              `flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${
                 isActive ? 'bg-white/10 text-white' : 'text-navy-100/70 hover:bg-white/5 hover:text-white'
               }`
             }
@@ -124,14 +124,14 @@ function Sidebar({ session, onSignOut, onNavigate }) {
       </nav>
 
       <div className="space-y-2 border-t border-white/10 pt-4">
-        <a href="/" target="_blank" rel="noreferrer" className="flex items-center gap-3 rounded-xl px-3 py-2 text-[0.85rem] text-navy-100/70 hover:text-white">
+        <a href="/" target="_blank" rel="noreferrer" className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-navy-100/70 hover:text-white">
           <Icon name="external" className="h-4 w-4" />
           View website
         </a>
-        <div className="px-3 text-[0.75rem] text-navy-100/45">
+        <div className="px-3 text-xs text-navy-100/45">
           Signed in as <span className="break-all text-navy-100/80">{session.email}</span>
         </div>
-        <button type="button" onClick={onSignOut} className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-[0.85rem] text-navy-100/70 hover:bg-white/5 hover:text-white">
+        <button type="button" onClick={onSignOut} className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm text-navy-100/70 hover:bg-white/5 hover:text-white">
           <Icon name="arrowLeft" className="h-4 w-4" />
           Sign out
         </button>
@@ -178,7 +178,7 @@ function Overview() {
       <div className="grid gap-6 xl:grid-cols-2">
         <Panel
           title="Latest consultation requests"
-          actions={<Link to="/admin/requests" className="text-[0.82rem] font-semibold text-navy-700 hover:text-navy-950">See all →</Link>}
+          actions={<Link to="/admin/requests" className="text-sm font-semibold text-navy-700 hover:text-navy-950">See all →</Link>}
         >
           {requests.data?.length ? (
             <ul className="divide-y divide-navy-900/[0.07]">
@@ -186,7 +186,7 @@ function Overview() {
                 <li key={r.id} className="flex items-center justify-between gap-3 py-3">
                   <div className="min-w-0">
                     <p className="truncate font-semibold text-navy-950">{r.full_name}</p>
-                    <p className="truncate text-[0.8rem] text-navy-500">
+                    <p className="truncate text-sm text-navy-500">
                       {r.study_level} · {r.country} · {fmtDateTime(r.created_at)}
                     </p>
                   </div>
@@ -195,7 +195,7 @@ function Overview() {
               ))}
             </ul>
           ) : (
-            <p className="text-[0.9rem] text-navy-500">{requests.loading ? 'Loading…' : 'No requests yet.'}</p>
+            <p className="text-base text-navy-500">{requests.loading ? 'Loading…' : 'No requests yet.'}</p>
           )}
         </Panel>
 
@@ -206,18 +206,18 @@ function Overview() {
                 <li key={`${i.kind.key}-${i.slug}`} className="flex items-center justify-between gap-3 py-3">
                   <div className="min-w-0">
                     <p className="truncate font-semibold text-navy-950">{i.name}</p>
-                    <p className="text-[0.8rem] text-navy-500">
+                    <p className="text-sm text-navy-500">
                       {i.kind.flyerLabel} · closes {formatDate(i.deadline)}
                     </p>
                   </div>
-                  <span className="shrink-0 rounded-full bg-rose-50 px-2.5 py-0.5 text-[0.75rem] font-semibold text-rose-700 ring-1 ring-rose-200">
+                  <span className="shrink-0 rounded-full bg-rose-50 px-2.5 py-0.5 text-xs font-semibold text-rose-700 ring-1 ring-rose-200">
                     {deadlineStatus(i.deadline).label}
                   </span>
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="text-[0.9rem] text-navy-500">{listings.loading ? 'Loading…' : 'Nothing closes in the next 45 days.'}</p>
+            <p className="text-base text-navy-500">{listings.loading ? 'Loading…' : 'Nothing closes in the next 45 days.'}</p>
           )}
         </Panel>
       </div>
@@ -281,7 +281,7 @@ export default function AdminApp() {
 
       <main className="min-w-0 overflow-x-hidden px-4 py-6 sm:px-6 lg:ml-64 lg:px-10 lg:py-10">
         {!api.isLive && (
-          <p className="mb-6 rounded-xl bg-gold-50 px-4 py-3 text-[0.82rem] text-gold-900 ring-1 ring-gold-300/60">
+          <p className="mb-6 rounded-xl bg-gold-50 px-4 py-3 text-sm text-gold-900 ring-1 ring-gold-300/60">
             <strong>Demo mode:</strong> changes are saved only in this browser. Connect Supabase (see README) to go live.
           </p>
         )}

@@ -33,7 +33,7 @@ export default function Countries() {
                     Not sure where to apply?
                   </h3>
                 </div>
-                <p className="mt-3 text-[0.92rem] leading-[1.7] text-navy-700/80">
+                <p className="mt-3 text-base leading-[1.7] text-navy-700/80">
                   Destination choice is a funding decision as much as an academic one. We compare
                   your shortlist on award density, living costs and work rights before you commit.
                 </p>
@@ -63,11 +63,11 @@ export default function Countries() {
 
                   <div className="min-w-0 flex-1">
                     <div className="truncate font-semibold text-navy-950">{c.name}</div>
-                    <div className="truncate text-[0.78rem] text-navy-500">{c.note}</div>
+                    <div className="truncate text-sm text-navy-500">{c.note}</div>
                   </div>
 
                   <div className="shrink-0 text-right">
-                    <div className="text-[0.78rem] font-semibold text-gold-600">{c.awards}</div>
+                    <div className="text-sm font-semibold text-gold-600">{c.awards}</div>
                     <Icon
                       name="arrowUpRight"
                       className="ml-auto mt-1 h-3.5 w-3.5 text-navy-300 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-navy-600"

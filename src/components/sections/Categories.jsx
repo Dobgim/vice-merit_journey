@@ -49,9 +49,9 @@ export default function Categories() {
                   </div>
 
                   <h3 className="mt-6 font-display text-xl font-semibold text-white">{c.title}</h3>
-                  <p className="mt-3 flex-1 text-[0.92rem] leading-[1.7] text-navy-100/65">{c.body}</p>
+                  <p className="mt-3 flex-1 text-base leading-[1.7] text-navy-100/65">{c.body}</p>
 
-                  <span className="mt-6 inline-flex items-center gap-2 text-[0.83rem] font-semibold text-gold-200">
+                  <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-gold-200">
                     Explore awards
                     <Icon
                       name="arrowRight"

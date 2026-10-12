@@ -22,7 +22,7 @@ function CurrencyToggle({ value, onChange }) {
             type="button"
             onClick={() => onChange(code)}
             aria-pressed={active}
-            className={`relative isolate rounded-full px-5 py-2 text-[0.85rem] font-semibold transition-colors ${
+            className={`relative isolate rounded-full px-5 py-2 text-sm font-semibold transition-colors ${
               active ? 'text-white' : 'text-navy-700 hover:text-navy-950'
             }`}
           >
@@ -68,27 +68,27 @@ function PackageCard({ pkg, currency }) {
         )}
       </div>
 
-      <h3 className={`relative mt-6 font-display text-[1.45rem] font-semibold ${featured ? 'text-white' : 'text-navy-950'}`}>
+      <h3 className={`relative mt-6 font-display text-xl font-semibold ${featured ? 'text-white' : 'text-navy-950'}`}>
         {pkg.name}
       </h3>
-      <p className={`relative mt-2 text-[0.92rem] leading-[1.6] ${featured ? 'text-navy-100/75' : 'text-navy-700/80'}`}>
+      <p className={`relative mt-2 text-base leading-[1.6] ${featured ? 'text-navy-100/75' : 'text-navy-700/80'}`}>
         {pkg.tagline}
       </p>
 
       <div className="relative mt-6 flex flex-wrap items-end gap-x-2 gap-y-1">
-        <span className={`font-display text-[2.4rem] font-semibold leading-none ${featured ? 'text-gold-200' : 'text-navy-950'}`}>
+        <span className={`font-display text-4xl font-semibold leading-none ${featured ? 'text-gold-200' : 'text-navy-950'}`}>
           {price}
         </span>
-        <span className={`pb-1 text-[0.85rem] ${featured ? 'text-navy-100/60' : 'text-navy-500'}`}>{pkg.unit}</span>
+        <span className={`pb-1 text-sm ${featured ? 'text-navy-100/60' : 'text-navy-500'}`}>{pkg.unit}</span>
       </div>
-      <p className={`relative mt-2 inline-flex items-center gap-1.5 text-[0.8rem] ${featured ? 'text-navy-100/60' : 'text-navy-500'}`}>
+      <p className={`relative mt-2 inline-flex items-center gap-1.5 text-sm ${featured ? 'text-navy-100/60' : 'text-navy-500'}`}>
         <Icon name="clock" className="h-3.5 w-3.5" />
         Delivery: {pkg.delivery}
       </p>
 
       <ul className={`relative mt-6 flex-1 space-y-3 border-t pt-6 ${featured ? 'border-white/10' : 'border-navy-900/[0.07]'}`}>
         {pkg.features.map((f) => (
-          <li key={f} className={`flex gap-3 text-[0.92rem] leading-[1.55] ${featured ? 'text-navy-50' : 'text-navy-800'}`}>
+          <li key={f} className={`flex gap-3 text-base leading-[1.55] ${featured ? 'text-navy-50' : 'text-navy-800'}`}>
             <Icon name="check" className={`mt-0.5 h-4 w-4 shrink-0 ${featured ? 'text-gold-300' : 'text-emerald-600'}`} />
             {f}
           </li>
@@ -178,7 +178,7 @@ export default function PackagesPage() {
             ))}
           </Stagger>
 
-          <p className="mt-10 text-center text-[0.85rem] text-navy-500">
+          <p className="mt-10 text-center text-sm text-navy-500">
             50% deposit to start · balance before final delivery · Mobile Money, Orange Money, bank transfer or card
           </p>
         </div>
@@ -189,10 +189,10 @@ export default function PackagesPage() {
         <div className="container grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
             <p className="eyebrow text-navy-500">Add-ons</p>
-            <h2 className="mt-3 font-display text-[2rem] font-semibold leading-tight text-navy-950">
+            <h2 className="mt-3 font-display text-3xl font-semibold leading-tight text-navy-950">
               Need just one piece?
             </h2>
-            <p className="mt-3 max-w-md text-[0.97rem] leading-[1.7] text-navy-700/80">
+            <p className="mt-3 max-w-md text-base leading-[1.7] text-navy-700/80">
               Add any of these to a package, or order them on their own.
             </p>
           </div>
@@ -200,7 +200,7 @@ export default function PackagesPage() {
           <Card hover={false} className="divide-y divide-navy-900/[0.07]">
             {packageAddons.map((a) => (
               <div key={a.name} className="flex items-center justify-between gap-4 px-6 py-4">
-                <span className="text-[0.95rem] font-medium text-navy-900">{a.name}</span>
+                <span className="text-base font-medium text-navy-900">{a.name}</span>
                 <span className="shrink-0 font-semibold text-navy-950">
                   {a.price ? currencies[currency].format(a.price[currency]) : a.note}
                 </span>
@@ -218,11 +218,11 @@ export default function PackagesPage() {
             {packageSteps.map((step, i) => (
               <StaggerItem key={step.title}>
                 <Card className="h-full p-6">
-                  <span className="font-display text-[2.2rem] font-semibold leading-none text-gold-500">
+                  <span className="font-display text-4xl font-semibold leading-none text-gold-500">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <h3 className="mt-4 font-display text-lg font-semibold text-navy-950">{step.title}</h3>
-                  <p className="mt-2 text-[0.9rem] leading-[1.65] text-navy-700/80">{step.body}</p>
+                  <p className="mt-2 text-base leading-[1.65] text-navy-700/80">{step.body}</p>
                 </Card>
               </StaggerItem>
             ))}
@@ -241,7 +241,7 @@ export default function PackagesPage() {
                   {f.q}
                   <Icon name="plus" className="mt-0.5 h-4 w-4 shrink-0 transition-transform duration-300 group-open:rotate-45" />
                 </summary>
-                <p className="mt-3 text-[0.94rem] leading-[1.7] text-navy-700">{f.a}</p>
+                <p className="mt-3 text-base leading-[1.7] text-navy-700">{f.a}</p>
               </details>
             ))}
           </div>

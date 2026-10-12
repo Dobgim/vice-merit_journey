@@ -30,8 +30,8 @@ const C = {
 
 const ACCENT = { scholarships: '#dcbf72', grants: '#6ee7b7', internships: '#7dd3fc', fellowships: '#c4b5fd', competitions: '#fda4af' }
 
-const DISPLAY = 'Fraunces, Georgia, serif'
-const SANS = '"Plus Jakarta Sans", Inter, system-ui, sans-serif'
+const DISPLAY = '"Source Serif 4", Georgia, serif'
+const SANS = '"Source Sans 3", system-ui, sans-serif'
 
 /* ---------------------------------------------------------------- helpers */
 

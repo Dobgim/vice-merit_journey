@@ -84,7 +84,7 @@ export default function PackagesAdmin() {
                   className={`${inputCls} resize-y`}
                 />
               </Field>
-              <label className="flex items-center gap-2 text-[0.88rem] text-navy-800">
+              <label className="flex items-center gap-2 text-sm text-navy-800">
                 <input
                   type="radio"
                   name="popular"
@@ -101,7 +101,7 @@ export default function PackagesAdmin() {
 
       <Panel title="Add-ons">
         <div className="space-y-2">
-          <div className="hidden grid-cols-[1fr_120px_140px_32px] gap-2 px-1 text-[0.72rem] font-semibold uppercase tracking-wider text-navy-500 sm:grid">
+          <div className="hidden grid-cols-[1fr_120px_140px_32px] gap-2 px-1 text-xs font-semibold uppercase tracking-wider text-navy-500 sm:grid">
             <span>Name</span><span>USD</span><span>FCFA</span><span />
           </div>
           {addons.map((a, i) => (
@@ -123,7 +123,7 @@ export default function PackagesAdmin() {
           <button
             type="button"
             onClick={() => setAddons((l) => [...l, { name: '', price: { USD: '', XAF: '' } }])}
-            className="inline-flex items-center gap-1.5 pt-1 text-[0.85rem] font-semibold text-navy-700 hover:text-navy-950"
+            className="inline-flex items-center gap-1.5 pt-1 text-sm font-semibold text-navy-700 hover:text-navy-950"
           >
             <Icon name="plus" className="h-4 w-4" />
             Add add-on

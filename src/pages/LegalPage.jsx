@@ -17,7 +17,7 @@ export default function LegalPage({ doc }) {
       <Section tone="light" className="!pt-12 sm:!pt-16">
         <div className="container grid grid-cols-1 gap-10 lg:grid-cols-[220px_minmax(0,1fr)]">
           <nav aria-label="Sections" className="hidden lg:block">
-            <ul className="sticky top-28 space-y-1 text-[0.85rem]">
+            <ul className="sticky top-28 space-y-1 text-sm">
               {page.sections.map((s, i) => (
                 <li key={s.title}>
                   <a href={`#s${i + 1}`} className="block rounded-lg px-3 py-1.5 text-navy-600 hover:bg-white hover:text-navy-950">
@@ -29,21 +29,21 @@ export default function LegalPage({ doc }) {
           </nav>
 
           <article className="min-w-0 rounded-2xl border border-navy-900/[0.07] bg-white p-6 shadow-soft sm:p-10">
-            <p className="text-[0.85rem] text-navy-500">Last updated: {page.updated}</p>
+            <p className="text-sm text-navy-500">Last updated: {page.updated}</p>
             {page.sections.map((s, i) => (
               <section key={s.title} id={`s${i + 1}`} className="scroll-mt-28 border-b border-navy-900/[0.06] py-7 last:border-0 last:pb-0">
-                <h2 className="font-display text-[1.35rem] font-semibold text-navy-950">
+                <h2 className="font-display text-xl font-semibold text-navy-950">
                   {i + 1}. {s.title}
                 </h2>
                 {s.body.map((para) =>
                   Array.isArray(para) ? (
-                    <ul key={para[0]} className="mt-3 list-disc space-y-1.5 pl-5 text-[0.95rem] leading-[1.7] text-navy-800 marker:text-gold-500">
+                    <ul key={para[0]} className="mt-3 list-disc space-y-1.5 pl-5 text-base leading-[1.7] text-navy-800 marker:text-gold-500">
                       {para.map((li) => (
                         <li key={li}>{li}</li>
                       ))}
                     </ul>
                   ) : (
-                    <p key={para.slice(0, 40)} className="mt-3 text-[0.95rem] leading-[1.75] text-navy-800">
+                    <p key={para.slice(0, 40)} className="mt-3 text-base leading-[1.75] text-navy-800">
                       {para}
                     </p>
                   )
@@ -51,7 +51,7 @@ export default function LegalPage({ doc }) {
               </section>
             ))}
 
-            <div className="mt-8 rounded-xl bg-mist p-5 text-[0.92rem] text-navy-800">
+            <div className="mt-8 rounded-xl bg-mist p-5 text-base text-navy-800">
               Questions about this page? Email{' '}
               <a href={`mailto:${company.email}`} className="font-semibold text-navy-950 underline underline-offset-2">
                 {company.email}

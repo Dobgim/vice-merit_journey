@@ -50,7 +50,7 @@ export default function FlyerDownload({ item, kind, label }) {
         {url ? (
           <img src={url} alt={`Flyer for ${item.name}`} className="block aspect-[4/5] w-full object-cover" />
         ) : (
-          <div className="flex aspect-[4/5] items-center justify-center text-[0.85rem] text-navy-100/60">
+          <div className="flex aspect-[4/5] items-center justify-center text-sm text-navy-100/60">
             {error ? 'Could not create the flyer.' : 'Creating flyer…'}
           </div>
         )}
@@ -60,7 +60,7 @@ export default function FlyerDownload({ item, kind, label }) {
           href={url ?? undefined}
           download={fileName}
           aria-disabled={!url}
-          className={`inline-flex h-10 items-center justify-center gap-2 rounded-full bg-navy-900 px-4 text-[0.85rem] font-semibold text-white transition-colors hover:bg-navy-800 ${
+          className={`inline-flex h-10 items-center justify-center gap-2 rounded-full bg-navy-900 px-4 text-sm font-semibold text-white transition-colors hover:bg-navy-800 ${
             url ? '' : 'pointer-events-none opacity-50'
           }`}
         >
@@ -71,7 +71,7 @@ export default function FlyerDownload({ item, kind, label }) {
           <button
             type="button"
             onClick={share}
-            className="inline-flex h-10 items-center justify-center gap-2 rounded-full border border-navy-900/15 bg-white px-4 text-[0.85rem] font-semibold text-navy-900 hover:border-navy-900/35"
+            className="inline-flex h-10 items-center justify-center gap-2 rounded-full border border-navy-900/15 bg-white px-4 text-sm font-semibold text-navy-900 hover:border-navy-900/35"
           >
             <Icon name="share" className="h-4 w-4" />
             Share
@@ -81,7 +81,7 @@ export default function FlyerDownload({ item, kind, label }) {
             href={`https://wa.me/?text=${encodeURIComponent(`${item.name} — apply here: ${item.officialUrl}`)}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-10 items-center justify-center gap-2 rounded-full border border-navy-900/15 bg-white px-4 text-[0.85rem] font-semibold text-navy-900 hover:border-navy-900/35"
+            className="inline-flex h-10 items-center justify-center gap-2 rounded-full border border-navy-900/15 bg-white px-4 text-sm font-semibold text-navy-900 hover:border-navy-900/35"
           >
             <Icon name="whatsapp" className="h-4 w-4" />
             Send link

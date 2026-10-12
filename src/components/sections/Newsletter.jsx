@@ -44,10 +44,10 @@ export default function Newsletter() {
                   <Icon name="bell" className="h-3.5 w-3.5" />
                   Scholarship alerts
                 </span>
-                <h2 className="mt-5 font-display text-[1.7rem] font-semibold leading-[1.15] text-navy-950 balance sm:text-[2.1rem]">
+                <h2 className="mt-5 font-display text-2xl font-semibold leading-tight text-navy-950 balance sm:text-3xl">
                   New awards and deadline reminders, <span className="italic text-gold-600">in your inbox.</span>
                 </h2>
-                <p className="mt-3 text-[0.97rem] leading-[1.7] text-navy-700/80">
+                <p className="mt-3 text-base leading-[1.7] text-navy-700/80">
                   One short email a fortnight: newly verified scholarships for your level and a heads-up
                   30 days before major deadlines. No spam, unsubscribe any time.
                 </p>
@@ -65,7 +65,7 @@ export default function Newsletter() {
                     <Icon name="checkCircle" className="h-6 w-6 shrink-0 text-emerald-600" />
                     <div>
                       <p className="font-semibold text-emerald-900">You are on the list.</p>
-                      <p className="mt-1 text-[0.9rem] text-emerald-800/80">
+                      <p className="mt-1 text-base text-emerald-800/80">
                         The next alert will arrive with the coming fortnight’s new awards.
                       </p>
                     </div>
@@ -85,7 +85,7 @@ export default function Newsletter() {
                         autoComplete="email"
                         placeholder="you@example.com"
                         aria-invalid={Boolean(errors.email)}
-                        className={`h-12 w-full rounded-xl border bg-white px-4 text-[0.95rem] text-navy-950 placeholder:text-navy-400 focus:outline-none focus:ring-2 focus:ring-gold-400/60 ${
+                        className={`h-12 w-full rounded-xl border bg-white px-4 text-base text-navy-950 placeholder:text-navy-400 focus:outline-none focus:ring-2 focus:ring-gold-400/60 ${
                           errors.email ? 'border-rose-300' : 'border-navy-900/[0.12] hover:border-navy-900/25'
                         }`}
                         {...register('email', {
@@ -98,7 +98,7 @@ export default function Newsletter() {
                     <label className="block">
                       <span className="sr-only">Study level</span>
                       <select
-                        className="h-12 w-full rounded-xl border border-navy-900/[0.12] bg-white px-4 text-[0.95rem] text-navy-950 hover:border-navy-900/25 focus:outline-none focus:ring-2 focus:ring-gold-400/60"
+                        className="h-12 w-full rounded-xl border border-navy-900/[0.12] bg-white px-4 text-base text-navy-950 hover:border-navy-900/25 focus:outline-none focus:ring-2 focus:ring-gold-400/60"
                         {...register('studyLevel')}
                       >
                         <option value="">All study levels</option>
@@ -115,7 +115,7 @@ export default function Newsletter() {
                     </Button>
 
                     {(errors.email || serverError) && (
-                      <p className="flex items-center gap-1.5 text-[0.8rem] font-medium text-rose-600 sm:col-span-2">
+                      <p className="flex items-center gap-1.5 text-sm font-medium text-rose-600 sm:col-span-2">
                         <Icon name="close" className="h-3 w-3" />
                         {errors.email?.message ?? serverError}
                       </p>

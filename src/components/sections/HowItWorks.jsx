@@ -38,16 +38,16 @@ export default function HowItWorks() {
                     </span>
                   </span>
 
-                  <h3 className="font-display text-[1.4rem] font-semibold text-navy-950 lg:mt-7">
+                  <h3 className="font-display text-xl font-semibold text-navy-950 lg:mt-7">
                     {s.title}
                   </h3>
                 </div>
 
-                <p className="mt-4 text-[0.96rem] leading-[1.75] text-navy-700/80 lg:pr-6">{s.body}</p>
+                <p className="mt-4 text-base leading-[1.75] text-navy-700/80 lg:pr-6">{s.body}</p>
 
                 <ul className="mt-5 space-y-2.5">
                   {s.detail.map((d) => (
-                    <li key={d} className="flex items-center gap-2.5 text-[0.87rem] text-navy-700">
+                    <li key={d} className="flex items-center gap-2.5 text-sm text-navy-700">
                       <span className="flex h-5 w-5 items-center justify-center rounded-full bg-gold-100 ring-1 ring-gold-300/50">
                         <Icon name="check" className="h-3 w-3 text-gold-700" />
                       </span>

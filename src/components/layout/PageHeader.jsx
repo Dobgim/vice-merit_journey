@@ -32,7 +32,7 @@ export default function PageHeader({ eyebrow, title, accent, lede, crumb, crumbs
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: EASE }}
-          className="group mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-2 text-[0.82rem] font-semibold text-white backdrop-blur transition-colors hover:border-white/30 hover:bg-white/[0.12]"
+          className="group mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-2 text-sm font-semibold text-white backdrop-blur transition-colors hover:border-white/30 hover:bg-white/[0.12]"
         >
           <Icon name="arrowLeft" className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-0.5" />
           Back
@@ -43,7 +43,7 @@ export default function PageHeader({ eyebrow, title, accent, lede, crumb, crumbs
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: EASE }}
           aria-label="Breadcrumb"
-          className="flex flex-wrap items-center gap-2 text-[0.8rem] text-navy-100/55"
+          className="flex flex-wrap items-center gap-2 text-sm text-navy-100/55"
         >
           {/* `crumbs` are the intermediate levels between Home and this page */}
           {[{ label: 'Home', to: '/' }, ...crumbs].map((c) => (
@@ -70,7 +70,7 @@ export default function PageHeader({ eyebrow, title, accent, lede, crumb, crumbs
           initial={{ opacity: 0, y: 22, filter: 'blur(6px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           transition={{ duration: 0.8, ease: EASE, delay: 0.12 }}
-          className="mt-4 max-w-3xl font-display text-[2.35rem] font-semibold leading-[1.08] tracking-tight balance sm:text-[3rem] lg:text-[3.5rem]"
+          className="mt-4 max-w-3xl font-display text-3xl font-semibold leading-tight balance sm:text-4xl lg:text-[2.75rem]"
         >
           {title}
           {accent && <span className="text-gradient italic"> {accent}</span>}
@@ -81,7 +81,7 @@ export default function PageHeader({ eyebrow, title, accent, lede, crumb, crumbs
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: EASE, delay: 0.2 }}
-            className="mt-6 max-w-2xl text-[1.02rem] leading-[1.75] text-navy-100/75"
+            className="mt-6 max-w-2xl text-lg leading-[1.75] text-navy-100/75"
           >
             {lede}
           </motion.p>

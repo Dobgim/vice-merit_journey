@@ -76,8 +76,8 @@ export const ScholarshipCard = forwardRef(function ScholarshipCard({ item, kind 
             <div className="flex min-w-0 items-center gap-2.5">
               <OrgLogo item={item} size="sm" />
               <div className="min-w-0">
-                <div className="text-[0.78rem] font-semibold text-navy-800">{item.country}</div>
-                <div className="truncate text-[0.72rem] text-navy-500">{item.org}</div>
+                <div className="text-sm font-semibold text-navy-800">{item.country}</div>
+                <div className="truncate text-xs text-navy-500">{item.org}</div>
               </div>
             </div>
 
@@ -86,14 +86,14 @@ export const ScholarshipCard = forwardRef(function ScholarshipCard({ item, kind 
             </Badge>
           </div>
 
-          <h3 className="mt-5 font-display text-[1.22rem] font-semibold leading-snug text-navy-950 transition-colors duration-300 group-hover:text-navy-800">
+          <h3 className="mt-5 font-display text-xl font-semibold leading-snug text-navy-950 transition-colors duration-300 group-hover:text-navy-800">
             {/* Stretched link: the whole card opens the detail page */}
             <Link to={href} className="after:absolute after:inset-0 after:content-['']">
               {item.name}
             </Link>
           </h3>
 
-          <p className="mt-3 flex-1 text-[0.9rem] leading-[1.7] text-navy-700/80">{item.summary}</p>
+          <p className="mt-3 flex-1 text-base leading-[1.7] text-navy-700/80">{item.summary}</p>
 
           <div className="mt-5 flex flex-wrap gap-1.5">
             <Badge variant="outline">{item.level}</Badge>
@@ -106,11 +106,11 @@ export const ScholarshipCard = forwardRef(function ScholarshipCard({ item, kind 
 
           <dl className="mt-5 grid grid-cols-2 gap-3 border-t border-navy-900/[0.07] pt-5 text-sm">
             <div>
-              <dt className="text-[0.7rem] uppercase tracking-wider text-navy-500">Value</dt>
+              <dt className="text-xs uppercase tracking-wider text-navy-500">Value</dt>
               <dd className="mt-1 font-semibold text-navy-900">{item.amount}</dd>
             </div>
             <div>
-              <dt className="text-[0.7rem] uppercase tracking-wider text-navy-500">Deadline</dt>
+              <dt className="text-xs uppercase tracking-wider text-navy-500">Deadline</dt>
               <dd className="mt-1 inline-flex items-center gap-1.5 font-semibold text-navy-900">
                 <Icon name="calendar" className="h-3.5 w-3.5" />
                 {item.deadline ? formatDate(item.deadline) : 'Rolling'}
@@ -148,7 +148,7 @@ function FilterRail({ filters, filter, onChange }) {
             type="button"
             onClick={() => onChange(f)}
             aria-pressed={active}
-            className={`relative isolate shrink-0 rounded-full px-4 py-2 text-[0.85rem] font-medium transition-colors duration-300 ${
+            className={`relative isolate shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-colors duration-300 ${
               active ? 'text-white' : 'text-navy-700 hover:text-navy-950'
             }`}
           >
@@ -171,7 +171,7 @@ function FilterRail({ filters, filter, onChange }) {
 }
 
 const controlBase =
-  'h-12 w-full rounded-xl border border-navy-900/[0.12] bg-white text-[0.92rem] text-navy-950 transition-colors duration-300 hover:border-navy-900/25 focus:outline-none focus:ring-2 focus:ring-gold-400/60'
+  'h-12 w-full rounded-xl border border-navy-900/[0.12] bg-white text-base text-navy-950 transition-colors duration-300 hover:border-navy-900/25 focus:outline-none focus:ring-2 focus:ring-gold-400/60'
 
 /* ------------------------------------------------------------------ Section */
 
@@ -277,7 +277,7 @@ export default function Scholarships({ kind = 'scholarships' }) {
           <FilterRail filters={config.filters} filter={filter} onChange={(f) => setParam('type', f, 'All')} />
         </Reveal>
 
-        <div className="mt-6 flex flex-wrap items-center justify-between gap-3 text-[0.85rem] text-navy-600">
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-3 text-sm text-navy-600">
           <p aria-live="polite">
             Showing <span className="font-semibold text-navy-900">{visible.length}</span> of {items.length} open{' '}
             {config.plural} · closed calls are removed automatically
@@ -314,7 +314,7 @@ export default function Scholarships({ kind = 'scholarships' }) {
               <h3 className="font-display text-xl font-semibold text-navy-950">
                 Not sure which of these you can win?
               </h3>
-              <p className="mt-1.5 text-[0.93rem] text-navy-700/80">
+              <p className="mt-1.5 text-base text-navy-700/80">
                 Tell us your profile and we will tell you where you are genuinely competitive.
               </p>
             </div>

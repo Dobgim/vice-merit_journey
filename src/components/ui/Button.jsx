@@ -5,7 +5,7 @@ import Icon from './Icon'
 const MotionLink = motion.create(Link)
 
 const base =
-  'group relative inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-tight transition-colors duration-300 disabled:opacity-60 disabled:pointer-events-none'
+  'group relative inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-colors duration-300 disabled:opacity-60 disabled:pointer-events-none'
 
 const variants = {
   primary: 'bg-navy-900 text-white shadow-soft hover:bg-navy-800 hover:shadow-lift',
@@ -19,7 +19,7 @@ const variants = {
 
 const sizes = {
   sm: 'h-10 px-5 text-sm',
-  md: 'h-12 px-6 text-[0.95rem]',
+  md: 'h-12 px-6 text-base',
   lg: 'h-14 px-8 text-base',
 }
 

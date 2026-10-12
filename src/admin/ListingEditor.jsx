@@ -70,7 +70,7 @@ function RowsEditor({ rows, onChange, fields, addLabel }) {
       <button
         type="button"
         onClick={() => onChange([...rows, Object.fromEntries(fields.map(([k]) => [k, '']))])}
-        className="inline-flex items-center gap-1.5 text-[0.85rem] font-semibold text-navy-700 hover:text-navy-950"
+        className="inline-flex items-center gap-1.5 text-sm font-semibold text-navy-700 hover:text-navy-950"
       >
         <Icon name="plus" className="h-4 w-4" />
         {addLabel}
@@ -228,12 +228,12 @@ export default function ListingEditor() {
           </Panel>
 
           <Panel title="Flyer image">
-            <p className="text-[0.85rem] text-navy-600">
+            <p className="text-sm text-navy-600">
               Optional. Upload the official flyer or logo (a wide 2:1 image looks best). Without one, the website draws a
               branded flyer automatically.
             </p>
             <div className="mt-4 flex flex-wrap items-center gap-3">
-              <label className="inline-flex h-10 cursor-pointer items-center gap-2 rounded-full bg-navy-900 px-4 text-[0.85rem] font-semibold text-white hover:bg-navy-800">
+              <label className="inline-flex h-10 cursor-pointer items-center gap-2 rounded-full bg-navy-900 px-4 text-sm font-semibold text-white hover:bg-navy-800">
                 <Icon name="plus" className="h-4 w-4" />
                 {uploading ? 'Uploading…' : form.image ? 'Replace image' : 'Upload image'}
                 <input type="file" accept="image/*" onChange={upload} className="sr-only" disabled={uploading} />
@@ -255,7 +255,7 @@ export default function ListingEditor() {
                 </Field>
               ))}
               <div>
-                <p className="mb-1.5 text-[0.8rem] font-semibold text-navy-800">Key dates</p>
+                <p className="mb-1.5 text-sm font-semibold text-navy-800">Key dates</p>
                 <RowsEditor
                   rows={form.timeline}
                   onChange={(timeline) => setForm((f) => ({ ...f, timeline }))}
@@ -264,7 +264,7 @@ export default function ListingEditor() {
                 />
               </div>
               <div>
-                <p className="mb-1.5 text-[0.8rem] font-semibold text-navy-800">Frequently asked questions</p>
+                <p className="mb-1.5 text-sm font-semibold text-navy-800">Frequently asked questions</p>
                 <RowsEditor
                   rows={form.faqs}
                   onChange={(faqs) => setForm((f) => ({ ...f, faqs }))}
@@ -279,12 +279,12 @@ export default function ListingEditor() {
         <div className="space-y-4 xl:sticky xl:top-6 xl:self-start">
           <Panel title="Visibility">
             <label className="flex cursor-pointer items-center justify-between gap-3">
-              <span className="text-[0.9rem] text-navy-800">{published ? 'Published on the website' : 'Hidden from the website'}</span>
+              <span className="text-base text-navy-800">{published ? 'Published on the website' : 'Hidden from the website'}</span>
               <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} className="h-5 w-5 accent-navy-900" />
             </label>
           </Panel>
           <div>
-            <p className="mb-2 text-[0.75rem] font-semibold uppercase tracking-wider text-navy-500">Card preview</p>
+            <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-navy-500">Card preview</p>
             <div className="pointer-events-none">
               <ScholarshipCard item={preview} kind={kind} />
             </div>

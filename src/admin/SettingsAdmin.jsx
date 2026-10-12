@@ -72,7 +72,7 @@ export default function SettingsAdmin() {
         </Panel>
 
         <Panel title="Social media">
-          <p className="mb-4 text-[0.85rem] text-navy-600">Paste the full link to each profile. Leave a field empty to hide that icon.</p>
+          <p className="mb-4 text-sm text-navy-600">Paste the full link to each profile. Leave a field empty to hide that icon.</p>
           <div className="space-y-3">
             {company.socials.map((s) => (
               <label key={s.label} className="flex items-center gap-3">
