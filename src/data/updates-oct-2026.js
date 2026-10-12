@@ -7,6 +7,7 @@
  */
 import { applyLinks } from './applyLinks'
 import { formatDate } from '../lib/deadline'
+import { logoDomain } from '../lib/logo'
 
 export const corrections = {
   // Official page: a bursary to attend the One Young World Summit; closed 16 Sep.
@@ -89,6 +90,31 @@ export const corrections = {
   'lisa-jardine-grant-scheme': {
     deadlineNote: 'Past rounds opened in January and closed in March — confirm the current round on the Royal Society page.',
   },
+  // Official scholarship page: awards range from $3,000 to $18,000 a year; apply by 1 April.
+  'university-of-tennessee-international-volunteer-scholarship': {
+    amount: 'US$3,000 – $18,000 / year',
+    deadline: '2027-04-01',
+    deadlineNote: 'Apply for admission by 1 April to be considered — there is no separate scholarship form.',
+    eligibility: [
+      'Incoming first-year international student on a non-resident visa',
+      'Not graduating from a US high school',
+      'Strong academic record (award level depends on GPA and test scores)',
+      'Admission application submitted by 1 April of your final school year',
+    ],
+    benefits: [
+      '$3,000 to $18,000 per year depending on academic profile',
+      'Renewable for up to four years with satisfactory academic progress',
+      'Can be combined with other institutional awards where permitted',
+    ],
+  },
+  // Recent grants from The Pollination Project are up to US$500.
+  'pollination-project-seed-grants': {
+    amount: 'Up to US$500 seed grant',
+    benefits: ['Seed grant of up to US$500', 'Access to a worldwide community of grantees'],
+  },
+  'mopga-visiting-fellowship-program': { logoDomain: 'campusfrance.org' },
+  'roddenberry-foundation-catalyst-fund': { logoDomain: 'roddenberryfoundation.org' },
+  'teach-for-india-youth-fellowships': { logoDomain: 'teachforindia.org' },
   'princeton-fung-global-fellows': { logoDomain: 'princeton.edu' },
   'uongozi-institute-emerging-leaders-programme': { logoDomain: 'uongozi.or.tz' },
   'columbia-university-scholarships-for-displaced-students': { logoDomain: 'columbia.edu' },
@@ -113,7 +139,8 @@ export function applyUpdates(items) {
         const rest = (i.timeline ?? []).filter((t) => t.label !== 'Application deadline')
         out.timeline = fix.deadline ? [...rest, { date: formatDate(fix.deadline), label: 'Application deadline' }] : rest
       }
-      if (link) out = { ...out, officialUrl: link, officialSearch: false }
+      // Keep the logo from the organisation's main site (application pages often live on a portal).
+      if (link) out = { ...out, logoDomain: logoDomain(out) ?? undefined, officialUrl: link, officialSearch: false }
       return out
     })
 }

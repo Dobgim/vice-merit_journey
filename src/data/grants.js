@@ -259,7 +259,7 @@ export const grants = [
     documents: ['Online application', 'Project description and goals', 'Simple budget'],
     howToApply: [
       'Describe the change you want to create and who benefits.',
-      'Show what you will do with US$1,000 and how you will measure progress.',
+      'Show what you will do with the grant and how you will measure progress.',
       'Submit the online application.',
     ],
     timeline: [{ date: 'Any time', label: 'Rolling applications' }],
