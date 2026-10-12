@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { company } from '../../data/site'
 import { formatDate } from '../../lib/deadline'
 import { isUsableLogo, logoUrl } from '../../lib/logo'
+import { photos } from '../../data/photos'
 import Flag from './Flag'
 
 const accents = {
@@ -46,6 +47,8 @@ export default function Flyer({ item, kind = 'scholarships', label = 'Scholarshi
   const hero = size === 'hero'
   const a = accents[kind] ?? accents.scholarships
   const [logoFailed, setLogoFailed] = useState(false)
+  const [photoFailed, setPhotoFailed] = useState(false)
+  const photo = !photoFailed && photos[item.slug]
   const hasLogo = Boolean(logoUrl(item)) && !logoFailed
 
   // w-full + min-w-0: an aspect-ratio box must take its width from the card,
@@ -62,25 +65,44 @@ export default function Flyer({ item, kind = 'scholarships', label = 'Scholarshi
 
   return (
     <div className={`${frame} bg-gradient-to-br from-navy-800 via-navy-900 to-navy-950 text-white`} aria-hidden>
-      {/* Texture + glow */}
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(255,255,255,.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,.05)_1px,transparent_1px)] [background-size:28px_28px] [mask-image:linear-gradient(to_left,black,transparent_75%)]" />
-      <div className={`absolute -right-10 -top-12 -z-10 h-2/3 w-1/2 rounded-full blur-3xl ${a.glow}`} />
+      {photo ? (
+        <>
+          {/* Photo of the institution or host city, shaded so the text stays readable */}
+          <img
+            src={photo.src}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            referrerPolicy="no-referrer"
+            onError={() => setPhotoFailed(true)}
+            className="absolute inset-0 -z-20 h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy-950/90 via-navy-950/65 to-navy-950/25" />
+          <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-t from-navy-950/80 to-transparent" />
+        </>
+      ) : (
+        <>
+          {/* Texture + glow */}
+          <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(255,255,255,.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,.05)_1px,transparent_1px)] [background-size:28px_28px] [mask-image:linear-gradient(to_left,black,transparent_75%)]" />
+          <div className={`absolute -right-10 -top-12 -z-10 h-2/3 w-1/2 rounded-full blur-3xl ${a.glow}`} />
+        </>
+      )}
 
       {/* Visual anchor: organisation logo, or an oversized flag */}
-      <span className={`absolute right-[6%] top-1/2 -translate-y-1/2 ${hasLogo ? 'rotate-[-4deg]' : '-z-10 rotate-[-8deg] opacity-95 drop-shadow-2xl'}`}>
+      <span className={`absolute ${!hasLogo && photo ? 'right-3 top-3 sm:right-4 sm:top-4' : 'right-[6%] top-1/2 -translate-y-1/2'} ${hasLogo ? 'rotate-[-4deg]' : photo ? 'drop-shadow-lg' : '-z-10 rotate-[-8deg] opacity-95 drop-shadow-2xl'}`}>
         {hasLogo ? (
           <LogoTile item={item} hero={hero} onFail={() => setLogoFailed(true)} />
         ) : (
           <Flag
             emoji={item.flag}
-            className={hero ? 'h-20 w-28 rounded-lg sm:h-36 sm:w-52' : 'h-12 w-16 rounded-md sm:h-14 sm:w-20'}
+            className={photo ? (hero ? 'h-10 w-14 rounded-md sm:h-14 sm:w-20' : 'h-7 w-10 rounded') : hero ? 'h-20 w-28 rounded-lg sm:h-36 sm:w-52' : 'h-12 w-16 rounded-md sm:h-14 sm:w-20'}
             emojiClassName={hero ? 'text-[6rem] sm:text-[10rem]' : 'text-[4rem] sm:text-[5rem]'}
           />
         )}
       </span>
 
       <div className={`flex h-full min-w-0 flex-col justify-between ${hero ? 'p-5 sm:p-9' : 'p-3.5 sm:p-4'}`}>
-        <div className="flex min-w-0 flex-wrap items-center gap-1.5 pr-[30%]">
+        <div className={`flex min-w-0 flex-wrap items-center gap-1.5 ${hasLogo || !photo ? 'pr-[30%]' : 'pr-14'}`}>
           <span className={`rounded-full px-2.5 py-0.5 font-bold uppercase tracking-wider ${a.pill} ${hero ? 'text-[0.68rem] sm:text-[0.72rem]' : 'text-[0.58rem]'}`}>
             {label}
           </span>

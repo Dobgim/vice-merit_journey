@@ -19,6 +19,7 @@ import OrgLogo from '../components/ui/OrgLogo'
 import { byDeadline, deadlineStatus, formatDate } from '../lib/deadline'
 import { company } from '../data/site'
 import { buildOverview } from '../lib/overview'
+import { photos } from '../data/photos'
 import NotFound from './NotFound'
 
 /* ----------------------------------------------------------------- Helpers */
@@ -202,6 +203,15 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
               <div className="overflow-hidden rounded-2xl shadow-lift ring-1 ring-navy-900/10">
                 <Flyer item={s} kind={kind} label={config.flyerLabel} size="hero" />
               </div>
+              {!s.image && photos[s.slug] && (
+                <p className="mt-2 text-right text-[0.72rem] text-navy-500">
+                  Photo: {photos[s.slug].subject} —{' '}
+                  <a href={photos[s.slug].page} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-navy-800">
+                    {photos[s.slug].credit}, {photos[s.slug].license}
+                  </a>
+                  , via Wikimedia Commons
+                </p>
+              )}
             </Reveal>
 
             {!s.deadline && s.deadlineNote && (

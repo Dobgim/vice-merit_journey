@@ -4,6 +4,7 @@ import { Outlet, useLocation, useNavigationType } from 'react-router-dom'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import FloatingActions from './FloatingActions'
+import UpdateBanner from './UpdateBanner'
 
 // Scroll offsets per history entry, so Back returns you to where you were.
 const positions = new Map()
@@ -63,6 +64,7 @@ export default function RootLayout() {
 
       <Footer />
       <FloatingActions />
+      <UpdateBanner />
     </div>
   )
 }
