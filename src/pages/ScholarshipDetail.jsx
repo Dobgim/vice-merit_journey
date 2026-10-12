@@ -11,6 +11,7 @@ import DeadlineChip from '../components/ui/DeadlineChip'
 import ShareBar from '../components/ui/ShareBar'
 import Icon from '../components/ui/Icon'
 import { useOpportunities } from '../hooks/useScholarships'
+import useNow from '../hooks/useNow'
 import { kinds } from '../data/opportunities'
 import Flyer from '../components/ui/Flyer'
 import FlyerDownload from '../components/ui/FlyerDownload'
@@ -80,17 +81,19 @@ function Checklist({ items, icon = 'check', tone = 'text-emerald-600' }) {
 export default function ScholarshipDetail({ kind = 'scholarships' }) {
   const config = kinds[kind]
   const { slug } = useParams()
-  const items = useOpportunities(kind)
+  // Include closed calls so old links and flyers explain that the call has ended.
+  const items = useOpportunities(kind, { includeClosed: true })
+  const now = useNow(60_000)
   const s = items.find((i) => i.slug === slug)
 
   const related = useMemo(() => {
     if (!s) return []
     const score = (i) => (i.level === s.level ? 2 : 0) + (i.country === s.country ? 1 : 0) + (i.funding === s.funding ? 1 : 0)
     return items
-      .filter((i) => i.slug !== s.slug && deadlineStatus(i.deadline).state !== 'closed')
+      .filter((i) => i.slug !== s.slug && deadlineStatus(i.deadline, now).state !== 'closed')
       .sort((a, b) => score(b) - score(a) || byDeadline(a, b))
       .slice(0, 3)
-  }, [items, s])
+  }, [items, s, now])
 
   const sections = s
     ? [
@@ -108,6 +111,48 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
   const active = useActiveSection(sections.map((x) => x.id))
 
   if (!s) return <NotFound />
+
+  // Deadline passed: the listing is no longer shown anywhere on the site.
+  if (deadlineStatus(s.deadline, now).state === 'closed') {
+    return (
+      <>
+        <Seo title={`${s.name} (closed)`} description={`Applications for ${s.name} have closed. See open ${config.plural} instead.`} />
+        <PageHeader
+          eyebrow={`${config.flyerLabel} · closed`}
+          title={s.name}
+          lede={`Applications closed on ${formatDate(s.deadline)}, so this ${config.singular} is no longer listed on our website.`}
+          crumbs={[{ label: config.title, to: config.path }]}
+        >
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Button to={config.path} variant="gold" size="lg" icon="arrowRight">
+              See open {config.plural}
+            </Button>
+            <Button href="#alerts" variant="ghostLight" size="lg" icon="bell" iconRight={false}>
+              Alert me when it reopens
+            </Button>
+          </div>
+        </PageHeader>
+
+        {related.length > 0 && (
+          <Section tone="light" className="!py-16 sm:!py-20">
+            <div className="container">
+              <p className="eyebrow text-navy-500">Still open</p>
+              <h2 className="mt-3 font-display text-[1.9rem] font-semibold text-navy-950">Similar {config.plural} you can apply for now</h2>
+              <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {related.map((item) => (
+                  <ScholarshipCard key={item.slug} item={item} kind={kind} />
+                ))}
+              </div>
+            </div>
+          </Section>
+        )}
+
+        <div id="alerts" className="scroll-mt-24">
+          <Newsletter />
+        </div>
+      </>
+    )
+  }
 
   const status = deadlineStatus(s.deadline)
   const helpHref = `/book-consultation?scholarship=${encodeURIComponent(s.name)}`

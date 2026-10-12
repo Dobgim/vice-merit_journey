@@ -212,7 +212,6 @@ export default function Scholarships({ kind = 'scholarships' }) {
     return [...list].sort(SORTS[sort].fn)
   }, [items, config, filter, query, country, sort])
 
-  const openCount = items.filter((i) => deadlineStatus(i.deadline).state !== 'closed').length
   const hasRefinements = filter !== 'All' || query || country !== 'All'
 
   return (
@@ -280,8 +279,8 @@ export default function Scholarships({ kind = 'scholarships' }) {
 
         <div className="mt-6 flex flex-wrap items-center justify-between gap-3 text-[0.85rem] text-navy-600">
           <p aria-live="polite">
-            Showing <span className="font-semibold text-navy-900">{visible.length}</span> of {items.length}{' '}
-            {config.plural} · {openCount} currently open
+            Showing <span className="font-semibold text-navy-900">{visible.length}</span> of {items.length} open{' '}
+            {config.plural} · closed calls are removed automatically
           </p>
           {hasRefinements && (
             <button

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { kinds } from '../data/opportunities'
 import { fetchOpportunities } from '../lib/supabase'
-import { slugify } from '../lib/deadline'
+import { deadlineStatus, slugify } from '../lib/deadline'
+import useNow from './useNow'
 
 const withSlug = (list) => list.map((s) => (s.slug ? s : { ...s, slug: slugify(s.name) }))
 
@@ -13,8 +14,12 @@ const pending = {}
 /**
  * Listings for one opportunity type: what the admin has published, or the
  * bundled list in src/data/ until anything of that type has been added.
+ * Listings whose deadline has passed drop out automatically (re-checked every
+ * minute) unless `includeClosed` is set — the detail page uses that so old
+ * links and flyers can still explain that the call has closed.
  */
-export function useOpportunities(kind = 'scholarships') {
+export function useOpportunities(kind = 'scholarships', { includeClosed = false } = {}) {
+  const now = useNow(60_000)
   const bundled = kinds[kind].items
   const [items, setItems] = useState(() => cache[kind] ?? withSlug(bundled))
 
@@ -31,7 +36,7 @@ export function useOpportunities(kind = 'scholarships') {
     }
   }, [kind, bundled])
 
-  return items
+  return includeClosed ? items : items.filter((i) => deadlineStatus(i.deadline, now).state !== 'closed')
 }
 
 /** Admin calls this after saving so the public pages pick up the change. */
