@@ -14,8 +14,11 @@ import { useOpportunities } from '../hooks/useScholarships'
 import { kinds } from '../data/opportunities'
 import Flyer from '../components/ui/Flyer'
 import FlyerDownload from '../components/ui/FlyerDownload'
+import Countdown from '../components/ui/Countdown'
+import OrgLogo from '../components/ui/OrgLogo'
 import { byDeadline, deadlineStatus, formatDate } from '../lib/deadline'
 import { company } from '../data/site'
+import { buildOverview } from '../lib/overview'
 import NotFound from './NotFound'
 
 /* ----------------------------------------------------------------- Helpers */
@@ -91,7 +94,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
   const sections = s
     ? [
         { id: 'at-a-glance', label: 'At a glance', show: true },
-        { id: 'overview', label: 'Overview', show: s.overview?.length },
+        { id: 'overview', label: 'Overview', show: true },
         { id: 'eligibility', label: 'Eligibility', show: s.eligibility?.length },
         { id: 'benefits', label: 'Benefits', show: s.benefits?.length },
         { id: 'documents', label: 'Required documents', show: s.documents?.length },
@@ -229,6 +232,19 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
               </div>
             )}
 
+            {s.deadline && <Countdown deadline={s.deadline} />}
+
+            {s.org && (
+              <div className="flex min-w-0 items-center gap-4 rounded-2xl border border-navy-900/[0.07] bg-white p-4 shadow-soft">
+                <OrgLogo item={s} size="lg" />
+                <div className="min-w-0">
+                  <p className="text-[0.72rem] font-semibold uppercase tracking-wider text-navy-500">Offered by</p>
+                  <p className="font-display text-[1.15rem] font-semibold leading-snug text-navy-950">{s.org}</p>
+                  <p className="text-[0.85rem] text-navy-600">{s.country}</p>
+                </div>
+              </div>
+            )}
+
             <Block id="at-a-glance" icon="list" title="At a glance">
               <dl className="grid overflow-hidden rounded-xl border border-navy-900/[0.07] sm:grid-cols-2">
                 {facts.map((f) => (
@@ -246,15 +262,30 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
               </dl>
             </Block>
 
-            {s.overview?.length > 0 && (
-              <Block id="overview" icon="doc" title="Overview">
-                <div className="grid gap-4 text-[0.98rem] leading-[1.8] text-navy-800">
-                  {s.overview.map((p) => (
-                    <p key={p.slice(0, 40)}>{p}</p>
-                  ))}
-                </div>
-              </Block>
-            )}
+            <Block id="overview" icon="doc" title="Overview">
+              <div className="grid gap-7">
+                {buildOverview(s, kind, config).map((part) => (
+                  <div key={part.heading}>
+                    <h3 className="font-display text-[1.12rem] font-semibold text-navy-950">{part.heading}</h3>
+                    {part.paragraphs?.map((p) => (
+                      <p key={p.slice(0, 48)} className="mt-2.5 text-[0.98rem] leading-[1.8] text-navy-800">
+                        {p}
+                      </p>
+                    ))}
+                    {part.bullets && (
+                      <ul className="mt-2.5 grid gap-2">
+                        {part.bullets.map((b) => (
+                          <li key={b} className="flex gap-3 text-[0.96rem] leading-[1.7] text-navy-800">
+                            <Icon name="check" className="mt-1.5 h-4 w-4 shrink-0 text-gold-500" />
+                            {b}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </Block>
 
             {s.eligibility?.length > 0 && (
               <Block id="eligibility" icon="checkCircle" title="Who can apply">
@@ -441,7 +472,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
                 All {config.plural}
               </Button>
             </div>
-            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((item) => (
                 <ScholarshipCard key={item.slug} item={item} kind={kind} />
               ))}

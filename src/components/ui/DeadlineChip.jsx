@@ -1,4 +1,5 @@
 import { deadlineStatus } from '../../lib/deadline'
+import useNow from '../../hooks/useNow'
 
 const styles = {
   open: 'bg-emerald-50 text-emerald-700 ring-emerald-200',
@@ -16,7 +17,10 @@ const dark = {
 
 /** Live "N days left" / "Closed" pill, with a pulse when time is short. */
 export default function DeadlineChip({ deadline, tone = 'light', className = '' }) {
-  const { state, label } = deadlineStatus(deadline)
+  // Re-checked every minute (and when the page comes back into view), so the
+  // count goes down by itself as days pass.
+  const now = useNow(60_000)
+  const { state, label } = deadlineStatus(deadline, now)
   const palette = tone === 'dark' ? dark : styles
 
   return (

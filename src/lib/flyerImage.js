@@ -8,6 +8,7 @@ import QRCode from 'qrcode'
 import { company } from '../data/site'
 import { formatDate } from './deadline'
 import { isoFromEmoji } from '../components/ui/Flag'
+import { isUsableLogo, logoUrl } from './logo'
 
 const W = 1080
 const H = 1350
@@ -152,9 +153,11 @@ export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholars
   await ensureFonts()
   const accent = ACCENT[kind] ?? ACCENT.scholarships
   const iso = isoFromEmoji(item.flag)
-  const [logo, flag] = await Promise.all([
+  const orgLogoSrc = logoUrl(item, 256)
+  const [logo, flag, orgLogo] = await Promise.all([
     loadImage('/logo-mark.png'),
     iso ? loadImage(`https://flagcdn.com/w160/${iso}.png`, true) : null,
+    orgLogoSrc ? loadImage(orgLogoSrc, true) : null,
   ])
 
   const canvas = document.createElement('canvas')
@@ -210,6 +213,15 @@ export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholars
   /* Country row */
   y = 184
   let x = PAD
+  // Organisation logo on a white tile, in front of the flag
+  if (orgLogo && (item.logo || isUsableLogo(orgLogo))) {
+    ctx.fillStyle = C.white
+    roundRect(ctx, x, y - 10, 68, 68, 16)
+    ctx.fill()
+    const s = 52
+    ctx.drawImage(orgLogo, x + 8, y - 2, s, s)
+    x += 88
+  }
   if (flag || iso === 'eu') {
     ctx.save()
     roundRect(ctx, x, y, 72, 48, 8)

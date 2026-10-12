@@ -10,7 +10,8 @@ import Reveal, { EASE } from '../ui/Reveal'
 import Button from '../ui/Button'
 import DeadlineChip from '../ui/DeadlineChip'
 import Flyer from '../ui/Flyer'
-import Flag from '../ui/Flag'
+import OrgLogo from '../ui/OrgLogo'
+import useNow from '../../hooks/useNow'
 import Icon from '../ui/Icon'
 
 const SORTS = {
@@ -46,7 +47,8 @@ function fundingBadge(funding = '') {
 export const ScholarshipCard = forwardRef(function ScholarshipCard({ item, kind = 'scholarships' }, ref) {
   const config = kinds[kind]
   const badge = fundingBadge(item.funding)
-  const closed = deadlineStatus(item.deadline).state === 'closed'
+  const now = useNow(60_000)
+  const closed = deadlineStatus(item.deadline, now).state === 'closed'
   const href = `${config.path}/${item.slug}`
 
   return (
@@ -57,9 +59,9 @@ export const ScholarshipCard = forwardRef(function ScholarshipCard({ item, kind 
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -12, scale: 0.97 }}
       transition={{ duration: 0.5, ease: EASE }}
-      className="h-full"
+      className="h-full min-w-0"
     >
-      <Card className={`group flex h-full flex-col ${closed ? 'opacity-80' : ''}`}>
+      <Card className={`group flex h-full min-w-0 flex-col ${closed ? 'opacity-80' : ''}`}>
         <div className="overflow-hidden">
           <Flyer
             item={item}
@@ -72,7 +74,7 @@ export const ScholarshipCard = forwardRef(function ScholarshipCard({ item, kind 
         <div className="flex flex-1 flex-col p-6">
           <div className="flex items-start justify-between gap-3">
             <div className="flex min-w-0 items-center gap-2.5">
-              <Flag emoji={item.flag} className="h-5 w-7" emojiClassName="text-2xl" />
+              <OrgLogo item={item} size="sm" />
               <div className="min-w-0">
                 <div className="text-[0.78rem] font-semibold text-navy-800">{item.country}</div>
                 <div className="truncate text-[0.72rem] text-navy-500">{item.org}</div>
@@ -293,7 +295,7 @@ export default function Scholarships({ kind = 'scholarships' }) {
           )}
         </div>
 
-        <motion.div layout className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <motion.div layout className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
             {visible.map((item) => (
               <ScholarshipCard key={item.slug} item={item} kind={kind} />
