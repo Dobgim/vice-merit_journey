@@ -30,6 +30,7 @@ npm run preview  # serve the production build locally
 | `/services` | The seven consultancy services |
 | `/scholarships` | Searchable award database — level, country and funding filters, sort, live deadline status (filters are kept in the URL, e.g. `?type=Undergraduate`) |
 | `/scholarships/:slug` | Full award page — quick facts, overview, eligibility, benefits, documents, step-by-step application, key dates, FAQ, share buttons, related awards |
+| (every detail page) | Downloadable 1080×1350 flyer: logo, title, country, key facts, who can apply, benefits, apply link + QR code (`src/lib/flyerImage.js`) |
 | `/grants`, `/grants/:slug` | Grants listing and detail pages (same layout as scholarships) |
 | `/internships`, `/internships/:slug` | Internships listing and detail pages |
 | `/countries` | Study destinations |

@@ -47,6 +47,16 @@ export default function Listings() {
     }
   }
 
+  const flyer = async (r) => {
+    setActionError(null)
+    try {
+      const { downloadFlyer } = await import('../lib/flyerImage')
+      await downloadFlyer({ ...r.data, slug: r.slug }, { kind, label: config.flyerLabel })
+    } catch (e) {
+      setActionError(e)
+    }
+  }
+
   const remove = async (r) => {
     if (!window.confirm(`Delete “${r.data.name}”? It will disappear from the website.`)) return
     try {
@@ -115,6 +125,7 @@ export default function Listings() {
                 </div>
                 <div className="flex flex-wrap gap-2">
                   <Btn as={Link} to={`/admin/listings/${kind}/${r.id}`} variant="primary" icon="pen">Edit</Btn>
+                  <Btn variant="outline" icon="file" onClick={() => flyer(r)}>Flyer</Btn>
                   <Btn variant="outline" onClick={() => togglePublished(r)}>{r.published ? 'Hide' : 'Publish'}</Btn>
                   {r.published && (
                     <Btn as="a" href={`${config.path}/${r.slug}`} target="_blank" rel="noreferrer" variant="ghost" icon="external">

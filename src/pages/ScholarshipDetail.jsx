@@ -13,6 +13,7 @@ import Icon from '../components/ui/Icon'
 import { useOpportunities } from '../hooks/useScholarships'
 import { kinds } from '../data/opportunities'
 import Flyer from '../components/ui/Flyer'
+import FlyerDownload from '../components/ui/FlyerDownload'
 import { byDeadline, deadlineStatus, formatDate } from '../lib/deadline'
 import { company } from '../data/site'
 import NotFound from './NotFound'
@@ -354,25 +355,19 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
 
           {/* Sidebar */}
           <aside className="min-w-0">
-            <div className="grid gap-5 lg:sticky lg:top-24">
-              <Card hover={false} className="hidden p-5 lg:block">
-                <p className="eyebrow text-navy-500">On this page</p>
-                <nav aria-label="On this page" className="mt-3 grid gap-0.5">
-                  {sections.map((x) => (
-                    <a
-                      key={x.id}
-                      href={`#${x.id}`}
-                      className={`rounded-lg border-l-2 px-3 py-1.5 text-[0.88rem] transition-colors ${
-                        active === x.id
-                          ? 'border-gold-400 bg-mist font-semibold text-navy-950'
-                          : 'border-transparent text-navy-600 hover:text-navy-950'
-                      }`}
-                    >
-                      {x.label}
-                    </a>
-                  ))}
-                </nav>
+            {/* Only the section list stays pinned; the taller cards scroll with the page */}
+            <div className="grid gap-5">
+              <Card hover={false} id="flyer" className="scroll-mt-28 p-5">
+                <p className="eyebrow text-navy-500">Flyer to share</p>
+                <p className="mt-2 text-[0.85rem] leading-[1.6] text-navy-600">
+                  A ready-made image with the key details and the apply link — post it on WhatsApp, Facebook or
+                  Instagram.
+                </p>
+                <div className="mt-4">
+                  <FlyerDownload item={s} kind={kind} label={config.flyerLabel} />
+                </div>
               </Card>
+
 
               <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-navy-900 to-navy-950 p-6 text-white shadow-lift">
                 <div aria-hidden className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-gold-400/25 blur-[60px]" />
@@ -408,6 +403,25 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
                 <div className="mt-4">
                   <ShareBar title={s.name} url={pageUrl} />
                 </div>
+              </Card>
+
+              <Card hover={false} className="hidden p-5 lg:sticky lg:top-24 lg:block">
+                <p className="eyebrow text-navy-500">On this page</p>
+                <nav aria-label="On this page" className="mt-3 grid gap-0.5">
+                  {sections.map((x) => (
+                    <a
+                      key={x.id}
+                      href={`#${x.id}`}
+                      className={`rounded-lg border-l-2 px-3 py-1.5 text-[0.88rem] transition-colors ${
+                        active === x.id
+                          ? 'border-gold-400 bg-mist font-semibold text-navy-950'
+                          : 'border-transparent text-navy-600 hover:text-navy-950'
+                      }`}
+                    >
+                      {x.label}
+                    </a>
+                  ))}
+                </nav>
               </Card>
             </div>
           </aside>
