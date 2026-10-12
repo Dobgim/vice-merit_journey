@@ -373,10 +373,10 @@ export const packages = [
 ]
 
 export const packageAddons = [
-  { name: 'Extra essay', price: { USD: 210, XAF: 120000 } },
-  { name: 'Academic CV only', price: { USD: 15, XAF: 8000 } },
-  { name: 'Research proposal', price: { USD: 55, XAF: 30000 } },
-  { name: 'Mock interview (recorded)', price: { USD: 39, XAF: 22000 } },
+  { name: 'Extra essay', price: { USD: 25, XAF: 14000 } },
+  { name: 'Academic CV only', price: { USD: 20, XAF: 11000 } },
+  { name: 'Research proposal', price: { USD: 16, XAF: 9000 } },
+  { name: 'Mock interview (recorded)', price: { USD: 99, XAF: 55000 } },
   { name: 'Visa document review', price: { USD: 59, XAF: 33000 } },
   { name: 'Express delivery (72 hours)', price: null, note: '+30% of package price' },
 ]
