@@ -32,6 +32,8 @@ const MENU = {
     Scholarships: 'Bourses',
     Grants: 'Subventions',
     Internships: 'Stages',
+    Fellowships: 'Fellowships',
+    'Competitions & Awards': 'Concours et prix',
     Countries: 'Pays',
     FAQ: 'FAQ',
   },

@@ -182,7 +182,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
         <div className="mt-7 flex flex-col gap-3 sm:flex-row">
           {s.officialUrl && (
             <Button href={s.officialUrl} target="_blank" rel="noopener noreferrer" variant="gold" size="lg" icon="external">
-              {status.state === 'closed' ? 'Official page' : 'Apply on official site'}
+              {s.officialSearch ? 'Find the official call' : status.state === 'closed' ? 'Official page' : 'Apply on official site'}
             </Button>
           )}
           <Button to={helpHref} variant="ghostLight" size="lg" icon="arrowRight">
@@ -299,7 +299,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
                 {s.officialUrl && (
                   <div className="mt-7 flex flex-col gap-3 border-t border-navy-900/[0.07] pt-6 sm:flex-row">
                     <Button href={s.officialUrl} target="_blank" rel="noopener noreferrer" size="md" icon="external">
-                      Go to official application
+                      {s.officialSearch ? 'Find the official call' : 'Go to official application'}
                     </Button>
                     <Button to={helpHref} variant="outline" size="md" icon="arrowRight">
                       Have an advisor review my file
@@ -345,9 +345,10 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
             <p className="flex gap-3 rounded-2xl border border-navy-900/[0.07] bg-white p-5 text-[0.82rem] leading-[1.65] text-navy-600">
               <Icon name="shield" className="mt-0.5 h-4 w-4 shrink-0 text-navy-400" />
               <span>
-                Details were checked against the official source
-                {s.verified ? ` on ${formatDate(s.verified)}` : ''}. Awarding bodies can change terms and dates
-                at any time, so always confirm on the official website before applying. {company.name} is an
+                {s.source
+                  ? `Details come from ${s.source} as of ${formatDate(s.verified)} and have not yet been checked against the official website.`
+                  : `Details were checked against the official source${s.verified ? ` on ${formatDate(s.verified)}` : ''}.`}{' '}
+                Awarding bodies can change terms and dates at any time, so always confirm on the official website before applying. {company.name} is an
                 independent consultancy and is not affiliated with {s.org}.
               </span>
             </p>

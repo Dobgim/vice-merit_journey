@@ -64,7 +64,7 @@ export const internships = [
     level: 'University graduates',
     funding: 'Paid',
     category: 'Policy & government',
-    amount: 'Monthly grant + travel allowance',
+    amount: '€1,196.84 / month + travel allowance',
     deadline: '2027-04-07',
     verified: '2026-10-04',
     duration: '5 months (1 Oct 2027 – 28 Feb 2028)',

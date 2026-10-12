@@ -6,6 +6,11 @@
 import { scholarships } from './scholarships'
 import { grants } from './grants'
 import { internships } from './internships'
+import { competitions, fellowships, newGrants, newInternships, newScholarships } from './listings-oct-2026'
+
+const allScholarships = [...scholarships, ...newScholarships]
+const allGrants = [...grants, ...newGrants]
+const allInternships = [...internships, ...newInternships]
 
 const SCHOLARSHIP_FILTERS = [
   { label: 'All', test: () => true },
@@ -30,7 +35,7 @@ export const kinds = {
     singular: 'scholarship',
     plural: 'scholarships',
     title: 'Scholarships',
-    items: scholarships,
+    items: allScholarships,
     filters: SCHOLARSHIP_FILTERS,
     eyebrow: 'Scholarship database',
     heading: ['Open awards worth', 'building a year around'],
@@ -44,8 +49,8 @@ export const kinds = {
     singular: 'grant',
     plural: 'grants',
     title: 'Grants',
-    items: grants,
-    filters: byCategory(grants),
+    items: allGrants,
+    filters: byCategory(allGrants),
     eyebrow: 'Grants & funding',
     heading: ['Grants that fund your', 'idea, research or business'],
     lede: 'Seed capital, research funding and innovation prizes for entrepreneurs, researchers and changemakers. Open any grant for eligibility, benefits and how to apply.',
@@ -58,12 +63,40 @@ export const kinds = {
     singular: 'internship',
     plural: 'internships',
     title: 'Internships',
-    items: internships,
-    filters: byCategory(internships),
+    items: allInternships,
+    filters: byCategory(allInternships),
     eyebrow: 'Internships',
     heading: ['Internships that launch an', 'international career'],
     lede: 'Paid and stipend-supported internships at international organisations, governments and global institutions. Open any one for requirements and a step-by-step guide.',
     flyerLabel: 'Internship',
     labels: { level: 'Candidate level', funding: 'Pay', amount: 'Pay / stipend' },
+  },
+  fellowships: {
+    key: 'fellowships',
+    path: '/fellowships',
+    singular: 'fellowship',
+    plural: 'fellowships',
+    title: 'Fellowships',
+    items: fellowships,
+    filters: byCategory(fellowships),
+    eyebrow: 'Fellowships',
+    heading: ['Fellowships for leaders,', 'researchers and creators'],
+    lede: 'Leadership, research, journalism and creative fellowships — many fully funded. Open any one for who can apply, the deadline and how to apply.',
+    flyerLabel: 'Fellowship',
+    labels: { level: 'Who it’s for', funding: 'Funding', amount: 'Value' },
+  },
+  competitions: {
+    key: 'competitions',
+    path: '/competitions',
+    singular: 'competition',
+    plural: 'competitions',
+    title: 'Competitions & Awards',
+    items: competitions,
+    filters: byCategory(competitions),
+    eyebrow: 'Competitions & awards',
+    heading: ['Competitions and prizes', 'worth entering'],
+    lede: 'Essay, writing, photography, science and business competitions with prizes and recognition. Open any one for who can enter and the deadline.',
+    flyerLabel: 'Competition',
+    labels: { level: 'Who can enter', funding: 'Type', amount: 'Prize' },
   },
 }

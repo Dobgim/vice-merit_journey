@@ -27,7 +27,7 @@ const C = {
   faint: 'rgba(227,233,246,0.5)',
 }
 
-const ACCENT = { scholarships: '#dcbf72', grants: '#6ee7b7', internships: '#7dd3fc' }
+const ACCENT = { scholarships: '#dcbf72', grants: '#6ee7b7', internships: '#7dd3fc', fellowships: '#c4b5fd', competitions: '#fda4af' }
 
 const DISPLAY = 'Fraunces, Georgia, serif'
 const SANS = '"Plus Jakarta Sans", Inter, system-ui, sans-serif'
@@ -245,10 +245,14 @@ export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholars
   title.lines.forEach((line, i) => ctx.fillText(line, PAD, y + title.size + i * lh))
   y += title.size + (title.lines.length - 1) * lh + 50
 
-  ctx.font = `600 26px ${SANS}`
-  ctx.fillStyle = C.gold300
-  ctx.fillText(wrap(ctx, item.org, W - PAD * 2, 1)[0] ?? '', PAD, y)
-  y += 26
+  if (item.org) {
+    ctx.font = `600 26px ${SANS}`
+    ctx.fillStyle = C.gold300
+    ctx.fillText(wrap(ctx, item.org, W - PAD * 2, 1)[0] ?? '', PAD, y)
+    y += 26
+  } else {
+    y -= 30
+  }
 
   /* Summary */
   ctx.font = `400 26px ${SANS}`
@@ -353,15 +357,16 @@ export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholars
   ctx.font = `800 20px ${SANS}`
   ctx.letterSpacing = '3px'
   ctx.fillStyle = C.gold700
-  ctx.fillText('APPLY HERE', tx, panelY + 62)
+  ctx.fillText(item.officialSearch ? 'FIND THE OFFICIAL CALL' : 'APPLY HERE', tx, panelY + 62)
   ctx.letterSpacing = '0px'
   ctx.font = `700 28px ${SANS}`
   ctx.fillStyle = C.navy950
-  const urlLines = wrap(ctx, displayUrl(item.officialUrl).replace(/\//g, '/ '), tw, 3).map((l) => l.replace(/\/ /g, '/'))
+  const urlText = item.officialSearch ? `Search online for “${item.name}”` : displayUrl(item.officialUrl).replace(/\//g, '/ ')
+  const urlLines = wrap(ctx, urlText, tw, 3).map((l) => l.replace(/\/ /g, '/'))
   urlLines.forEach((l, i) => ctx.fillText(l, tx, panelY + 106 + i * 36))
   ctx.font = `400 21px ${SANS}`
   ctx.fillStyle = C.navy600
-  ctx.fillText('Scan the code or open the link to apply.', tx, panelY + panelH - 32)
+  ctx.fillText(item.officialSearch ? 'Scan the code to search for the official page.' : 'Scan the code or open the link to apply.', tx, panelY + panelH - 32)
 
   /* Footer */
   ctx.font = `600 22px ${SANS}`

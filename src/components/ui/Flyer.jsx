@@ -6,6 +6,8 @@ const accents = {
   scholarships: { glow: 'bg-gold-400/35', bar: 'from-gold-300 to-gold-500', pill: 'bg-gold-300 text-navy-950' },
   grants: { glow: 'bg-emerald-400/30', bar: 'from-emerald-300 to-emerald-500', pill: 'bg-emerald-300 text-navy-950' },
   internships: { glow: 'bg-sky-400/30', bar: 'from-sky-300 to-sky-500', pill: 'bg-sky-300 text-navy-950' },
+  fellowships: { glow: 'bg-violet-400/30', bar: 'from-violet-300 to-violet-500', pill: 'bg-violet-300 text-navy-950' },
+  competitions: { glow: 'bg-rose-400/30', bar: 'from-rose-300 to-rose-500', pill: 'bg-rose-300 text-navy-950' },
 }
 
 /**

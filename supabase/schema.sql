@@ -67,7 +67,7 @@ create policy "admins manage" on public.subscribers
 -- ----------------------------------- Scholarships, grants and internships
 create table if not exists public.opportunities (
   id uuid primary key default gen_random_uuid(),
-  kind text not null check (kind in ('scholarships', 'grants', 'internships')),
+  kind text not null,
   slug text not null,
   published boolean not null default true,
   data jsonb not null,
@@ -75,6 +75,11 @@ create table if not exists public.opportunities (
   unique (kind, slug)
 );
 alter table public.opportunities enable row level security;
+
+-- Allowed types (re-runnable, so older databases pick up new types too)
+alter table public.opportunities drop constraint if exists opportunities_kind_check;
+alter table public.opportunities add constraint opportunities_kind_check
+  check (kind in ('scholarships', 'grants', 'internships', 'fellowships', 'competitions'));
 
 drop policy if exists "public reads published" on public.opportunities;
 create policy "public reads published" on public.opportunities

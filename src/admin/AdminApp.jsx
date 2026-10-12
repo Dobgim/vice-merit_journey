@@ -86,7 +86,9 @@ const NAV = [
   { to: '/admin/subscribers', label: 'Subscribers', icon: 'bell' },
   { to: '/admin/listings/scholarships', label: 'Scholarships', icon: 'cap' },
   { to: '/admin/listings/grants', label: 'Grants', icon: 'wallet' },
+  { to: '/admin/listings/fellowships', label: 'Fellowships', icon: 'users' },
   { to: '/admin/listings/internships', label: 'Internships', icon: 'building' },
+  { to: '/admin/listings/competitions', label: 'Competitions & awards', icon: 'trending' },
   { to: '/admin/packages', label: 'Packages & prices', icon: 'star' },
   { to: '/admin/settings', label: 'Contact & social links', icon: 'globe' },
 ]
