@@ -2,6 +2,7 @@ import Seo from '../components/layout/Seo'
 import PageHeader from '../components/layout/PageHeader'
 import Scholarships from '../components/sections/Scholarships'
 import Newsletter from '../components/sections/Newsletter'
+import WhatsAppGroup from '../components/sections/WhatsAppGroup'
 import Button from '../components/ui/Button'
 import { kinds } from '../data/opportunities'
 
@@ -41,6 +42,7 @@ export default function OpportunityPage({ kind }) {
 
       <Scholarships kind={kind} />
       <div id="alerts" className="scroll-mt-24">
+        <WhatsAppGroup />
         <Newsletter />
       </div>
     </>

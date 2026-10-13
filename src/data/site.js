@@ -11,6 +11,8 @@ export const company = {
   phone: '+237 6 79 55 41 14',
   whatsapp: '237679554114', // digits only (country code, no +), used to build wa.me links
   whatsappDisplay: '+237 6 79 55 41 14',
+  whatsappGroup: 'https://chat.whatsapp.com/Kh0dtcUzRpmB8gIJfE4Jdd',
+  whatsappGroupName: 'Merit Leaders Scholarships',
   address: '1200 Kingsway Avenue, Suite 410, Toronto, ON',
   hours: 'Mon – Sat · 9:00 – 18:00 (GMT)',
   // Paste each profile link into `href` once the account exists. Empty ones

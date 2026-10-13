@@ -28,6 +28,7 @@ export default function Footer() {
             <div className="mt-7 flex gap-2.5">
               {[
                 { label: 'WhatsApp', href: `https://wa.me/${company.whatsapp}`, icon: 'whatsapp' },
+                { label: 'WhatsApp group', href: company.whatsappGroup, icon: 'users' },
                 ...company.socials.filter((s) => s.href),
               ].map((s) => (
                 <motion.a
@@ -119,6 +120,17 @@ export default function Footer() {
                 >
                   <Icon name="whatsapp" className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" />
                   WhatsApp: {company.whatsappDisplay}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={company.whatsappGroup}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-3 font-semibold text-[#5BE38F] transition-colors hover:text-white"
+                >
+                  <Icon name="users" className="mt-0.5 h-4 w-4 shrink-0" />
+                  Join our WhatsApp group
                 </a>
               </li>
               <li className="flex items-start gap-3 text-navy-100/65">

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import Seo from '../components/layout/Seo'
 import PageHeader from '../components/layout/PageHeader'
 import Newsletter from '../components/sections/Newsletter'
+import WhatsAppGroup from '../components/sections/WhatsAppGroup'
 import { ScholarshipCard } from '../components/sections/Scholarships'
 import { Badge, Card, IconTile, Section } from '../components/ui/Primitives'
 import Reveal from '../components/ui/Reveal'
@@ -148,6 +149,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
         )}
 
         <div id="alerts" className="scroll-mt-24">
+          <WhatsAppGroup />
           <Newsletter />
         </div>
       </>
@@ -537,6 +539,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
       )}
 
       <div id="alerts" className="scroll-mt-24">
+        <WhatsAppGroup />
         <Newsletter />
       </div>
     </>

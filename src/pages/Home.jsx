@@ -5,6 +5,7 @@ import Services from '../components/sections/Services'
 import Categories from '../components/sections/Categories'
 import HowItWorks from '../components/sections/HowItWorks'
 import Newsletter from '../components/sections/Newsletter'
+import WhatsAppGroup from '../components/sections/WhatsAppGroup'
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <Services />
       <Categories />
       <HowItWorks />
+      <WhatsAppGroup />
       <Newsletter />
     </>
   )
