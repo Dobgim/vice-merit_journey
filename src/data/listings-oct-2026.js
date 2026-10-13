@@ -45,7 +45,7 @@ function makeSummary(kind, what = '', who) {
 // Only treat the coverage text as a value/benefit when it actually describes money or support.
 const isFunding = (s = '') => /fund|tuition|stipend|grant|bursary|scholarship|award|allowance|waiver|housing|insurance|\$|€|£/i.test(s)
 
-function make(kind, o) {
+export function make(kind, o) {
   const deadline = o.deadline ?? null
   const coverage = o.coverage
   const who = o.who
@@ -63,8 +63,8 @@ function make(kind, o) {
     amount: o.amount ?? (isFunding(coverage) ? coverage : 'See the official call'),
     deadline,
     deadlineNote: o.note ?? (deadline ? undefined : ROLLING),
-    verified: AS_OF,
-    source: SOURCE,
+    verified: o.verified ?? AS_OF,
+    source: o.source ?? SOURCE,
     nationalities: who,
     fields: o.focus,
     officialUrl: o.url ?? search(`${o.name} ${o.searchHint ?? 'official call apply'}`),

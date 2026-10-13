@@ -7,12 +7,13 @@ import { scholarships } from './scholarships'
 import { grants } from './grants'
 import { internships } from './internships'
 import { competitions as rawCompetitions, fellowships as rawFellowships, newGrants, newInternships, newScholarships } from './listings-oct-2026'
+import { globalFellowships, globalGrants, globalInternships, globalScholarships } from './listings-global-2026'
 import { applyUpdates } from './updates-oct-2026'
 
-const allScholarships = applyUpdates([...scholarships, ...newScholarships])
-const allGrants = applyUpdates([...grants, ...newGrants])
-const allInternships = applyUpdates([...internships, ...newInternships])
-const fellowships = applyUpdates(rawFellowships)
+const allScholarships = applyUpdates([...scholarships, ...newScholarships, ...globalScholarships])
+const allGrants = applyUpdates([...grants, ...newGrants, ...globalGrants])
+const allInternships = applyUpdates([...internships, ...newInternships, ...globalInternships])
+const fellowships = applyUpdates([...rawFellowships, ...globalFellowships])
 const competitions = applyUpdates(rawCompetitions)
 
 const SCHOLARSHIP_FILTERS = [

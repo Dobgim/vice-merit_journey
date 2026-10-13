@@ -115,6 +115,11 @@ export const corrections = {
   'mopga-visiting-fellowship-program': { logoDomain: 'campusfrance.org' },
   'roddenberry-foundation-catalyst-fund': { logoDomain: 'roddenberryfoundation.org' },
   'teach-for-india-youth-fellowships': { logoDomain: 'teachforindia.org' },
+  // Official CSC page: closes 16:00 BST on Tuesday 20 October 2026 (the first list said 6 Nov).
+  "commonwealth-master-s-scholarships": {
+    deadline: '2026-10-20',
+    deadlineNote: 'Applications close at 16:00 UK time on 20 October 2026. References must be uploaded by the same deadline.',
+  },
   'princeton-fung-global-fellows': { logoDomain: 'princeton.edu' },
   'uongozi-institute-emerging-leaders-programme': { logoDomain: 'uongozi.or.tz' },
   'columbia-university-scholarships-for-displaced-students': { logoDomain: 'columbia.edu' },

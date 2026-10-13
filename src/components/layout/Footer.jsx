@@ -143,6 +143,9 @@ export default function Footer() {
             <Link to="/terms" className="transition-colors hover:text-white">
               Terms
             </Link>
+            <Link to="/admin" className="transition-colors hover:text-white">
+              Admin
+            </Link>
             <button
               type="button"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
