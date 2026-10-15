@@ -8,7 +8,7 @@ import { fetchSettings } from './supabase'
 
 const CACHE_KEY = 'ml_settings_cache'
 
-export const CONTACT_FIELDS = ['email', 'phone', 'whatsapp', 'whatsappDisplay', 'hours']
+export const CONTACT_FIELDS = ['domain', 'email', 'phone', 'whatsapp', 'whatsappDisplay', 'hours']
 
 function replaceArray(target, next) {
   if (Array.isArray(next) && next.length) target.splice(0, target.length, ...next)
