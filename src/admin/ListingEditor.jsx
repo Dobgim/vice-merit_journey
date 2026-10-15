@@ -229,18 +229,52 @@ export default function ListingEditor() {
 
           <Panel title="Flyer image">
             <p className="text-sm text-navy-600">
-              Optional. Upload the official flyer or logo (a wide 2:1 image looks best). Without one, the website draws a
-              branded flyer automatically.
+              Upload the official flyer or logo straight from your phone camera, photo gallery, or paste a Supabase image link.
             </p>
-            <div className="mt-4 flex flex-wrap items-center gap-3">
-              <label className="inline-flex h-10 cursor-pointer items-center gap-2 rounded-full bg-navy-900 px-4 text-sm font-semibold text-white hover:bg-navy-800">
+
+            {form.image && (
+              <div className="mt-4 overflow-hidden rounded-2xl border border-navy-900/10 bg-navy-950/5 p-2">
+                <img
+                  src={form.image}
+                  alt="Flyer preview"
+                  className="max-h-48 w-full rounded-xl object-contain bg-white"
+                  onError={(e) => (e.currentTarget.style.display = 'none')}
+                />
+              </div>
+            )}
+
+            <div className="mt-4 flex flex-wrap items-center gap-2.5">
+              {/* Phone Camera upload */}
+              <label className="inline-flex h-10 cursor-pointer items-center gap-2 rounded-xl bg-gold-400 px-4 text-sm font-semibold text-navy-950 shadow-sm transition hover:bg-gold-300 active:scale-95">
+                <Icon name="camera" className="h-4 w-4" />
+                <span>Camera</span>
+                <input type="file" accept="image/*" capture="environment" onChange={upload} className="sr-only" disabled={uploading} />
+              </label>
+
+              {/* Photos/Files upload */}
+              <label className="inline-flex h-10 cursor-pointer items-center gap-2 rounded-xl bg-navy-900 px-4 text-sm font-semibold text-white shadow-sm transition hover:bg-navy-800 active:scale-95">
                 <Icon name="plus" className="h-4 w-4" />
-                {uploading ? 'Uploading…' : form.image ? 'Replace image' : 'Upload image'}
+                <span>{uploading ? 'Uploading…' : form.image ? 'Replace image' : 'Upload photo'}</span>
                 <input type="file" accept="image/*" onChange={upload} className="sr-only" disabled={uploading} />
               </label>
+
               {form.image && (
-                <Btn variant="danger" onClick={() => setForm((f) => ({ ...f, image: '' }))}>Remove image</Btn>
+                <Btn variant="danger" onClick={() => setForm((f) => ({ ...f, image: '' }))}>
+                  Remove image
+                </Btn>
               )}
+            </div>
+
+            <div className="mt-4">
+              <Field label="Or paste image URL" hint="Direct link to an image in Supabase or online.">
+                <input
+                  type="url"
+                  value={form.image || ''}
+                  onChange={set('image')}
+                  placeholder="https://uitneltxtkmjqsbrbfzd.supabase.co/storage/v1/object/public/flyers/…"
+                  className={inputCls}
+                />
+              </Field>
             </div>
           </Panel>
 

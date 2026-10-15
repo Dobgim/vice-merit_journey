@@ -13,6 +13,7 @@ import Listings from './Listings'
 import ListingEditor from './ListingEditor'
 import PackagesAdmin from './PackagesAdmin'
 import SettingsAdmin from './SettingsAdmin'
+import MediaAdmin from './MediaAdmin'
 
 /* ------------------------------------------------------------------ Login */
 
@@ -60,7 +61,7 @@ function Login({ onSignedIn, notAdminEmail }) {
 
         <div className="mt-6 space-y-4">
           <Field label="Email">
-            <input type="email" required autoComplete="username" value={email} onChange={(e) => setEmail(e.target.value)} className={inputCls} />
+            <input type="email" required autoComplete="username" value={email} onChange={(e) => setEmail(e.target.value)} className={inputCls} placeholder="leadermerit17@gmail.com" />
           </Field>
           <Field label="Password">
             <input type="password" required autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} className={inputCls} />
@@ -89,11 +90,14 @@ const NAV = [
   { to: '/admin/listings/fellowships', label: 'Fellowships', icon: 'users' },
   { to: '/admin/listings/internships', label: 'Internships', icon: 'building' },
   { to: '/admin/listings/competitions', label: 'Competitions & awards', icon: 'trending' },
+  { to: '/admin/media', label: 'Media & Images', icon: 'image' },
   { to: '/admin/packages', label: 'Packages & prices', icon: 'star' },
-  { to: '/admin/settings', label: 'Contact & social links', icon: 'globe' },
+  { to: '/admin/settings', label: 'Settings & Domain', icon: 'globe' },
 ]
 
 function Sidebar({ session, onSignOut, onNavigate }) {
+  const liveUrl = `https://${company.domain || 'meritleaders.com'}`
+
   return (
     <div className="flex h-full flex-col bg-navy-950 p-4 text-white">
       <Link to="/admin" onClick={onNavigate} className="flex items-center gap-3 px-2 py-2">
@@ -124,9 +128,21 @@ function Sidebar({ session, onSignOut, onNavigate }) {
       </nav>
 
       <div className="space-y-2 border-t border-white/10 pt-4">
-        <a href="/" target="_blank" rel="noreferrer" className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-navy-100/70 hover:text-white">
-          <Icon name="external" className="h-4 w-4" />
-          View website
+        <a
+          href={liveUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="flex items-center justify-between rounded-xl bg-white/5 px-3 py-2 text-sm text-navy-100/90 transition hover:bg-white/10 hover:text-white"
+          title={`Visit ${liveUrl}`}
+        >
+          <span className="flex items-center gap-2">
+            <Icon name="globe" className="h-4 w-4 text-gold-300" />
+            <span>Live Site</span>
+          </span>
+          <span className="flex items-center gap-1 rounded bg-gold-400/20 px-1.5 py-0.5 text-[11px] font-semibold text-gold-200">
+            {company.domain || 'meritleaders.com'}
+            <Icon name="external" className="h-3 w-3" />
+          </span>
         </a>
         <div className="px-3 text-xs text-navy-100/45">
           Signed in as <span className="break-all text-navy-100/80">{session.email}</span>
@@ -157,11 +173,36 @@ function Overview() {
     .filter((i) => deadlineStatus(i.deadline).state === 'closing')
     .sort((a, b) => daysLeft(a.deadline) - daysLeft(b.deadline))
   const newCount = requests.data?.filter((r) => r.status === 'new').length ?? 0
+  const liveUrl = `https://${company.domain || 'meritleaders.com'}`
 
   return (
     <div className="space-y-6">
       <PageTitle title="Overview" sub="What needs your attention today." />
       <ErrorNote error={requests.error || subs.error || listings.error} />
+
+      {/* Custom Domain quick access banner */}
+      <div className="flex flex-col gap-3 rounded-2xl bg-gradient-to-r from-navy-950 via-navy-900 to-navy-950 p-4 text-white shadow-soft sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex items-center gap-3">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gold-400/20 text-gold-300 ring-1 ring-gold-400/30">
+            <Icon name="globe" className="h-5 w-5" />
+          </div>
+          <div className="min-w-0">
+            <p className="text-xs font-semibold uppercase tracking-wider text-gold-300">Connected Custom Domain</p>
+            <p className="truncate font-display font-semibold text-white">{liveUrl}</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <a
+            href={liveUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-xl bg-gold-400 px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-navy-950 shadow-sm transition hover:bg-gold-300 active:scale-95"
+          >
+            <span>Open Website</span>
+            <Icon name="external" className="h-3.5 w-3.5" />
+          </a>
+        </div>
+      </div>
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <Stat label="New requests" value={requests.loading ? '…' : newCount} hint={`${requests.data?.length ?? 0} in total`} icon="mail" />
@@ -206,7 +247,7 @@ function Overview() {
                 <li key={`${i.kind.key}-${i.slug}`} className="flex items-center justify-between gap-3 py-3">
                   <div className="min-w-0">
                     <p className="truncate font-semibold text-navy-950">{i.name}</p>
-                    <p className="text-sm text-navy-500">
+                    <p className="truncate text-sm text-navy-500">
                       {i.kind.flyerLabel} · closes {formatDate(i.deadline)}
                     </p>
                   </div>
@@ -256,6 +297,8 @@ export default function AdminApp() {
     setSession(null)
   }
 
+  const liveUrl = `https://${company.domain || 'meritleaders.com'}`
+
   return (
     <div className="notranslate min-h-screen bg-mist" translate="no">
       {/* Desktop sidebar */}
@@ -265,10 +308,24 @@ export default function AdminApp() {
 
       {/* Mobile top bar + drawer */}
       <div className="sticky top-0 z-40 flex items-center justify-between bg-navy-950 px-4 py-3 text-white lg:hidden">
-        <span className="font-display font-semibold">{company.name} · Admin</span>
-        <button type="button" onClick={() => setDrawer(true)} aria-label="Open menu" className="rounded-full p-2 hover:bg-white/10">
-          <Icon name="menu" className="h-5 w-5" />
-        </button>
+        <div className="flex items-center gap-2">
+          <img src="/logo-mark.png" alt="" className="h-7 w-7 rounded-lg bg-white p-0.5" />
+          <span className="font-display font-semibold">{company.name}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <a
+            href={liveUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-1 rounded-lg bg-gold-400/20 px-2.5 py-1 text-xs font-semibold text-gold-300"
+          >
+            <span>Live site</span>
+            <Icon name="external" className="h-3 w-3" />
+          </a>
+          <button type="button" onClick={() => setDrawer(true)} aria-label="Open menu" className="rounded-full p-2 hover:bg-white/10">
+            <Icon name="menu" className="h-5 w-5" />
+          </button>
+        </div>
       </div>
       {drawer && (
         <div className="fixed inset-0 z-50 lg:hidden">
@@ -293,6 +350,7 @@ export default function AdminApp() {
             <Route path="listings/:kind" element={<Listings />} />
             <Route path="listings/:kind/new" element={<ListingEditor />} />
             <Route path="listings/:kind/:id" element={<ListingEditor />} />
+            <Route path="media" element={<MediaAdmin />} />
             <Route path="packages" element={<PackagesAdmin />} />
             <Route path="settings" element={<SettingsAdmin />} />
             <Route path="*" element={<Overview />} />

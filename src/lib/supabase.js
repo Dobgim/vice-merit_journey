@@ -12,8 +12,8 @@
  * bundle unless credentials are actually present.
  */
 
-const url = import.meta.env.VITE_SUPABASE_URL
-const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+const url = import.meta.env.VITE_SUPABASE_URL || 'https://uitneltxtkmjqsbrbfzd.supabase.co'
+const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpdG5lbHR4dGttanFzYnJiZnpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIwNTU4MDgsImV4cCI6MjEwNzYzMTgwOH0.hvyW-ehCi4eF46KtSJ0p8bRNcXSUWmqQiYEcFRxi770'
 
 export const isSupabaseConfigured = Boolean(url && anonKey)
 

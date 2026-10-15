@@ -105,9 +105,12 @@ drop policy if exists "admins manage" on public.settings;
 create policy "admins manage" on public.settings
   for all to authenticated using (public.is_admin()) with check (public.is_admin());
 
--- -------------------------------------------------------- Add yourself
--- Replace the email below with your own, then run this line.
--- insert into public.admins (email) values ('you@example.com') on conflict do nothing;
+-- -------------------------------------------------------- Admins
+insert into public.admins (email) values
+  ('leadermerit17@gmail.com'),
+  ('leadermerit17@gmil.com'),
+  ('advisors@meritleaders.com')
+on conflict (email) do nothing;
 
 -- ------------------------------------------------- Flyer image uploads
 insert into storage.buckets (id, name, public)

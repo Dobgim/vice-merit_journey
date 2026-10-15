@@ -183,24 +183,67 @@ export async function saveSetting(key, value) {
   await must(sb.from('settings').upsert({ key, value, updated_at: now() }))
 }
 
-/* ---------------------------------------------------------------- Flyers */
+/* ---------------------------------------------------- Flyers & Media Storage */
 
-/** Upload a flyer image; resolves to a public URL to store in the listing. */
+/** Upload a flyer or website image; resolves to a public URL to store. */
 export async function uploadFlyer(file) {
-  if (!file.type.startsWith('image/')) throw new Error('Please choose an image file (JPG, PNG or WebP).')
+  if (file.type && !file.type.startsWith('image/')) {
+    throw new Error('Please choose an image file (JPG, PNG, WebP or GIF).')
+  }
   const sb = await getSupabase()
   if (!sb) {
-    if (file.size > 1.5 * 1024 * 1024) throw new Error('In demo mode flyers must be under 1.5 MB.')
+    if (file.size > 1.5 * 1024 * 1024) throw new Error('In demo mode images must be under 1.5 MB.')
     return new Promise((resolve, reject) => {
       const reader = new FileReader()
-      reader.onload = () => resolve(reader.result)
+      reader.onload = () => {
+        const url = reader.result
+        const items = demo.read('media_images', [])
+        demo.write('media_images', [{ name: file.name, url, created_at: now(), size: file.size }, ...items])
+        resolve(url)
+      }
       reader.onerror = () => reject(new Error('Could not read that file.'))
       reader.readAsDataURL(file)
     })
   }
-  const ext = file.name.split('.').pop()?.toLowerCase() || 'jpg'
-  const path = `${newId()}.${ext}`
-  const { error } = await sb.storage.from('flyers').upload(path, file, { cacheControl: '31536000', contentType: file.type })
+  const ext = (file.name?.split('.').pop()?.toLowerCase()) || (file.type?.split('/')[1]?.toLowerCase()) || 'jpg'
+  const path = `${Date.now()}-${newId()}.${ext}`
+  const { error } = await sb.storage.from('flyers').upload(path, file, {
+    cacheControl: '31536000',
+    contentType: file.type || 'image/jpeg'
+  })
   if (error) throw new Error(error.message)
   return sb.storage.from('flyers').getPublicUrl(path).data.publicUrl
+}
+
+/** Lists all images stored in Supabase storage bucket 'flyers'. */
+export async function listImages() {
+  const sb = await getSupabase()
+  if (!sb) return demo.read('media_images', [])
+
+  const { data, error } = await sb.storage.from('flyers').list('', {
+    limit: 100,
+    sortBy: { column: 'created_at', order: 'desc' },
+  })
+  if (error) throw new Error(error.message)
+
+  return (data || [])
+    .filter((f) => f.name && !f.name.startsWith('.'))
+    .map((item) => ({
+      name: item.name,
+      id: item.id || item.name,
+      created_at: item.created_at,
+      size: item.metadata?.size,
+      url: sb.storage.from('flyers').getPublicUrl(item.name).data.publicUrl,
+    }))
+}
+
+/** Deletes an image from the storage bucket. */
+export async function deleteImage(name) {
+  const sb = await getSupabase()
+  if (!sb) {
+    demo.write('media_images', demo.read('media_images', []).filter((i) => i.name !== name))
+    return
+  }
+  const { error } = await sb.storage.from('flyers').remove([name])
+  if (error) throw new Error(error.message)
 }
