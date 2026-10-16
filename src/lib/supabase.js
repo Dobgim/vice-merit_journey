@@ -12,6 +12,8 @@
  * bundle unless credentials are actually present.
  */
 
+import { sendEmail } from './mail'
+
 const url = import.meta.env.VITE_SUPABASE_URL || 'https://uitneltxtkmjqsbrbfzd.supabase.co'
 const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpdG5lbHR4dGttanFzYnJiZnpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIwNTU4MDgsImV4cCI6MjEwNzYzMTgwOH0.hvyW-ehCi4eF46KtSJ0p8bRNcXSUWmqQiYEcFRxi770'
 
@@ -70,39 +72,56 @@ export async function submitConsultation(payload) {
     message: payload.message,
   }
 
+  // Every request is emailed to the advisors; the database (when connected) keeps a copy for the dashboard.
+  const emailed = await sendEmail(
+    `New consultation request — ${row.full_name}`,
+    {
+      Name: row.full_name,
+      Email: row.email,
+      Phone: row.phone ?? '—',
+      'Study level': row.study_level,
+      'Country of residence': row.country,
+      Message: row.message,
+    },
+    row.email
+  )
+
   const supabase = await getSupabase()
 
   if (!supabase) {
-    await pause(900)
     const rows = demo.read('consultations', [])
     demo.write('consultations', [
       { ...row, id: newId(), status: 'new', notes: '', created_at: new Date().toISOString() },
       ...rows,
     ])
-    return { ok: true, mode: 'demo' }
+    return emailed ? { ok: true, mode: 'email' } : { ok: false, mode: 'email', error: new Error('Email not sent') }
   }
 
   const { error } = await supabase.from('consultations').insert(row)
-  return error ? { ok: false, mode: 'live', error } : { ok: true, mode: 'live' }
+  return error && !emailed ? { ok: false, mode: 'live', error } : { ok: true, mode: 'live' }
 }
 
 /** Subscribe an email to alerts. Resolves to { ok, mode, error }. */
 export async function subscribeToAlerts({ email, studyLevel }) {
   const row = { email: email.trim().toLowerCase(), study_level: studyLevel || null }
+  const emailed = await sendEmail(
+    'New scholarship-alerts subscriber',
+    { Email: row.email, 'Study level': row.study_level ?? 'All study levels' },
+    row.email
+  )
   const supabase = await getSupabase()
 
   if (!supabase) {
-    await pause(700)
     const rows = demo.read('subscribers', [])
     if (!rows.some((r) => r.email === row.email)) {
       demo.write('subscribers', [{ ...row, id: newId(), created_at: new Date().toISOString() }, ...rows])
     }
-    return { ok: true, mode: 'demo' }
+    return emailed ? { ok: true, mode: 'email' } : { ok: false, mode: 'email', error: new Error('Email not sent') }
   }
 
   const { error } = await supabase.from('subscribers').insert(row)
   // 23505 = unique violation: already subscribed, which is a success to the visitor.
-  if (error && error.code !== '23505') return { ok: false, mode: 'live', error }
+  if (error && error.code !== '23505' && !emailed) return { ok: false, mode: 'live', error }
   return { ok: true, mode: 'live' }
 }
 

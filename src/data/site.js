@@ -7,7 +7,9 @@ export const company = {
   name: 'Merit Leaders',
   tagline: 'Scholarship & Education Consultancy',
   domain: 'meritleaders.com',
-  email: 'leadermerit17@gmail.com',
+  email: 'advisor@meritleaders.com',
+  // Every booking and alerts sign-up is emailed here (see lib/mail.js); fixed so a dashboard typo can't lose messages.
+  formEmail: 'advisor@meritleaders.com',
   phone: '+237 6 79 55 41 14',
   whatsapp: '237679554114', // digits only (country code, no +), used to build wa.me links
   whatsappDisplay: '+237 6 79 55 41 14',

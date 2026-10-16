@@ -18,6 +18,8 @@ export function applySettings(settings = {}) {
   const contact = settings.contact
   if (contact) {
     for (const f of CONTACT_FIELDS) if (contact[f]) company[f] = contact[f]
+    // The domain was once saved misspelled ("meritleadrs"); never show that to visitors.
+    for (const f of ['email', 'domain']) company[f] = company[f].replace(/meritleadrs\./i, 'meritleaders.')
     if (contact.socials) {
       company.socials = company.socials.map((s) => ({ ...s, href: contact.socials[s.label] ?? s.href }))
     }

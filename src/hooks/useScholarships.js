@@ -1,10 +1,30 @@
 import { useEffect, useState } from 'react'
 import { kinds } from '../data/opportunities'
+import { requirements } from '../data/requirements'
 import { fetchOpportunities } from '../lib/supabase'
 import { deadlineStatus, slugify } from '../lib/deadline'
 import useNow from './useNow'
 
-const withSlug = (list) => list.map((s) => (s.slug ? s : { ...s, slug: slugify(s.name) }))
+const same = (a, b) => JSON.stringify(a ?? null) === JSON.stringify(b ?? null)
+
+/**
+ * Fill in who-can-apply and documents from data/requirements.js, but only
+ * where a listing still has what it was imported with — anything edited in
+ * the dashboard is left alone.
+ */
+function withRequirements(item, kind) {
+  const req = requirements[item.slug]
+  if (!req) return item
+  const original = kinds[kind].items.find((i) => i.slug === item.slug)
+  const out = { ...item }
+  for (const field of ['eligibility', 'documents']) {
+    if (req[field] && (!original || same(item[field], original[field]))) out[field] = req[field]
+  }
+  return out
+}
+
+const prepare = (list, kind) =>
+  list.map((s) => withRequirements(s.slug ? s : { ...s, slug: slugify(s.name) }, kind))
 
 // Fetched once per type per session and shared, so moving between a listing
 // and a detail page never re-requests or flashes the bundled data.
@@ -21,7 +41,7 @@ const pending = {}
 export function useOpportunities(kind = 'scholarships', { includeClosed = false } = {}) {
   const now = useNow(60_000)
   const bundled = kinds[kind].items
-  const [items, setItems] = useState(() => cache[kind] ?? withSlug(bundled))
+  const [items, setItems] = useState(() => cache[kind] ?? prepare(bundled, kind))
 
   useEffect(() => {
     if (cache[kind]) {
@@ -29,7 +49,7 @@ export function useOpportunities(kind = 'scholarships', { includeClosed = false 
       return
     }
     let alive = true
-    pending[kind] ??= fetchOpportunities(kind, bundled).then((data) => (cache[kind] = withSlug(data)))
+    pending[kind] ??= fetchOpportunities(kind, bundled).then((data) => (cache[kind] = prepare(data, kind)))
     pending[kind].then((data) => alive && setItems(data))
     return () => {
       alive = false
