@@ -1,5 +1,6 @@
 import Seo from '../components/layout/Seo'
 import PageHeader from '../components/layout/PageHeader'
+import OpportunityCount from '../components/ui/OpportunityCount'
 import Scholarships from '../components/sections/Scholarships'
 import Newsletter from '../components/sections/Newsletter'
 import WhatsAppGroup from '../components/sections/WhatsAppGroup'
@@ -21,6 +22,7 @@ export default function ScholarshipsPage() {
         accent="right now."
         lede="Search the funding we track by level, country and funding type. Every listing has a full breakdown — eligibility, benefits, documents and a step-by-step guide — verified against the awarding body."
       >
+        <OpportunityCount kind="scholarships" />
         <div className="flex flex-col gap-3 sm:flex-row">
           <Button to="/book-consultation" variant="gold" size="lg" icon="arrowRight">
             Check my eligibility

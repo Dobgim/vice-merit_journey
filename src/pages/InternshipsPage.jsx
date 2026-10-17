@@ -1,5 +1,6 @@
 import Seo from '../components/layout/Seo'
 import PageHeader from '../components/layout/PageHeader'
+import OpportunityCount from '../components/ui/OpportunityCount'
 import Scholarships from '../components/sections/Scholarships'
 import Newsletter from '../components/sections/Newsletter'
 import WhatsAppGroup from '../components/sections/WhatsAppGroup'
@@ -20,6 +21,7 @@ export default function InternshipsPage() {
         accent="international career."
         lede="Paid and stipend-supported internships at international organisations and global institutions. We can prepare your CV, cover letter and interview so you stand out."
       >
+        <OpportunityCount kind="internships" />
         <div className="flex flex-col gap-3 sm:flex-row">
           <Button to="/book-consultation?package=Internship%20application" variant="gold" size="lg" icon="arrowRight">
             Get help with my application

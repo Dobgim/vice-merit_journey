@@ -1,5 +1,6 @@
 import Seo from '../components/layout/Seo'
 import PageHeader from '../components/layout/PageHeader'
+import OpportunityCount from '../components/ui/OpportunityCount'
 import Scholarships from '../components/sections/Scholarships'
 import Newsletter from '../components/sections/Newsletter'
 import WhatsAppGroup from '../components/sections/WhatsAppGroup'
@@ -20,6 +21,7 @@ export default function GrantsPage() {
         accent="business."
         lede="Non-repayable grants, seed capital and innovation prizes, each with a full breakdown of who can apply, what you get and how to apply. Need help with the proposal? We write and review grant applications too."
       >
+        <OpportunityCount kind="grants" />
         <div className="flex flex-col gap-3 sm:flex-row">
           <Button to="/book-consultation?package=Grant%20application" variant="gold" size="lg" icon="arrowRight">
             Get help with a grant proposal

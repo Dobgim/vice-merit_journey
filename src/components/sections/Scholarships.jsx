@@ -217,17 +217,6 @@ export default function Scholarships({ kind = 'scholarships' }) {
   return (
     <Section id={kind} tone="light">
       <div className="container">
-        <div className="mb-8 flex justify-center">
-          <p
-            className="inline-flex items-baseline gap-2.5 rounded-2xl bg-navy-950 px-6 py-3 text-white shadow-lift"
-            aria-live="polite"
-          >
-            <span className="font-display text-3xl font-semibold leading-none text-gold-300 tabular-nums">{items.length}</span>
-            <span className="text-base font-semibold">
-              {items.length === 1 ? config.singular : config.plural} available now
-            </span>
-          </p>
-        </div>
         <SectionHeading
           eyebrow={config.eyebrow}
           title={config.heading[0]}
