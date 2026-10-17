@@ -1,9 +1,9 @@
 /**
- * Shareable flyer image (1080 px wide JPEG, height fits the content) for one
- * listing: brand, title, host country and flag, key facts, the "Can I apply?"
- * checklist, what you get, requirements, documents, a short overview, the
- * official apply link (printed and as a QR code) and Merit Leaders' contacts
- * (WhatsApp, email, Facebook, LinkedIn, website). Drawn on a canvas so every
+ * Shareable A4-shaped flyer image (1080×1527 JPEG) for one listing: brand,
+ * title, host country and flag, key facts, what you get, requirements and
+ * documents (trimmed to fit the page), the official apply link printed and as
+ * a QR code, and Merit Leaders' contacts in one row (WhatsApp, email, website,
+ * with Facebook and LinkedIn underneath). Drawn on a canvas so every
  * flyer is crisp and identical everywhere. Loaded on demand (with `qrcode`).
  */
 import QRCode from 'qrcode'
@@ -11,8 +11,6 @@ import { company } from '../data/site'
 import { formatDate } from './deadline'
 import { isoFromEmoji } from '../components/ui/Flag'
 import { isUsableLogo, logoUrl } from './logo'
-import { buildOverview } from './overview'
-import { criteriaFor } from '../data/criteria'
 
 const W = 1080
 const PAD = 72
@@ -152,31 +150,8 @@ async function ensureFonts() {
 
 /* ------------------------------------------------------------------- draw */
 
-const MAX_H = 4200
-
-/** Section card: heading + rows drawn by `body`; returns the new y. */
-function card(ctx, y, heading, accent, body) {
-  const top = y
-  const inner = { x: PAD + 30, w: W - PAD * 2 - 60 }
-  let cy = top + 60
-  cy = body(inner, cy)
-  const h = cy - top + 28
-  ctx.save()
-  ctx.globalCompositeOperation = 'destination-over'
-  ctx.fillStyle = 'rgba(255,255,255,0.06)'
-  roundRect(ctx, PAD, top, W - PAD * 2, h, 22)
-  ctx.fill()
-  ctx.restore()
-  ctx.strokeStyle = 'rgba(255,255,255,0.12)'
-  roundRect(ctx, PAD, top, W - PAD * 2, h, 22)
-  ctx.stroke()
-  ctx.font = `800 19px ${SANS}`
-  ctx.letterSpacing = '3px'
-  ctx.fillStyle = accent
-  ctx.fillText(heading, PAD + 30, top + 42)
-  ctx.letterSpacing = '0px'
-  return top + h + 22
-}
+// A4 proportions (1 : 1.414)
+const H = 1527
 
 /** Bulleted list inside a card. */
 function bullets(ctx, items, inner, y, accent, { max = 6, lines = 2, size = 24 } = {}) {
@@ -208,11 +183,10 @@ export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholars
     orgLogoSrc ? loadImage(orgLogoSrc, true) : null,
   ])
 
-  // Content is drawn on a tall transparent canvas, then placed on a background
-  // cut to the height actually used.
+  // Content is drawn on a transparent canvas, then placed on the background.
   const content = document.createElement('canvas')
   content.width = W
-  content.height = MAX_H
+  content.height = H
   const ctx = content.getContext('2d')
   ctx.textBaseline = 'alphabetic'
 
@@ -269,24 +243,24 @@ export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholars
 
   /* Title, organisation, summary */
   y = 268
-  const title = fit(ctx, item.name, W - PAD * 2, 3, [72, 64, 56, 50, 46], (s) => `700 ${s}px ${DISPLAY}`)
+  const title = fit(ctx, item.name, W - PAD * 2, 2, [64, 56, 50, 44, 40], (s) => `700 ${s}px ${DISPLAY}`)
   ctx.fillStyle = C.white
   const lh = Math.round(title.size * 1.12)
   title.lines.forEach((line, i) => ctx.fillText(line, PAD, y + title.size + i * lh))
-  y += title.size + (title.lines.length - 1) * lh + 50
+  y += title.size + (title.lines.length - 1) * lh + 42
   if (item.org) {
     ctx.font = `600 26px ${SANS}`
     ctx.fillStyle = C.gold300
     ctx.fillText(wrap(ctx, item.org, W - PAD * 2, 1)[0] ?? '', PAD, y)
     y += 10
   } else y -= 30
-  ctx.font = `400 26px ${SANS}`
+  ctx.font = `400 24px ${SANS}`
   ctx.fillStyle = C.muted
-  for (const line of wrap(ctx, item.summary, W - PAD * 2, 3)) {
-    y += 36
+  for (const line of wrap(ctx, item.summary, W - PAD * 2, 2)) {
+    y += 33
     ctx.fillText(line, PAD, y)
   }
-  y += 36
+  y += 28
 
   /* Key facts */
   const gap = 16
@@ -298,119 +272,129 @@ export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholars
   ].forEach(([h, v], i) => {
     const bx = PAD + i * (colW + gap)
     ctx.fillStyle = 'rgba(255,255,255,0.08)'
-    roundRect(ctx, bx, y, colW, 128, 18)
+    roundRect(ctx, bx, y, colW, 108, 18)
     ctx.fill()
     ctx.font = `800 17px ${SANS}`
     ctx.letterSpacing = '2px'
     ctx.fillStyle = accent
-    ctx.fillText(h, bx + 22, y + 38)
+    ctx.fillText(h, bx + 22, y + 34)
     ctx.letterSpacing = '0px'
-    ctx.font = `600 24px ${SANS}`
+    ctx.font = `600 22px ${SANS}`
     ctx.fillStyle = C.white
-    wrap(ctx, v || '—', colW - 44, 2).forEach((l, j) => ctx.fillText(l, bx + 22, y + 76 + j * 32))
+    wrap(ctx, v || '—', colW - 44, 2).forEach((l, j) => ctx.fillText(l, bx + 22, y + 66 + j * 29))
   })
-  y += 128 + 26
+  y += 108 + 20
 
-  /* Can I apply? */
-  const crit = criteriaFor(item, kind)
-  if (crit.length) {
-    y = card(ctx, y, 'CAN I APPLY?  ALL MUST BE TRUE', accent, (inner, cy) => {
-      for (const c of crit) {
-        ctx.font = `800 17px ${SANS}`
-        ctx.letterSpacing = '1.5px'
-        ctx.fillStyle = C.gold200
-        ctx.fillText(c.label.toUpperCase(), inner.x, cy + 20)
-        ctx.letterSpacing = '0px'
-        ctx.font = `600 24px ${SANS}`
-        ctx.fillStyle = C.white
-        const ls = wrap(ctx, c.text, inner.w, 3)
-        ls.forEach((l, i) => ctx.fillText(l, inner.x, cy + 54 + i * 33))
-        cy += 54 + (ls.length - 1) * 33 + 22
-      }
-      return cy - 8
-    })
-  }
-
-  /* What you get */
+  /* Lists — trimmed until everything fits on the A4 page */
   const benefits = (item.benefits ?? []).filter(Boolean)
-  if (benefits.length) y = card(ctx, y, 'WHAT YOU GET', accent, (inner, cy) => bullets(ctx, benefits, inner, cy, accent, { max: 6 }))
-
-  /* Requirements */
   const reqs = (item.eligibility ?? []).filter((e) => !/^(Open to|Level):/.test(e))
-  if (reqs.length) y = card(ctx, y, 'REQUIREMENTS', accent, (inner, cy) => bullets(ctx, reqs, inner, cy, accent, { max: 6 }))
-
-  /* Documents */
   const docs = (item.documents ?? []).filter(Boolean)
-  if (docs.length) y = card(ctx, y, 'DOCUMENTS YOU NEED', accent, (inner, cy) => bullets(ctx, docs, inner, cy, accent, { max: 8, lines: 2, size: 23 }))
 
-  /* About (from the overview) */
-  const parts = buildOverview(item, kind, { key: kind, singular: label.toLowerCase() })
-  const about = [parts[0]?.paragraphs?.[0], parts[1]?.paragraphs?.[0]].filter((p) => p && p !== item.summary)
-  if (about.length) {
-    y = card(ctx, y, 'ABOUT THIS ' + label.toUpperCase(), accent, (inner, cy) => {
-      ctx.font = `400 23px ${SANS}`
-      ctx.fillStyle = C.muted
-      for (const p of about) {
-        const ls = wrap(ctx, p, inner.w, 5)
-        ls.forEach((l, i) => ctx.fillText(l, inner.x, cy + 22 + i * 33))
-        cy += ls.length * 33 + 14
-      }
-      return cy
-    })
+  const contactH = 92
+  const qrPanelH = 176
+  const panelY = H - 36 - contactH - 18 - qrPanelH
+  const room = panelY - 20
+
+  // One panel with three sub-sections keeps the overhead low so more items fit.
+  const drawLists = (g, top, lim) => {
+    const inner = { x: PAD + 28, w: W - PAD * 2 - 56 }
+    let cy = top + 14
+    const section = (heading, list, max) => {
+      if (!list.length || !max) return
+      g.font = `800 17px ${SANS}`
+      g.letterSpacing = '2px'
+      g.fillStyle = accent
+      g.fillText(heading, inner.x, cy + 26)
+      g.letterSpacing = '0px'
+      cy = bullets(g, list, inner, cy + 36, accent, { max, lines: lim.lines, size: 21 }) + 4
+    }
+    section('WHAT YOU GET', benefits, lim.b)
+    section('REQUIREMENTS', reqs, lim.r)
+    section('DOCUMENTS YOU NEED', docs, lim.d)
+    const h = cy - top + 10
+    g.save()
+    g.globalCompositeOperation = 'destination-over'
+    g.fillStyle = 'rgba(255,255,255,0.06)'
+    roundRect(g, PAD, top, W - PAD * 2, h, 22)
+    g.fill()
+    g.restore()
+    g.strokeStyle = 'rgba(255,255,255,0.12)'
+    roundRect(g, PAD, top, W - PAD * 2, h, 22)
+    g.stroke()
+    return top + h
   }
+  // Try the fullest version first, then drop items (documents first) until it fits.
+  const tries = []
+  for (const lines of [2, 1]) for (let d = 6; d >= 2; d--) for (let r = 5; r >= 2; r--) for (let b = 4; b >= 1; b--) tries.push({ b, r, d, lines })
+  tries.sort((p, q) => q.b + q.r + q.d + q.lines * 3 - (p.b + p.r + p.d + p.lines * 3))
+  const scratch = document.createElement('canvas')
+  scratch.width = W
+  scratch.height = H * 2
+  const sctx = scratch.getContext('2d')
+  const lim = tries.find((t) => {
+    sctx.clearRect(0, 0, W, H * 2)
+    return drawLists(sctx, y, t) <= room
+  }) ?? { b: 1, r: 1, d: 1, lines: 1 }
+  drawLists(ctx, y, lim)
 
-  /* Apply panel */
-  const panelH = 250
-  const panelY = y + 8
+  /* Apply panel — compact QR, still easy to scan */
   ctx.fillStyle = C.white
-  roundRect(ctx, PAD, panelY, W - PAD * 2, panelH, 26)
+  roundRect(ctx, PAD, panelY, W - PAD * 2, qrPanelH, 22)
   ctx.fill()
-  const qrSize = 202
+  const qrSize = 136
   if (item.officialUrl) {
     const qr = document.createElement('canvas')
     await QRCode.toCanvas(qr, item.officialUrl, { width: qrSize, margin: 0, errorCorrectionLevel: 'M', color: { dark: C.navy950, light: '#ffffff' } })
-    ctx.drawImage(qr, PAD + 24, panelY + 24, qrSize, qrSize)
+    ctx.drawImage(qr, PAD + 20, panelY + 20, qrSize, qrSize)
   }
-  const tx = PAD + 24 + qrSize + 32
-  const tw = W - PAD - 28 - tx
-  ctx.font = `800 20px ${SANS}`
+  const tx = PAD + 20 + qrSize + 28
+  const tw = W - PAD - 24 - tx
+  ctx.font = `800 19px ${SANS}`
   ctx.letterSpacing = '3px'
   ctx.fillStyle = C.gold700
-  ctx.fillText(item.officialSearch ? 'FIND THE OFFICIAL CALL' : 'APPLY HERE', tx, panelY + 62)
+  ctx.fillText(item.officialSearch ? 'FIND THE OFFICIAL CALL' : 'APPLY HERE', tx, panelY + 50)
   ctx.letterSpacing = '0px'
-  ctx.font = `700 28px ${SANS}`
+  ctx.font = `700 25px ${SANS}`
   ctx.fillStyle = C.navy950
   const urlText = item.officialSearch ? `Search online for “${item.name}”` : displayUrl(item.officialUrl).replace(/\//g, '/ ')
-  wrap(ctx, urlText, tw, 3).map((l) => l.replace(/\/ /g, '/')).forEach((l, i) => ctx.fillText(l, tx, panelY + 106 + i * 36))
-  ctx.font = `400 21px ${SANS}`
+  wrap(ctx, urlText, tw, 2).map((l) => l.replace(/\/ /g, '/')).forEach((l, i) => ctx.fillText(l, tx, panelY + 88 + i * 32))
+  ctx.font = `400 20px ${SANS}`
   ctx.fillStyle = C.navy600
-  ctx.fillText(item.officialSearch ? 'Scan the code to search for the official page.' : 'Scan the code or open the link to apply.', tx, panelY + panelH - 32)
-  y = panelY + panelH + 30
+  ctx.fillText(item.officialSearch ? 'Scan the code to search for the official page.' : 'Scan the code or open the link to apply.', tx, panelY + qrPanelH - 24)
 
-  /* Contact footer */
-  const contacts = [
+  /* Contacts — one horizontal row, social pages underneath */
+  const cy0 = H - 36 - contactH
+  ctx.fillStyle = 'rgba(255,255,255,0.07)'
+  roundRect(ctx, PAD, cy0, W - PAD * 2, contactH, 18)
+  ctx.fill()
+  const row = [
     ['WhatsApp', company.whatsappDisplay],
     ['Email', company.email],
-    ...company.socials.filter((s) => s.href && /facebook|linkedin/i.test(s.label)).map((s) => [s.label, shortUrl(s.href)]),
-    ['Website', company.domain],
+    ['Web', company.domain],
   ]
-  y = card(ctx, y, 'NEED HELP APPLYING? CONTACT MERIT LEADERS', C.gold300, (inner, cy) => {
-    for (const [k, v] of contacts) {
-      ctx.font = `800 18px ${SANS}`
-      ctx.letterSpacing = '1.5px'
-      ctx.fillStyle = C.gold200
-      ctx.fillText(k.toUpperCase(), inner.x, cy + 24)
-      ctx.letterSpacing = '0px'
-      ctx.font = `600 25px ${SANS}`
-      ctx.fillStyle = C.white
-      ctx.fillText(wrap(ctx, v, inner.w - 190, 1)[0] ?? '', inner.x + 190, cy + 24)
-      cy += 42
-    }
-    return cy - 6
+  ctx.textAlign = 'center'
+  const cw = (W - PAD * 2) / row.length
+  row.forEach(([k, v], i) => {
+    const cx = PAD + cw * i + cw / 2
+    ctx.font = `800 15px ${SANS}`
+    ctx.letterSpacing = '2px'
+    ctx.fillStyle = C.gold200
+    ctx.fillText(k.toUpperCase(), cx, cy0 + 30)
+    ctx.letterSpacing = '0px'
+    ctx.font = `700 22px ${SANS}`
+    ctx.fillStyle = C.white
+    ctx.fillText(wrap(ctx, v, cw - 16, 1)[0] ?? '', cx, cy0 + 58)
   })
-  const height = Math.min(MAX_H, y + 34)
+  const socials = company.socials.filter((s) => s.href && /facebook|linkedin/i.test(s.label)).map((s) => shortUrl(s.href))
+  if (socials.length) {
+    ctx.font = `500 17px ${SANS}`
+    ctx.fillStyle = C.muted
+    ctx.fillText(socials.join('   ·   '), W / 2, cy0 + 82)
+  }
+  ctx.textAlign = 'left'
+  const height = H
 
-  /* Background, cut to height, with the content on top */
+  /* Background with the content on top */
   const canvas = document.createElement('canvas')
   canvas.width = W
   canvas.height = height

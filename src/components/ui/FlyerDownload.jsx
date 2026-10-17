@@ -46,16 +46,15 @@ export default function FlyerDownload({ item, kind, label }) {
 
   return (
     <div>
-      <div className="max-h-[34rem] overflow-y-auto overflow-x-hidden rounded-xl bg-navy-900 ring-1 ring-navy-900/10">
+      <div className="overflow-hidden rounded-xl bg-navy-900 ring-1 ring-navy-900/10">
         {url ? (
-          <img src={url} alt={`Flyer for ${item.name}`} className="block h-auto w-full" />
+          <img src={url} alt={`Flyer for ${item.name}`} className="block aspect-[1080/1527] w-full" />
         ) : (
-          <div className="flex aspect-[4/5] items-center justify-center text-sm text-navy-100/60">
+          <div className="flex aspect-[1080/1527] items-center justify-center text-sm text-navy-100/60">
             {error ? 'Could not create the flyer.' : 'Creating flyer…'}
           </div>
         )}
       </div>
-      {url && <p className="mt-2 text-center text-xs text-navy-500">Scroll the preview to see the whole flyer.</p>}
       <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
         <a
           href={url ?? undefined}
