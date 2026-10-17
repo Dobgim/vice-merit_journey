@@ -10,9 +10,9 @@ export const company = {
   email: 'advisor@meritleaders.com',
   // Every booking and alerts sign-up is emailed here (see lib/mail.js); fixed so a dashboard typo can't lose messages.
   formEmail: 'advisor@meritleaders.com',
-  phone: '+237 6 79 55 41 14',
-  whatsapp: '237679554114', // digits only (country code, no +), used to build wa.me links
-  whatsappDisplay: '+237 6 79 55 41 14',
+  phone: '+237 675146271',
+  whatsapp: '237675146271', // digits only (country code, no +), used to build wa.me links
+  whatsappDisplay: '+237 675146271',
   whatsappGroup: 'https://chat.whatsapp.com/Kh0dtcUzRpmB8gIJfE4Jdd',
   whatsappGroupName: 'Merit Leaders Scholarships',
   address: '1200 Kingsway Avenue, Suite 410, Toronto, ON',
@@ -20,10 +20,10 @@ export const company = {
   // Paste each profile link into `href` once the account exists. Empty ones
   // are hidden; WhatsApp is always shown.
   socials: [
-    { label: 'Facebook', href: '', icon: 'facebook' },
+    { label: 'Facebook', href: 'https://www.facebook.com/Meritleaders', icon: 'facebook' },
     { label: 'Instagram', href: '', icon: 'instagram' },
     { label: 'TikTok', href: '', icon: 'tiktok' },
-    { label: 'LinkedIn', href: '', icon: 'linkedin' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/company/merit-leaders/', icon: 'linkedin' },
     { label: 'X', href: '', icon: 'x' },
     { label: 'YouTube', href: '', icon: 'youtube' },
     { label: 'Telegram', href: '', icon: 'telegram' },

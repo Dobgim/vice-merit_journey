@@ -1,7 +1,9 @@
 /**
- * Shareable flyer image (1080×1350 JPEG) for one listing: brand, title, host
- * country and flag, key facts, who can apply, a short summary, and the
- * official apply link printed and as a QR code. Drawn on a canvas so every
+ * Shareable flyer image (1080 px wide JPEG, height fits the content) for one
+ * listing: brand, title, host country and flag, key facts, the "Can I apply?"
+ * checklist, what you get, requirements, documents, a short overview, the
+ * official apply link (printed and as a QR code) and Merit Leaders' contacts
+ * (WhatsApp, email, Facebook, LinkedIn, website). Drawn on a canvas so every
  * flyer is crisp and identical everywhere. Loaded on demand (with `qrcode`).
  */
 import QRCode from 'qrcode'
@@ -9,9 +11,10 @@ import { company } from '../data/site'
 import { formatDate } from './deadline'
 import { isoFromEmoji } from '../components/ui/Flag'
 import { isUsableLogo, logoUrl } from './logo'
+import { buildOverview } from './overview'
+import { criteriaFor } from '../data/criteria'
 
 const W = 1080
-const H = 1350
 const PAD = 72
 
 const C = {
@@ -149,6 +152,51 @@ async function ensureFonts() {
 
 /* ------------------------------------------------------------------- draw */
 
+const MAX_H = 4200
+
+/** Section card: heading + rows drawn by `body`; returns the new y. */
+function card(ctx, y, heading, accent, body) {
+  const top = y
+  const inner = { x: PAD + 30, w: W - PAD * 2 - 60 }
+  let cy = top + 60
+  cy = body(inner, cy)
+  const h = cy - top + 28
+  ctx.save()
+  ctx.globalCompositeOperation = 'destination-over'
+  ctx.fillStyle = 'rgba(255,255,255,0.06)'
+  roundRect(ctx, PAD, top, W - PAD * 2, h, 22)
+  ctx.fill()
+  ctx.restore()
+  ctx.strokeStyle = 'rgba(255,255,255,0.12)'
+  roundRect(ctx, PAD, top, W - PAD * 2, h, 22)
+  ctx.stroke()
+  ctx.font = `800 19px ${SANS}`
+  ctx.letterSpacing = '3px'
+  ctx.fillStyle = accent
+  ctx.fillText(heading, PAD + 30, top + 42)
+  ctx.letterSpacing = '0px'
+  return top + h + 22
+}
+
+/** Bulleted list inside a card. */
+function bullets(ctx, items, inner, y, accent, { max = 6, lines = 2, size = 24 } = {}) {
+  ctx.font = `500 ${size}px ${SANS}`
+  const lh = Math.round(size * 1.4)
+  for (const text of items.slice(0, max)) {
+    const ls = wrap(ctx, text, inner.w - 34, lines)
+    ctx.fillStyle = accent
+    ctx.beginPath()
+    ctx.arc(inner.x + 7, y + 14, 5, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.fillStyle = C.white
+    ls.forEach((l, i) => ctx.fillText(l, inner.x + 30, y + 22 + i * lh))
+    y += ls.length * lh + 10
+  }
+  return y
+}
+
+const shortUrl = (u = '') => u.replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/$/, '')
+
 export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholarship' } = {}) {
   await ensureFonts()
   const accent = ACCENT[kind] ?? ACCENT.scholarships
@@ -160,33 +208,13 @@ export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholars
     orgLogoSrc ? loadImage(orgLogoSrc, true) : null,
   ])
 
-  const canvas = document.createElement('canvas')
-  canvas.width = W
-  canvas.height = H
-  const ctx = canvas.getContext('2d')
-
-  /* Background */
-  const bg = ctx.createLinearGradient(0, 0, W, H)
-  bg.addColorStop(0, C.navy800)
-  bg.addColorStop(0.55, C.navy900)
-  bg.addColorStop(1, C.navy950)
-  ctx.fillStyle = bg
-  ctx.fillRect(0, 0, W, H)
-
-  const glow = ctx.createRadialGradient(W - 120, 120, 0, W - 120, 120, 520)
-  glow.addColorStop(0, `${accent}55`)
-  glow.addColorStop(1, `${accent}00`)
-  ctx.fillStyle = glow
-  ctx.fillRect(0, 0, W, H)
-
-  ctx.strokeStyle = 'rgba(255,255,255,0.045)'
-  ctx.lineWidth = 1
-  for (let x = W / 2; x < W; x += 40) {
-    ctx.beginPath()
-    ctx.moveTo(x, 0)
-    ctx.lineTo(x, 640)
-    ctx.stroke()
-  }
+  // Content is drawn on a tall transparent canvas, then placed on a background
+  // cut to the height actually used.
+  const content = document.createElement('canvas')
+  content.width = W
+  content.height = MAX_H
+  const ctx = content.getContext('2d')
+  ctx.textBaseline = 'alphabetic'
 
   /* Brand header */
   let y = 64
@@ -194,8 +222,6 @@ export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholars
   roundRect(ctx, PAD, y, 84, 84, 20)
   ctx.fill()
   if (logo) ctx.drawImage(logo, PAD + 5, y + 5, 74, 74)
-
-  ctx.textBaseline = 'alphabetic'
   ctx.font = `600 40px ${DISPLAY}`
   ctx.fillStyle = C.white
   const merit = 'Merit '
@@ -207,19 +233,16 @@ export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholars
   ctx.fillStyle = C.faint
   ctx.fillText(company.tagline.toUpperCase(), PAD + 104, y + 74)
   ctx.letterSpacing = '0px'
-
   pill(ctx, W - PAD, y + 22, label.toUpperCase(), { bg: accent, fg: C.navy950, align: 'right' })
 
   /* Country row */
   y = 184
   let x = PAD
-  // Organisation logo on a white tile, in front of the flag
   if (orgLogo && (item.logo || isUsableLogo(orgLogo))) {
     ctx.fillStyle = C.white
     roundRect(ctx, x, y - 10, 68, 68, 16)
     ctx.fill()
-    const s = 52
-    ctx.drawImage(orgLogo, x + 8, y - 2, s, s)
+    ctx.drawImage(orgLogo, x + 8, y - 2, 52, 52)
     x += 88
   }
   if (flag || iso === 'eu') {
@@ -231,7 +254,6 @@ export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholars
     ctx.restore()
     x += 92
   } else if (!iso && item.flag) {
-    // 🌍 / 🌐 for multi-country listings
     ctx.font = `44px "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif`
     ctx.textBaseline = 'middle'
     ctx.fillText(item.flag, x, y + 26)
@@ -241,129 +263,114 @@ export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholars
   ctx.font = `600 30px ${SANS}`
   ctx.fillStyle = C.white
   ctx.textBaseline = 'middle'
-  const country = wrap(ctx, item.country, W - PAD * 2 - (x - PAD) - 300, 1)[0] ?? ''
-  ctx.fillText(country, x, y + 25)
+  ctx.fillText(wrap(ctx, item.country, W - PAD * 2 - (x - PAD) - 300, 1)[0] ?? '', x, y + 25)
   ctx.textBaseline = 'alphabetic'
-  if (item.funding) {
-    ctx.font = `800 20px ${SANS}`
-    pill(ctx, W - PAD, y + 4, item.funding.toUpperCase(), { bg: 'rgba(255,255,255,0.1)', fg: C.gold200, align: 'right' })
-  }
+  if (item.funding) pill(ctx, W - PAD, y + 4, item.funding.toUpperCase(), { bg: 'rgba(255,255,255,0.1)', fg: C.gold200, align: 'right' })
 
-  /* Title + organisation */
+  /* Title, organisation, summary */
   y = 268
   const title = fit(ctx, item.name, W - PAD * 2, 3, [72, 64, 56, 50, 46], (s) => `700 ${s}px ${DISPLAY}`)
   ctx.fillStyle = C.white
   const lh = Math.round(title.size * 1.12)
   title.lines.forEach((line, i) => ctx.fillText(line, PAD, y + title.size + i * lh))
   y += title.size + (title.lines.length - 1) * lh + 50
-
   if (item.org) {
     ctx.font = `600 26px ${SANS}`
     ctx.fillStyle = C.gold300
     ctx.fillText(wrap(ctx, item.org, W - PAD * 2, 1)[0] ?? '', PAD, y)
-    y += 26
-  } else {
-    y -= 30
-  }
-
-  /* Summary */
+    y += 10
+  } else y -= 30
   ctx.font = `400 26px ${SANS}`
   ctx.fillStyle = C.muted
-  for (const line of wrap(ctx, item.summary, W - PAD * 2, 2)) {
+  for (const line of wrap(ctx, item.summary, W - PAD * 2, 3)) {
     y += 36
     ctx.fillText(line, PAD, y)
   }
-  y += 34
+  y += 36
 
-  /* Fact boxes */
-  const box = (bx, by, bw, bh, heading, value, lines = 2) => {
-    ctx.fillStyle = 'rgba(255,255,255,0.06)'
-    roundRect(ctx, bx, by, bw, bh, 18)
-    ctx.fill()
-    ctx.strokeStyle = 'rgba(255,255,255,0.12)'
-    ctx.stroke()
-    ctx.font = `800 17px ${SANS}`
-    ctx.letterSpacing = '2px'
-    ctx.fillStyle = accent
-    ctx.fillText(heading, bx + 22, by + 38)
-    ctx.letterSpacing = '0px'
-    ctx.font = `600 24px ${SANS}`
-    ctx.fillStyle = C.white
-    wrap(ctx, value || '—', bw - 44, lines).forEach((l, i) => ctx.fillText(l, bx + 22, by + 76 + i * 32))
-  }
-
+  /* Key facts */
   const gap = 16
   const colW = (W - PAD * 2 - gap * 2) / 3
-  const facts = [
+  ;[
     ['VALUE', item.amount],
     ['DEADLINE', item.deadline ? formatDate(item.deadline) : 'Rolling'],
     ['LEVEL', item.level],
-  ]
-  facts.forEach(([h, v], i) => box(PAD + i * (colW + gap), y, colW, 128, h, v, 2))
-  y += 128 + gap
-  box(PAD, y, W - PAD * 2, 100, 'WHO CAN APPLY', item.nationalities || item.level, 1)
-  y += 100 + gap
+  ].forEach(([h, v], i) => {
+    const bx = PAD + i * (colW + gap)
+    ctx.fillStyle = 'rgba(255,255,255,0.08)'
+    roundRect(ctx, bx, y, colW, 128, 18)
+    ctx.fill()
+    ctx.font = `800 17px ${SANS}`
+    ctx.letterSpacing = '2px'
+    ctx.fillStyle = accent
+    ctx.fillText(h, bx + 22, y + 38)
+    ctx.letterSpacing = '0px'
+    ctx.font = `600 24px ${SANS}`
+    ctx.fillStyle = C.white
+    wrap(ctx, v || '—', colW - 44, 2).forEach((l, j) => ctx.fillText(l, bx + 22, y + 76 + j * 32))
+  })
+  y += 128 + 26
 
-  /* What you get — as many benefits as fit above the apply panel */
-  const panelTop = H - 64 - 46 - 250
-  const room = panelTop - 28 - y
-  const benefits = item.benefits ?? []
-  if (benefits.length && room >= 120) {
-    ctx.font = `500 23px ${SANS}`
-    const lineH = 33
-    const maxLines = Math.floor((room - 64) / lineH)
-    const rows = []
-    for (const b of benefits) {
-      const lines = wrap(ctx, b, W - PAD * 2 - 78, 2)
-      if (rows.length + lines.length > maxLines) break
-      rows.push(...lines.map((l, i) => ({ l, first: i === 0 })))
-    }
-    if (rows.length) {
-      const bh = 64 + rows.length * lineH
-      ctx.fillStyle = 'rgba(255,255,255,0.06)'
-      roundRect(ctx, PAD, y, W - PAD * 2, bh, 18)
-      ctx.fill()
-      ctx.strokeStyle = 'rgba(255,255,255,0.12)'
-      ctx.stroke()
-      ctx.font = `800 17px ${SANS}`
-      ctx.letterSpacing = '2px'
-      ctx.fillStyle = accent
-      ctx.fillText('WHAT YOU GET', PAD + 22, y + 38)
-      ctx.letterSpacing = '0px'
-      ctx.font = `500 23px ${SANS}`
-      rows.forEach(({ l, first }, i) => {
-        const ly = y + 76 + i * lineH
-        if (first) {
-          ctx.fillStyle = accent
-          ctx.beginPath()
-          ctx.arc(PAD + 30, ly - 8, 4.5, 0, Math.PI * 2)
-          ctx.fill()
-        }
+  /* Can I apply? */
+  const crit = criteriaFor(item, kind)
+  if (crit.length) {
+    y = card(ctx, y, 'CAN I APPLY?  ALL MUST BE TRUE', accent, (inner, cy) => {
+      for (const c of crit) {
+        ctx.font = `800 17px ${SANS}`
+        ctx.letterSpacing = '1.5px'
+        ctx.fillStyle = C.gold200
+        ctx.fillText(c.label.toUpperCase(), inner.x, cy + 20)
+        ctx.letterSpacing = '0px'
+        ctx.font = `600 24px ${SANS}`
         ctx.fillStyle = C.white
-        ctx.fillText(l, PAD + 50, ly)
-      })
-    }
+        const ls = wrap(ctx, c.text, inner.w, 3)
+        ls.forEach((l, i) => ctx.fillText(l, inner.x, cy + 54 + i * 33))
+        cy += 54 + (ls.length - 1) * 33 + 22
+      }
+      return cy - 8
+    })
   }
 
-  /* Apply panel (anchored to the bottom) */
+  /* What you get */
+  const benefits = (item.benefits ?? []).filter(Boolean)
+  if (benefits.length) y = card(ctx, y, 'WHAT YOU GET', accent, (inner, cy) => bullets(ctx, benefits, inner, cy, accent, { max: 6 }))
+
+  /* Requirements */
+  const reqs = (item.eligibility ?? []).filter((e) => !/^(Open to|Level):/.test(e))
+  if (reqs.length) y = card(ctx, y, 'REQUIREMENTS', accent, (inner, cy) => bullets(ctx, reqs, inner, cy, accent, { max: 6 }))
+
+  /* Documents */
+  const docs = (item.documents ?? []).filter(Boolean)
+  if (docs.length) y = card(ctx, y, 'DOCUMENTS YOU NEED', accent, (inner, cy) => bullets(ctx, docs, inner, cy, accent, { max: 8, lines: 2, size: 23 }))
+
+  /* About (from the overview) */
+  const parts = buildOverview(item, kind, { key: kind, singular: label.toLowerCase() })
+  const about = [parts[0]?.paragraphs?.[0], parts[1]?.paragraphs?.[0]].filter((p) => p && p !== item.summary)
+  if (about.length) {
+    y = card(ctx, y, 'ABOUT THIS ' + label.toUpperCase(), accent, (inner, cy) => {
+      ctx.font = `400 23px ${SANS}`
+      ctx.fillStyle = C.muted
+      for (const p of about) {
+        const ls = wrap(ctx, p, inner.w, 5)
+        ls.forEach((l, i) => ctx.fillText(l, inner.x, cy + 22 + i * 33))
+        cy += ls.length * 33 + 14
+      }
+      return cy
+    })
+  }
+
+  /* Apply panel */
   const panelH = 250
-  const panelY = H - 64 - 46 - panelH
+  const panelY = y + 8
   ctx.fillStyle = C.white
   roundRect(ctx, PAD, panelY, W - PAD * 2, panelH, 26)
   ctx.fill()
-
   const qrSize = 202
   if (item.officialUrl) {
     const qr = document.createElement('canvas')
-    await QRCode.toCanvas(qr, item.officialUrl, {
-      width: qrSize,
-      margin: 0,
-      errorCorrectionLevel: 'M',
-      color: { dark: C.navy950, light: '#ffffff' },
-    })
+    await QRCode.toCanvas(qr, item.officialUrl, { width: qrSize, margin: 0, errorCorrectionLevel: 'M', color: { dark: C.navy950, light: '#ffffff' } })
     ctx.drawImage(qr, PAD + 24, panelY + 24, qrSize, qrSize)
   }
-
   const tx = PAD + 24 + qrSize + 32
   const tw = W - PAD - 28 - tx
   ctx.font = `800 20px ${SANS}`
@@ -374,23 +381,59 @@ export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholars
   ctx.font = `700 28px ${SANS}`
   ctx.fillStyle = C.navy950
   const urlText = item.officialSearch ? `Search online for “${item.name}”` : displayUrl(item.officialUrl).replace(/\//g, '/ ')
-  const urlLines = wrap(ctx, urlText, tw, 3).map((l) => l.replace(/\/ /g, '/'))
-  urlLines.forEach((l, i) => ctx.fillText(l, tx, panelY + 106 + i * 36))
+  wrap(ctx, urlText, tw, 3).map((l) => l.replace(/\/ /g, '/')).forEach((l, i) => ctx.fillText(l, tx, panelY + 106 + i * 36))
   ctx.font = `400 21px ${SANS}`
   ctx.fillStyle = C.navy600
   ctx.fillText(item.officialSearch ? 'Scan the code to search for the official page.' : 'Scan the code or open the link to apply.', tx, panelY + panelH - 32)
+  y = panelY + panelH + 30
 
-  /* Footer */
-  ctx.font = `600 22px ${SANS}`
-  ctx.fillStyle = C.muted
-  ctx.textAlign = 'center'
-  ctx.fillText(
-    `Need help applying? WhatsApp ${company.whatsappDisplay}  ·  ${company.domain}`,
-    W / 2,
-    H - 56
-  )
-  ctx.textAlign = 'left'
+  /* Contact footer */
+  const contacts = [
+    ['WhatsApp', company.whatsappDisplay],
+    ['Email', company.email],
+    ...company.socials.filter((s) => s.href && /facebook|linkedin/i.test(s.label)).map((s) => [s.label, shortUrl(s.href)]),
+    ['Website', company.domain],
+  ]
+  y = card(ctx, y, 'NEED HELP APPLYING? CONTACT MERIT LEADERS', C.gold300, (inner, cy) => {
+    for (const [k, v] of contacts) {
+      ctx.font = `800 18px ${SANS}`
+      ctx.letterSpacing = '1.5px'
+      ctx.fillStyle = C.gold200
+      ctx.fillText(k.toUpperCase(), inner.x, cy + 24)
+      ctx.letterSpacing = '0px'
+      ctx.font = `600 25px ${SANS}`
+      ctx.fillStyle = C.white
+      ctx.fillText(wrap(ctx, v, inner.w - 190, 1)[0] ?? '', inner.x + 190, cy + 24)
+      cy += 42
+    }
+    return cy - 6
+  })
+  const height = Math.min(MAX_H, y + 34)
 
+  /* Background, cut to height, with the content on top */
+  const canvas = document.createElement('canvas')
+  canvas.width = W
+  canvas.height = height
+  const out = canvas.getContext('2d')
+  const bg = out.createLinearGradient(0, 0, W, height)
+  bg.addColorStop(0, C.navy800)
+  bg.addColorStop(0.55, C.navy900)
+  bg.addColorStop(1, C.navy950)
+  out.fillStyle = bg
+  out.fillRect(0, 0, W, height)
+  const glow = out.createRadialGradient(W - 120, 120, 0, W - 120, 120, 520)
+  glow.addColorStop(0, `${accent}55`)
+  glow.addColorStop(1, `${accent}00`)
+  out.fillStyle = glow
+  out.fillRect(0, 0, W, height)
+  out.strokeStyle = 'rgba(255,255,255,0.045)'
+  for (let gx = W / 2; gx < W; gx += 40) {
+    out.beginPath()
+    out.moveTo(gx, 0)
+    out.lineTo(gx, 640)
+    out.stroke()
+  }
+  out.drawImage(content, 0, 0)
   return canvas
 }
 

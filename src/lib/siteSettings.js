@@ -17,7 +17,17 @@ function replaceArray(target, next) {
 export function applySettings(settings = {}) {
   const contact = settings.contact
   if (contact) {
-    for (const f of CONTACT_FIELDS) if (contact[f]) company[f] = contact[f]
+    // Phone fields must contain a real number — a saved label (e.g. the business name) is ignored.
+    const isNumber = (v) => String(v).replace(/\D/g, '').length >= 8
+    for (const f of CONTACT_FIELDS) {
+      if (!contact[f]) continue
+      if (['phone', 'whatsapp', 'whatsappDisplay'].includes(f)) {
+        if (!isNumber(contact[f])) continue
+        // Same number in another spacing: keep one consistent format across the site.
+        if (String(contact[f]).replace(/\D/g, '') === String(company[f]).replace(/\D/g, '')) continue
+      }
+      company[f] = f === 'whatsapp' ? String(contact[f]).replace(/\D/g, '') : contact[f]
+    }
     // The domain was once saved misspelled ("meritleadrs"); never show that to visitors.
     for (const f of ['email', 'domain']) company[f] = company[f].replace(/meritleadrs\./i, 'meritleaders.')
     if (contact.socials) {

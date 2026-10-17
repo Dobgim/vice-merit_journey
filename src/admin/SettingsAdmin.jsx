@@ -135,13 +135,13 @@ export default function SettingsAdmin() {
               <input type="email" required value={form.email} onChange={set('email')} className={inputCls} />
             </Field>
             <Field label="Phone (call)">
-              <input value={form.phone} onChange={set('phone')} className={inputCls} placeholder="+237 6 79 55 41 14" />
+              <input value={form.phone} onChange={set('phone')} className={inputCls} placeholder="+237 675146271" />
             </Field>
-            <Field label="WhatsApp number" hint="Digits only, with country code (e.g. 237679554114).">
+            <Field label="WhatsApp number" hint="Digits only, with country code (e.g. 237675146271).">
               <input value={form.whatsapp} onChange={set('whatsapp')} inputMode="numeric" className={inputCls} />
             </Field>
             <Field label="WhatsApp displayed text">
-              <input value={form.whatsappDisplay} onChange={set('whatsappDisplay')} className={inputCls} placeholder="+237 6 79 55 41 14" />
+              <input value={form.whatsappDisplay} onChange={set('whatsappDisplay')} className={inputCls} placeholder="+237 675146271" />
             </Field>
             <Field label="Opening hours">
               <input value={form.hours} onChange={set('hours')} className={inputCls} />

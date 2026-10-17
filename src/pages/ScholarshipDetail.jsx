@@ -21,6 +21,7 @@ import OrgLogo from '../components/ui/OrgLogo'
 import { byDeadline, deadlineStatus, formatDate } from '../lib/deadline'
 import { company } from '../data/site'
 import { buildOverview } from '../lib/overview'
+import { criteriaFor } from '../data/criteria'
 import { photos } from '../data/photos'
 import NotFound from './NotFound'
 
@@ -99,6 +100,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
   const sections = s
     ? [
         { id: 'at-a-glance', label: 'At a glance', show: true },
+        { id: 'can-i-apply', label: 'Can I apply?', show: true },
         { id: 'overview', label: 'Overview', show: true },
         { id: 'eligibility', label: 'Eligibility', show: s.eligibility?.length },
         { id: 'benefits', label: 'Benefits', show: s.benefits?.length },
@@ -319,6 +321,26 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
               </dl>
             </Block>
 
+            <Block id="can-i-apply" icon="checkCircle" title="Can I apply?">
+              <p className="-mt-1 mb-4 text-base text-navy-700">
+                Check each statement. If all of them are true for you, you can apply for this {config.singular}.
+              </p>
+              <dl className="overflow-hidden rounded-xl border border-navy-900/[0.08]">
+                {criteriaFor(s, kind).map((c, i) => (
+                  <div
+                    key={c.label}
+                    className={`grid gap-1 p-4 sm:grid-cols-[11rem_1fr] sm:gap-4 ${i ? 'border-t border-navy-900/[0.07]' : 'bg-gold-50/60'}`}
+                  >
+                    <dt className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-navy-500">
+                      <Icon name="check" className="h-3.5 w-3.5 shrink-0 text-gold-600" />
+                      {c.label}
+                    </dt>
+                    <dd className={`text-base leading-snug text-navy-900 ${i ? '' : 'font-semibold'}`}>{c.text}</dd>
+                  </div>
+                ))}
+              </dl>
+            </Block>
+
             <Block id="overview" icon="doc" title="Overview">
               <div className="grid gap-7">
                 {buildOverview(s, kind, config).map((part) => (
@@ -345,7 +367,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
             </Block>
 
             {s.eligibility?.length > 0 && (
-              <Block id="eligibility" icon="checkCircle" title="Who can apply">
+              <Block id="eligibility" icon="checkCircle" title="Full eligibility details">
                 <Checklist items={s.eligibility} />
               </Block>
             )}
