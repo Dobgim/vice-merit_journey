@@ -32,14 +32,14 @@ function summarize(kind, o) {
   return `${o.org}: internships for students and recent graduates in ${field(o.focus)}, based in ${o.country}.`
 }
 
-function build(kind, o) {
-  const { opens, ...rest } = o
+export function build(kind, o, source = SOURCE) {
+  const { opens, dates = [], ...rest } = o
   return make(kind, {
     ...rest,
     coverage: o.amount,
-    dates: opens ? [{ date: opens, label: 'Applications open' }] : undefined,
+    dates: opens || dates.length ? [...(opens ? [{ date: opens, label: 'Applications open' }] : []), ...dates] : undefined,
     summary: summarize(kind, o),
-    source: SOURCE,
+    source,
   })
 }
 
