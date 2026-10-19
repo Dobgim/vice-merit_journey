@@ -130,25 +130,39 @@ export async function subscribeToAlerts({ email, studyLevel }) {
 const toListing = (row) => ({ ...row.data, id: row.id, slug: row.slug, published: row.published })
 
 /**
- * Published listings of one kind ('scholarships' | 'grants' | 'internships').
- * Falls back to the bundled list until the admin has added any of that kind.
+ * Settings key holding { [kind]: [slug, …] } — built-in listings the admin has
+ * deleted or hidden, so they are not added back from the bundled data.
+ */
+export const RETIRED_KEY = 'retired_listings'
+
+/**
+ * Published listings of one kind ('scholarships' | 'grants' | …): what the
+ * admin has saved, plus any built-in listing added to the code since the last
+ * import (unless the admin deleted or hid it). Falls back to the bundled list
+ * until the admin has added any of that kind.
  */
 export async function fetchOpportunities(kind, fallback = []) {
   const supabase = await getSupabase()
+  let rows
 
   if (!supabase) {
-    const rows = demo.read('opportunities', []).filter((r) => r.kind === kind)
-    return rows.length ? rows.filter((r) => r.published).map(toListing) : fallback
+    const all = demo.read('opportunities', []).filter((r) => r.kind === kind)
+    if (!all.length) return fallback
+    rows = all.filter((r) => r.published)
+  } else {
+    const { data, error } = await supabase
+      .from('opportunities')
+      .select('id, kind, slug, published, data')
+      .eq('kind', kind)
+      .eq('published', true)
+    if (error || !data?.length) return fallback
+    rows = data
   }
 
-  const { data, error } = await supabase
-    .from('opportunities')
-    .select('id, kind, slug, published, data')
-    .eq('kind', kind)
-    .eq('published', true)
-
-  if (error || !data?.length) return fallback
-  return data.map(toListing)
+  const retired = new Set((await fetchSettings())[RETIRED_KEY]?.[kind] ?? [])
+  const saved = new Set(rows.map((r) => r.slug))
+  const added = fallback.filter((i) => !saved.has(i.slug) && !retired.has(i.slug))
+  return [...rows.map(toListing), ...added]
 }
 
 /** All site settings as { key: value }. Empty object when none are saved. */

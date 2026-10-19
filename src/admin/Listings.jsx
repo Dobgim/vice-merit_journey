@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { kinds } from '../data/opportunities'
 import { deadlineStatus, formatDate } from '../lib/deadline'
@@ -15,6 +15,17 @@ export default function Listings() {
   const [busy, setBusy] = useState(false)
   const [actionError, setActionError] = useState(null)
   const [flashNode, flash] = useFlash()
+  const [fresh, setFresh] = useState([])
+
+  // Built-in listings added to the code since the last import: already on the website, not yet editable here.
+  useEffect(() => {
+    let alive = true
+    if (data?.length) api.newBuiltIn(kind, data).then((items) => alive && setFresh(items)).catch(() => {})
+    else setFresh([])
+    return () => {
+      alive = false
+    }
+  }, [kind, data])
 
   const rows = useMemo(() => {
     const term = q.trim().toLowerCase()
@@ -27,9 +38,10 @@ export default function Listings() {
     setBusy(true)
     setActionError(null)
     try {
+      const count = data?.length ? fresh.length : config.items.length
       await api.importBundled(kind)
       reload()
-      flash(`${config.items.length} ${config.plural} imported`)
+      flash(`${count} ${config.plural} imported`)
     } catch (e) {
       setActionError(e)
     } finally {
@@ -60,7 +72,7 @@ export default function Listings() {
   const remove = async (r) => {
     if (!window.confirm(`Delete “${r.data.name}”? It will disappear from the website.`)) return
     try {
-      await api.deleteOpportunity(r.id)
+      await api.deleteOpportunity(r.id, { kind, slug: r.slug })
       setData(data.filter((x) => x.id !== r.id))
       flash('Deleted')
     } catch (e) {
@@ -85,11 +97,23 @@ export default function Listings() {
             Your website is currently showing the {config.items.length} built-in {config.plural}.
           </p>
           <p className="mt-1 text-sm text-gold-900/80">
-            Import them first so you can edit them here. Once you add or import anything, the website shows only what
-            is listed on this page.
+            Import them first so you can edit them here. Built-in listings you delete or hide here stay off the
+            website.
           </p>
           <Btn variant="primary" icon="arrowRight" disabled={busy} onClick={importAll} className="mt-4">
             {busy ? 'Importing…' : `Import the ${config.items.length} built-in ${config.plural}`}
+          </Btn>
+        </div>
+      )}
+
+      {!!data?.length && !!fresh.length && (
+        <div className="rounded-2xl border border-gold-300/60 bg-gold-50 p-5">
+          <p className="font-semibold text-gold-900">
+            {fresh.length} new built-in {fresh.length === 1 ? config.singular : config.plural} {fresh.length === 1 ? 'is' : 'are'} already on the website but not in this list yet.
+          </p>
+          <p className="mt-1 text-sm text-gold-900/80">Import them to edit, hide or delete them here.</p>
+          <Btn variant="primary" icon="arrowRight" disabled={busy} onClick={importAll} className="mt-4">
+            {busy ? 'Importing…' : `Import ${fresh.length} new ${fresh.length === 1 ? config.singular : config.plural}`}
           </Btn>
         </div>
       )}

@@ -4,7 +4,7 @@
  *          read requests/subscribers or change listings and settings.
  *   demo — localStorage in this browser (see src/lib/supabase.js).
  */
-import { demo, getSupabase, isSupabaseConfigured, newId } from '../lib/supabase'
+import { RETIRED_KEY, demo, getSupabase, isSupabaseConfigured, newId } from '../lib/supabase'
 import { kinds } from '../data/opportunities'
 import { slugify } from '../lib/deadline'
 import { clearOpportunityCache } from '../hooks/useScholarships'
@@ -109,41 +109,75 @@ export async function getOpportunity(id) {
   return must(sb.from('opportunities').select('*').eq('id', id).maybeSingle())
 }
 
+/* Built-in listings are shown on the website even before they are imported,
+   so one the admin deletes, hides or renames is "retired" — otherwise the
+   bundled copy would reappear. */
+const isBuiltIn = (kind, slug) => kinds[kind]?.items.some((i) => i.slug === slug)
+
+async function getRetired() {
+  return (await getSettings())[RETIRED_KEY] ?? {}
+}
+
+async function setRetired(kind, slug, retire) {
+  if (!isBuiltIn(kind, slug)) return
+  const all = await getRetired()
+  const slugs = new Set(all[kind] ?? [])
+  if (slugs.has(slug) === retire) return
+  if (retire) slugs.add(slug)
+  else slugs.delete(slug)
+  await saveSetting(RETIRED_KEY, { ...all, [kind]: [...slugs] })
+}
+
+/** Built-in listings not in the dashboard yet (added to the code since the last import). */
+export async function newBuiltIn(kind, rows) {
+  const retired = new Set((await getRetired())[kind] ?? [])
+  const saved = new Set(rows.map((r) => r.slug))
+  return kinds[kind].items.filter((i) => !saved.has(i.slug) && !retired.has(i.slug))
+}
+
 export async function saveOpportunity({ id, kind, published, data }) {
   const slug = data.slug?.trim() || slugify(data.name)
   const { slug: _drop, id: _id, published: _p, ...listing } = data
   const row = { kind, slug, published, data: listing, updated_at: now() }
   clearOpportunityCache()
+  const previous = id ? (await getOpportunity(id))?.slug : null
 
   const sb = await getSupabase()
+  let saved
   if (!sb) {
     const rows = demo.read('opportunities', [])
     if (rows.some((r) => r.kind === kind && r.slug === slug && r.id !== id)) {
       throw new Error(`Another ${kinds[kind].singular} already uses the web address “${slug}”.`)
     }
-    const saved = { ...row, id: id ?? newId() }
+    saved = { ...row, id: id ?? newId() }
     demo.write('opportunities', id ? rows.map((r) => (r.id === id ? saved : r)) : [saved, ...rows])
-    return saved
+  } else if (id) {
+    saved = await must(sb.from('opportunities').update(row).eq('id', id).select().single())
+  } else {
+    saved = await must(sb.from('opportunities').insert(row).select().single())
   }
 
-  if (id) return must(sb.from('opportunities').update(row).eq('id', id).select().single())
-  return must(sb.from('opportunities').insert(row).select().single())
+  if (previous && previous !== slug) await setRetired(kind, previous, true)
+  await setRetired(kind, slug, !published)
+  return saved
 }
 
-export async function deleteOpportunity(id) {
+export async function deleteOpportunity(id, { kind, slug } = {}) {
   clearOpportunityCache()
   const sb = await getSupabase()
   if (!sb) {
     demo.write('opportunities', demo.read('opportunities', []).filter((r) => r.id !== id))
-    return
+  } else {
+    await must(sb.from('opportunities').delete().eq('id', id))
   }
-  await must(sb.from('opportunities').delete().eq('id', id))
+  if (kind && slug) await setRetired(kind, slug, true)
 }
 
 /** Copy the built-in listings of a kind into the database so they can be edited. */
 export async function importBundled(kind) {
   clearOpportunityCache()
-  const rows = kinds[kind].items.map((item) => {
+  const retired = new Set((await getRetired())[kind] ?? [])
+  const rows = kinds[kind].items.filter((item) => !retired.has(item.slug)).map((item) => {
     const { slug, ...data } = item
     return { kind, slug: slug ?? slugify(item.name), published: true, data, updated_at: now() }
   })

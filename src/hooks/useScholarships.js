@@ -32,8 +32,8 @@ const cache = {}
 const pending = {}
 
 /**
- * Listings for one opportunity type: what the admin has published, or the
- * bundled list in src/data/ until anything of that type has been added.
+ * Listings for one opportunity type: what the admin has published plus any
+ * built-in listing not imported yet (see fetchOpportunities)
  * Listings whose deadline has passed drop out automatically (re-checked every
  * minute) unless `includeClosed` is set — the detail page uses that so old
  * links and flyers can still explain that the call has closed.
