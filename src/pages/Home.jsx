@@ -6,6 +6,7 @@ import Categories from '../components/sections/Categories'
 import HowItWorks from '../components/sections/HowItWorks'
 import Newsletter from '../components/sections/Newsletter'
 import WhatsAppGroup from '../components/sections/WhatsAppGroup'
+import LatestArticles from '../components/sections/LatestArticles'
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
       <Services />
       <Categories />
       <HowItWorks />
+      <LatestArticles />
       <WhatsAppGroup />
       <Newsletter />
     </>

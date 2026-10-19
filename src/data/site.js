@@ -45,6 +45,7 @@ export const navLinks = [
       { label: 'Countries', to: '/countries', hint: 'Study destinations we cover' },
     ],
   },
+  { label: 'Blog', to: '/blog' },
   { label: 'FAQ', to: '/faq' },
   { label: 'About', to: '/about' },
 ]

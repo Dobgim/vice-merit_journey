@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/blog-proxy/feed.xml",
+      "destination": "https://blog.meritleaders.com/feed.xml"
+    },
+    {
+      "source": "/blog-proxy/home",
+      "destination": "https://blog.meritleaders.com/"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

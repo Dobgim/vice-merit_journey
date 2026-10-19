@@ -13,6 +13,7 @@ import InternshipsPage from './pages/InternshipsPage'
 import OpportunityPage from './pages/OpportunityPage'
 import CountriesPage from './pages/CountriesPage'
 import FAQPage from './pages/FAQPage'
+import BlogPage from './pages/BlogPage'
 import BookConsultationPage from './pages/BookConsultationPage'
 import NotFound from './pages/NotFound'
 import LegalPage from './pages/LegalPage'
@@ -53,6 +54,7 @@ export default function App() {
         <Route path="competitions/:slug" element={<ScholarshipDetail key="competitions" kind="competitions" />} />
         <Route path="countries" element={<CountriesPage />} />
         <Route path="faq" element={<FAQPage />} />
+        <Route path="blog" element={<BlogPage />} />
         <Route path="book-consultation" element={<BookConsultationPage />} />
         <Route path="privacy" element={<LegalPage key="privacy" doc="privacy" />} />
         <Route path="terms" element={<LegalPage key="terms" doc="terms" />} />
