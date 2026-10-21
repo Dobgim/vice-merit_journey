@@ -12,6 +12,7 @@ import DeadlineChip from '../ui/DeadlineChip'
 import Flyer from '../ui/Flyer'
 import OrgLogo from '../ui/OrgLogo'
 import useNow from '../../hooks/useNow'
+import { COST_FILTERS, hasApplicationFee } from '../../lib/fees'
 import Icon from '../ui/Icon'
 
 const SORTS = {
@@ -49,6 +50,7 @@ export const ScholarshipCard = forwardRef(function ScholarshipCard({ item, kind 
   const badge = fundingBadge(item.funding)
   const now = useNow(60_000)
   const closed = deadlineStatus(item.deadline, now).state === 'closed'
+  const fee = hasApplicationFee(item)
   const href = `${config.path}/${item.slug}`
 
   return (
@@ -96,8 +98,13 @@ export const ScholarshipCard = forwardRef(function ScholarshipCard({ item, kind 
           <p className="mt-3 flex-1 text-base leading-[1.7] text-navy-700/80">{item.summary}</p>
 
           <div className="mt-5 flex flex-wrap gap-1.5">
+            {fee && (
+              <Badge variant="danger" icon="wallet">
+                Application fee
+              </Badge>
+            )}
             <Badge variant="outline">{item.level}</Badge>
-            {item.tags?.map((t) => (
+            {item.tags?.filter((t) => !(fee && /fee/i.test(t))).map((t) => (
               <Badge key={t} variant="outline">
                 {t}
               </Badge>
@@ -170,6 +177,42 @@ function FilterRail({ filters, filter, onChange }) {
   )
 }
 
+/** All / Free to apply / Application fee — whether applying costs money. */
+function CostToggle({ cost, counts, onChange }) {
+  return (
+    <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+      <span className="text-sm font-medium text-navy-600">Cost to apply:</span>
+      <div role="group" aria-label="Cost to apply" className="inline-flex rounded-full border border-navy-900/10 bg-white p-1 shadow-soft">
+        {Object.entries(COST_FILTERS).map(([key, { label }]) => {
+          const active = cost === key
+          return (
+            <button
+              key={key}
+              type="button"
+              onClick={() => onChange(key)}
+              aria-pressed={active}
+              className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition-colors duration-300 ${
+                active
+                  ? key === 'fee'
+                    ? 'bg-rose-600 text-white'
+                    : key === 'free'
+                      ? 'bg-emerald-600 text-white'
+                      : 'bg-navy-900 text-white'
+                  : 'text-navy-700 hover:text-navy-950'
+              }`}
+            >
+              {key === 'free' && <Icon name="check" className="h-3.5 w-3.5" />}
+              {key === 'fee' && <Icon name="wallet" className="h-3.5 w-3.5" />}
+              {label}
+              <span className={`text-xs ${active ? 'text-white/75' : 'text-navy-400'}`}>{counts[key]}</span>
+            </button>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 const controlBase =
   'h-12 w-full rounded-xl border border-navy-900/[0.12] bg-white text-base text-navy-950 transition-colors duration-300 hover:border-navy-900/25 focus:outline-none focus:ring-2 focus:ring-gold-400/60'
 
@@ -187,6 +230,7 @@ export default function Scholarships({ kind = 'scholarships' }) {
 
   const filterLabels = config.filters.map((f) => f.label)
   const filter = filterLabels.includes(params.get('type')) ? params.get('type') : 'All'
+  const cost = COST_FILTERS[params.get('cost')] ? params.get('cost') : 'all'
   const query = params.get('q') ?? ''
   const country = params.get('country') ?? 'All'
   const sort = SORTS[params.get('sort')] ? params.get('sort') : 'deadline'
@@ -207,12 +251,16 @@ export default function Scholarships({ kind = 'scholarships' }) {
     const test = config.filters.find((f) => f.label === filter).test
     const list = items
       .filter(test)
+      .filter(COST_FILTERS[cost].test)
       .filter((i) => matchesQuery(i, query.trim()))
       .filter((i) => country === 'All' || i.country === country)
     return [...list].sort(SORTS[sort].fn)
-  }, [items, config, filter, query, country, sort])
+  }, [items, config, filter, cost, query, country, sort])
 
-  const hasRefinements = filter !== 'All' || query || country !== 'All'
+  const feeCount = useMemo(() => items.filter(hasApplicationFee).length, [items])
+  const costCounts = { all: items.length, free: items.length - feeCount, fee: feeCount }
+
+  const hasRefinements = filter !== 'All' || cost !== 'all' || query || country !== 'All'
 
   return (
     <Section id={kind} tone="light">
@@ -275,6 +323,7 @@ export default function Scholarships({ kind = 'scholarships' }) {
 
         <Reveal delay={0.15} className="mt-6">
           <FilterRail filters={config.filters} filter={filter} onChange={(f) => setParam('type', f, 'All')} />
+          <CostToggle cost={cost} counts={costCounts} onChange={(c) => setParam('cost', c, 'all')} />
         </Reveal>
 
         <div className="mt-6 flex flex-wrap items-center justify-between gap-3 text-sm text-navy-600">

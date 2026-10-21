@@ -6,6 +6,7 @@ import Newsletter from '../components/sections/Newsletter'
 import WhatsAppGroup from '../components/sections/WhatsAppGroup'
 import { ScholarshipCard } from '../components/sections/Scholarships'
 import { Badge, Card, IconTile, Section } from '../components/ui/Primitives'
+import { hasApplicationFee } from '../lib/fees'
 import Reveal from '../components/ui/Reveal'
 import Button from '../components/ui/Button'
 import DeadlineChip from '../components/ui/DeadlineChip'
@@ -225,6 +226,9 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
         <div className="flex flex-wrap items-center gap-2">
           <Badge variant={/fully|paid|seed|prize|grant/i.test(s.funding ?? '') ? 'gold' : 'dark'} icon="star">
             {s.funding}
+          </Badge>
+          <Badge variant={hasApplicationFee(s) ? 'danger' : 'success'} icon={hasApplicationFee(s) ? 'wallet' : 'check'}>
+            {hasApplicationFee(s) ? 'Application fee' : 'Free to apply'}
           </Badge>
           <DeadlineChip deadline={s.deadline} tone="dark" />
           <Badge variant="dark" icon="calendar">
