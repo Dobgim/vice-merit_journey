@@ -14,6 +14,9 @@ export function parseDate(iso) {
   return new Date(y, m - 1, d)
 }
 
+/** The site lists only calls with a fixed closing date — rolling and "varies" calls are left out. */
+export const hasFixedDeadline = (item) => Boolean(parseDate(item?.deadline))
+
 /** "5 Nov 2026". Falls back to the raw value for non-ISO strings. */
 export function formatDate(iso) {
   const date = parseDate(iso)

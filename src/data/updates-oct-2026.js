@@ -6,7 +6,7 @@
  * the programme's own application page instead of a homepage or web search.
  */
 import { applyLinks } from './applyLinks'
-import { formatDate } from '../lib/deadline'
+import { formatDate, hasFixedDeadline } from '../lib/deadline'
 import { logoDomain } from '../lib/logo'
 import { retiredSlugs, withDirectLink } from './fixes-oct21-2026'
 
@@ -134,8 +134,7 @@ export const removed = new Set(['french-institute-for-research-in-africa-grants'
 /** Apply corrections and verified application links to a list of listings. */
 export function applyUpdates(items) {
   return items
-    .filter((i) => !removed.has(i.slug) && !retiredSlugs.has(i.slug))
-    .map((i) => {
+    .filter((i) => !removed.has(i.slug) && !retiredSlugs.has(i.slug))    .map((i) => {
       const fix = corrections[i.slug]
       const link = applyLinks[i.slug]
       let out = fix ? { ...i, ...fix } : i
@@ -149,4 +148,5 @@ export function applyUpdates(items) {
       if (link) out = { ...out, logoDomain: logoDomain(out) ?? undefined, officialUrl: link, officialSearch: false }
       return withDirectLink(out)
     })
+    .filter(hasFixedDeadline)
 }
