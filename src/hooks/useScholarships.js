@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { kinds } from '../data/opportunities'
 import { requirements } from '../data/requirements'
+import { retiredSlugs, withDirectLink } from '../data/fixes-oct21-2026'
 import { fetchOpportunities } from '../lib/supabase'
 import { deadlineStatus, slugify } from '../lib/deadline'
 import useNow from './useNow'
@@ -23,8 +24,12 @@ function withRequirements(item, kind) {
   return out
 }
 
+// Saved listings get the same direct application links and retirements as the built-in ones.
 const prepare = (list, kind) =>
-  list.map((s) => withRequirements(s.slug ? s : { ...s, slug: slugify(s.name) }, kind))
+  list
+    .map((s) => (s.slug ? s : { ...s, slug: slugify(s.name) }))
+    .filter((s) => !retiredSlugs.has(s.slug))
+    .map((s) => withRequirements(withDirectLink(s), kind))
 
 // Fetched once per type per session and shared, so moving between a listing
 // and a detail page never re-requests or flashes the bundled data.

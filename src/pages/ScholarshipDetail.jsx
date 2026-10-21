@@ -161,6 +161,8 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
 
   const status = deadlineStatus(s.deadline)
   const helpHref = `/book-consultation?scholarship=${encodeURIComponent(s.name)}`
+  // Only ever link to the funder's own page — never a web search.
+  const applyUrl = !s.officialSearch && s.officialUrl
   const pageUrl = typeof window !== 'undefined' ? window.location.href : ''
 
   const facts = [
@@ -191,7 +193,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
         '@type': 'MonetaryGrant',
         name: s.name,
         description: s.summary,
-        url: s.officialUrl,
+        url: applyUrl || pageUrl,
         funder: { '@type': 'Organization', name: s.org },
       },
       ...(s.faqs?.length
@@ -237,9 +239,9 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
         </div>
 
         <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-          {s.officialUrl && (
-            <Button href={s.officialUrl} target="_blank" rel="noopener noreferrer" variant="gold" size="lg" icon="external">
-              {s.officialSearch ? 'Find the official call' : status.state === 'closed' ? 'Official page' : 'Apply on official site'}
+          {applyUrl && (
+            <Button href={applyUrl} target="_blank" rel="noopener noreferrer" variant="gold" size="lg" icon="external">
+              {status.state === 'closed' ? 'Official page' : 'Apply on official site'}
             </Button>
           )}
           <Button to={helpHref} variant="ghostLight" size="lg" icon="arrowRight">
@@ -410,10 +412,10 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
                     </li>
                   ))}
                 </ol>
-                {s.officialUrl && (
+                {applyUrl && (
                   <div className="mt-7 flex flex-col gap-3 border-t border-navy-900/[0.07] pt-6 sm:flex-row">
-                    <Button href={s.officialUrl} target="_blank" rel="noopener noreferrer" size="md" icon="external">
-                      {s.officialSearch ? 'Find the official call' : 'Go to official application'}
+                    <Button href={applyUrl} target="_blank" rel="noopener noreferrer" size="md" icon="external">
+                      Apply on official site
                     </Button>
                     <Button to={helpHref} variant="outline" size="md" icon="arrowRight">
                       Have an advisor review my file

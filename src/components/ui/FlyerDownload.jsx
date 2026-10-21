@@ -38,7 +38,7 @@ export default function FlyerDownload({ item, kind, label }) {
   const share = async () => {
     const file = new File([blob], fileName, { type: 'image/jpeg' })
     try {
-      await navigator.share({ files: [file], title: item.name, text: `${item.name} — apply here: ${item.officialUrl}` })
+      await navigator.share({ files: [file], title: item.name, text: `${item.name} — apply here: ${(!item.officialSearch && item.officialUrl) || window.location.href}` })
     } catch {
       /* cancelled */
     }
@@ -78,7 +78,7 @@ export default function FlyerDownload({ item, kind, label }) {
           </button>
         ) : (
           <a
-            href={`https://wa.me/?text=${encodeURIComponent(`${item.name} — apply here: ${item.officialUrl}`)}`}
+            href={`https://wa.me/?text=${encodeURIComponent(`${item.name} — apply here: ${(!item.officialSearch && item.officialUrl) || window.location.href}`)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex h-10 items-center justify-center gap-2 rounded-full border border-navy-900/15 bg-white px-4 text-sm font-semibold text-navy-900 hover:border-navy-900/35"

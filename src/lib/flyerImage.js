@@ -342,9 +342,12 @@ export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholars
   roundRect(ctx, PAD, panelY, W - PAD * 2, qrPanelH, 22)
   ctx.fill()
   const qrSize = 136
-  if (item.officialUrl) {
+  // Never print a web-search link: without an official page the flyer points to our listing instead.
+  const applyUrl = !item.officialSearch && item.officialUrl
+  const target = applyUrl || `${window.location.origin}/${kind}/${item.slug}`
+  {
     const qr = document.createElement('canvas')
-    await QRCode.toCanvas(qr, item.officialUrl, { width: qrSize, margin: 0, errorCorrectionLevel: 'M', color: { dark: C.navy950, light: '#ffffff' } })
+    await QRCode.toCanvas(qr, target, { width: qrSize, margin: 0, errorCorrectionLevel: 'M', color: { dark: C.navy950, light: '#ffffff' } })
     ctx.drawImage(qr, PAD + 20, panelY + 20, qrSize, qrSize)
   }
   const tx = PAD + 20 + qrSize + 28
@@ -352,15 +355,15 @@ export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholars
   ctx.font = `800 19px ${SANS}`
   ctx.letterSpacing = '3px'
   ctx.fillStyle = C.gold700
-  ctx.fillText(item.officialSearch ? 'FIND THE OFFICIAL CALL' : 'APPLY HERE', tx, panelY + 50)
+  ctx.fillText(applyUrl ? 'APPLY HERE' : 'FULL DETAILS', tx, panelY + 50)
   ctx.letterSpacing = '0px'
   ctx.font = `700 25px ${SANS}`
   ctx.fillStyle = C.navy950
-  const urlText = item.officialSearch ? `Search online for “${item.name}”` : displayUrl(item.officialUrl).replace(/\//g, '/ ')
+  const urlText = displayUrl(target).replace(/\//g, '/ ')
   wrap(ctx, urlText, tw, 2).map((l) => l.replace(/\/ /g, '/')).forEach((l, i) => ctx.fillText(l, tx, panelY + 88 + i * 32))
   ctx.font = `400 20px ${SANS}`
   ctx.fillStyle = C.navy600
-  ctx.fillText(item.officialSearch ? 'Scan the code to search for the official page.' : 'Scan the code or open the link to apply.', tx, panelY + qrPanelH - 24)
+  ctx.fillText(applyUrl ? 'Scan the code or open the link to apply.' : 'Scan the code for eligibility and how to apply.', tx, panelY + qrPanelH - 24)
 
   /* Contacts — one horizontal row, social pages underneath */
   const cy0 = H - 36 - contactH

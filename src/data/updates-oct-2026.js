@@ -8,6 +8,7 @@
 import { applyLinks } from './applyLinks'
 import { formatDate } from '../lib/deadline'
 import { logoDomain } from '../lib/logo'
+import { retiredSlugs, withDirectLink } from './fixes-oct21-2026'
 
 export const corrections = {
   // Official page: a bursary to attend the One Young World Summit; closed 16 Sep.
@@ -133,7 +134,7 @@ export const removed = new Set(['french-institute-for-research-in-africa-grants'
 /** Apply corrections and verified application links to a list of listings. */
 export function applyUpdates(items) {
   return items
-    .filter((i) => !removed.has(i.slug))
+    .filter((i) => !removed.has(i.slug) && !retiredSlugs.has(i.slug))
     .map((i) => {
       const fix = corrections[i.slug]
       const link = applyLinks[i.slug]
@@ -146,6 +147,6 @@ export function applyUpdates(items) {
       }
       // Keep the logo from the organisation's main site (application pages often live on a portal).
       if (link) out = { ...out, logoDomain: logoDomain(out) ?? undefined, officialUrl: link, officialSearch: false }
-      return out
+      return withDirectLink(out)
     })
 }
