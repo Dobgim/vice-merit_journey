@@ -10,13 +10,14 @@ import { competitions as rawCompetitions, fellowships as rawFellowships, newGran
 import { globalFellowships, globalGrants, globalInternships, globalScholarships } from './listings-global-2026'
 import { verifiedFellowships, verifiedGrants, verifiedInternships, verifiedScholarships } from './listings-verified-oct17-2026'
 import { oct21Fellowships, oct21Scholarships } from './listings-oct21-2026'
+import { autoCompetitions, autoFellowships, autoGrants, autoInternships, autoScholarships } from './listings-auto'
 import { applyUpdates } from './updates-oct-2026'
 
-const allScholarships = applyUpdates([...scholarships, ...newScholarships, ...globalScholarships, ...verifiedScholarships, ...oct21Scholarships])
-const allGrants = applyUpdates([...grants, ...newGrants, ...globalGrants, ...verifiedGrants])
-const allInternships = applyUpdates([...internships, ...newInternships, ...globalInternships, ...verifiedInternships])
-const fellowships = applyUpdates([...rawFellowships, ...globalFellowships, ...verifiedFellowships, ...oct21Fellowships])
-const competitions = applyUpdates(rawCompetitions)
+const allScholarships = applyUpdates([...scholarships, ...newScholarships, ...globalScholarships, ...verifiedScholarships, ...oct21Scholarships, ...autoScholarships])
+const allGrants = applyUpdates([...grants, ...newGrants, ...globalGrants, ...verifiedGrants, ...autoGrants])
+const allInternships = applyUpdates([...internships, ...newInternships, ...globalInternships, ...verifiedInternships, ...autoInternships])
+const fellowships = applyUpdates([...rawFellowships, ...globalFellowships, ...verifiedFellowships, ...oct21Fellowships, ...autoFellowships])
+const competitions = applyUpdates([...rawCompetitions, ...autoCompetitions])
 
 const SCHOLARSHIP_FILTERS = [
   { label: 'All', test: () => true },
