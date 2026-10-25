@@ -3,7 +3,12 @@
  * event and reminders a week and a day before. Works with Google Calendar,
  * Outlook and Apple Calendar.
  */
-const ics = (text = '') => String(text).replace(/\/g, '\\').replace(/[,;]/g, (c) => `\${c}`).replace(/\r?\n/g, '\n')
+// iCalendar text escaping: backslash, comma and semicolon get a backslash; newlines become \n.
+const ics = (text = '') =>
+  String(text)
+    .replace(/\\/g, '\\\\')
+    .replace(/[,;]/g, (c) => '\\' + c)
+    .replace(/\r?\n/g, '\\n')
 const day = (iso) => iso.slice(0, 10).replace(/-/g, '')
 
 function nextDay(iso) {
