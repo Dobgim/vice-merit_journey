@@ -7,6 +7,9 @@ import WhatsAppGroup from '../components/sections/WhatsAppGroup'
 import { ScholarshipCard } from '../components/sections/Scholarships'
 import { Badge, Card, IconTile, Section } from '../components/ui/Primitives'
 import { hasApplicationFee } from '../lib/fees'
+import { postedOn } from '../lib/timing'
+import useSaved, { toggleSaved } from '../lib/saved'
+import { downloadDeadline } from '../lib/calendar'
 import Reveal from '../components/ui/Reveal'
 import Button from '../components/ui/Button'
 import DeadlineChip from '../components/ui/DeadlineChip'
@@ -87,6 +90,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
   // Include closed calls so old links and flyers explain that the call has ended.
   const items = useOpportunities(kind, { includeClosed: true })
   const now = useNow(60_000)
+  const isSaved = useSaved().has(slug)
   const s = items.find((i) => i.slug === slug)
 
   const related = useMemo(() => {
@@ -175,6 +179,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
     { label: 'Eligible applicants', value: s.nationalities, icon: 'users' },
     { label: 'Fields of study', value: s.fields, icon: 'book' },
     { label: 'Application deadline', value: s.deadline ? formatDate(s.deadline) : s.deadlineNote ?? 'Rolling', icon: 'calendar' },
+    { label: 'Posted', value: postedOn(s) ? formatDate(postedOn(s)) : null, icon: 'sparkle' },
     { label: 'Last verified', value: s.verified ? formatDate(s.verified) : null, icon: 'shield' },
   ].filter((f) => f.value)
 
@@ -247,6 +252,17 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
           <Button to={helpHref} variant="ghostLight" size="lg" icon="arrowRight">
             Get expert help applying
           </Button>
+        </div>
+
+        <div className="mt-3 flex flex-wrap gap-3">
+          <Button as="button" type="button" onClick={() => toggleSaved(s.slug)} variant="ghostLight" size="sm" icon="bookmark" iconRight={false} aria-pressed={isSaved}>
+            {isSaved ? 'Saved' : 'Save for later'}
+          </Button>
+          {s.deadline && status.state !== 'closed' && (
+            <Button as="button" type="button" onClick={() => downloadDeadline(s, pageUrl)} variant="ghostLight" size="sm" icon="calendar" iconRight={false}>
+              Add deadline to calendar
+            </Button>
+          )}
         </div>
       </PageHeader>
 

@@ -14,19 +14,22 @@ import OrgLogo from '../ui/OrgLogo'
 import useNow from '../../hooks/useNow'
 import { COST_FILTERS, hasApplicationFee } from '../../lib/fees'
 import Icon from '../ui/Icon'
+import { TIMING_FILTERS, isNew, postedOn } from '../../lib/timing'
+import useSaved, { toggleSaved } from '../../lib/saved'
 
 const SORTS = {
   deadline: { label: 'Deadline (soonest)', fn: byDeadline },
-  name: { label: 'Name (A–Z)', fn: (a, b) => a.name.localeCompare(b.name) },
-  verified: {
-    label: 'Recently verified',
-    fn: (a, b) => String(b.verified ?? '').localeCompare(String(a.verified ?? '')),
+  newest: {
+    label: 'Newest first',
+    fn: (a, b) => String(postedOn(b) ?? '').localeCompare(String(postedOn(a) ?? '')),
   },
+  name: { label: 'Name (A–Z)', fn: (a, b) => a.name.localeCompare(b.name) },
 }
 
 function matchesQuery(item, q) {
   if (!q) return true
-  const haystack = [item.name, item.org, item.country, item.level, item.fields, item.category, ...(item.tags ?? [])]
+  // Includes who can apply, so a search for a nationality ("Nigerian", "African") finds eligible calls.
+  const haystack = [item.name, item.org, item.country, item.level, item.fields, item.category, item.nationalities, item.summary, ...(item.tags ?? [])]
     .join(' ')
     .toLowerCase()
   return q
@@ -51,6 +54,9 @@ export const ScholarshipCard = forwardRef(function ScholarshipCard({ item, kind 
   const now = useNow(60_000)
   const closed = deadlineStatus(item.deadline, now).state === 'closed'
   const fee = hasApplicationFee(item)
+  const fresh = isNew(item, now)
+  const posted = postedOn(item)
+  const saved = useSaved().has(item.slug)
   const href = `${config.path}/${item.slug}`
 
   return (
@@ -64,6 +70,24 @@ export const ScholarshipCard = forwardRef(function ScholarshipCard({ item, kind 
       className="h-full min-w-0"
     >
       <Card className={`group flex h-full min-w-0 flex-col ${closed ? 'opacity-80' : ''}`}>
+        {/* Above the stretched link so it saves instead of opening the listing */}
+        <button
+          type="button"
+          onClick={() => toggleSaved(item.slug)}
+          aria-pressed={saved}
+          aria-label={saved ? `Remove ${item.name} from saved` : `Save ${item.name}`}
+          title={saved ? 'Saved — click to remove' : 'Save for later'}
+          className={`absolute right-3 top-3 z-20 inline-flex h-10 w-10 items-center justify-center rounded-full shadow-soft ring-1 transition-colors ${
+            saved ? 'bg-gold-400 text-navy-950 ring-gold-500' : 'bg-white/90 text-navy-800 ring-navy-900/10 hover:bg-white'
+          }`}
+        >
+          <Icon name="bookmark" className={`h-5 w-5 ${saved ? 'fill-current' : ''}`} />
+        </button>
+        {fresh && (
+          <span className="absolute left-3 top-3 z-20 rounded-full bg-emerald-600 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-soft">
+            New
+          </span>
+        )}
         <div className="overflow-hidden">
           <Flyer
             item={item}
@@ -125,8 +149,9 @@ export const ScholarshipCard = forwardRef(function ScholarshipCard({ item, kind 
             </div>
           </dl>
 
-          <div className="mt-4">
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
             <DeadlineChip deadline={item.deadline} />
+            {posted && <span className="text-xs text-navy-500">Posted {formatDate(posted)}</span>}
           </div>
 
           <span className="mt-6 inline-flex h-10 w-full items-center justify-center gap-2 rounded-full border border-navy-900/15 bg-white/70 text-sm font-semibold text-navy-900 transition-colors duration-300 group-hover:border-navy-900/35 group-hover:bg-navy-900 group-hover:text-white">
@@ -177,37 +202,35 @@ function FilterRail({ filters, filter, onChange }) {
   )
 }
 
-/** All / Free to apply / Application fee — whether applying costs money. */
-function CostToggle({ cost, counts, onChange }) {
+/**
+ * A labelled row of toggle buttons with counts — used for "Show" (new,
+ * closing soon, saved) and "Cost to apply". `styles`/`icons` are per key.
+ */
+function Segmented({ label, options, value, counts, onChange, styles = {}, icons = {} }) {
   return (
     <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
-      <span className="text-sm font-medium text-navy-600">Cost to apply:</span>
-      <div role="group" aria-label="Cost to apply" className="inline-flex rounded-full border border-navy-900/10 bg-white p-1 shadow-soft">
-        {Object.entries(COST_FILTERS).map(([key, { label }]) => {
-          const active = cost === key
-          return (
-            <button
-              key={key}
-              type="button"
-              onClick={() => onChange(key)}
-              aria-pressed={active}
-              className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition-colors duration-300 ${
-                active
-                  ? key === 'fee'
-                    ? 'bg-rose-600 text-white'
-                    : key === 'free'
-                      ? 'bg-emerald-600 text-white'
-                      : 'bg-navy-900 text-white'
-                  : 'text-navy-700 hover:text-navy-950'
-              }`}
-            >
-              {key === 'free' && <Icon name="check" className="h-3.5 w-3.5" />}
-              {key === 'fee' && <Icon name="wallet" className="h-3.5 w-3.5" />}
-              {label}
-              <span className={`text-xs ${active ? 'text-white/75' : 'text-navy-400'}`}>{counts[key]}</span>
-            </button>
-          )
-        })}
+      <span className="text-sm font-medium text-navy-600">{label}:</span>
+      <div role="group" aria-label={label} className="mask-fade-x -mx-5 flex max-w-full overflow-x-auto px-5 sm:mx-0 sm:px-0">
+        <div className="inline-flex shrink-0 rounded-full border border-navy-900/10 bg-white p-1 shadow-soft">
+          {Object.entries(options).map(([key, { label: text }]) => {
+            const active = value === key
+            return (
+              <button
+                key={key}
+                type="button"
+                onClick={() => onChange(key)}
+                aria-pressed={active}
+                className={`inline-flex shrink-0 items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition-colors duration-300 ${
+                  active ? (styles[key] ?? 'bg-navy-900 text-white') : 'text-navy-700 hover:text-navy-950'
+                }`}
+              >
+                {icons[key] && <Icon name={icons[key]} className="h-3.5 w-3.5" />}
+                {text}
+                <span className={`text-xs ${active ? 'text-white/75' : 'text-navy-400'}`}>{counts[key]}</span>
+              </button>
+            )
+          })}
+        </div>
       </div>
     </div>
   )
@@ -231,6 +254,9 @@ export default function Scholarships({ kind = 'scholarships' }) {
   const filterLabels = config.filters.map((f) => f.label)
   const filter = filterLabels.includes(params.get('type')) ? params.get('type') : 'All'
   const cost = COST_FILTERS[params.get('cost')] ? params.get('cost') : 'all'
+  const when = TIMING_FILTERS[params.get('when')] ? params.get('when') : 'all'
+  const saved = useSaved()
+  const now = useNow(60_000)
   const query = params.get('q') ?? ''
   const country = params.get('country') ?? 'All'
   const sort = SORTS[params.get('sort')] ? params.get('sort') : 'deadline'
@@ -252,15 +278,20 @@ export default function Scholarships({ kind = 'scholarships' }) {
     const list = items
       .filter(test)
       .filter(COST_FILTERS[cost].test)
+      .filter((i) => TIMING_FILTERS[when].test(i, now, saved))
       .filter((i) => matchesQuery(i, query.trim()))
       .filter((i) => country === 'All' || i.country === country)
     return [...list].sort(SORTS[sort].fn)
-  }, [items, config, filter, cost, query, country, sort])
+  }, [items, config, filter, cost, when, saved, now, query, country, sort])
 
   const feeCount = useMemo(() => items.filter(hasApplicationFee).length, [items])
   const costCounts = { all: items.length, free: items.length - feeCount, fee: feeCount }
+  const whenCounts = useMemo(
+    () => Object.fromEntries(Object.entries(TIMING_FILTERS).map(([k, f]) => [k, items.filter((i) => f.test(i, now, saved)).length])),
+    [items, now, saved]
+  )
 
-  const hasRefinements = filter !== 'All' || cost !== 'all' || query || country !== 'All'
+  const hasRefinements = filter !== 'All' || cost !== 'all' || when !== 'all' || query || country !== 'All'
 
   return (
     <Section id={kind} tone="light">
@@ -284,7 +315,7 @@ export default function Scholarships({ kind = 'scholarships' }) {
                 type="search"
                 value={query}
                 onChange={(e) => setParam('q', e.target.value, '')}
-                placeholder={`Search ${config.plural}, organisations, countries…`}
+                placeholder={`Search ${config.plural}, countries or your nationality…`}
                 className={`${controlBase} pl-11 pr-4 placeholder:text-navy-400`}
               />
             </label>
@@ -323,7 +354,24 @@ export default function Scholarships({ kind = 'scholarships' }) {
 
         <Reveal delay={0.15} className="mt-6">
           <FilterRail filters={config.filters} filter={filter} onChange={(f) => setParam('type', f, 'All')} />
-          <CostToggle cost={cost} counts={costCounts} onChange={(c) => setParam('cost', c, 'all')} />
+          <Segmented
+            label="Show"
+            options={TIMING_FILTERS}
+            value={when}
+            counts={whenCounts}
+            onChange={(w) => setParam('when', w, 'all')}
+            styles={{ new: 'bg-emerald-600 text-white', week: 'bg-rose-600 text-white', month: 'bg-amber-600 text-white', saved: 'bg-gold-500 text-navy-950' }}
+            icons={{ new: 'sparkle', week: 'clock', month: 'calendar', saved: 'bookmark' }}
+          />
+          <Segmented
+            label="Cost to apply"
+            options={COST_FILTERS}
+            value={cost}
+            counts={costCounts}
+            onChange={(c) => setParam('cost', c, 'all')}
+            styles={{ free: 'bg-emerald-600 text-white', fee: 'bg-rose-600 text-white' }}
+            icons={{ free: 'check', fee: 'wallet' }}
+          />
         </Reveal>
 
         <div className="mt-6 flex flex-wrap items-center justify-between gap-3 text-sm text-navy-600">
