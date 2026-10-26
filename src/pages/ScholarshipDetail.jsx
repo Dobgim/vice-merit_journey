@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Seo from '../components/layout/Seo'
 import PageHeader from '../components/layout/PageHeader'
 import Newsletter from '../components/sections/Newsletter'
@@ -501,6 +501,24 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
                 </div>
               </Card>
 
+
+              <Link
+                to="/eligibility"
+                className="flex items-center gap-3 rounded-2xl border border-gold-400/40 bg-gradient-to-br from-gold-50 to-white p-5 transition-colors hover:border-gold-400"
+              >
+                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-gold-300 to-gold-500 text-navy-950">
+                  <Icon name="checkCircle" className="h-5 w-5" />
+                </span>
+                <span>
+                  <span className="flex items-center gap-1.5 font-semibold text-navy-950">
+                    Am I eligible?
+                    <Icon name="arrowRight" className="h-3.5 w-3.5" />
+                  </span>
+                  <span className="mt-0.5 block text-sm leading-snug text-navy-600">
+                    See every open opportunity that accepts your nationality and level.
+                  </span>
+                </span>
+              </Link>
 
               <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-navy-900 to-navy-950 p-6 text-white shadow-lift">
                 <div aria-hidden className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-gold-400/25 blur-[60px]" />

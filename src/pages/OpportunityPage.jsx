@@ -36,8 +36,8 @@ export default function OpportunityPage({ kind }) {
           <Button to={`/book-consultation?package=${encodeURIComponent(c.help)}`} variant="gold" size="lg" icon="arrowRight">
             Get help with my application
           </Button>
-          <Button href="#alerts" variant="ghostLight" size="lg" icon="bell" iconRight={false}>
-            Get alerts
+          <Button to="/eligibility" variant="ghostLight" size="lg" icon="checkCircle" iconRight={false}>
+            Am I eligible?
           </Button>
         </div>
       </PageHeader>

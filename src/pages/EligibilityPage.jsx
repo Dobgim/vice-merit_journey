@@ -13,11 +13,16 @@ const KEY = 'ml_eligibility_profile'
 const BLANK = { country: '', level: '', kind: '', field: '' }
 
 function loadProfile() {
+  let saved = {}
   try {
-    return { ...BLANK, ...JSON.parse(localStorage.getItem(KEY) ?? '{}') }
+    saved = JSON.parse(localStorage.getItem(KEY) ?? '{}')
   } catch {
-    return BLANK
+    /* storage blocked */
   }
+  // Choices passed in the link (e.g. from the home page) win over saved ones.
+  const params = new URLSearchParams(window.location.search)
+  const fromLink = Object.fromEntries(['country', 'level', 'kind'].filter((k) => params.has(k)).map((k) => [k, params.get(k)]))
+  return { ...BLANK, ...saved, ...fromLink }
 }
 
 const control =

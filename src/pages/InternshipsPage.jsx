@@ -26,8 +26,8 @@ export default function InternshipsPage() {
           <Button to="/book-consultation?package=Internship%20application" variant="gold" size="lg" icon="arrowRight">
             Get help with my application
           </Button>
-          <Button href="#alerts" variant="ghostLight" size="lg" icon="bell" iconRight={false}>
-            Get internship alerts
+          <Button to="/eligibility" variant="ghostLight" size="lg" icon="checkCircle" iconRight={false}>
+            Am I eligible?
           </Button>
         </div>
       </PageHeader>

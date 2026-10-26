@@ -1,5 +1,6 @@
 import Seo from '../components/layout/Seo'
 import Hero from '../components/sections/Hero'
+import EligibilityTeaser from '../components/sections/EligibilityTeaser'
 import WhyChooseUs from '../components/sections/WhyChooseUs'
 import Services from '../components/sections/Services'
 import Categories from '../components/sections/Categories'
@@ -16,6 +17,7 @@ export default function Home() {
         description="Merit Leaders matches undergraduate, graduate, postgraduate and international students with scholarships they are genuinely competitive for — then supports every step of the application."
       />
       <Hero />
+      <EligibilityTeaser />
       <WhyChooseUs />
       <Services />
       <Categories />

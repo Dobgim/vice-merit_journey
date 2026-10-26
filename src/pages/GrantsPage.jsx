@@ -26,8 +26,8 @@ export default function GrantsPage() {
           <Button to="/book-consultation?package=Grant%20application" variant="gold" size="lg" icon="arrowRight">
             Get help with a grant proposal
           </Button>
-          <Button href="#alerts" variant="ghostLight" size="lg" icon="bell" iconRight={false}>
-            Get grant alerts
+          <Button to="/eligibility" variant="ghostLight" size="lg" icon="checkCircle" iconRight={false}>
+            Am I eligible?
           </Button>
         </div>
       </PageHeader>
