@@ -24,7 +24,7 @@ export default function ScholarshipsPage() {
       >
         <OpportunityCount kind="scholarships" />
         <div className="flex flex-col gap-3 sm:flex-row">
-          <Button to="/book-consultation" variant="gold" size="lg" icon="arrowRight">
+          <Button to="/eligibility" variant="gold" size="lg" icon="arrowRight">
             Check my eligibility
           </Button>
           <Button href="#alerts" variant="ghostLight" size="lg" icon="bell" iconRight={false}>

@@ -43,12 +43,14 @@ export const navLinks = [
   {
     label: 'Opportunities',
     children: [
+      { label: 'Am I eligible?', to: '/eligibility', hint: 'See only what you can apply for' },
       { label: 'Scholarships', to: '/scholarships', hint: 'Fully and partially funded study' },
       { label: 'Fellowships', to: '/fellowships', hint: 'Leadership, research and creative' },
       { label: 'Grants', to: '/grants', hint: 'Seed capital, research and prizes' },
       { label: 'Internships', to: '/internships', hint: 'Paid and stipend-supported roles' },
       { label: 'Competitions & Awards', to: '/competitions', hint: 'Essays, writing, photography, science' },
       { label: 'Countries', to: '/countries', hint: 'Study destinations we cover' },
+      { label: 'Browse by nationality & level', to: '/explore', hint: 'Pages for your country and level' },
     ],
   },
   { label: 'Blog', to: '/blog' },
