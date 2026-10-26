@@ -1,5 +1,5 @@
 Title: How to Apply for the Swiss Government Excellence Scholarship 2027–28
-Meta description: A plain-English guide for Cameroonian and African researchers: what the Swiss Government Excellence Scholarship offers, and how to apply before your deadline.
+Meta description: A plain-English guide for researchers: what the Swiss Government Excellence Scholarship offers, and how to apply before your deadline.
 Suggested image: A researcher at a laptop in a bright university library, with the Swiss Alps visible through the window
 
 If you are finishing a master's degree and dream of doing a PhD or a research stay in Switzerland, one scholarship deserves a place on your shortlist: the **Swiss Government Excellence Scholarship**. Many embassy deadlines fall between now and early December, so this is the moment to act.
@@ -27,7 +27,7 @@ Rules on length of funding and extensions are detailed in the official FAQ, so p
 
 This is the part that trips people up. The deadline is **not the same for every country**. Each country has its own opening date and submission deadline, published by SBFI in a country list (PDFs organised by region, including Africa). For example, one African country in the official list has a deadline of 27 November 2026, but yours may differ.
 
-**Your task today:** open the official page, find the Africa or A–Z country list, look up Cameroon (or your own country), and write down the exact opening date, deadline, and which scholarship types are offered to you. Do not rely on anyone else's date, including ours.
+**Your task today:** open the official page, find the A–Z country list, look up your country, and write down the exact opening date, deadline, and which scholarship types are offered to you. Do not rely on anyone else's date, including ours.
 
 Official page: [Swiss Government Excellence Scholarships (SBFI)](https://www.sbfi.admin.ch/en/swiss-government-excellence-scholarships)
 
