@@ -20,7 +20,7 @@ export function logoDomain(item) {
  * to show as a logo, so callers fall back to the country flag.
  */
 export const MIN_LOGO_PX = 48
-export const isUsableLogo = (img, min = MIN_LOGO_PX) => Boolean(img) && img.naturalWidth >= min
+export const isUsableLogo = (img, min = MIN_LOGO_PX) => Boolean(img) && (img.naturalWidth || img.width) >= min
 
 export function logoUrl(item, size = 128) {
   if (item.logo) return item.logo

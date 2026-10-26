@@ -3,11 +3,9 @@
  * shows letters like "US"), so country flags come from flagcdn.com; other
  * emoji such as 🌍 are drawn as-is.
  */
-export function isoFromEmoji(emoji = '') {
-  const points = [...emoji].map((c) => c.codePointAt(0))
-  if (points.length !== 2 || points.some((p) => p < 0x1f1e6 || p > 0x1f1ff)) return null
-  return points.map((p) => String.fromCharCode(p - 0x1f1e6 + 97)).join('')
-}
+import { isoFromEmoji } from '../../lib/flag'
+
+export { isoFromEmoji }
 
 export default function Flag({ emoji, className = 'h-5 w-7', emojiClassName = '' }) {
   const iso = isoFromEmoji(emoji)

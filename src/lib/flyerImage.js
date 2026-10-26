@@ -9,7 +9,7 @@
 import QRCode from 'qrcode'
 import { SITE_URL, company } from '../data/site'
 import { formatDate } from './deadline'
-import { isoFromEmoji } from '../components/ui/Flag'
+import { isoFromEmoji } from './flag'
 import { isUsableLogo, logoUrl } from './logo'
 
 const W = 1080
@@ -50,6 +50,29 @@ function loadImage(src, crossOrigin) {
     }),
     6000
   )
+}
+
+/**
+ * Where flyers are drawn. The browser by default; the site build passes a
+ * Node canvas instead (see build-seo.js) to make the images social posts use.
+ */
+const browserEnv = {
+  createCanvas: (width, height) => Object.assign(document.createElement('canvas'), { width, height }),
+  loadImage,
+  emoji: true,
+}
+
+/** QR code drawn module by module, so it works with any canvas. */
+function drawQr(ctx, text, x, y, size) {
+  const { modules } = QRCode.create(text, { errorCorrectionLevel: 'M' })
+  const cell = Math.floor(size / modules.size)
+  const offset = Math.floor((size - cell * modules.size) / 2)
+  ctx.fillStyle = C.white
+  ctx.fillRect(x, y, size, size)
+  ctx.fillStyle = C.navy950
+  for (let r = 0; r < modules.size; r++)
+    for (let c = 0; c < modules.size; c++)
+      if (modules.get(r, c)) ctx.fillRect(x + offset + c * cell, y + offset + r * cell, cell, cell)
 }
 
 function roundRect(ctx, x, y, w, h, r) {
@@ -137,7 +160,7 @@ function drawEuFlag(ctx, x, y, w, h) {
 }
 
 async function ensureFonts() {
-  if (!document.fonts?.load) return
+  if (typeof document === 'undefined' || !document.fonts?.load) return
   await withTimeout(
     Promise.all(
       [`700 64px ${DISPLAY}`, `600 40px ${DISPLAY}`, `400 24px ${SANS}`, `600 24px ${SANS}`, `800 20px ${SANS}`].map((f) =>
@@ -175,21 +198,19 @@ const shortUrl = (u = '') => u.replace(/^https?:\/\//, '').replace(/^www\./, '')
 /** This opportunity's page on meritleaders.com — what flyers and shares link to. */
 export const listingUrl = (item, kind = 'scholarships') => `${SITE_URL}/${kind}/${item.slug}`
 
-export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholarship' } = {}) {
+export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholarship', env = browserEnv, social = false } = {}) {
   await ensureFonts()
   const accent = ACCENT[kind] ?? ACCENT.scholarships
   const iso = isoFromEmoji(item.flag)
   const orgLogoSrc = logoUrl(item, 256)
   const [logo, flag, orgLogo] = await Promise.all([
-    loadImage('/logo-mark.png'),
-    iso ? loadImage(`https://flagcdn.com/w160/${iso}.png`, true) : null,
-    orgLogoSrc ? loadImage(orgLogoSrc, true) : null,
+    env.loadImage('/logo-mark.png'),
+    iso ? env.loadImage(`https://flagcdn.com/w160/${iso}.png`, true) : null,
+    orgLogoSrc ? env.loadImage(orgLogoSrc, true) : null,
   ])
 
   // Content is drawn on a transparent canvas, then placed on the background.
-  const content = document.createElement('canvas')
-  content.width = W
-  content.height = H
+  const content = env.createCanvas(W, H)
   const ctx = content.getContext('2d')
   ctx.textBaseline = 'alphabetic'
 
@@ -230,7 +251,7 @@ export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholars
     else drawEuFlag(ctx, x, y, 72, 48)
     ctx.restore()
     x += 92
-  } else if (!iso && item.flag) {
+  } else if (!iso && item.flag && env.emoji) {
     ctx.font = `44px "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif`
     ctx.textBaseline = 'middle'
     ctx.fillText(item.flag, x, y + 26)
@@ -292,6 +313,9 @@ export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholars
   const benefits = (item.benefits ?? []).filter(Boolean)
   const reqs = (item.eligibility ?? []).filter((e) => !/^(Open to|Level):/.test(e))
   const docs = (item.documents ?? []).filter(Boolean)
+  // Extra sections that fill the page when a listing has short lists; dropped first if space runs out.
+  const who = [item.nationalities, item.fields && `Fields: ${item.fields}`].filter(Boolean)
+  const notes = [item.deadlineNote].filter(Boolean)
 
   const contactH = 92
   const qrPanelH = 176
@@ -312,8 +336,10 @@ export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholars
       cy = bullets(g, list, inner, cy + 36, accent, { max, lines: lim.lines, size: 21 }) + 4
     }
     section('WHAT YOU GET', benefits, lim.b)
+    section('WHO CAN APPLY', who, lim.x ? 2 : 0)
     section('REQUIREMENTS', reqs, lim.r)
     section('DOCUMENTS YOU NEED', docs, lim.d)
+    section('GOOD TO KNOW', notes, lim.x ? 1 : 0)
     const h = cy - top + 10
     g.save()
     g.globalCompositeOperation = 'destination-over'
@@ -328,16 +354,15 @@ export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholars
   }
   // Try the fullest version first, then drop items (documents first) until it fits.
   const tries = []
-  for (const lines of [2, 1]) for (let d = 6; d >= 2; d--) for (let r = 5; r >= 2; r--) for (let b = 4; b >= 1; b--) tries.push({ b, r, d, lines })
-  tries.sort((p, q) => q.b + q.r + q.d + q.lines * 3 - (p.b + p.r + p.d + p.lines * 3))
-  const scratch = document.createElement('canvas')
-  scratch.width = W
-  scratch.height = H * 2
+  for (const x of [1, 0]) for (const lines of [2, 1]) for (let d = 6; d >= 2; d--) for (let r = 5; r >= 2; r--) for (let b = 4; b >= 1; b--) tries.push({ b, r, d, lines, x })
+  const score = (t) => t.b + t.r + t.d + t.lines * 3 + t.x * 2
+  tries.sort((p, q) => score(q) - score(p))
+  const scratch = env.createCanvas(W, H * 2)
   const sctx = scratch.getContext('2d')
   const lim = tries.find((t) => {
     sctx.clearRect(0, 0, W, H * 2)
     return drawLists(sctx, y, t) <= room
-  }) ?? { b: 1, r: 1, d: 1, lines: 1 }
+  }) ?? { b: 1, r: 1, d: 1, lines: 1, x: 0 }
   drawLists(ctx, y, lim)
 
   /* Apply panel — compact QR, still easy to scan */
@@ -348,11 +373,7 @@ export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholars
   // The QR code and link send people to this opportunity's page on our site
   // first; that page has the eligibility checklist and the official Apply button.
   const target = listingUrl(item, kind)
-  {
-    const qr = document.createElement('canvas')
-    await QRCode.toCanvas(qr, target, { width: qrSize, margin: 0, errorCorrectionLevel: 'M', color: { dark: C.navy950, light: '#ffffff' } })
-    ctx.drawImage(qr, PAD + 20, panelY + 20, qrSize, qrSize)
-  }
+  drawQr(ctx, target, PAD + 20, panelY + 20, qrSize)
   const tx = PAD + 20 + qrSize + 28
   const tw = W - PAD - 24 - tx
   ctx.font = `800 19px ${SANS}`
@@ -398,32 +419,35 @@ export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholars
     ctx.fillText(socials.join('   ·   '), W / 2, cy0 + 82)
   }
   ctx.textAlign = 'left'
-  const height = H
 
-  /* Background with the content on top */
-  const canvas = document.createElement('canvas')
-  canvas.width = W
-  canvas.height = height
+  /*
+   * Background with the content on top. Social posts are 1080×1350 (Instagram
+   * accepts nothing taller than 4:5): the background fills the whole post and
+   * the A4 content is scaled down and centred on it.
+   */
+  const [width, height] = social ? [1080, 1350] : [W, H]
+  const canvas = env.createCanvas(width, height)
   const out = canvas.getContext('2d')
-  const bg = out.createLinearGradient(0, 0, W, height)
+  const bg = out.createLinearGradient(0, 0, width, height)
   bg.addColorStop(0, C.navy800)
   bg.addColorStop(0.55, C.navy900)
   bg.addColorStop(1, C.navy950)
   out.fillStyle = bg
-  out.fillRect(0, 0, W, height)
-  const glow = out.createRadialGradient(W - 120, 120, 0, W - 120, 120, 520)
+  out.fillRect(0, 0, width, height)
+  const glow = out.createRadialGradient(width - 120, 120, 0, width - 120, 120, 520)
   glow.addColorStop(0, `${accent}55`)
   glow.addColorStop(1, `${accent}00`)
   out.fillStyle = glow
-  out.fillRect(0, 0, W, height)
+  out.fillRect(0, 0, width, height)
   out.strokeStyle = 'rgba(255,255,255,0.045)'
-  for (let gx = W / 2; gx < W; gx += 40) {
+  for (let gx = width / 2; gx < width; gx += 40) {
     out.beginPath()
     out.moveTo(gx, 0)
     out.lineTo(gx, 640)
     out.stroke()
   }
-  out.drawImage(content, 0, 0)
+  const scale = height / H
+  out.drawImage(content, (width - W * scale) / 2, 0, W * scale, height)
   return canvas
 }
 
