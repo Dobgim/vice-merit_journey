@@ -39,11 +39,57 @@ function ActivePill({ overHero }) {
   )
 }
 
+/** One entry in a desktop dropdown; `featured` entries render as a gold-tinted card. */
+function DropdownLink({ item, active }) {
+  if (item.featured) {
+    return (
+      <Link
+        to={item.to}
+        className="mt-2 flex items-start gap-3 rounded-xl border border-gold-400/40 bg-gradient-to-br from-gold-50 to-white p-4 transition-colors hover:border-gold-400"
+      >
+        <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-gold-300 to-gold-500 text-navy-950">
+          <Icon name={item.icon ?? 'check'} className="h-4 w-4" />
+        </span>
+        <span>
+          <span className="flex items-center gap-1.5 text-base font-semibold text-navy-950">
+            <MenuLabel label={item.label} />
+            <Icon name="arrowRight" className="h-3.5 w-3.5" />
+          </span>
+          {item.hint && <span className="mt-0.5 block text-sm leading-snug text-navy-600">{item.hint}</span>}
+        </span>
+      </Link>
+    )
+  }
+  return (
+    <Link
+      to={item.to}
+      className={`flex items-start gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-navy-50 ${active ? 'bg-navy-50' : ''}`}
+    >
+      {item.icon && (
+        <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-navy-50 text-navy-700">
+          <Icon name={item.icon} className="h-4 w-4" />
+        </span>
+      )}
+      <span>
+        <span className="block text-[15px] font-semibold text-navy-950"><MenuLabel label={item.label} /></span>
+        {item.hint && <span className="mt-0.5 block text-sm leading-snug text-navy-500">{item.hint}</span>}
+      </span>
+    </Link>
+  )
+}
+
 /** Desktop dropdown for a link group (e.g. Opportunities → Scholarships, Grants, Internships). */
 function NavGroup({ group, overHero, pathname }) {
   const [open, setOpen] = useState(false)
   const ref = useRef(null)
   const isActive = group.children.some((c) => pathname.startsWith(c.to))
+  // Items with a `section` are shown in columns, one column per section.
+  const sections = group.children.reduce((acc, c) => {
+    const title = c.section ?? null
+    const found = acc.find(([t]) => t === title)
+    found ? found[1].push(c) : acc.push([title, [c]])
+    return acc
+  }, [])
 
   useEffect(() => setOpen(false), [pathname])
   useEffect(() => {
@@ -79,23 +125,28 @@ function NavGroup({ group, overHero, pathname }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 6 }}
             transition={{ duration: 0.18 }}
-            className="absolute left-1/2 top-full z-[80] w-72 -translate-x-1/2 pt-2"
+            className={`absolute left-1/2 top-full z-[80] -translate-x-1/2 pt-2 ${sections.length > 1 ? 'w-[min(680px,calc(100vw-2rem))]' : 'w-72'}`}
           >
-            <ul className="rounded-2xl border border-navy-900/10 bg-white p-2 shadow-lift">
-              {group.children.map((c) => (
-                <li key={c.to}>
-                  <Link
-                    to={c.to}
-                    className={`block rounded-xl px-4 py-3 transition-colors hover:bg-navy-50 ${
-                      pathname.startsWith(c.to) ? 'bg-navy-50' : ''
-                    }`}
-                  >
-                    <span className="block text-base font-semibold text-navy-950"><MenuLabel label={c.label} /></span>
-                    {c.hint && <span className="mt-0.5 block text-sm text-navy-500">{c.hint}</span>}
-                  </Link>
-                </li>
+            <div
+              className={`grid gap-1 rounded-2xl border border-navy-900/10 bg-white p-2 shadow-lift ${
+                sections.length > 1 ? 'grid-cols-2 gap-x-2 p-3' : ''
+              }`}
+            >
+              {sections.map(([title, items]) => (
+                <div key={title ?? 'all'}>
+                  {title && (
+                    <p className="px-3 pb-1.5 pt-2 text-xs font-semibold uppercase tracking-[0.08em] text-navy-500">{title}</p>
+                  )}
+                  <ul>
+                    {items.map((c) => (
+                      <li key={c.to}>
+                        <DropdownLink item={c} active={pathname.startsWith(c.to)} />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
-            </ul>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

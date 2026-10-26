@@ -43,14 +43,15 @@ export const navLinks = [
   {
     label: 'Opportunities',
     children: [
-      { label: 'Am I eligible?', to: '/eligibility', hint: 'See only what you can apply for' },
-      { label: 'Scholarships', to: '/scholarships', hint: 'Fully and partially funded study' },
-      { label: 'Fellowships', to: '/fellowships', hint: 'Leadership, research and creative' },
-      { label: 'Grants', to: '/grants', hint: 'Seed capital, research and prizes' },
-      { label: 'Internships', to: '/internships', hint: 'Paid and stipend-supported roles' },
-      { label: 'Competitions & Awards', to: '/competitions', hint: 'Essays, writing, photography, science' },
-      { label: 'Countries', to: '/countries', hint: 'Study destinations we cover' },
-      { label: 'Browse by nationality & level', to: '/explore', hint: 'Pages for your country and level' },
+      // `section` splits the desktop dropdown into two columns; `featured` is the highlighted card.
+      { label: 'Scholarships', to: '/scholarships', hint: 'Fully and partially funded study', icon: 'cap', section: 'Browse by type' },
+      { label: 'Fellowships', to: '/fellowships', hint: 'Leadership, research and creative', icon: 'star', section: 'Browse by type' },
+      { label: 'Grants', to: '/grants', hint: 'Seed capital, research and prizes', icon: 'wallet', section: 'Browse by type' },
+      { label: 'Internships', to: '/internships', hint: 'Paid and stipend-supported roles', icon: 'building', section: 'Browse by type' },
+      { label: 'Competitions & Awards', to: '/competitions', hint: 'Essays, writing, photography, science', icon: 'award', section: 'Browse by type' },
+      { label: 'Countries', to: '/countries', hint: 'Study destinations we cover', icon: 'globe', section: 'Find your fit' },
+      { label: 'Browse by nationality & level', to: '/explore', hint: 'Pages for your country and level', icon: 'layers', section: 'Find your fit' },
+      { label: 'Am I eligible?', to: '/eligibility', hint: 'Tell us your nationality and level — see only what you can apply for', icon: 'checkCircle', section: 'Find your fit', featured: true },
     ],
   },
   { label: 'Blog', to: '/blog' },
