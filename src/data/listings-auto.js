@@ -57,6 +57,7 @@ const internshipRows = [
 /* ------------------------------------------------------------ Competitions */
 
 const competitionRows = [
+  { name: 'Sillerman First Book Prize for African Poets 2027', org: 'African Poetry Book Fund', country: 'Africa', flag: '🌍', level: 'Unpublished poets', category: 'Writing & essays', focus: 'A first book-length collection of poetry in English', who: 'African poets — born in Africa, a national or resident of an African country, or with African parents — who have not published a full-length poetry collection', amount: 'US$1,000 + publication by the University of Nebraska Press', summary: 'US$1,000 and publication of a first poetry collection for African poets who have not yet published a book of poems.', deadline: '2026-12-01', opens: '2026-09-15', note: 'Free to enter. Submit online through Submittable; manuscripts of at least 50 pages, with no author name on the manuscript. English only (translations are accepted).', url: 'https://africanpoetrybf.brown.edu/contest-prizes/sillerman-prize-for-african-poetry-winners/', logoDomain: 'brown.edu', tags: ['Poetry', 'Africa', 'Free to enter'], added: '2026-10-26' },
 ]
 
 const rows = (kind, list) => list.map(({ added, ...o }) => build(kind, { verified: added, ...o }, SOURCE))

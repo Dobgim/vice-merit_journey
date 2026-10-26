@@ -404,5 +404,6 @@ export const criteria = {
   'planet-forward-storyfest-awards': contest(ALL + ' (college and university students)', NO_AGE),
   'biopage-storytelling-writing-contest': contest(),
   'international-schools-essay-competition-and-debate': contest(ALL + ' (secondary-school students)', 'Age bands are set in the rules'),
+  'sillerman-first-book-prize-for-african-poets-2027': { who: only('African poets — born in Africa, a national or resident of an African country, or with African parents'), degree: NO_DEGREE, age: NO_AGE, language: 'Poems must be in English (translations into English are accepted)', other: 'You must not have published a full-length poetry collection (self-published books that were sold count); staff of the University of Nebraska Press, Akashic Books, Amalion Press and Brown University cannot enter' },
   'arso-continental-essay-competition': contest(only('African students'), 'Categories by school or university level'),
 }
