@@ -7,7 +7,7 @@
  * flyer is crisp and identical everywhere. Loaded on demand (with `qrcode`).
  */
 import QRCode from 'qrcode'
-import { company } from '../data/site'
+import { SITE_URL, company } from '../data/site'
 import { formatDate } from './deadline'
 import { isoFromEmoji } from '../components/ui/Flag'
 import { isUsableLogo, logoUrl } from './logo'
@@ -171,6 +171,9 @@ function bullets(ctx, items, inner, y, accent, { max = 6, lines = 2, size = 24 }
 }
 
 const shortUrl = (u = '') => u.replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/$/, '')
+
+/** This opportunity's page on meritleaders.com — what flyers and shares link to. */
+export const listingUrl = (item, kind = 'scholarships') => `${SITE_URL}/${kind}/${item.slug}`
 
 export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholarship' } = {}) {
   await ensureFonts()
@@ -342,9 +345,9 @@ export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholars
   roundRect(ctx, PAD, panelY, W - PAD * 2, qrPanelH, 22)
   ctx.fill()
   const qrSize = 136
-  // Never print a web-search link: without an official page the flyer points to our listing instead.
-  const applyUrl = !item.officialSearch && item.officialUrl
-  const target = applyUrl || `${window.location.origin}/${kind}/${item.slug}`
+  // The QR code and link send people to this opportunity's page on our site
+  // first; that page has the eligibility checklist and the official Apply button.
+  const target = listingUrl(item, kind)
   {
     const qr = document.createElement('canvas')
     await QRCode.toCanvas(qr, target, { width: qrSize, margin: 0, errorCorrectionLevel: 'M', color: { dark: C.navy950, light: '#ffffff' } })
@@ -355,7 +358,7 @@ export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholars
   ctx.font = `800 19px ${SANS}`
   ctx.letterSpacing = '3px'
   ctx.fillStyle = C.gold700
-  ctx.fillText(applyUrl ? 'APPLY HERE' : 'FULL DETAILS', tx, panelY + 50)
+  ctx.fillText('APPLY HERE', tx, panelY + 50)
   ctx.letterSpacing = '0px'
   ctx.font = `700 25px ${SANS}`
   ctx.fillStyle = C.navy950
@@ -363,7 +366,7 @@ export async function drawFlyer(item, { kind = 'scholarships', label = 'Scholars
   wrap(ctx, urlText, tw, 2).map((l) => l.replace(/\/ /g, '/')).forEach((l, i) => ctx.fillText(l, tx, panelY + 88 + i * 32))
   ctx.font = `400 20px ${SANS}`
   ctx.fillStyle = C.navy600
-  ctx.fillText(applyUrl ? 'Scan the code or open the link to apply.' : 'Scan the code for eligibility and how to apply.', tx, panelY + qrPanelH - 24)
+  ctx.fillText('Scan the code or open the link to apply.', tx, panelY + qrPanelH - 24)
 
   /* Contacts — one horizontal row, social pages underneath */
   const cy0 = H - 36 - contactH

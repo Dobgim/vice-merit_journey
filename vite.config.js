@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import sitemap from './sitemap.js'
 
 // The blog lives on blog.meritleaders.com, which sends no CORS headers, so the
 // site reads it through same-origin /blog-proxy paths (rewritten in vercel.json).
@@ -10,6 +11,6 @@ const blogProxy = {
 }
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), sitemap()],
   server: { port: 5173, open: true, proxy: { '/blog-proxy': blogProxy } },
 })

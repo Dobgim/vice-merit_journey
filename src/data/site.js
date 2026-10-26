@@ -3,6 +3,12 @@
  * Swap any array here for a Supabase query without touching components.
  */
 
+/**
+ * The site's public address. meritleaders.com redirects here, so canonical
+ * links, the sitemap and flyer QR codes all use this exact origin.
+ */
+export const SITE_URL = 'https://www.meritleaders.com'
+
 export const company = {
   name: 'Merit Leaders',
   tagline: 'Scholarship & Education Consultancy',

@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /blog-proxy/
+
+Sitemap: https://www.meritleaders.com/sitemap.xml
