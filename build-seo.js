@@ -67,7 +67,7 @@ function rss(title, description, entries, flyers) {
       <title>${esc(`${item.name} (${what}) — deadline ${prettyDate(item.deadline)}`)}</title>
       <link>${esc(SITE_URL + p)}</link>
       <guid isPermaLink="true">${esc(SITE_URL + p)}</guid>
-      <pubDate>${new Date(`${isoDay(item.posted) ?? isoDay(item.verified) ?? today()}T07:00:00Z`).toUTCString()}</pubDate>
+      <pubDate>${new Date(/T\d\d:\d\d/.test(item.posted ?? '') ? item.posted : `${isoDay(item.posted) ?? isoDay(item.verified) ?? today()}T07:00:00Z`).toUTCString()}</pubDate>
       <category>${esc(kinds[kind].title)}</category>
       <description>${esc(text)}</description>
       <enclosure url="${esc(flyers.get(p) ?? imageFor(item))}" length="0" type="image/jpeg" />

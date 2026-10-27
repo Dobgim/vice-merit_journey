@@ -14,14 +14,14 @@ import OrgLogo from '../ui/OrgLogo'
 import useNow from '../../hooks/useNow'
 import { COST_FILTERS, hasApplicationFee } from '../../lib/fees'
 import Icon from '../ui/Icon'
-import { TIMING_FILTERS, isNew, postedOn } from '../../lib/timing'
+import { TIMING_FILTERS, formatPosted, isNew, postedSortKey } from '../../lib/timing'
 import useSaved, { toggleSaved } from '../../lib/saved'
 
 const SORTS = {
   deadline: { label: 'Deadline (soonest)', fn: byDeadline },
   newest: {
     label: 'Newest first',
-    fn: (a, b) => String(postedOn(b) ?? '').localeCompare(String(postedOn(a) ?? '')),
+    fn: (a, b) => postedSortKey(b) - postedSortKey(a),
   },
   name: { label: 'Name (A–Z)', fn: (a, b) => a.name.localeCompare(b.name) },
 }
@@ -55,7 +55,7 @@ export const ScholarshipCard = forwardRef(function ScholarshipCard({ item, kind 
   const closed = deadlineStatus(item.deadline, now).state === 'closed'
   const fee = hasApplicationFee(item)
   const fresh = isNew(item, now)
-  const posted = postedOn(item)
+  const posted = formatPosted(item, now)
   const saved = useSaved().has(item.slug)
   const href = `${config.path}/${item.slug}`
 
@@ -151,7 +151,7 @@ export const ScholarshipCard = forwardRef(function ScholarshipCard({ item, kind 
 
           <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
             <DeadlineChip deadline={item.deadline} />
-            {posted && <span className="text-xs text-navy-500">Posted {formatDate(posted)}</span>}
+            {posted && <span className="text-xs text-navy-500">Posted {posted}</span>}
           </div>
 
           <span className="mt-6 inline-flex h-10 w-full items-center justify-center gap-2 rounded-full border border-navy-900/15 bg-white/70 text-sm font-semibold text-navy-900 transition-colors duration-300 group-hover:border-navy-900/35 group-hover:bg-navy-900 group-hover:text-white">

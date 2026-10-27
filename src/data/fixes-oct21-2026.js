@@ -7,6 +7,9 @@
  */
 
 import { formatDate } from '../lib/deadline'
+import * as auditA from './audit-oct27-a'
+import * as auditB from './audit-oct27-b'
+import * as auditC from './audit-oct27-c'
 
 /** slug → the page with the call's instructions and application route. */
 export const directLinks = {
@@ -247,6 +250,12 @@ export const callFixes = {
   },
 }
 
+// The 27 Oct 2026 audit (one file per part) adds its removals and corrections here.
+for (const part of [auditA, auditB, auditC]) {
+  for (const slug of Object.keys(part.retired)) retiredSlugs.add(slug)
+  Object.assign(callFixes, part.fixes)
+}
+
 const SEARCH = /google\.[a-z.]+\/search|bing\.com\/search|duckduckgo\.com/i
 
 /** True when a link is a web search or only a site's front page. */
@@ -264,7 +273,7 @@ export function isWeakLink(url) {
 export function withDirectLink(item) {
   const fix = callFixes[item.slug]
   const link = directLinks[item.slug]
-  let out = fix ? { ...item, ...fix } : item
+  let out = fix ? { ...item, ...fix, ...(fix.officialUrl ? { officialSearch: false } : {}) } : item
   // Keep the key dates in step with a corrected deadline.
   if (fix?.deadline && item.timeline) {
     const rest = item.timeline.filter((t) => t.label !== 'Application deadline')

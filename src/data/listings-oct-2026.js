@@ -64,6 +64,7 @@ export function make(kind, o) {
     deadline,
     deadlineNote: o.note ?? (deadline ? undefined : ROLLING),
     verified: o.verified ?? AS_OF,
+    ...(o.posted ? { posted: o.posted } : {}),
     source: o.source ?? SOURCE,
     nationalities: who,
     fields: o.focus,

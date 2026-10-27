@@ -128,7 +128,10 @@ export default function ListingEditor() {
     setSaving(true)
     setError(null)
     try {
-      await api.saveOpportunity({ id, kind, published, data: toListing(form) })
+      // A new listing records the exact moment it was posted; edits keep the original time.
+      const data = toListing(form)
+      if (!id && !data.posted) data.posted = new Date().toISOString()
+      await api.saveOpportunity({ id, kind, published, data })
       navigate(`/admin/listings/${kind}`)
     } catch (err) {
       setError(err)

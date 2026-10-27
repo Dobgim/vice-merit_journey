@@ -7,7 +7,7 @@ import WhatsAppGroup from '../components/sections/WhatsAppGroup'
 import { ScholarshipCard } from '../components/sections/Scholarships'
 import { Badge, Card, IconTile, Section } from '../components/ui/Primitives'
 import { hasApplicationFee } from '../lib/fees'
-import { postedOn } from '../lib/timing'
+import { formatPosted } from '../lib/timing'
 import useSaved, { toggleSaved } from '../lib/saved'
 import { downloadDeadline } from '../lib/calendar'
 import Reveal from '../components/ui/Reveal'
@@ -179,7 +179,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
     { label: 'Eligible applicants', value: s.nationalities, icon: 'users' },
     { label: 'Fields of study', value: s.fields, icon: 'book' },
     { label: 'Application deadline', value: s.deadline ? formatDate(s.deadline) : s.deadlineNote ?? 'Rolling', icon: 'calendar' },
-    { label: 'Posted', value: postedOn(s) ? formatDate(postedOn(s)) : null, icon: 'sparkle' },
+    { label: 'Posted', value: formatPosted(s), icon: 'sparkle' },
     { label: 'Last verified', value: s.verified ? formatDate(s.verified) : null, icon: 'shield' },
   ].filter((f) => f.value)
 
