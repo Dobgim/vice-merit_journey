@@ -89,7 +89,9 @@ ${items}
 
 /* -------------------------------------------------------------- Prerender */
 
-const STYLE = `<style>.pr{max-width:960px;margin:0 auto;padding:7rem 1.25rem 4rem;font-family:'Source Sans 3',system-ui,sans-serif;color:#0f1b3d;line-height:1.65}.pr h1{font-family:'Source Serif 4',Georgia,serif;font-size:2rem;line-height:1.2;margin:.5rem 0 1rem}.pr .eb{color:#835525;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem}.pr dl{display:grid;grid-template-columns:max-content 1fr;gap:.4rem 1.25rem;margin:1.5rem 0}.pr dt{font-weight:700}.pr ul{padding-left:1.1rem}.pr a{color:#25376c}</style>`
+// Plain HTML for search engines; people with JavaScript see a spinner until the app replaces it.
+
+const STYLE = `<style>.pr{max-width:960px;margin:0 auto;padding:7rem 1.25rem 4rem;font-family:'Source Sans 3',system-ui,sans-serif;color:#0f1b3d;line-height:1.65}.pr h1{font-family:'Source Serif 4',Georgia,serif;font-size:2rem;line-height:1.2;margin:.5rem 0 1rem}.pr .eb{color:#835525;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem}.pr dl{display:grid;grid-template-columns:max-content 1fr;gap:.4rem 1.25rem;margin:1.5rem 0}.pr dt{font-weight:700}.pr ul{padding-left:1.1rem}.pr a{color:#25376c}html.js .pr{visibility:hidden}html.js #root:has(.pr)::before{content:'';position:fixed;top:50%;left:50%;width:36px;height:36px;margin:-18px 0 0 -18px;border:3px solid #e5e7eb;border-top-color:#c9a227;border-radius:50%;animation:prs .8s linear infinite}@keyframes prs{to{transform:rotate(360deg)}}</style><script>document.documentElement.classList.add('js');setTimeout(function(){document.documentElement.classList.remove('js')},10000)</script>`
 
 function page(template, { title, description, url, image, body }) {
   return template
