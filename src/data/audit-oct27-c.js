@@ -6,11 +6,12 @@
  */
 export const retired = {
   'african-female-artist-mentorship-program': 'Girl Child Art Foundation’s page still shows the 2025–26 call (deadline 30 Oct 2025) and no 2026–27 call is published: https://www.girlchildart.org/art-mentorship-mentees/',
-  'capes-pipd-postdoctoral-fellowship-overseas-round-2': 'CAPES page lists round 2 registration as 13 Nov–9 Dec 2026, so it is not open yet: https://www.gov.br/capes/pt-br/acesso-a-informacao/acoes-e-programas/bolsas/bolsas-no-pais/programa-institucional-de-pos-doutorado-pipd',
-  'landis-gyr-foundation-residency-zug': 'Zug 2028 application period opens only on 1 Dec 2026 (runs to 31 Jan 2027): https://www.lg-stiftung.ch/en/apply',
 }
 
 export const fixes = {
+  // Not open yet: hidden until `opensOn`, then shown as newly posted.
+  'capes-pipd-postdoctoral-fellowship-overseas-round-2': { opensOn: '2026-11-13', posted: '2026-11-13', deadlineNote: 'Round 2 registration runs 13 November – 9 December 2026.' },
+  'landis-gyr-foundation-residency-zug': { opensOn: '2026-12-01', posted: '2026-12-01', deadlineNote: 'The Zug 2028 application period runs 1 December 2026 – 31 January 2027.' },
   'african-union-internship': { officialUrl: 'https://jobs.au.int/job/Internship-Program/1506-en_US' },
   'equality-fund-journalism-fellowship': { officialUrl: 'https://equalityfund.ca/en/posts/application-journalism-fellowship' },
   'yale-maurice-r-greenberg-world-fellows': { officialUrl: 'https://worldfellows.yale.edu/the-program/application/' },

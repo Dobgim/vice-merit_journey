@@ -6,7 +6,7 @@
  * the programme's own application page instead of a homepage or web search.
  */
 import { applyLinks } from './applyLinks'
-import { formatDate, hasFixedDeadline } from '../lib/deadline'
+import { formatDate, hasFixedDeadline, isOpenYet } from '../lib/deadline'
 import { logoDomain } from '../lib/logo'
 import { retiredSlugs, withDirectLink } from './fixes-oct21-2026'
 
@@ -148,5 +148,5 @@ export function applyUpdates(items) {
       if (link) out = { ...out, logoDomain: logoDomain(out) ?? undefined, officialUrl: link, officialSearch: false }
       return withDirectLink(out)
     })
-    .filter(hasFixedDeadline)
+    .filter((i) => hasFixedDeadline(i) && isOpenYet(i))
 }

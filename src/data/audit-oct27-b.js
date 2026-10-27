@@ -5,20 +5,21 @@
  *  - fixes:   { slug: { officialUrl, deadline, deadlineNote } } — only the fields that changed
  */
 export const retired = {
-  'csc-award-for-outstanding-self-financed-chinese-students-abroad-2026-27': 'Not open yet: online registration runs 23 Nov–4 Dec 2026 (https://australia.lxgz.org.cn/australia/tzgg/2026101409374876776/index.html)',
-  'queen-elizabeth-commonwealth-scholarships-2027-28-cycle-1': 'Not open yet: ACU calendar shows applications open 18 Nov 2026 (https://www.acu.ac.uk/funding-opportunities/funding-opportunities-calendar/)',
-  'swe-scholarship-program-collegiate-graduate-scholars': 'Not open yet: applications open 1 Dec 2026 (https://swe.org/scholarships-overview/)',
-  'beit-trust-postgraduate-scholarships-2027': 'Not open yet: window opens 1 Dec 2026 (https://beittrust.org.uk/beit-trust-scholarships/)',
-  'swe-india-scholars': 'Not open yet: opens 8 Feb 2027 (https://swe.org/india/scholarships/)',
-  'visegrad-scholarship-program-2027': 'Not open yet: 2027 round opens 1 Jan 2027 (https://www.visegradfund.org/apply/mobilities/visegrad-scholarships/)',
-  'maypole-fund-small-grants': 'Not open yet: Jan 2027 window opens 1 Jan 2027 (https://www.maypolefund.org/deadlines/)',
   'trisong-grants': 'Program paused: Khyentse Foundation is not accepting Trisong applications (https://khyentsefoundation.org/grants-scholarships/trisong-grants/)',
   'tony-elumelu-foundation-entrepreneurship-programme-2027': 'No 2027 cycle announced; platform opens each 1 January (https://www.tonyelumelufoundation.org/tef-entrepreneurship-programme/faqs)',
   'wenner-gren-post-phd-research-grant': 'No 1 Nov deadline: only deadline is 1 May each year (https://wennergren.org/program/post-phd-research-grant/)',
-  'eu-blue-book-traineeship-october-2027': 'Not open yet: October 2027 session registration opens 15 Feb 2027 (https://traineeships.ec.europa.eu/about/calendar-sessions_en)',
 }
 
 export const fixes = {
+  // Not open yet: hidden until `opensOn`, then shown as newly posted.
+  'csc-award-for-outstanding-self-financed-chinese-students-abroad-2026-27': { opensOn: '2026-11-23', posted: '2026-11-23', deadlineNote: 'Online registration runs 23 November – 4 December 2026.' },
+  'queen-elizabeth-commonwealth-scholarships-2027-28-cycle-1': { opensOn: '2026-11-18', posted: '2026-11-18', deadlineNote: 'Applications open on 18 November 2026 (ACU funding calendar).' },
+  'swe-scholarship-program-collegiate-graduate-scholars': { opensOn: '2026-12-01', posted: '2026-12-01', deadlineNote: 'Applications open on 1 December 2026.' },
+  'beit-trust-postgraduate-scholarships-2027': { opensOn: '2026-12-01', posted: '2026-12-01', deadlineNote: 'The application window opens on 1 December 2026.' },
+  'swe-india-scholars': { opensOn: '2027-02-08', posted: '2027-02-08', deadlineNote: 'Applications open on 8 February 2027.' },
+  'visegrad-scholarship-program-2027': { opensOn: '2027-01-01', posted: '2027-01-01', deadlineNote: 'The 2027 round opens on 1 January 2027.' },
+  'maypole-fund-small-grants': { opensOn: '2027-01-01', posted: '2027-01-01', deadlineNote: 'The January 2027 window opens on 1 January.' },
+  'eu-blue-book-traineeship-october-2027': { opensOn: '2027-02-15', posted: '2027-02-15', deadlineNote: 'Registration for the October 2027 session opens on 15 February 2027.' },
   'whitley-award': {
     officialUrl: 'https://whitleyaward.org/apply-for-conservation-funding/apply-for-a-whitley-award/',
     deadlineNote: 'Closes 23:59 GMT on 30 Oct 2026; register on the WFN portal first.',

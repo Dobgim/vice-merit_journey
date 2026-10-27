@@ -9,13 +9,23 @@ export const retired = {
   'lester-b-pearson-scholarship': 'Needs a school nomination, and the nomination deadline was 9 Oct 2026 (admission deadline 16 Oct); no longer open to new applicants (https://future.utoronto.ca/pearson-scholarships)',
   'australia-awards-scholarship': '2027 intake closed 30 Apr 2026; the next round is not open (https://www.dfat.gov.au/people-to-people/australia-awards/australia-awards-scholarships-opening-and-closing-dates)',
   'mext-japanese-government-scholarship': 'Embassy-recommendation route for 2027 is past its application stage (documents go to embassies Apr–May, first screening May–July 2026); next call not yet open (https://www.studyinjapan.go.jp/en/smap-stopj-applications-research.html)',
-  'commonwealth-shared-scholarships-2027': 'Applications for 2027/28 open only on 10 Nov 2026 (close 8 Dec 2026), so not open yet (https://cscuk.fcdo.gov.uk/scholarships/commonwealth-shared-scholarships-applications/)',
-  'taiwanicdf-higher-education-scholarship': 'The 2027 application window opens only on 1 Dec 2026 (closes 15 Mar 2027), so not open yet (https://www.icdf.org.tw/wSite/np?ctNode=31566&CtUnit=368&BaseDSD=7&mp=2)',
   'pierre-elliott-trudeau-foundation-doctoral-scholarship': 'Two-step process: eligibility screening was due 2 Oct 2026 and only confirmed applicants can open the full application, so closed to new applicants (https://www.trudeaufoundation.ca/2027-applications/)',
   'capes-pdse-2027-doctoral-sandwich-abroad': 'Open only to candidates already approved in their institution’s internal selection (ended 16 Oct 2026); CAPES registration for those candidates runs 20 Oct–18 Nov 2026 (https://www.gov.br/capes/pt-br/acesso-a-informacao/acoes-e-programas/bolsas/bolsas-e-auxilios-internacionais/encontre-aqui/paises/multinacional/programa-de-doutorado-sanduiche-no-exterior-pdse)',
 }
 
 export const fixes = {
+  // Not open yet: hidden until `opensOn`, then shown as newly posted.
+  'commonwealth-shared-scholarships-2027': {
+    opensOn: '2026-11-10',
+    posted: '2026-11-10',
+    deadline: '2026-12-08',
+    deadlineNote: 'Applications for 2027/28 open on 10 November and close on 8 December 2026 (https://cscuk.fcdo.gov.uk/scholarships/commonwealth-shared-scholarships-applications/).',
+  },
+  'taiwanicdf-higher-education-scholarship': {
+    opensOn: '2026-12-01',
+    posted: '2026-12-01',
+    deadlineNote: 'The 2027 application window runs from 1 December 2026 to 15 March 2027.',
+  },
   'princeton-fung-global-fellows': {
     officialUrl: 'https://funggfp.princeton.edu/applications',
   },

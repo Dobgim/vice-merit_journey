@@ -17,6 +17,15 @@ export function parseDate(iso) {
 /** The site lists only calls with a fixed closing date — rolling and "varies" calls are left out. */
 export const hasFixedDeadline = (item) => Boolean(parseDate(item?.deadline))
 
+/**
+ * False while a call has not opened yet (`opensOn` in the future), so it stays
+ * hidden and appears by itself on its opening day.
+ */
+export const isOpenYet = (item, now = new Date()) => {
+  const opens = parseDate(item?.opensOn)
+  return !opens || opens <= now
+}
+
 /** "5 Nov 2026". Falls back to the raw value for non-ISO strings. */
 export function formatDate(iso) {
   const date = parseDate(iso)
