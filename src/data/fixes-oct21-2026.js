@@ -183,6 +183,10 @@ export const retiredSlugs = new Set([
   'wenner-gren-fellowship-in-anthropology-black-experiences', // 2026 call not found
   'wenner-gren-hunt-postdoctoral-fellowship', // replaced by Hunt Fellowship in Public Writing; letter-of-interest deadline 15 Oct passed
   'yrv-global-teachers-grants', // no official page found
+  // Edinburgh Mastercard Foundation 2027/28: invitation only — applicants had to attend a
+  // mandatory info session (15–24 Sep 2026); the declaration stage closed in October.
+  'edinburgh-x-mastercard-foundation-online-learning-scholars',
+  'university-of-edinburgh-mastercard-foundation-scholars-program',
 ])
 
 /** Corrections found on the official pages. */
