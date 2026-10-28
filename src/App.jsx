@@ -14,6 +14,7 @@ import OpportunityPage from './pages/OpportunityPage'
 import CountriesPage from './pages/CountriesPage'
 import FAQPage from './pages/FAQPage'
 import BlogPage from './pages/BlogPage'
+import BlogPostPage from './pages/BlogPostPage'
 import LandingPage from './pages/LandingPage'
 import ExplorePage from './pages/ExplorePage'
 import EligibilityPage from './pages/EligibilityPage'
@@ -58,6 +59,7 @@ export default function App() {
         <Route path="countries" element={<CountriesPage />} />
         <Route path="faq" element={<FAQPage />} />
         <Route path="blog" element={<BlogPage />} />
+        <Route path="blog/:slug" element={<BlogPostPage />} />
         <Route path="eligibility" element={<EligibilityPage />} />
         <Route path="explore" element={<ExplorePage />} />
         <Route path="for/:slug" element={<LandingPage key="for" type="for" />} />

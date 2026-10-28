@@ -3,7 +3,10 @@
  * gives every post; the blog's home page adds the cover image and read time.
  * Both are fetched through same-origin /blog-proxy paths (see vercel.json),
  * because the blog sends no CORS headers. New articles appear automatically.
+ * Articles published on this site (data/posts.js) are listed alongside them.
  */
+import { posts as ownPosts } from '../data/posts'
+
 export const BLOG_URL = 'https://blog.meritleaders.com'
 
 const parse = (text, type) => new DOMParser().parseFromString(text, type)
@@ -33,9 +36,21 @@ async function homeDetails() {
 
 let cache = null
 
-/** Newest first. Rejects only if the feed itself cannot be read. */
+/** Newest first: our own articles plus the blog's. Rejects only if there are none and the feed cannot be read. */
 export function fetchBlogPosts() {
-  cache ??= (async () => {
+  cache ??= fetchFeedPosts()
+    .catch((err) => {
+      cache = null // allow a retry on the next visit
+      if (!ownPosts.length) throw err
+      return []
+    })
+    .then((feed) => [...ownPosts, ...feed].sort((a, b) => (b.date ?? 0) - (a.date ?? 0)))
+  return cache
+}
+
+/** Articles from blog.meritleaders.com. */
+function fetchFeedPosts() {
+  return (async () => {
     const [feed, extra] = await Promise.all([
       getText('/blog-proxy/feed.xml'),
       homeDetails().catch(() => ({})), // images are a nice-to-have
@@ -59,12 +74,7 @@ export function fetchBlogPosts() {
         }
       })
       .filter((p) => p.title && p.link)
-      .sort((a, b) => (b.date ?? 0) - (a.date ?? 0))
-  })().catch((err) => {
-    cache = null // allow a retry on the next visit
-    throw err
-  })
-  return cache
+  })()
 }
 
 export const formatPostDate = (date) =>

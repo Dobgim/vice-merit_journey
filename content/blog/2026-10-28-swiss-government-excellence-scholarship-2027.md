@@ -1,6 +1,8 @@
 Title: How to Apply for the Swiss Government Excellence Scholarship 2027–28
 Meta description: A plain-English guide for researchers: what the Swiss Government Excellence Scholarship offers, and how to apply before your deadline.
-Suggested image: A researcher at a laptop in a bright university library, with the Swiss Alps visible through the window
+Published: 2026-10-28
+Cover: https://thumb.wikimedia.org/wikipedia/commons/thumb/d/da/Bundeshaus_1128.jpg/1280px-Bundeshaus_1128.jpg
+Cover credit: Federal Palace of Switzerland, Bern. Photo: Mike Lehmann, CC BY-SA 3.0 (Wikimedia Commons)
 
 If you are finishing a master's degree and dream of doing a PhD or a research stay in Switzerland, one scholarship deserves a place on your shortlist: the **Swiss Government Excellence Scholarship**. Many embassy deadlines fall between now and early December, so this is the moment to act.
 
@@ -77,4 +79,4 @@ We are advisers and coaches, not ghostwriters. We can help you check that you ar
 
 ## Ready to take the next step?
 
-Check whether you qualify at [https://www.meritleaders.com/eligibility](https://www.meritleaders.com/eligibility), or talk to an adviser by booking a consultation at [https://www.meritleaders.com/book-consultation](https://www.meritleaders.com/book-consultation).
+Check whether you qualify with our [eligibility checker](https://www.meritleaders.com/eligibility), or [book a consultation](https://www.meritleaders.com/book-consultation) to talk to an adviser.

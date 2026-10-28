@@ -68,6 +68,41 @@
   .ring-hairline {
     @apply ring-1 ring-navy-900/[0.06];
   }
+
+  /* Blog articles written in Markdown (pages/BlogPostPage.jsx) */
+  .article {
+    @apply text-[1.0625rem] leading-[1.8] text-navy-800;
+  }
+  .article > * + * {
+    @apply mt-5;
+  }
+  .article h2 {
+    @apply !mt-10 font-display text-2xl font-semibold leading-snug text-navy-950;
+  }
+  .article h3 {
+    @apply !mt-8 font-display text-xl font-semibold text-navy-950;
+  }
+  .article strong {
+    @apply font-semibold text-navy-950;
+  }
+  .article a {
+    @apply font-semibold text-navy-700 underline decoration-gold-400 underline-offset-2 hover:text-navy-950;
+  }
+  .article ul {
+    @apply list-disc space-y-2 pl-5 marker:text-gold-500;
+  }
+  .article ol {
+    @apply list-decimal space-y-2 pl-5 marker:font-semibold marker:text-gold-600;
+  }
+  .article ul.checklist {
+    @apply list-none rounded-xl bg-mist p-5 pl-5;
+  }
+  .article .checklist li {
+    @apply flex gap-3;
+  }
+  .article .checklist .box {
+    @apply mt-[0.3rem] h-4 w-4 shrink-0 rounded border-2 border-gold-500;
+  }
 }
 
 @layer utilities {

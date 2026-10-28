@@ -1,14 +1,17 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import Icon from './Icon'
 import { formatPostDate } from '../../lib/blog'
 
-/** One article; opens the full post on blog.meritleaders.com in a new tab. */
+const MotionLink = motion.create(Link)
+
+/** One article; our own posts open on this site, blog.meritleaders.com posts in a new tab. */
 export default function BlogCard({ post }) {
+  const Card = post.to ? MotionLink : motion.a
+  const target = post.to ? { to: post.to } : { href: post.link, target: '_blank', rel: 'noopener noreferrer' }
   return (
-    <motion.a
-      href={post.link}
-      target="_blank"
-      rel="noopener noreferrer"
+    <Card
+      {...target}
       whileHover={{ y: -6 }}
       transition={{ type: 'spring', stiffness: 300, damping: 24 }}
       className="group flex h-full flex-col overflow-hidden rounded-2xl border border-navy-900/[0.07] bg-white shadow-soft transition-colors hover:border-navy-900/[0.14]"
@@ -47,9 +50,9 @@ export default function BlogCard({ post }) {
 
         <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-gold-700">
           Read article
-          <Icon name="arrowUpRight" className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          <Icon name={post.to ? 'arrowRight' : 'arrowUpRight'} className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
         </span>
       </div>
-    </motion.a>
+    </Card>
   )
 }

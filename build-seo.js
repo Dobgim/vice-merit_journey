@@ -21,6 +21,7 @@ import { photos } from './src/data/photos.js'
 import { buildLandingPages } from './src/lib/eligibility.js'
 import { socialCaption } from './src/lib/caption.js'
 import { drawFlyer } from './src/lib/flyerImage.js'
+import { parsePost } from './src/lib/posts.js'
 
 const LOGO = `${SITE_URL}/merit-leaders-logo.jpg`
 const STATIC_PAGES = [
@@ -35,6 +36,13 @@ const prettyDate = (iso) =>
   iso ? new Date(`${iso.slice(0, 10)}T12:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Rolling'
 const imageFor = (item) => photos[item.slug]?.src ?? LOGO
 
+/** Articles published on the site (content/blog/*.md). */
+function blogPosts(root) {
+  const dir = path.join(root, 'content', 'blog')
+  if (!fs.existsSync(dir)) return []
+  return fs.readdirSync(dir).filter((f) => f.endsWith('.md')).map((f) => parsePost(f, fs.readFileSync(path.join(dir, f), 'utf8')))
+}
+
 /** All listings as { kind, path, item }. */
 function allEntries() {
   return Object.values(kinds).flatMap((k) =>
@@ -45,8 +53,9 @@ const isOpen = (item) => (isoDay(item.deadline) ?? '') >= today()
 
 /* ---------------------------------------------------------------- Sitemap */
 
-function sitemap(entries, landing) {
+function sitemap(entries, landing, posts) {
   const urls = [
+    ...posts.map((p) => ({ loc: p.to, lastmod: p.date?.toISOString().slice(0, 10) ?? today() })),
     ...STATIC_PAGES.map((p) => ({ loc: p, lastmod: today() })),
     ...entries.map((e) => ({ loc: e.path, lastmod: isoDay(e.item.posted) ?? isoDay(e.item.verified) ?? today() })),
     ...landing.map((p) => ({ loc: p.path, lastmod: today() })),
@@ -202,7 +211,8 @@ export default function buildSeo() {
         .map((p) => ({ ...p, matches: open.filter(p.test) }))
         .filter((p) => p.matches.length > 0)
 
-      fs.writeFileSync(path.join(outDir, 'sitemap.xml'), sitemap(entries, landing))
+      const posts = blogPosts(root)
+      fs.writeFileSync(path.join(outDir, 'sitemap.xml'), sitemap(entries, landing, posts))
 
       fs.mkdirSync(path.join(outDir, 'feeds'), { recursive: true })
       const posted = (e) => isoDay(e.item.posted) ?? isoDay(e.item.verified) ?? ''
@@ -232,6 +242,15 @@ export default function buildSeo() {
           url: SITE_URL + k.path,
           image: LOGO,
           body: `<p class="eb">${esc(k.eyebrow)}</p><h1>${esc(k.heading.join(' '))}</h1><p>${esc(k.lede)}</p>${linkList(list)}`,
+        }))
+      }
+      for (const p of posts) {
+        writeHtml(outDir, p.to, page(template, {
+          title: `${p.title} — Merit Leaders`,
+          description: p.excerpt,
+          url: p.link,
+          image: p.image ?? LOGO,
+          body: `<p class="eb">Merit Leaders blog</p><h1>${esc(p.title)}</h1>${p.html}`,
         }))
       }
       for (const p of landing) {
