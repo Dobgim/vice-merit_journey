@@ -190,6 +190,7 @@ export const retiredSlugs = new Set([
   // mandatory info session (15–24 Sep 2026); the declaration stage closed in October.
   'edinburgh-x-mastercard-foundation-online-learning-scholars',
   'university-of-edinburgh-mastercard-foundation-scholars-program',
+  'culture-helps-solidarity-collaboration-grants-final-round', // funder shows no 10 Nov 2026 round (checked 27-28 Oct)
 ])
 
 /** Corrections found on the official pages. */
