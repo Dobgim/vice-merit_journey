@@ -247,7 +247,6 @@ export default function buildSeo() {
       }
       for (const p of posts) {
         const head = [
-          `<meta name="keywords" content="${esc([...p.keywords, ...p.tags].join(', '))}" />`,
           `<meta property="article:published_time" content="${p.date?.toISOString() ?? ''}" />`,
           ...p.tags.map((t) => `<meta property="article:tag" content="${esc(t)}" />`),
           `<script type="application/ld+json">${JSON.stringify(postJsonLd(p)).replace(/</g, '\\u003c')}</script>`,
@@ -260,6 +259,7 @@ export default function buildSeo() {
           body: `<p class="eb">Merit Leaders blog</p><h1>${esc(p.title)}</h1>${p.html}`,
         })
           .replace('<meta property="og:type" content="website" />', '<meta property="og:type" content="article" />')
+          .replace(/(<meta\s+name="keywords"\s+content=")[^"]*(")/, `$1${esc([...p.keywords, ...p.tags].join(', '))}$2`)
           .replace('</head>', `${head}</head>`)
         writeHtml(outDir, p.to, html)
       }
