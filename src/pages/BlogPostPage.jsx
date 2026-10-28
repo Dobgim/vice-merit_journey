@@ -8,7 +8,8 @@ import Icon from '../components/ui/Icon'
 import NotFound from './NotFound'
 import { posts } from '../data/posts'
 import { formatPostDate } from '../lib/blog'
-import { SITE_URL, company } from '../data/site'
+import { postJsonLd } from '../lib/posts'
+import { company } from '../data/site'
 
 /** One article published on this site (content/blog/*.md). */
 export default function BlogPostPage() {
@@ -18,17 +19,7 @@ export default function BlogPostPage() {
   if (!post) return <NotFound />
 
   const more = posts.filter((p) => p !== post).slice(0, 3)
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    headline: post.title,
-    description: post.excerpt,
-    datePublished: post.date?.toISOString(),
-    image: post.image ?? undefined,
-    url: `${SITE_URL}${post.to}`,
-    author: { '@type': 'Organization', name: company.name },
-    publisher: { '@type': 'Organization', name: company.name, logo: `${SITE_URL}/merit-leaders-logo.jpg` },
-  }
+  const jsonLd = postJsonLd(post, company.name)
 
   // Links to our own pages inside the article open without a full reload.
   const followLink = (e) => {
@@ -61,11 +52,20 @@ export default function BlogPostPage() {
           <article className="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-navy-900/[0.07] bg-white shadow-soft">
             {post.image && (
               <figure>
-                <img src={post.image} alt="" className="aspect-[1200/560] w-full object-cover" />
+                <img src={post.image} alt={post.imageAlt} className="aspect-[1200/560] w-full object-cover" />
                 {post.imageCredit && <figcaption className="px-6 pt-2 text-xs text-navy-500 sm:px-10">{post.imageCredit}</figcaption>}
               </figure>
             )}
             <div className="article p-6 sm:p-10" onClick={followLink} dangerouslySetInnerHTML={{ __html: post.html }} />
+            {post.tags.length > 0 && (
+              <ul aria-label="Topics" className="flex flex-wrap gap-2 border-t border-navy-900/[0.06] px-6 py-5 sm:px-10">
+                {post.tags.map((t) => (
+                  <li key={t} className="rounded-full bg-mist px-3 py-1 text-sm font-medium text-navy-700">
+                    #{t}
+                  </li>
+                ))}
+              </ul>
+            )}
           </article>
 
           <div className="mx-auto mt-10 flex max-w-3xl flex-wrap justify-center gap-3">

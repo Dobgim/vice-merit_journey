@@ -21,7 +21,7 @@ import { photos } from './src/data/photos.js'
 import { buildLandingPages } from './src/lib/eligibility.js'
 import { socialCaption } from './src/lib/caption.js'
 import { drawFlyer } from './src/lib/flyerImage.js'
-import { parsePost } from './src/lib/posts.js'
+import { parsePost, postJsonLd } from './src/lib/posts.js'
 
 const LOGO = `${SITE_URL}/merit-leaders-logo.jpg`
 const STATIC_PAGES = [
@@ -226,12 +226,13 @@ export default function buildSeo() {
 
       const template = fs.readFileSync(path.join(outDir, 'index.html'), 'utf8')
       for (const e of entries) {
+        const guides = posts.filter((p) => p.related.includes(e.path))
         writeHtml(outDir, e.path, page(template, {
           title: `${e.item.name} — Merit Leaders`,
           description: `${e.item.summary ?? ''} Deadline: ${prettyDate(e.item.deadline)}.`.trim(),
           url: SITE_URL + e.path,
           image: imageFor(e.item),
-          body: detailBody(e),
+          body: detailBody(e) + guides.map((g) => `<p>Guide: <a href="${esc(g.to)}">${esc(g.title)}</a></p>`).join(''),
         }))
       }
       for (const k of Object.values(kinds)) {
@@ -245,13 +246,22 @@ export default function buildSeo() {
         }))
       }
       for (const p of posts) {
-        writeHtml(outDir, p.to, page(template, {
+        const head = [
+          `<meta name="keywords" content="${esc([...p.keywords, ...p.tags].join(', '))}" />`,
+          `<meta property="article:published_time" content="${p.date?.toISOString() ?? ''}" />`,
+          ...p.tags.map((t) => `<meta property="article:tag" content="${esc(t)}" />`),
+          `<script type="application/ld+json">${JSON.stringify(postJsonLd(p)).replace(/</g, '\\u003c')}</script>`,
+        ].join('')
+        const html = page(template, {
           title: `${p.title} — Merit Leaders`,
           description: p.excerpt,
           url: p.link,
           image: p.image ?? LOGO,
           body: `<p class="eb">Merit Leaders blog</p><h1>${esc(p.title)}</h1>${p.html}`,
-        }))
+        })
+          .replace('<meta property="og:type" content="website" />', '<meta property="og:type" content="article" />')
+          .replace('</head>', `${head}</head>`)
+        writeHtml(outDir, p.to, html)
       }
       for (const p of landing) {
         writeHtml(outDir, p.path, page(template, {

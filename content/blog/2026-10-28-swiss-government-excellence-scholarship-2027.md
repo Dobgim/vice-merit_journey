@@ -1,7 +1,11 @@
 Title: How to Apply for the Swiss Government Excellence Scholarship 2027–28
-Meta description: A plain-English guide for researchers: what the Swiss Government Excellence Scholarship offers, and how to apply before your deadline.
+Meta description: Swiss Government Excellence Scholarship 2027–28: who can apply, the CHF 2,450 monthly stipend, country deadlines and a step-by-step plan for PhD applicants.
+Keywords: Swiss Government Excellence Scholarship 2027, Swiss Government Excellence Scholarship deadline, ESKAS scholarship, fully funded PhD scholarship in Switzerland, Swiss scholarships for international students, Swiss scholarships for African students, how to apply for a Swiss Government Excellence Scholarship
+Tags: Switzerland, PhD scholarships, Research scholarships, Fully funded, Application guide
+Related: /scholarships/swiss-government-excellence-scholarship
 Published: 2026-10-28
 Cover: https://thumb.wikimedia.org/wikipedia/commons/thumb/d/da/Bundeshaus_1128.jpg/1280px-Bundeshaus_1128.jpg
+Cover alt: The Federal Palace of Switzerland in Bern
 Cover credit: Federal Palace of Switzerland, Bern. Photo: Mike Lehmann, CC BY-SA 3.0 (Wikimedia Commons)
 
 If you are finishing a master's degree and dream of doing a PhD or a research stay in Switzerland, one scholarship deserves a place on your shortlist: the **Swiss Government Excellence Scholarship**. Many embassy deadlines fall between now and early December, so this is the moment to act.

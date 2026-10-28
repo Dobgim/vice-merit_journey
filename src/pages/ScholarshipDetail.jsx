@@ -27,6 +27,7 @@ import { company } from '../data/site'
 import { buildOverview } from '../lib/overview'
 import { criteriaFor } from '../data/criteria'
 import { photos } from '../data/photos'
+import { posts } from '../data/posts'
 import NotFound from './NotFound'
 
 /* ----------------------------------------------------------------- Helpers */
@@ -501,6 +502,26 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
                 </div>
               </Card>
 
+              {posts
+                .filter((p) => p.related.includes(`${config.path}/${slug}`))
+                .map((p) => (
+                  <Link
+                    key={p.slug}
+                    to={p.to}
+                    className="flex items-center gap-3 rounded-2xl border border-navy-900/[0.08] bg-white p-5 shadow-soft transition-colors hover:border-navy-900/[0.18]"
+                  >
+                    <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy-950 text-gold-200">
+                      <Icon name="book" className="h-5 w-5" />
+                    </span>
+                    <span>
+                      <span className="flex items-center gap-1.5 font-semibold text-navy-950">
+                        Read our application guide
+                        <Icon name="arrowRight" className="h-3.5 w-3.5" />
+                      </span>
+                      <span className="mt-0.5 block text-sm leading-snug text-navy-600">{p.title}</span>
+                    </span>
+                  </Link>
+                ))}
 
               <Link
                 to="/eligibility"
