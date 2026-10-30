@@ -22,4 +22,10 @@ export const fixes = {
   'university-of-geneva-excellence-master-fellowships-2027': opensOn('2027-01-01', 'Applications open in January 2027 and close on 28 February 2027 (30 April for some Swiss bachelor’s holders).'),
   'university-of-helsinki-scholarships-2027': opensOn('2027-01-05', 'Ask for a scholarship on the programme application form during the 5–19 January 2027 window; there is no separate form.'),
   'aalto-science-institute-international-summer-research-programme-2027': opensOn('2027-01-07', 'The strict application window runs from 7 to 31 January 2027.'),
+  // Chinese university calls added 30 Oct 2026; windows not open yet.
+  'nankai-university-chinese-government-scholarship-2027-type-b': opensOn('2026-11-01', 'Type B runs from November 2026 to 20 March 2027: apply on studyinchina.csc.edu.cn (code 10055, Type B), then upload the form to Nankai\u2019s system. Places are limited, so apply early.'),
+  'dalian-university-of-technology-phd-scholarships-2027-chinese-government-liaoning-presidential': opensOn('2026-11-01', 'Scholarship applications run from 1 November 2026 to 20:00 Beijing time on 15 February 2027. Application fee: CNY 400 (Chinese Government or Liaoning) or CNY 800 (Presidential).'),
+  'university-of-science-and-technology-beijing-chinese-government-scholarship-2027-type-b': opensOn('2026-11-01', 'Apply directly to USTB (code 10008), generally from 1 November to 15 April. The USTB Chancellor Scholarship runs generally to 30 April, with full and partial awards.'),
+  'xiamen-university-new-international-student-scholarships-2027': opensOn('2026-12-01', 'Open from 1 December 2026 to 30 April 2027, at application.xmu.edu.cn. You are considered only after you have been admitted.'),
+  'jilin-university-bridging-medicine-programme-2027-pre-mbbs-self-funded': opensOn('2026-11-01', 'Applications run in November and December; submit your materials at apply.jlu.edu.cn by 31 December 2026. Enrolment is in early March 2027.'),
 }
