@@ -16,4 +16,10 @@ export const fixes = {
   'ikea-foundation-switzerland-scholarships': opensOn('2026-11-16', 'Applications open on a new portal in mid-November 2026.'),
   'ikea-foundation-switzerland-project-and-work-grants': opensOn('2026-11-16', 'Applications open on a new portal in mid-November 2026. Apply at least four months before your project starts.'),
   'prosperous-future-grant-programme-2027-round-5': opensOn('2026-11-18', 'Applications open on 18 November 2026 and close at 23:59 on 27 January 2027.'),
+  // Added 30 Oct 2026; windows not open yet.
+  'latvian-state-scholarships-2027-28': opensOn('2027-02-01', 'The next call runs from 1 February to 1 April 2027, per VIAA. Apply at scholarships.viaa.gov.lv.'),
+  'aalto-university-excellence-scholarship-2027': opensOn('2026-12-07', 'Apply on the master’s application form during the 7 December 2026 – 5 January 2027 window; you cannot apply before or after it.'),
+  'university-of-geneva-excellence-master-fellowships-2027': opensOn('2027-01-01', 'Applications open in January 2027 and close on 28 February 2027 (30 April for some Swiss bachelor’s holders).'),
+  'university-of-helsinki-scholarships-2027': opensOn('2027-01-05', 'Ask for a scholarship on the programme application form during the 5–19 January 2027 window; there is no separate form.'),
+  'aalto-science-institute-international-summer-research-programme-2027': opensOn('2027-01-07', 'The strict application window runs from 7 to 31 January 2027.'),
 }
