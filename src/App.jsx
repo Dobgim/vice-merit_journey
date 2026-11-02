@@ -11,6 +11,7 @@ import ScholarshipDetail from './pages/ScholarshipDetail'
 import GrantsPage from './pages/GrantsPage'
 import InternshipsPage from './pages/InternshipsPage'
 import OpportunityPage from './pages/OpportunityPage'
+import CoursesPage from './pages/CoursesPage'
 import CountriesPage from './pages/CountriesPage'
 import FAQPage from './pages/FAQPage'
 import BlogPage from './pages/BlogPage'
@@ -56,6 +57,7 @@ export default function App() {
         <Route path="fellowships/:slug" element={<ScholarshipDetail key="fellowships" kind="fellowships" />} />
         <Route path="competitions" element={<OpportunityPage key="competitions" kind="competitions" />} />
         <Route path="competitions/:slug" element={<ScholarshipDetail key="competitions" kind="competitions" />} />
+        <Route path="courses" element={<CoursesPage />} />
         <Route path="countries" element={<CountriesPage />} />
         <Route path="faq" element={<FAQPage />} />
         <Route path="blog" element={<BlogPage />} />

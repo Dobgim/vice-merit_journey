@@ -34,6 +34,7 @@ const MENU = {
     Internships: 'Stages',
     Fellowships: 'Fellowships',
     'Competitions & Awards': 'Concours et prix',
+    'Free Courses': 'Cours gratuits',
     Countries: 'Pays',
     FAQ: 'FAQ',
   },

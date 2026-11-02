@@ -49,6 +49,7 @@ export const navLinks = [
       { label: 'Grants', to: '/grants', hint: 'Seed capital, research and prizes', icon: 'wallet', section: 'Browse by type' },
       { label: 'Internships', to: '/internships', hint: 'Paid and stipend-supported roles', icon: 'building', section: 'Browse by type' },
       { label: 'Competitions & Awards', to: '/competitions', hint: 'Essays, writing, photography, science', icon: 'award', section: 'Browse by type' },
+      { label: 'Free Courses', to: '/courses', hint: 'Free certificates in every major field', icon: 'book', section: 'Browse by type' },
       { label: 'Browse by nationality & level', to: '/explore', hint: 'Pages for your country and level', icon: 'layers', section: 'Find your fit' },
       { label: 'Am I eligible?', to: '/eligibility', hint: 'Tell us your nationality and level — see only what you can apply for', icon: 'checkCircle', section: 'Find your fit', featured: true },
     ],

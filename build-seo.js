@@ -26,7 +26,7 @@ import { parsePost, postJsonLd } from './src/lib/posts.js'
 const LOGO = `${SITE_URL}/merit-leaders-logo.jpg`
 const STATIC_PAGES = [
   '/', '/about', '/services', '/packages', '/scholarships', '/fellowships', '/grants', '/internships',
-  '/competitions', '/countries', '/blog', '/faq', '/book-consultation', '/eligibility', '/explore', '/privacy', '/terms',
+  '/competitions', '/courses', '/countries', '/blog', '/faq', '/book-consultation', '/eligibility', '/explore', '/privacy', '/terms',
 ]
 
 const esc = (s = '') => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
