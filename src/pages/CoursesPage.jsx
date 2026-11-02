@@ -33,7 +33,8 @@ const jsonLd = {
 function CourseCard({ course }) {
   return (
     <article className="flex h-full flex-col rounded-2xl border border-navy-900/10 bg-white p-6 shadow-soft">
-      <p className="text-sm font-semibold text-navy-600">{course.provider}</p>
+      <p className="text-xs font-semibold uppercase tracking-wide text-gold-700">{course.specialty ?? course.field}</p>
+      <p className="mt-2 text-sm font-semibold text-navy-600">{course.provider}</p>
       <h2 className="mt-1 font-display text-xl font-semibold leading-snug text-navy-950">{course.name}</h2>
       <p className="mt-3 text-base leading-relaxed text-navy-700/90">{course.summary}</p>
       <ul className="mt-4 flex flex-wrap gap-2 text-sm text-navy-700">
@@ -107,7 +108,7 @@ export default function CoursesPage() {
   const searched = useMemo(() => {
     const q = query.trim().toLowerCase()
     if (!q) return courses
-    return courses.filter((c) => [c.name, c.provider, c.field, c.summary].join(' ').toLowerCase().includes(q))
+    return courses.filter((c) => [c.name, c.provider, c.field, c.specialty, c.summary].join(' ').toLowerCase().includes(q))
   }, [query])
 
   const inLevel = level === 'All' ? searched : searched.filter((c) => c.level === level)
