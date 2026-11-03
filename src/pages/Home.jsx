@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <>
       <Seo
-        title="Win the Scholarship You Deserve"
+        title="Scholarships & Fellowships for International Students"
         description="Merit Leaders matches undergraduate, graduate, postgraduate and international students with scholarships they are genuinely competitive for — then supports every step of the application."
       />
       <Hero />

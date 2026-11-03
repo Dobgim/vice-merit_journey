@@ -5,12 +5,16 @@ import Scholarships from '../components/sections/Scholarships'
 import Newsletter from '../components/sections/Newsletter'
 import WhatsAppGroup from '../components/sections/WhatsAppGroup'
 import Button from '../components/ui/Button'
+import { kinds } from '../data/opportunities'
+import { useOpportunities } from '../hooks/useScholarships'
+import { kindTitle } from '../lib/seo'
 
 export default function GrantsPage() {
+  const open = useOpportunities('grants').length
   return (
     <>
       <Seo
-        title="Grants"
+        title={kindTitle(kinds.grants, open)}
         description="Grants for entrepreneurs, researchers, innovators and community leaders — seed capital, research funding and prizes, with eligibility, benefits and how to apply."
       />
 

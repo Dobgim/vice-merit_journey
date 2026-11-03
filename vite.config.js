@@ -13,4 +13,15 @@ const blogProxy = {
 export default defineConfig({
   plugins: [react(), buildSeo()],
   server: { port: 5173, open: true, proxy: { '/blog-proxy': blogProxy } },
+  build: {
+    rollupOptions: {
+      output: {
+        // React and the other libraries change far less often than the
+        // listings, so returning visitors keep them cached across updates.
+        manualChunks(id) {
+          if (/node_modules\/(react|react-dom|react-router|react-router-dom|scheduler|framer-motion|react-hook-form)\//.test(id)) return 'vendor'
+        },
+      },
+    },
+  },
 })

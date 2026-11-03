@@ -1,36 +1,94 @@
 import { Suspense, lazy } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import RootLayout from './components/layout/RootLayout'
-
 import Home from './pages/Home'
-import About from './pages/About'
-import ServicesPage from './pages/ServicesPage'
-import PackagesPage from './pages/PackagesPage'
-import ScholarshipsPage from './pages/ScholarshipsPage'
-import ScholarshipDetail from './pages/ScholarshipDetail'
-import GrantsPage from './pages/GrantsPage'
-import InternshipsPage from './pages/InternshipsPage'
-import OpportunityPage from './pages/OpportunityPage'
-import CoursesPage from './pages/CoursesPage'
-import CountriesPage from './pages/CountriesPage'
-import FAQPage from './pages/FAQPage'
-import BlogPage from './pages/BlogPage'
-import BlogPostPage from './pages/BlogPostPage'
-import LandingPage from './pages/LandingPage'
-import ExplorePage from './pages/ExplorePage'
-import EligibilityPage from './pages/EligibilityPage'
-import BookConsultationPage from './pages/BookConsultationPage'
 import NotFound from './pages/NotFound'
-import LegalPage from './pages/LegalPage'
+
+/**
+ * Pages other than the home page are separate downloads, so a visitor landing
+ * on one page does not wait for the code of every other page. main.jsx loads
+ * the current page's code before the first render, and preloadPages() fetches
+ * the rest in the background once the page is up, so moving between pages
+ * stays instant.
+ */
+const pages = {
+  about: () => import('./pages/About'),
+  services: () => import('./pages/ServicesPage'),
+  packages: () => import('./pages/PackagesPage'),
+  scholarships: () => import('./pages/ScholarshipsPage'),
+  detail: () => import('./pages/ScholarshipDetail'),
+  grants: () => import('./pages/GrantsPage'),
+  internships: () => import('./pages/InternshipsPage'),
+  opportunity: () => import('./pages/OpportunityPage'),
+  courses: () => import('./pages/CoursesPage'),
+  countries: () => import('./pages/CountriesPage'),
+  faq: () => import('./pages/FAQPage'),
+  blog: () => import('./pages/BlogPage'),
+  post: () => import('./pages/BlogPostPage'),
+  landing: () => import('./pages/LandingPage'),
+  explore: () => import('./pages/ExplorePage'),
+  eligibility: () => import('./pages/EligibilityPage'),
+  book: () => import('./pages/BookConsultationPage'),
+  legal: () => import('./pages/LegalPage'),
+}
+
+const About = lazy(pages.about)
+const ServicesPage = lazy(pages.services)
+const PackagesPage = lazy(pages.packages)
+const ScholarshipsPage = lazy(pages.scholarships)
+const ScholarshipDetail = lazy(pages.detail)
+const GrantsPage = lazy(pages.grants)
+const InternshipsPage = lazy(pages.internships)
+const OpportunityPage = lazy(pages.opportunity)
+const CoursesPage = lazy(pages.courses)
+const CountriesPage = lazy(pages.countries)
+const FAQPage = lazy(pages.faq)
+const BlogPage = lazy(pages.blog)
+const BlogPostPage = lazy(pages.post)
+const LandingPage = lazy(pages.landing)
+const ExplorePage = lazy(pages.explore)
+const EligibilityPage = lazy(pages.eligibility)
+const BookConsultationPage = lazy(pages.book)
+const LegalPage = lazy(pages.legal)
 
 // The dashboard is a separate download, so visitors never load it.
 const AdminApp = lazy(() => import('./admin/AdminApp'))
 
-/**
- * Every page is imported eagerly on purpose. The whole site is ~120 kB gzipped,
- * so bundling it once buys instant route changes — no chunk request, no
- * loading spinner, no layout shift between pages.
- */
+const routePages = [
+  [/^\/(scholarships|grants|internships|fellowships|competitions)\/[^/]+/, pages.detail],
+  [/^\/scholarships\/?$/, pages.scholarships],
+  [/^\/grants\/?$/, pages.grants],
+  [/^\/internships\/?$/, pages.internships],
+  [/^\/(fellowships|competitions)\/?$/, pages.opportunity],
+  [/^\/blog\/[^/]+/, pages.post],
+  [/^\/blog\/?$/, pages.blog],
+  [/^\/(for|study-in|level)\/[^/]+/, pages.landing],
+  [/^\/(privacy|terms)\/?$/, pages.legal],
+  [/^\/about\/?$/, pages.about],
+  [/^\/services\/?$/, pages.services],
+  [/^\/packages\/?$/, pages.packages],
+  [/^\/courses\/?$/, pages.courses],
+  [/^\/countries\/?$/, pages.countries],
+  [/^\/faq\/?$/, pages.faq],
+  [/^\/explore\/?$/, pages.explore],
+  [/^\/eligibility\/?$/, pages.eligibility],
+  [/^\/book-consultation\/?$/, pages.book],
+]
+
+/** Loads the code for the page at `pathname`, so the first render does not wait for it. */
+export function preloadPage(pathname) {
+  const load = routePages.find(([re]) => re.test(pathname))?.[1]
+  return load ? load().catch(() => {}) : Promise.resolve()
+}
+
+/** Fetches every page's code in the background, one after another. */
+export function preloadPages() {
+  const queue = Object.values(pages)
+  const next = () => queue.length && queue.shift()().catch(() => {}).then(next)
+  if ('requestIdleCallback' in window) window.requestIdleCallback(next, { timeout: 4000 })
+  else setTimeout(next, 2000)
+}
+
 export default function App() {
   return (
     <Routes>

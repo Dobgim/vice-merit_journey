@@ -5,12 +5,16 @@ import Scholarships from '../components/sections/Scholarships'
 import Newsletter from '../components/sections/Newsletter'
 import WhatsAppGroup from '../components/sections/WhatsAppGroup'
 import Button from '../components/ui/Button'
+import { kinds } from '../data/opportunities'
+import { useOpportunities } from '../hooks/useScholarships'
+import { kindTitle } from '../lib/seo'
 
 export default function InternshipsPage() {
+  const open = useOpportunities('internships').length
   return (
     <>
       <Seo
-        title="Internships"
+        title={kindTitle(kinds.internships, open)}
         description="Paid and stipend-supported internships at the UN, IMF, World Bank, European Commission and more — requirements, pay, deadlines and how to apply."
       />
 

@@ -22,6 +22,12 @@ import { buildLandingPages } from './src/lib/eligibility.js'
 import { socialCaption } from './src/lib/caption.js'
 import { drawFlyer } from './src/lib/flyerImage.js'
 import { parsePost, postJsonLd } from './src/lib/posts.js'
+import { kindTitle, listingSeo, pageTitle } from './src/lib/seo.js'
+import { buildOverview } from './src/lib/overview.js'
+import { criteriaFor } from './src/data/criteria.js'
+import { requirements } from './src/data/requirements.js'
+import { retiredSlugs, withDirectLink } from './src/data/fixes-oct21-2026.js'
+import { hasFixedDeadline, isOpenYet } from './src/lib/deadline.js'
 
 const LOGO = `${SITE_URL}/merit-leaders-logo.jpg`
 const STATIC_PAGES = [
@@ -43,10 +49,21 @@ function blogPosts(root) {
   return fs.readdirSync(dir).filter((f) => f.endsWith('.md')).map((f) => parsePost(f, fs.readFileSync(path.join(dir, f), 'utf8')))
 }
 
-/** All listings as { kind, path, item }. */
+/** Who can apply and documents from data/requirements.js, as the app adds them (hooks/useScholarships.js). */
+const withRequirements = (item) => ({ ...item, ...requirements[item.slug] })
+
+/**
+ * Listings the site actually shows, as { kind, path, item }: the same
+ * corrections, links and retirements as the app, so no page is pre-rendered
+ * (or put in the sitemap) that the app would answer with "not found".
+ */
 function allEntries() {
   return Object.values(kinds).flatMap((k) =>
-    k.items.filter((i) => i.slug).map((item) => ({ kind: k.key, path: `${k.path}/${item.slug}`, item }))
+    k.items
+      .filter((i) => i.slug && !retiredSlugs.has(i.slug))
+      .map((i) => withRequirements(withDirectLink(i)))
+      .filter((i) => hasFixedDeadline(i) && isOpenYet(i))
+      .map((item) => ({ kind: k.key, path: `${k.path}/${item.slug}`, item }))
   )
 }
 const isOpen = (item) => (isoDay(item.deadline) ?? '') >= today()
@@ -102,7 +119,26 @@ ${items}
 
 const STYLE = `<style>.pr{max-width:960px;margin:0 auto;padding:7rem 1.25rem 4rem;font-family:'Source Sans 3',system-ui,sans-serif;color:#0f1b3d;line-height:1.65}.pr h1{font-family:'Source Serif 4',Georgia,serif;font-size:2rem;line-height:1.2;margin:.5rem 0 1rem}.pr .eb{color:#835525;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem}.pr dl{display:grid;grid-template-columns:max-content 1fr;gap:.4rem 1.25rem;margin:1.5rem 0}.pr dt{font-weight:700}.pr ul{padding-left:1.1rem}.pr a{color:#25376c}html.js .pr{visibility:hidden}html.js #root:has(.pr)::before{content:'';position:fixed;top:50%;left:50%;width:36px;height:36px;margin:-18px 0 0 -18px;border:3px solid #e5e7eb;border-top-color:#c9a227;border-radius:50%;animation:prs .8s linear infinite}@keyframes prs{to{transform:rotate(360deg)}}</style><script>document.documentElement.classList.add('js');setTimeout(function(){document.documentElement.classList.remove('js')},10000)</script>`
 
-function page(template, { title, description, url, image, body }) {
+/**
+ * <link rel="modulepreload"> tags for one page's code (src/pages/<name>.jsx)
+ * and the chunks it imports, so the browser fetches them alongside the main
+ * script instead of after it. `chunks` comes from the build (generateBundle).
+ */
+function preloadTags(chunks, name) {
+  const files = new Set()
+  // index.html already preloads the main script and what it imports.
+  const loaded = new Set([...chunks.values()].filter((c) => c.isEntry).flatMap((c) => [c.fileName, ...c.imports]))
+  const add = (file) => {
+    const c = chunks.get(file)
+    if (!c || loaded.has(file) || files.has(file)) return
+    files.add(file)
+    c.imports.forEach(add)
+  }
+  for (const c of chunks.values()) if (c.facadeModuleId?.endsWith(`/src/pages/${name}.jsx`)) add(c.fileName)
+  return [...files].map((f) => `<link rel="modulepreload" crossorigin href="/${f}" />`).join('')
+}
+
+function page(template, { title, description, url, image, body, preload = '' }) {
   return template
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(title)}</title>`)
     .replace(/(<meta\s+name="description"\s+content=")[^"]*(")/, `$1${esc(description)}$2`)
@@ -112,26 +148,82 @@ function page(template, { title, description, url, image, body }) {
     .replace(/(<meta property="og:image" content=")[^"]*(")/, `$1${esc(image)}$2`)
     .replace(/(<meta name="twitter:title" content=")[^"]*(")/, `$1${esc(title)}$2`)
     .replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${esc(description)}$2`)
-    .replace('</head>', `<link rel="canonical" href="${esc(url)}" />${STYLE}</head>`)
+    .replace('</head>', `<link rel="canonical" href="${esc(url)}" />${preload}${STYLE}</head>`)
     .replace('<div id="root"></div>', `<div id="root"><main class="pr">${body}</main></div>`)
 }
 
 const linkList = (list) =>
   `<ul>${list.map((e) => `<li><a href="${esc(e.path)}">${esc(e.item.name)}</a> — deadline ${prettyDate(e.item.deadline)}</li>`).join('')}</ul>`
 
-function detailBody({ kind, item }) {
-  const facts = [
-    ['Deadline', prettyDate(item.deadline)],
-    ['Value', item.amount],
-    ['Who can apply', item.nationalities],
-    ['Level', item.level],
-    ['Host', [item.org, item.country].filter(Boolean).join(', ')],
-  ].filter(([, v]) => v)
-  return `<p class="eb">${esc(kinds[kind].singular)}</p><h1>${esc(item.name)}</h1><p>${esc(item.summary ?? '')}</p>
-<dl>${facts.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>
-${(item.overview ?? []).slice(0, 3).map((p) => `<p>${esc(p)}</p>`).join('')}
-<p><a href="${esc(kinds[kind].path)}">More ${esc(kinds[kind].plural)}</a> · <a href="/eligibility">Am I eligible?</a> · <a href="/book-consultation">Get expert help applying</a></p>`
+const items = (list, tag = 'ul') => `<${tag}>${list.map((x) => `<li>${esc(x)}</li>`).join('')}</${tag}>`
+const section = (title, html) => (html ? `<h2>${esc(title)}</h2>${html}` : '')
+
+/** Same three suggestions as the detail page: closest level, country and funding first. */
+function similar(entry, open) {
+  const s = entry.item
+  const score = (i) => (i.level === s.level ? 2 : 0) + (i.country === s.country ? 1 : 0) + (i.funding === s.funding ? 1 : 0)
+  return open
+    .filter((e) => e.kind === entry.kind && e.item.slug !== s.slug)
+    .sort((a, b) => score(b.item) - score(a.item) || a.item.deadline.localeCompare(b.item.deadline))
+    .slice(0, 3)
 }
+
+/** The detail page's content as plain HTML, section for section. */
+function detailBody(entry, open) {
+  const { kind, item } = entry
+  const config = kinds[kind]
+  const closed = !isOpen(item)
+  const official = !item.officialSearch && item.officialUrl
+  const facts = [
+    ['Host / provider', item.org],
+    ['Host country', item.country],
+    [config.labels.level, item.level],
+    [config.labels.funding, item.funding],
+    [config.labels.amount, item.amount],
+    ['Duration', item.duration],
+    ['Eligible applicants', item.nationalities],
+    ['Fields of study', item.fields],
+    ['Application deadline', item.deadline ? prettyDate(item.deadline) : item.deadlineNote],
+    ['Last verified', item.verified && prettyDate(item.verified)],
+  ].filter(([, v]) => v)
+  const overview = buildOverview(item, kind, config)
+    .map((part) => `<h3>${esc(part.heading)}</h3>${(part.paragraphs ?? []).map((p) => `<p>${esc(p)}</p>`).join('')}${part.bullets ? items(part.bullets) : ''}`)
+    .join('')
+  const can = criteriaFor(item, kind)
+  return [
+    `<nav><a href="/">Home</a> › <a href="${esc(config.path)}">${esc(config.title)}</a></nav>`,
+    `<p class="eb">${esc(config.singular)}${item.country ? ` · ${esc(item.country)}` : ''}${closed ? ' · closed' : ''}</p><h1>${esc(item.name)}</h1><p>${esc(item.summary ?? '')}</p>`,
+    closed ? '<p><strong>Applications for this cycle have closed.</strong> Most opportunities reopen on a similar timetable each year.</p>' : '',
+    section('At a glance', `<dl>${facts.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>`),
+    item.deadlineNote ? `<p>${esc(item.deadlineNote)}</p>` : '',
+    section('Can I apply?', can.length ? `<dl>${can.map((c) => `<dt>${esc(c.label)}</dt><dd>${esc(c.text)}</dd>`).join('')}</dl>` : ''),
+    section('Overview', overview),
+    section('Full eligibility details', item.eligibility?.length ? items(item.eligibility) : ''),
+    section('What you get', item.benefits?.length ? items(item.benefits) : ''),
+    section('Required documents', item.documents?.length ? items(item.documents) : ''),
+    section('How to apply, step by step', item.howToApply?.length ? items(item.howToApply, 'ol') : ''),
+    section('Key dates', item.timeline?.length ? items(item.timeline.map((t) => `${t.date}: ${t.label}`)) : ''),
+    section('Frequently asked questions', (item.faqs ?? []).map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')),
+    official ? `<p><a href="${esc(official)}" rel="noopener">Apply on the official site</a></p>` : '',
+    section(`Similar ${config.plural} you can apply for now`, linkList(similar(entry, open))),
+    `<p><a href="${esc(config.path)}">More ${esc(config.plural)}</a> · <a href="/eligibility">Am I eligible?</a> · <a href="/book-consultation">Get expert help applying</a></p>`,
+  ].join('\n')
+}
+
+/** Search terms for one listing; Bing still reads the keywords tag. */
+const listingKeywords = ({ kind, item }) =>
+  [
+    item.name,
+    item.org,
+    item.country && `${kinds[kind].plural} in ${item.country}`,
+    item.level && `${item.level.toLowerCase()} ${kinds[kind].plural}`,
+    item.funding,
+    `${kinds[kind].plural} for international students`,
+  ]
+    .filter(Boolean)
+    .join(', ')
+
+const withKeywords = (html, keywords) => html.replace(/(<meta\s+name="keywords"\s+content=")[^"]*(")/, `$1${esc(keywords)}$2`)
 
 /* ----------------------------------------------------------------- Flyers */
 
@@ -197,9 +289,13 @@ function writeHtml(outDir, route, html) {
 export default function buildSeo() {
   let outDir = 'dist'
   let root = '.'
+  const chunks = new Map()
   return {
     name: 'merit-build-seo',
     apply: 'build',
+    generateBundle(_, bundle) {
+      for (const c of Object.values(bundle)) if (c.type === 'chunk') chunks.set(c.fileName, c)
+    },
     configResolved(config) {
       root = config.root
       outDir = path.resolve(config.root, config.build.outDir)
@@ -225,20 +321,23 @@ export default function buildSeo() {
       fs.writeFileSync(path.join(outDir, 'feeds', 'closing-soon.xml'), rss('Merit Leaders — closing soon', 'Opportunities closing in the next 14 days.', soon, flyers))
 
       const template = fs.readFileSync(path.join(outDir, 'index.html'), 'utf8')
+      const detailPreload = preloadTags(chunks, 'ScholarshipDetail')
       for (const e of entries) {
         const guides = posts.filter((p) => p.related.includes(e.path))
-        writeHtml(outDir, e.path, page(template, {
-          title: `${e.item.name} — Merit Leaders`,
-          description: `${e.item.summary ?? ''} Deadline: ${prettyDate(e.item.deadline)}.`.trim(),
+        const seo = listingSeo(e.item, kinds[e.kind], { closed: !isOpen(e.item) })
+        writeHtml(outDir, e.path, withKeywords(page(template, {
+          title: pageTitle(seo.title),
+          description: seo.description,
           url: SITE_URL + e.path,
           image: imageFor(e.item),
-          body: detailBody(e) + guides.map((g) => `<p>Guide: <a href="${esc(g.to)}">${esc(g.title)}</a></p>`).join(''),
-        }))
+          preload: detailPreload,
+          body: detailBody(e, open) + guides.map((g) => `<p>Guide: <a href="${esc(g.to)}">${esc(g.title)}</a></p>`).join(''),
+        }), listingKeywords(e)))
       }
       for (const k of Object.values(kinds)) {
         const list = open.filter((e) => e.kind === k.key).sort((a, b) => a.item.deadline.localeCompare(b.item.deadline))
         writeHtml(outDir, k.path, page(template, {
-          title: `${k.title} — ${list.length} open now — Merit Leaders`,
+          title: pageTitle(kindTitle(k, list.length)),
           description: k.lede,
           url: SITE_URL + k.path,
           image: LOGO,
@@ -252,10 +351,11 @@ export default function buildSeo() {
           `<script type="application/ld+json">${JSON.stringify(postJsonLd(p)).replace(/</g, '\\u003c')}</script>`,
         ].join('')
         const html = page(template, {
-          title: `${p.title} — Merit Leaders`,
+          title: pageTitle(p.title),
           description: p.excerpt,
           url: p.link,
           image: p.image ?? LOGO,
+          preload: preloadTags(chunks, 'BlogPostPage'),
           body: `<p class="eb">Merit Leaders blog</p><h1>${esc(p.title)}</h1>${p.html}`,
         })
           .replace('<meta property="og:type" content="website" />', '<meta property="og:type" content="article" />')
@@ -265,7 +365,7 @@ export default function buildSeo() {
       }
       for (const p of landing) {
         writeHtml(outDir, p.path, page(template, {
-          title: `${p.title} — Merit Leaders`,
+          title: pageTitle(p.title),
           description: `${p.lede} ${p.matches.length} open now.`,
           url: SITE_URL + p.path,
           image: LOGO,

@@ -28,6 +28,7 @@ import { buildOverview } from '../lib/overview'
 import { criteriaFor } from '../data/criteria'
 import { photos } from '../data/photos'
 import { posts } from '../data/posts'
+import { listingSeo } from '../lib/seo'
 import NotFound from './NotFound'
 
 /* ----------------------------------------------------------------- Helpers */
@@ -125,7 +126,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
   if (deadlineStatus(s.deadline, now).state === 'closed') {
     return (
       <>
-        <Seo title={`${s.name} (closed)`} description={`Applications for ${s.name} have closed. See open ${config.plural} instead.`} />
+        <Seo {...listingSeo(s, config, { closed: true })} />
         <PageHeader
           eyebrow={`${config.flyerLabel} · closed`}
           title={s.name}
@@ -219,11 +220,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
 
   return (
     <>
-      <Seo
-        title={s.name}
-        description={`${s.name}: ${s.summary} Eligibility, benefits, required documents, deadline and how to apply.`}
-        jsonLd={jsonLd}
-      />
+      <Seo {...listingSeo(s, config)} jsonLd={jsonLd} />
 
       <PageHeader
         eyebrow={`${config.flyerLabel} · ${s.country}`}

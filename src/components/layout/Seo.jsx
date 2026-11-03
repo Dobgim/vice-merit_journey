@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { SITE_URL, company } from '../../data/site'
+import { SITE_URL } from '../../data/site'
+import { pageTitle } from '../../lib/seo'
 
 /** Creates the head tag if it is missing, then sets one attribute on it. */
 function setHeadTag(selector, create, attr, value) {
@@ -23,7 +24,7 @@ export default function Seo({ title, description, jsonLd }) {
   const { pathname } = useLocation()
 
   useEffect(() => {
-    document.title = title ? `${title} — ${company.name}` : `${company.name} — Scholarship Consultancy`
+    document.title = pageTitle(title)
 
     if (!description) return
     setHeadTag('meta[name="description"]', () => Object.assign(document.createElement('meta'), { name: 'description' }), 'content', description)
