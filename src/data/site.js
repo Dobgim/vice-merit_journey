@@ -395,6 +395,34 @@ export const packageAddons = [
   { name: 'Express delivery (72 hours)', price: null, note: '+30% of package price' },
 ]
 
+/** Low-cost first services, for students who want to try us before a package. */
+export const starterOffers = [
+  {
+    id: 'letter-review',
+    name: 'Motivation letter review',
+    price: { USD: 9, XAF: 5000 },
+    delivery: '48 hours',
+    icon: 'pen',
+    body: 'Send your draft. We return it with clear comments on structure, story and what the committee will look for.',
+  },
+  {
+    id: 'cv-review',
+    name: 'CV review',
+    price: { USD: 5, XAF: 3000 },
+    delivery: '48 hours',
+    icon: 'file',
+    body: 'We mark up your CV so it reads like a scholarship CV: the right order, the right detail, nothing missing.',
+  },
+  {
+    id: 'shortlist',
+    name: 'Scholarship shortlist',
+    price: { USD: 5, XAF: 3000 },
+    delivery: '48 hours',
+    icon: 'award',
+    body: 'Tell us your level, field and nationality. We send you 5 open scholarships you qualify for, with their deadlines.',
+  },
+]
+
 export const packageSteps = [
   { title: 'Choose & message us', body: 'Pick a package and send us a WhatsApp message. We reply within a few hours.' },
   { title: 'Intake interview', body: 'A call to capture your story, achievements and goals. A 50% deposit confirms your slot.' },
