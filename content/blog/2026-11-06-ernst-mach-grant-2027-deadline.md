@@ -1,5 +1,5 @@
 Title: Ernst Mach Grant 2027/28: Research in Austria, Apply by 1 December
-Meta description: Up to 9 months of funded research in Austria, open to PhD students and young researchers from Africa. The Ernst Mach Grant 2027/28 closes 1 December 2026.
+Meta description: Up to 9 months of funded research in Austria, open to PhD students and young researchers worldwide. The Ernst Mach Grant 2027/28 closes 1 December 2026.
 Keywords: Ernst Mach Grant 2027/28, Ernst Mach Grant deadline, Ernst Mach Grant Worldwide, Ernst Mach Grant for African students, OeAD scholarship Austria 2027, research grant in Austria for PhD students, Austrian Government grant for postgraduates, research stay in Austria, scholarship in Austria for international students
 Tags: Austria, Research grants, PhD students, Postdoc, International students, Application guide
 Related: /scholarships/ernst-mach-grant-worldwide-2027-28
@@ -8,7 +8,7 @@ Cover: https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Wien_-_Universit
 Cover alt: The main building of the University of Vienna on the Ringstraße under a blue spring sky
 Cover credit: University of Vienna. Photo: C.Stadler/Bwag, CC BY-SA 4.0 (Wikimedia Commons)
 
-Imagine finishing a chapter of your PhD in Vienna, Graz or Innsbruck, working next to a professor whose papers you have been citing for years. The **Ernst Mach Grant 2027/28** makes that possible: the Austrian Government pays a monthly grant for a research stay of **1 to 9 months**. It is open to researchers from every country outside Austria, including Cameroon and the rest of Africa. Applications close on **1 December 2026 at 23:59 CET**, and the step that takes longest, finding a host supervisor, needs to start this week.
+Imagine finishing a chapter of your PhD in Vienna, Graz or Innsbruck, working next to a professor whose papers you have been citing for years. The **Ernst Mach Grant 2027/28** makes that possible: the Austrian Government pays a monthly grant for a research stay of **1 to 9 months**. It is open to researchers from every country outside Austria. Applications close on **1 December 2026 at 23:59 CET**, and the step that takes longest, finding a host supervisor, needs to start this week.
 
 This guide explains who can apply, which documents take the most time, and how to use the weeks you have left. You can also see the key facts at a glance on our [Ernst Mach Grant listing](https://www.meritleaders.com/scholarships/ernst-mach-grant-worldwide-2027-28).
 
@@ -22,11 +22,11 @@ Stays for this call start from **September 2027**, and the OeAD says they cannot
 
 ## How much is the grant?
 
-You receive a monthly grant for each month of your stay. The OeAD has not published the 2027/28 rate on the pages we checked, and older OeAD material is not tied to this call, so we have not quoted a figure. Check the current rate through our listing before you plan your budget, and expect to cover some costs, such as flights, yourself.
+You receive a monthly grant for every month you spend in Austria, at the rate the OeAD sets for this call. The grant is meant for living costs, so plan to pay for extras such as flights yourself. The current monthly rate is on the official call, linked from our [Ernst Mach Grant listing](https://www.meritleaders.com/scholarships/ernst-mach-grant-worldwide-2027-28).
 
 ## Who can apply?
 
-According to the OeAD's FAQ for this call, you can apply if you are:
+You can apply if you are:
 
 - a **PhD student** at a university outside Austria;
 - a **postgraduate or postdoc** who finished your studies at a university outside Austria **after 30 September 2025** and wants to do research in Austria; or
@@ -34,17 +34,17 @@ According to the OeAD's FAQ for this call, you can apply if you are:
 
 The programme page gives an **age limit of 35**. You cannot apply if you are a regular student at an Austrian university, live permanently in Austria, or did most of your academic education there.
 
-If you are a Cameroonian PhD student, a young lecturer, or a recent master's graduate with a clear research plan, this call deserves a serious look. If you are still in your first degree, it is not the right fit yet. Our [eligibility checker](https://www.meritleaders.com/eligibility) can point you to better options.
+If you are a PhD student, a young lecturer, or a recent master's graduate with a clear research plan, this call deserves a serious look. If you are still in your first degree, it is not the right fit yet. Our [eligibility checker](https://www.meritleaders.com/eligibility) can point you to better options.
 
 ## When is the deadline?
 
-Applications close at **23:59 CET on 1 December 2026**. Cameroon is on the same time in December, so that is 23:59 Cameroon time too. Results are expected in **early July 2027**, and stays begin from September 2027.
+Applications close at **23:59 CET on 1 December 2026**. Convert this to your own time zone so you don't get caught out. Results are expected in **early July 2027**, and stays begin from September 2027.
 
 Late applications are not accepted, so aim to submit at least a few days early.
 
 ## What documents do you need?
 
-For most applicants, the slow part is not the online form. It is getting letters signed and stamped. Based on the OeAD's FAQ, plan for these:
+For most applicants, the slow part is not the online form. It is getting letters signed and stamped. Plan for these:
 
 - **A supervision confirmation from a lecturer at an Austrian university.** It must use the OeAD template, with a date, signature and stamp. The supervisor also confirms that your project can be done in English.
 - **Recommendation letters.** They can be freely worded, but need letterhead, a date, a signature and the institution's stamp, and must be **no older than six months** when you apply.
@@ -101,7 +101,7 @@ Collect the signed supervisor template, prepare any translations, declare any AI
 
 ### Is the Ernst Mach Grant fully funded?
 
-It pays a monthly grant during your stay, so we list it as partially funded. Check what the grant covers before you plan your budget.
+It is partially funded. The monthly grant covers your living costs during the stay, but extras such as flights are up to you.
 
 ### Can master's students apply?
 

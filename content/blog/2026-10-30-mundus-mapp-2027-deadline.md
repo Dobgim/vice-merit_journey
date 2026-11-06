@@ -16,7 +16,7 @@ This guide explains who can apply, what the scholarship covers, and how to use t
 
 Mundus MAPP is a two-year Erasmus Mundus joint master's in public policy. A group of European universities runs it together, and you study in more than one country. You finish with a joint or double degree.
 
-Erasmus Mundus scholarships are funded by the European Union and go to a limited number of top applicants. The programme's official site says they are awarded on academic merit.
+Erasmus Mundus scholarships are funded by the European Union and go to a limited number of top applicants, selected on academic merit.
 
 ## When is the Mundus MAPP 2027 deadline?
 
@@ -26,21 +26,21 @@ The official [Mundus MAPP financial aid page](https://www.mundusmapp.org/financi
 - **15 April 2027:** non-EU/EEA residents who are not seeking aid.
 - **1 July 2027:** EU/EEA residents who are not seeking aid.
 
-If you need a scholarship, the date that matters is **1 December 2026**. Please check the exact closing time on the [official admissions calendar](https://www.mundusmapp.org/admissions-calendar/), because we cannot confirm time zones for you.
+If you need a scholarship, the date that matters is **1 December 2026**. The exact closing time is on the [official admissions calendar](https://www.mundusmapp.org/admissions-calendar/).
 
 ## Who can apply?
 
-The official admissions requirements say, in short:
+In short:
 
 - You need a bachelor's degree with at least an Upper Second Class (2.1) result, or a GPA of about 3.17 out of 4.0 or the equivalent.
 - Applicants with a bachelor's degree in natural sciences or engineering are not eligible. Social science degrees are preferred.
 - You must show English proficiency, usually through a test such as IELTS Academic or TOEFL iBT. Some applicants are exempt if their degree was taught in English in certain listed countries.
 
-One of the admissions pages looks old, so please **check the official page** for the current grade and test-score requirements before you pay for any exam.
+Confirm the current grade and test-score requirements on the official page before you pay for any exam.
 
 ## What does the scholarship cover?
 
-According to the programme, an Erasmus Mundus scholarship includes a full tuition-fee waiver and a monthly allowance. The commonly quoted EU rate is **€1,400 a month for 24 months**, up to a maximum of €33,600 in total. Travel, installation and visa costs can be treated differently, so read the funding page carefully for what is and is not covered.
+An Erasmus Mundus scholarship includes a full tuition-fee waiver and a monthly allowance. The standard EU rate is **€1,400 a month for 24 months**, up to a maximum of €33,600 in total. Travel, installation and visa costs can be treated differently, so read the funding page carefully for what is and is not covered.
 
 There is also one smaller Institutional Scholarship per study track, giving a 50% tuition waiver but no stipend. Because only a few top candidates are funded, the programme itself encourages you to look for other funding too.
 

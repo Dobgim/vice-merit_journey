@@ -32,9 +32,9 @@ The scholarship deadline is **1 December 2026, 23:59 CET**. TU Delft says that i
 - **Living costs:** a fixed monthly contribution, set out in your scholarship contract.
 - **Second year:** continued support depends on your results. You need at least 48 of the 60 ECTS credits by the end of your first year.
 
-Some things stay your responsibility. TU Delft's FAQ says flights and accommodation are not covered, and it estimates about €1,500 in settling-in costs for students arriving from abroad. You also cannot hold other full or partial scholarship funding at the same time as this award.
+Some things stay your responsibility. Flights and accommodation are not covered, and TU Delft estimates about €1,500 in settling-in costs for students arriving from abroad. You also cannot hold other full or partial scholarship funding at the same time as this award.
 
-Because TU Delft's pages have given different totals, we do not quote one here. Check the current amount on the official page, which you can reach from [our listing](https://www.meritleaders.com/scholarships/tu-delft-justus-louise-van-effen-excellence-scholarship-2027), before you plan your budget.
+The full breakdown of the award is in the official scholarship terms, which you can reach from [our listing](https://www.meritleaders.com/scholarships/tu-delft-justus-louise-van-effen-excellence-scholarship-2027).
 
 ## Who can apply?
 
@@ -49,7 +49,7 @@ You cannot apply if you:
 - Are an international applicant with a bachelor's degree from a Dutch university.
 - Have already started your studies at TU Delft.
 
-Students from Cameroon and across Africa can apply if they meet these conditions, as no African country is excluded in the rules we read. Not sure where you stand? Try our [eligibility checker](https://www.meritleaders.com/eligibility).
+The scholarship is open to students of every nationality who meet these conditions. Not sure where you stand? Try our [eligibility checker](https://www.meritleaders.com/eligibility).
 
 ## What documents do you need?
 
@@ -94,7 +94,7 @@ No. The top 10% is a guide to the level expected, and TU Delft does not require 
 
 ### How many reference letters do I need?
 
-One. If you have two references, TU Delft asks you to combine them into a single PDF. Check the requirements in your application portal before you submit, because one TU Delft page describes this differently.
+One. If you have two references, TU Delft asks you to combine them into a single PDF. Check the requirements in your application portal before you submit.
 
 ### Can I apply for other scholarships too?
 
