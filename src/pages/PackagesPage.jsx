@@ -7,7 +7,7 @@ import SectionHeading from '../components/ui/SectionHeading'
 import Reveal, { Stagger, StaggerItem } from '../components/ui/Reveal'
 import Button from '../components/ui/Button'
 import Icon from '../components/ui/Icon'
-import { company, currencies, packageAddons, packageFaqs, packageSteps, packages, starterOffers } from '../data/site'
+import { company, currencies, packageFaqs, packageSteps, packages, starterOffers } from '../data/site'
 
 const whatsappFor = (text) => `https://wa.me/${company.whatsapp}?text=${encodeURIComponent(text)}`
 
@@ -156,50 +156,6 @@ export default function PackagesPage() {
         </div>
       </PageHeader>
 
-      {/* Starter offers */}
-      <Section id="start-small" tone="white" className="!py-16 sm:!py-20">
-        <div className="container">
-          <SectionHeading
-            eyebrow="Start small"
-            title="Not ready for a package?"
-            accent="Try a quick review."
-            lede="Small, fast services at student prices. Pay with Mobile Money or Orange Money and get your feedback in 48 hours."
-          />
-          <Stagger className="mt-12 grid gap-5 md:grid-cols-3">
-            {starterOffers.map((o) => {
-              const price = currencies.XAF.format(o.price.XAF)
-              return (
-                <StaggerItem key={o.id} className="h-full">
-                  <Card hover={false} className="flex h-full flex-col p-6">
-                    <IconTile name={o.icon} tone="navy" />
-                    <h3 className="mt-5 font-display text-lg font-semibold text-navy-950">{o.name}</h3>
-                    <p className="mt-1 flex flex-wrap items-baseline gap-x-2 text-navy-950">
-                      <span className="font-display text-2xl font-semibold">{price}</span>
-                      <span className="text-sm text-navy-500">
-                        ({currencies.USD.format(o.price.USD)}) · {o.delivery}
-                      </span>
-                    </p>
-                    <p className="mt-3 flex-1 text-base leading-[1.6] text-navy-700/80">{o.body}</p>
-                    <Button
-                      href={whatsappFor(`Hi ${company.name} — I would like the ${o.name} (${price}).`)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      variant="primary"
-                      size="md"
-                      icon="whatsapp"
-                      iconRight={false}
-                      className="mt-6 w-full"
-                    >
-                      Order on WhatsApp
-                    </Button>
-                  </Card>
-                </StaggerItem>
-              )
-            })}
-          </Stagger>
-        </div>
-      </Section>
-
       {/* Pricing */}
       <Section id="pricing" tone="light">
         <div className="container">
@@ -228,29 +184,45 @@ export default function PackagesPage() {
         </div>
       </Section>
 
-      {/* Add-ons */}
-      <Section tone="white" className="!py-16 sm:!py-20">
-        <div className="container grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div>
-            <p className="eyebrow text-navy-500">Add-ons</p>
-            <h2 className="mt-3 font-display text-3xl font-semibold leading-tight text-navy-950">
-              Need just one piece?
-            </h2>
-            <p className="mt-3 max-w-md text-base leading-[1.7] text-navy-700/80">
-              Add any of these to a package, or order them on their own.
-            </p>
-          </div>
-
-          <Card hover={false} className="divide-y divide-navy-900/[0.07]">
-            {packageAddons.map((a) => (
-              <div key={a.name} className="flex items-center justify-between gap-4 px-6 py-4">
-                <span className="text-base font-medium text-navy-900">{a.name}</span>
-                <span className="shrink-0 font-semibold text-navy-950">
-                  {a.price ? currencies[currency].format(a.price[currency]) : a.note}
-                </span>
-              </div>
-            ))}
-          </Card>
+      {/* Starter offers */}
+      <Section id="start-small" tone="white" className="!py-16 sm:!py-20">
+        <div className="container">
+          <SectionHeading
+            eyebrow="Start small"
+            title="Not ready for a package?"
+            accent="Try a quick review."
+            lede="Small, fast services at student prices, with your feedback in 48 hours. Pay by card, bank transfer or mobile money."
+          />
+          <Stagger className="mt-12 grid gap-5 md:grid-cols-2 lg:mx-auto lg:max-w-4xl">
+            {starterOffers.map((o) => {
+              const price = currencies[currency].format(o.price[currency])
+              return (
+                <StaggerItem key={o.id} className="h-full">
+                  <Card hover={false} className="flex h-full flex-col p-6">
+                    <IconTile name={o.icon} tone="navy" />
+                    <h3 className="mt-5 font-display text-lg font-semibold text-navy-950">{o.name}</h3>
+                    <p className="mt-1 flex flex-wrap items-baseline gap-x-2 text-navy-950">
+                      <span className="font-display text-2xl font-semibold">{price}</span>
+                      <span className="text-sm text-navy-500">{o.delivery}</span>
+                    </p>
+                    <p className="mt-3 flex-1 text-base leading-[1.6] text-navy-700/80">{o.body}</p>
+                    <Button
+                      href={whatsappFor(`Hi ${company.name} — I would like the ${o.name} (${price}).`)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      variant="primary"
+                      size="md"
+                      icon="whatsapp"
+                      iconRight={false}
+                      className="mt-6 w-full"
+                    >
+                      Order on WhatsApp
+                    </Button>
+                  </Card>
+                </StaggerItem>
+              )
+            })}
+          </Stagger>
         </div>
       </Section>
 

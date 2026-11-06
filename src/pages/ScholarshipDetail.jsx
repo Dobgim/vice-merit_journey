@@ -565,7 +565,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
                     to="/packages"
                     className="mt-4 block border-t border-white/10 pt-4 text-center text-sm leading-snug text-navy-100/70 hover:text-white"
                   >
-                    Already have a draft? <span className="font-semibold text-gold-200">Get your motivation letter reviewed for 5,000 FCFA</span>
+                    Already have a draft? <span className="font-semibold text-gold-200">Get your motivation letter reviewed from $9</span>
                   </Link>
                 </div>
               </div>

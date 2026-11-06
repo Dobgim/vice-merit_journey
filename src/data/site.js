@@ -413,14 +413,6 @@ export const starterOffers = [
     icon: 'file',
     body: 'We mark up your CV so it reads like a scholarship CV: the right order, the right detail, nothing missing.',
   },
-  {
-    id: 'shortlist',
-    name: 'Scholarship shortlist',
-    price: { USD: 5, XAF: 3000 },
-    delivery: '48 hours',
-    icon: 'award',
-    body: 'Tell us your level, field and nationality. We send you 5 open scholarships you qualify for, with their deadlines.',
-  },
 ]
 
 export const packageSteps = [
