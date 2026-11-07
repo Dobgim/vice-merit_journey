@@ -9,6 +9,12 @@ import Button from '../components/ui/Button'
 import Icon from '../components/ui/Icon'
 import { company, currencies, packageFaqs, packageSteps, packages, starterOffers } from '../data/site'
 
+/** The same price in the currency the toggle is not showing. */
+const otherPrice = (price, currency) => {
+  const other = currency === 'USD' ? 'XAF' : 'USD'
+  return currencies[other].format(price[other])
+}
+
 const whatsappFor = (text) => `https://wa.me/${company.whatsapp}?text=${encodeURIComponent(text)}`
 
 function CurrencyToggle({ value, onChange }) {
@@ -81,6 +87,9 @@ function PackageCard({ pkg, currency }) {
         </span>
         <span className={`pb-1 text-sm ${featured ? 'text-navy-100/60' : 'text-navy-500'}`}>{pkg.unit}</span>
       </div>
+      <p className={`relative mt-1.5 text-sm font-medium ${featured ? 'text-navy-100/70' : 'text-navy-600'}`}>
+        ≈ {otherPrice(pkg.price, currency)}
+      </p>
       <p className={`relative mt-2 inline-flex items-center gap-1.5 text-sm ${featured ? 'text-navy-100/60' : 'text-navy-500'}`}>
         <Icon name="clock" className="h-3.5 w-3.5" />
         Delivery: {pkg.delivery}
@@ -97,7 +106,7 @@ function PackageCard({ pkg, currency }) {
 
       <div className="relative mt-8 grid gap-2.5">
         <Button
-          href={whatsappFor(`Hi ${company.name} — I would like the ${pkg.name} package (${price}). Can we get started?`)}
+          href={whatsappFor(`Hi ${company.name} — I would like the ${pkg.name} package (${price} / ${otherPrice(pkg.price, currency)}). Can we get started?`)}
           target="_blank"
           rel="noopener noreferrer"
           variant={featured ? 'gold' : 'primary'}
@@ -203,11 +212,12 @@ export default function PackagesPage() {
                     <h3 className="mt-5 font-display text-lg font-semibold text-navy-950">{o.name}</h3>
                     <p className="mt-1 flex flex-wrap items-baseline gap-x-2 text-navy-950">
                       <span className="font-display text-2xl font-semibold">{price}</span>
-                      <span className="text-sm text-navy-500">{o.delivery}</span>
+                      <span className="text-sm font-medium text-navy-600">≈ {otherPrice(o.price, currency)}</span>
+                      <span className="text-sm text-navy-500">· {o.delivery}</span>
                     </p>
                     <p className="mt-3 flex-1 text-base leading-[1.6] text-navy-700/80">{o.body}</p>
                     <Button
-                      href={whatsappFor(`Hi ${company.name} — I would like the ${o.name} (${price}).`)}
+                      href={whatsappFor(`Hi ${company.name} — I would like the ${o.name} (${price} / ${otherPrice(o.price, currency)}).`)}
                       target="_blank"
                       rel="noopener noreferrer"
                       variant="primary"
