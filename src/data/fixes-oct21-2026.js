@@ -245,7 +245,7 @@ export const callFixes = {
   },
   'yenching-academy-scholarship-peking-university': {
     deadline: '2026-11-30',
-    deadlineNote: 'Applications close at 9:00 am Beijing time on 30 November 2026.',
+    deadlineNote: 'Applications close at 9:00 am Beijing time on 30 November 2026. You apply through the portal at apply.yca.pku.edu.cn, linked from the admissions page; it can take up to a minute to open outside China, so be patient and do not leave it to the last day.',
   },
   'pierre-elliott-trudeau-foundation-doctoral-scholarship': {
     deadlineNote: 'Only applicants who passed the eligibility screening (due 2 October 2026) can submit the full application by 6 November 2026.',
