@@ -196,6 +196,9 @@ export const retiredSlugs = new Set([
 
 /** Corrections found on the official pages. */
 export const callFixes = {
+  'getfund-local-scholarships-2026-27': {
+    deadlineNote: 'GETFund’s website security certificate expired on 29 October 2026, so your browser may warn you when you open the official page. Don’t enter passwords or payment details there until it is fixed; confirm the details with GETFund directly.',
+  },
   'rotary-global-grant-scholarship-district-5890-houston': {
     deadline: '2026-11-08',
     deadlineNote: 'Rotary clubs send their candidate’s application to the District 5890 Global Grant Scholar Committee Chair by 8 November 2026; interviews follow in December. Apply through a Rotary club, not Rotary International.',

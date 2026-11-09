@@ -169,6 +169,10 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
   const helpHref = `/book-consultation?scholarship=${encodeURIComponent(s.name)}`
   // Only ever link to the funder's own page — never a web search.
   const applyUrl = !s.officialSearch && s.officialUrl
+  // Sites in China often time out abroad; say so next to the apply buttons.
+  const chinaSite = Boolean(applyUrl) && /\.cn$/i.test(applyUrl.replace(/^https?:\/\/([^/:]+).*$/, '$1'))
+  const chinaTip =
+    'Chinese university websites can be slow or fail to open outside China. If the link does not load, wait a few minutes and try again, or start on the CSC portal at studyinchina.csc.edu.cn.'
   const pageUrl = typeof window !== 'undefined' ? window.location.href : ''
 
   const facts = [
@@ -251,6 +255,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
             Get expert help applying
           </Button>
         </div>
+        {chinaSite && <p className="mt-3 max-w-2xl text-sm leading-relaxed text-navy-100/70">{chinaTip}</p>}
 
         <div className="mt-3 flex flex-wrap gap-3">
           <Button as="button" type="button" onClick={() => toggleSaved(s.slug)} variant="ghostLight" size="sm" icon="bookmark" iconRight={false} aria-pressed={isSaved}>
@@ -436,6 +441,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
                     </Button>
                   </div>
                 )}
+                {chinaSite && <p className="mt-3 text-sm leading-relaxed text-navy-600">{chinaTip}</p>}
               </Block>
             )}
 
