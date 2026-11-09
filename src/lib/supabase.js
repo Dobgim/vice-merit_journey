@@ -101,6 +101,51 @@ export async function submitConsultation(payload) {
   return error && !emailed ? { ok: false, mode: 'live', error } : { ok: true, mode: 'live' }
 }
 
+/**
+ * Enter the free application support giveaway. Entries are stored as
+ * consultation requests tagged "[Free application]", so they show up in the
+ * dashboard without a new table. Resolves to { ok, mode, error }.
+ */
+export async function submitGiveawayEntry(entry) {
+  const details = {
+    'WhatsApp': entry.phone,
+    'Follows us as': entry.followName,
+    'Nationality': entry.nationality,
+    'Field of study': entry.field,
+    'Last qualification and grade': entry.qualification,
+    'Documents ready': entry.documents.length ? entry.documents.join(', ') : 'None ticked',
+    'Scholarships chosen': entry.scholarships.map((s) => `${s.name} (closes ${s.deadline}) https://www.meritleaders.com/scholarships/${s.slug}`).join(' | '),
+    'Why study abroad': entry.why,
+  }
+  const row = {
+    full_name: entry.fullName,
+    email: entry.email,
+    phone: entry.phone,
+    study_level: entry.level,
+    country: entry.nationality,
+    message: `[Free application]\n${Object.entries(details).map(([k, v]) => `${k}: ${v}`).join('\n')}`,
+  }
+
+  const emailed = await sendEmail(
+    `Free application entry — ${row.full_name}`,
+    { Name: row.full_name, Email: row.email, Level: row.study_level, ...details },
+    row.email
+  )
+
+  const supabase = await getSupabase()
+  if (!supabase) {
+    const rows = demo.read('consultations', [])
+    demo.write('consultations', [
+      { ...row, id: newId(), status: 'new', notes: '', created_at: new Date().toISOString() },
+      ...rows,
+    ])
+    return emailed ? { ok: true, mode: 'email' } : { ok: false, mode: 'email', error: new Error('Email not sent') }
+  }
+
+  const { error } = await supabase.from('consultations').insert(row)
+  return error && !emailed ? { ok: false, mode: 'live', error } : { ok: true, mode: 'live' }
+}
+
 /** Subscribe an email to alerts. Resolves to { ok, mode, error }. */
 export async function subscribeToAlerts({ email, studyLevel }) {
   const row = { email: email.trim().toLowerCase(), study_level: studyLevel || null }

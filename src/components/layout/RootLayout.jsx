@@ -1,3 +1,4 @@
+import GiveawayBand from './GiveawayBand'
 import { Suspense, useEffect, useLayoutEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Outlet, useLocation, useNavigationType } from 'react-router-dom'
@@ -65,6 +66,7 @@ export default function RootLayout() {
         </Suspense>
       </motion.main>
 
+      <GiveawayBand />
       <Footer />
       <FloatingActions />
       <UpdateBanner />

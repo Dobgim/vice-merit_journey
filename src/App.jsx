@@ -30,6 +30,7 @@ const pages = {
   eligibility: () => import('./pages/EligibilityPage'),
   book: () => import('./pages/BookConsultationPage'),
   legal: () => import('./pages/LegalPage'),
+  giveaway: () => import('./pages/GiveawayPage'),
 }
 
 const About = lazy(pages.about)
@@ -50,6 +51,7 @@ const ExplorePage = lazy(pages.explore)
 const EligibilityPage = lazy(pages.eligibility)
 const BookConsultationPage = lazy(pages.book)
 const LegalPage = lazy(pages.legal)
+const GiveawayPage = lazy(pages.giveaway)
 
 // The dashboard is a separate download, so visitors never load it.
 const AdminApp = lazy(() => import('./admin/AdminApp'))
@@ -73,6 +75,7 @@ const routePages = [
   [/^\/explore\/?$/, pages.explore],
   [/^\/eligibility\/?$/, pages.eligibility],
   [/^\/book-consultation\/?$/, pages.book],
+  [/^\/free-application\/?$/, pages.giveaway],
 ]
 
 /** Loads the code for the page at `pathname`, so the first render does not wait for it. */
@@ -126,6 +129,7 @@ export default function App() {
         <Route path="study-in/:slug" element={<LandingPage key="study-in" type="study-in" />} />
         <Route path="level/:slug" element={<LandingPage key="level" type="level" />} />
         <Route path="book-consultation" element={<BookConsultationPage />} />
+        <Route path="free-application" element={<GiveawayPage />} />
         <Route path="privacy" element={<LegalPage key="privacy" doc="privacy" />} />
         <Route path="terms" element={<LegalPage key="terms" doc="terms" />} />
         {/* Old links and bookmarks */}

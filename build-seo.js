@@ -28,6 +28,7 @@ import { criteriaFor } from './src/data/criteria.js'
 import { requirements } from './src/data/requirements.js'
 import { retiredSlugs, withDirectLink } from './src/data/fixes-oct21-2026.js'
 import { hasFixedDeadline, isOpenYet } from './src/lib/deadline.js'
+import { giveaway, isGiveawayOpen } from './src/data/giveaway.js'
 
 const LOGO = `${SITE_URL}/merit-leaders-logo.jpg`
 const STATIC_PAGES = [
@@ -74,6 +75,8 @@ function sitemap(entries, landing, posts) {
   const urls = [
     ...posts.map((p) => ({ loc: p.to, lastmod: p.date?.toISOString().slice(0, 10) ?? today() })),
     ...STATIC_PAGES.map((p) => ({ loc: p, lastmod: today() })),
+    // The giveaway page is only listed while entries are open (see src/data/giveaway.js).
+    ...(isGiveawayOpen() ? [{ loc: giveaway.path, lastmod: today() }] : []),
     ...entries.map((e) => ({ loc: e.path, lastmod: isoDay(e.item.posted) ?? isoDay(e.item.verified) ?? today() })),
     ...landing.map((p) => ({ loc: p.path, lastmod: today() })),
   ]
