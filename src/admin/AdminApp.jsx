@@ -8,6 +8,7 @@ import Icon from '../components/ui/Icon'
 import * as api from './api'
 import { Btn, ErrorNote, Field, Panel, PageTitle, Stat, StatusBadge, fmtDateTime, inputCls, useLoad } from './ui'
 import Consultations from './Consultations'
+import Giveaway from './Giveaway'
 import Subscribers from './Subscribers'
 import Listings from './Listings'
 import ListingEditor from './ListingEditor'
@@ -84,6 +85,7 @@ function Login({ onSignedIn, notAdminEmail }) {
 const NAV = [
   { to: '/admin', label: 'Overview', icon: 'layers', end: true },
   { to: '/admin/requests', label: 'Consultation requests', icon: 'mail' },
+  { to: '/admin/giveaway', label: 'Free application entries', icon: 'award' },
   { to: '/admin/subscribers', label: 'Subscribers', icon: 'bell' },
   { to: '/admin/listings/scholarships', label: 'Scholarships', icon: 'cap' },
   { to: '/admin/listings/grants', label: 'Grants', icon: 'wallet' },
@@ -346,6 +348,7 @@ export default function AdminApp() {
           <Routes>
             <Route index element={<Overview />} />
             <Route path="requests" element={<Consultations />} />
+            <Route path="giveaway" element={<Giveaway />} />
             <Route path="subscribers" element={<Subscribers />} />
             <Route path="listings/:kind" element={<Listings />} />
             <Route path="listings/:kind/new" element={<ListingEditor />} />

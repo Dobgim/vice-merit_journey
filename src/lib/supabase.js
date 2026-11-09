@@ -123,7 +123,8 @@ export async function submitGiveawayEntry(entry) {
     phone: entry.phone,
     study_level: entry.level,
     country: entry.nationality,
-    message: `[Free application]\n${Object.entries(details).map(([k, v]) => `${k}: ${v}`).join('\n')}`,
+    // One line per answer (newlines inside answers become spaces) so the dashboard can read it back.
+    message: `[Free application]\n${Object.entries(details).map(([k, v]) => `${k}: ${String(v ?? '').replace(/\s*\n+\s*/g, ' ')}`).join('\n')}`,
   }
 
   const emailed = await sendEmail(

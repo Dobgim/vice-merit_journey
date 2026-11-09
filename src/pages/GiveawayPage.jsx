@@ -94,9 +94,11 @@ function ScholarshipPicker({ picked, onChange, error }) {
         <Icon name="search" className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-navy-400" />
         <input
           type="search"
+          name="scholarship-filter"
+          autoComplete="off"
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="Search by name, country or field, e.g. Germany, engineering, PhD"
+          placeholder="Filter the list, e.g. Germany, engineering, PhD"
           className={`${input} h-12 pl-11`}
         />
       </div>
