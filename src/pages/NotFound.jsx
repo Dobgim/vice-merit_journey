@@ -5,7 +5,7 @@ import Button from '../components/ui/Button'
 export default function NotFound() {
   return (
     <>
-      <Seo title="Page Not Found" description="That page does not exist." />
+      <Seo title="Page Not Found" description="That page does not exist." noindex />
 
       <section className="relative isolate flex min-h-[70vh] items-center overflow-hidden bg-navy-950 px-6 py-32 text-center text-white">
         <Aurora />

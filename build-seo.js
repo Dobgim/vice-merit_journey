@@ -71,16 +71,23 @@ const isOpen = (item) => (isoDay(item.deadline) ?? '') >= today()
 
 /* ---------------------------------------------------------------- Sitemap */
 
+/**
+ * Only pages worth indexing: closed listings stay online (they are noindex)
+ * but are left out. lastmod is given only where it is a real date — stamping
+ * every page with the build date teaches Google to ignore lastmod entirely.
+ */
 function sitemap(entries, landing, posts) {
   const urls = [
-    ...posts.map((p) => ({ loc: p.to, lastmod: p.date?.toISOString().slice(0, 10) ?? today() })),
-    ...STATIC_PAGES.map((p) => ({ loc: p, lastmod: today() })),
+    ...posts.map((p) => ({ loc: p.to, lastmod: p.date?.toISOString().slice(0, 10) })),
+    ...STATIC_PAGES.map((p) => ({ loc: p })),
     // The giveaway page is only listed while entries are open (see src/data/giveaway.js).
-    ...(isGiveawayOpen() ? [{ loc: giveaway.path, lastmod: today() }] : []),
-    ...entries.map((e) => ({ loc: e.path, lastmod: isoDay(e.item.posted) ?? isoDay(e.item.verified) ?? today() })),
-    ...landing.map((p) => ({ loc: p.path, lastmod: today() })),
+    ...(isGiveawayOpen() ? [{ loc: giveaway.path }] : []),
+    ...entries.filter((e) => isOpen(e.item)).map((e) => ({ loc: e.path, lastmod: isoDay(e.item.verified) ?? isoDay(e.item.posted) })),
+    ...landing.map((p) => ({ loc: p.path })),
   ]
-  const body = urls.map((u) => `  <url><loc>${esc(SITE_URL + u.loc)}</loc><lastmod>${u.lastmod}</lastmod></url>`).join('\n')
+  const body = urls
+    .map((u) => `  <url><loc>${esc(SITE_URL + u.loc)}</loc>${u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : ''}</url>`)
+    .join('\n')
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`
 }
 
@@ -141,7 +148,7 @@ function preloadTags(chunks, name) {
   return [...files].map((f) => `<link rel="modulepreload" crossorigin href="/${f}" />`).join('')
 }
 
-function page(template, { title, description, url, image, body, preload = '' }) {
+function page(template, { title, description, url, image, body, preload = '', noindex = false }) {
   return template
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(title)}</title>`)
     .replace(/(<meta\s+name="description"\s+content=")[^"]*(")/, `$1${esc(description)}$2`)
@@ -151,7 +158,7 @@ function page(template, { title, description, url, image, body, preload = '' }) 
     .replace(/(<meta property="og:image" content=")[^"]*(")/, `$1${esc(image)}$2`)
     .replace(/(<meta name="twitter:title" content=")[^"]*(")/, `$1${esc(title)}$2`)
     .replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${esc(description)}$2`)
-    .replace('</head>', `<link rel="canonical" href="${esc(url)}" />${preload}${STYLE}</head>`)
+    .replace('</head>', `<link rel="canonical" href="${esc(url)}" />${noindex ? '<meta name="robots" content="noindex, follow" />' : ''}${preload}${STYLE}</head>`)
     .replace('<div id="root"></div>', `<div id="root"><main class="pr">${body}</main></div>`)
 }
 
@@ -334,6 +341,7 @@ export default function buildSeo() {
           url: SITE_URL + e.path,
           image: imageFor(e.item),
           preload: detailPreload,
+          noindex: !isOpen(e.item),
           body: detailBody(e, open) + guides.map((g) => `<p>Guide: <a href="${esc(g.to)}">${esc(g.title)}</a></p>`).join(''),
         }), listingKeywords(e)))
       }

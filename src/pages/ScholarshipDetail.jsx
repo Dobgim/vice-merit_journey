@@ -126,7 +126,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
   if (deadlineStatus(s.deadline, now).state === 'closed') {
     return (
       <>
-        <Seo {...listingSeo(s, config, { closed: true })} />
+        <Seo {...listingSeo(s, config, { closed: true })} noindex />
         <PageHeader
           eyebrow={`${config.flyerLabel} · closed`}
           title={s.name}

@@ -20,8 +20,15 @@ function setHeadTag(selector, create, attr, value) {
  * current page (without query string), so Google indexes each listing on its
  * own instead of treating every page as the homepage.
  */
-export default function Seo({ title, description, jsonLd }) {
+export default function Seo({ title, description, jsonLd, noindex = false }) {
   const { pathname } = useLocation()
+
+  // The server answers every path with 200, so pages that should not be in
+  // Google (not found, closed listings) say so with a robots tag instead.
+  useEffect(() => {
+    if (noindex) setHeadTag('meta[name="robots"]', () => Object.assign(document.createElement('meta'), { name: 'robots' }), 'content', 'noindex, follow')
+    else document.querySelector('meta[name="robots"]')?.remove()
+  }, [noindex, pathname])
 
   useEffect(() => {
     document.title = pageTitle(title)
