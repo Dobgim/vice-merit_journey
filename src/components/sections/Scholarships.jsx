@@ -360,8 +360,8 @@ export default function Scholarships({ kind = 'scholarships' }) {
             value={when}
             counts={whenCounts}
             onChange={(w) => setParam('when', w, 'all')}
-            styles={{ new: 'bg-emerald-600 text-white', week: 'bg-rose-600 text-white', month: 'bg-amber-600 text-white', saved: 'bg-gold-500 text-navy-950' }}
-            icons={{ new: 'sparkle', week: 'clock', month: 'calendar', saved: 'bookmark' }}
+            styles={{ today: 'bg-navy-900 text-white', new: 'bg-emerald-600 text-white', week: 'bg-rose-600 text-white', month: 'bg-amber-600 text-white', saved: 'bg-gold-500 text-navy-950' }}
+            icons={{ today: 'bell', new: 'sparkle', week: 'clock', month: 'calendar', saved: 'bookmark' }}
           />
           <Segmented
             label="Cost to apply"

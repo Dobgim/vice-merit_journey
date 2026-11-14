@@ -4,7 +4,8 @@ import { daysLeft, parseDate } from './deadline'
  * When a listing was posted on the site: `posted` if set, otherwise the day it
  * was added/checked (`verified`). Either may be a plain date (2026-10-26) or a
  * full timestamp (2026-10-26T23:06:00Z) — newer listings record the time too.
- * Drives the "Posted" line, the NEW badge, "Newest first" and "New this week".
+ * Drives the "Posted" line, the NEW badge, "Newest first", "Last 24 hours" and
+ * "New this week".
  */
 export const postedOn = (item) => (parseDate(item?.posted) ? item.posted : parseDate(item?.verified) ? item.verified : null)
 
@@ -51,6 +52,17 @@ export const isNew = (item, now) => {
   return d !== null && d >= 0 && d <= NEW_DAYS
 }
 
+/**
+ * Posted within the last 24 hours. Listings that record only a day (no time)
+ * count from the start of that day, so they show for the day they were added.
+ */
+export const isPostedToday = (item, now = new Date()) => {
+  const at = postedAt(item)
+  if (!at) return false
+  const age = now - at
+  return age >= 0 && age < 24 * 60 * 60 * 1000
+}
+
 const closesWithin = (days) => (item, now) => {
   const d = daysLeft(item.deadline, now)
   return d !== null && d >= 0 && d <= days
@@ -59,6 +71,7 @@ const closesWithin = (days) => (item, now) => {
 /** Listing-page "Show" switch (`?when=`): key → label and test(item, now, saved). */
 export const TIMING_FILTERS = {
   all: { label: 'All', test: () => true },
+  today: { label: 'Last 24 hours', test: (i, now) => isPostedToday(i, now) },
   new: { label: 'New this week', test: (i, now) => isNew(i, now) },
   week: { label: 'Closing in 7 days', test: closesWithin(7) },
   month: { label: 'Closing in 30 days', test: closesWithin(30) },
