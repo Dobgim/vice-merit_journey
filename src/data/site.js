@@ -178,7 +178,7 @@ export const categories = [
   },
   {
     title: 'Graduate',
-    filter: 'Graduate',
+    filter: 'Master’s',
     body: 'Master’s funding, assistantships and departmental tuition waivers across taught and research routes.',
     count: '620+ awards',
     icon: 'book',
@@ -186,7 +186,7 @@ export const categories = [
   },
   {
     title: 'Postgraduate & PhD',
-    filter: 'Postgraduate & PhD',
+    filter: 'PhD',
     body: 'Doctoral fellowships, research grants and stipend-backed positions with named supervisors.',
     count: '310+ awards',
     icon: 'flask',

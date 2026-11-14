@@ -12,6 +12,7 @@ import { verifiedFellowships, verifiedGrants, verifiedInternships, verifiedSchol
 import { oct21Fellowships, oct21Scholarships } from './listings-oct21-2026'
 import { autoCompetitions, autoFellowships, autoGrants, autoInternships, autoScholarships } from './listings-auto'
 import { applyUpdates } from './updates-oct-2026'
+import { levelsOf } from '../lib/search'
 
 const allScholarships = applyUpdates([...scholarships, ...newScholarships, ...globalScholarships, ...verifiedScholarships, ...oct21Scholarships, ...autoScholarships])
 const allGrants = applyUpdates([...grants, ...newGrants, ...globalGrants, ...verifiedGrants, ...autoGrants])
@@ -21,10 +22,11 @@ const competitions = applyUpdates([...rawCompetitions, ...autoCompetitions])
 
 const SCHOLARSHIP_FILTERS = [
   { label: 'All', test: () => true },
-  { label: 'Undergraduate', test: (i) => i.level === 'Undergraduate' },
-  { label: 'Graduate', test: (i) => i.level === 'Graduate' },
-  { label: 'Postgraduate & PhD', test: (i) => i.level === 'Postgraduate' || i.level === 'PhD' },
-  { label: 'Postdoctoral', test: (i) => i.level === 'Postdoctoral' },
+  // Levels are free text ("Master’s & PhD"), so they are read by levelsOf rather than compared exactly.
+  { label: 'Undergraduate', test: (i) => levelsOf(i).has('undergraduate') },
+  { label: 'Master’s', test: (i) => levelsOf(i).has('graduate') },
+  { label: 'PhD', test: (i) => levelsOf(i).has('phd') },
+  { label: 'Postdoctoral', test: (i) => levelsOf(i).has('postdoctoral') },
   { label: 'Fully Funded', test: (i) => i.funding === 'Fully Funded' },
   { label: 'Partially Funded', test: (i) => i.funding === 'Partially Funded' },
 ]

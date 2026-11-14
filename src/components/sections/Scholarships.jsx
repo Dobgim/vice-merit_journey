@@ -16,6 +16,7 @@ import { COST_FILTERS, hasApplicationFee } from '../../lib/fees'
 import Icon from '../ui/Icon'
 import { TIMING_FILTERS, formatPosted, isNew, postedSortKey } from '../../lib/timing'
 import useSaved, { toggleSaved } from '../../lib/saved'
+import { countriesOf, searchListings } from '../../lib/search'
 
 const SORTS = {
   deadline: { label: 'Deadline (soonest)', fn: byDeadline },
@@ -24,18 +25,6 @@ const SORTS = {
     fn: (a, b) => postedSortKey(b) - postedSortKey(a),
   },
   name: { label: 'Name (A–Z)', fn: (a, b) => a.name.localeCompare(b.name) },
-}
-
-function matchesQuery(item, q) {
-  if (!q) return true
-  // Includes who can apply, so a search for a nationality ("Nigerian", "African") finds eligible calls.
-  const haystack = [item.name, item.org, item.country, item.level, item.fields, item.category, item.nationalities, item.summary, ...(item.tags ?? [])]
-    .join(' ')
-    .toLowerCase()
-  return q
-    .toLowerCase()
-    .split(/\s+/)
-    .every((word) => haystack.includes(word))
 }
 
 /** Gold for the strongest funding, neutral for everything else. */
@@ -252,13 +241,16 @@ export default function Scholarships({ kind = 'scholarships' }) {
   const [params, setParams] = useSearchParams()
 
   const filterLabels = config.filters.map((f) => f.label)
-  const filter = filterLabels.includes(params.get('type')) ? params.get('type') : 'All'
+  // Links shared before the level pills were renamed still open the right one.
+  const type = { Graduate: 'Master’s', 'Postgraduate & PhD': 'PhD' }[params.get('type')] ?? params.get('type')
+  const filter = filterLabels.includes(type) ? type : 'All'
   const cost = COST_FILTERS[params.get('cost')] ? params.get('cost') : 'all'
   const when = TIMING_FILTERS[params.get('when')] ? params.get('when') : 'all'
   const saved = useSaved()
   const now = useNow(60_000)
   const query = params.get('q') ?? ''
-  const country = params.get('country') ?? 'All'
+  // Older links carry the full text ("China (Chengdu)"); the menu now lists the country alone.
+  const country = (params.get('country') ?? 'All').replace(/\s*\(.*?\)/g, '').trim() || 'All'
   const sort = SORTS[params.get('sort')] ? params.get('sort') : 'deadline'
 
   const setParam = (key, value, fallback) => {
@@ -269,7 +261,7 @@ export default function Scholarships({ kind = 'scholarships' }) {
   }
 
   const countries = useMemo(
-    () => ['All', ...[...new Set(items.map((i) => i.country))].sort()],
+    () => ['All', ...[...new Set(items.flatMap(countriesOf))].sort()],
     [items]
   )
 
@@ -279,9 +271,8 @@ export default function Scholarships({ kind = 'scholarships' }) {
       .filter(test)
       .filter(COST_FILTERS[cost].test)
       .filter((i) => TIMING_FILTERS[when].test(i, now, saved))
-      .filter((i) => matchesQuery(i, query.trim()))
-      .filter((i) => country === 'All' || i.country === country)
-    return [...list].sort(SORTS[sort].fn)
+      .filter((i) => country === 'All' || countriesOf(i).includes(country))
+    return [...searchListings(list, query)].sort(SORTS[sort].fn)
   }, [items, config, filter, cost, when, saved, now, query, country, sort])
 
   const feeCount = useMemo(() => items.filter(hasApplicationFee).length, [items])
