@@ -11,6 +11,18 @@ create table if not exists public.admins (
 );
 alter table public.admins enable row level security;
 
+-- Nobody reads or changes this table through the API: is_admin() below is the
+-- only way in, and admins are added here in the SQL editor. Any policy or
+-- grant left over from an earlier setup is removed.
+do $$
+declare p record;
+begin
+  for p in select policyname from pg_policies where schemaname = 'public' and tablename = 'admins' loop
+    execute format('drop policy %I on public.admins', p.policyname);
+  end loop;
+end $$;
+revoke all on public.admins from anon, authenticated;
+
 create or replace function public.is_admin()
 returns boolean
 language sql
@@ -41,7 +53,15 @@ alter table public.consultations enable row level security;
 
 drop policy if exists "anyone can submit" on public.consultations;
 create policy "anyone can submit" on public.consultations
-  for insert to anon, authenticated with check (status = 'new');
+  for insert to anon, authenticated with check (status = 'new' and notes = '');
+
+-- Size limits so the public form cannot be used to fill the database.
+alter table public.consultations drop constraint if exists consultations_size_check;
+alter table public.consultations add constraint consultations_size_check check (
+  char_length(full_name) <= 200 and char_length(email) <= 320
+  and char_length(coalesce(phone, '')) <= 60 and char_length(coalesce(study_level, '')) <= 120
+  and char_length(coalesce(country, '')) <= 120 and char_length(coalesce(message, '')) <= 20000
+) not valid;
 
 drop policy if exists "admins manage" on public.consultations;
 create policy "admins manage" on public.consultations
@@ -59,6 +79,11 @@ alter table public.subscribers enable row level security;
 drop policy if exists "anyone can subscribe" on public.subscribers;
 create policy "anyone can subscribe" on public.subscribers
   for insert to anon, authenticated with check (true);
+
+alter table public.subscribers drop constraint if exists subscribers_email_check;
+alter table public.subscribers add constraint subscribers_email_check check (
+  char_length(email) <= 320 and email like '%_@_%' and char_length(coalesce(study_level, '')) <= 120
+) not valid;
 
 drop policy if exists "admins manage" on public.subscribers;
 create policy "admins manage" on public.subscribers
@@ -108,9 +133,12 @@ create policy "admins manage" on public.settings
 -- -------------------------------------------------------- Admins
 insert into public.admins (email) values
   ('leadermerit17@gmail.com'),
-  ('leadermerit17@gmil.com'),
   ('advisors@meritleaders.com')
 on conflict (email) do nothing;
+
+-- A misspelled address ("gmil.com") was once listed here. That domain belongs
+-- to someone else, who could have signed up with it and become an admin.
+delete from public.admins where email = 'leadermerit17@gmil.com';
 
 -- ------------------------------------------------- Flyer image uploads
 insert into storage.buckets (id, name, public)

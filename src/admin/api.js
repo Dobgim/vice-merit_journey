@@ -15,6 +15,8 @@ const now = () => new Date().toISOString()
 
 async function must(promise) {
   const { data, error } = await promise
+  // 23505 = unique violation; the only unique rule an admin can hit is a listing's web address.
+  if (error?.code === '23505') throw new Error('Another listing of this type already uses that web address (slug). Change the name or slug and save again.')
   if (error) throw new Error(error.message)
   return data
 }
@@ -221,7 +223,8 @@ export async function saveSetting(key, value) {
 
 /** Upload a flyer or website image; resolves to a public URL to store. */
 export async function uploadFlyer(file) {
-  if (file.type && !file.type.startsWith('image/')) {
+  // SVG is left out on purpose: it can carry scripts, and uploads are served publicly.
+  if (!['image/jpeg', 'image/png', 'image/webp', 'image/gif'].includes(file.type)) {
     throw new Error('Please choose an image file (JPG, PNG, WebP or GIF).')
   }
   const sb = await getSupabase()
@@ -255,7 +258,7 @@ export async function listImages() {
   if (!sb) return demo.read('media_images', [])
 
   const { data, error } = await sb.storage.from('flyers').list('', {
-    limit: 100,
+    limit: 1000,
     sortBy: { column: 'created_at', order: 'desc' },
   })
   if (error) throw new Error(error.message)
