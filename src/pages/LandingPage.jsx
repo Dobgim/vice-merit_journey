@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import Seo from '../components/layout/Seo'
+import { landingDescription } from '../lib/seo'
 import PageHeader from '../components/layout/PageHeader'
 import { Section } from '../components/ui/Primitives'
 import OpportunityGrid from '../components/ui/OpportunityGrid'
@@ -32,7 +33,7 @@ export default function LandingPage({ type }) {
 
   return (
     <>
-      <Seo title={page.title} description={`${page.lede} ${matches.length} open now.`} />
+      <Seo title={page.title} description={landingDescription(page, matches.length)} />
 
       <PageHeader
         crumbs={[{ label: 'Explore', to: '/explore' }]}

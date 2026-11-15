@@ -48,7 +48,7 @@ export const directLinks = {
   'danish-art-workshops-residency': 'https://svfk.dk/en/residency',
   'dreyfus-program-for-transformative-research': 'https://www.dreyfus.org/program-for-transformative-research-launches/',
   'east-west-center-graduate-degree-fellowship-2027': 'https://www.eastwestcenter.org/apply',
-  'eeem-foundation-community-impact-grant-program': 'https://teeem.org/foundation',
+  'eeem-foundation-community-impact-grant-program': 'https://www.teeem.org/foundation',
   'elks-most-valuable-student-scholarship': 'https://www.elks.org/scholars/scholarships/mvs.cfm',
   'equality-fund-journalism-fellowship': 'https://equalityfund.ca/journalism-fellowship',
   'european-youth-assembly-2027-funded-seats-amsterdam': 'https://thecips.org/eya2027/',

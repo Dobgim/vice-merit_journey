@@ -7,7 +7,7 @@ import WhatsAppGroup from '../components/sections/WhatsAppGroup'
 import Button from '../components/ui/Button'
 import { kinds } from '../data/opportunities'
 import { useOpportunities } from '../hooks/useScholarships'
-import { kindTitle } from '../lib/seo'
+import { kindTitle, kindDescription } from '../lib/seo'
 
 export default function InternshipsPage() {
   const open = useOpportunities('internships').length
@@ -15,7 +15,7 @@ export default function InternshipsPage() {
     <>
       <Seo
         title={kindTitle(kinds.internships, open)}
-        description="Paid and stipend-supported internships at the UN, IMF, World Bank, European Commission and more — requirements, pay, deadlines and how to apply."
+        description={kindDescription(kinds.internships)}
       />
 
       <PageHeader

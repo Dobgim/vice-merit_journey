@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import Seo from '../components/layout/Seo'
+import { staticSeo } from '../lib/seo'
 import PageHeader from '../components/layout/PageHeader'
 import { Section } from '../components/ui/Primitives'
 import Button from '../components/ui/Button'
@@ -23,10 +24,7 @@ export default function ExplorePage() {
 
   return (
     <>
-      <Seo
-        title="Explore opportunities by country, nationality and level"
-        description="Browse open scholarships, fellowships, grants and internships by your nationality, the country you want to study in, or your study level."
-      />
+      <Seo {...staticSeo.explore} />
       <PageHeader
         crumb="Explore"
         eyebrow="Find your fit faster"

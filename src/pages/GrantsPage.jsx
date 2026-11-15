@@ -7,7 +7,7 @@ import WhatsAppGroup from '../components/sections/WhatsAppGroup'
 import Button from '../components/ui/Button'
 import { kinds } from '../data/opportunities'
 import { useOpportunities } from '../hooks/useScholarships'
-import { kindTitle } from '../lib/seo'
+import { kindTitle, kindDescription } from '../lib/seo'
 
 export default function GrantsPage() {
   const open = useOpportunities('grants').length
@@ -15,7 +15,7 @@ export default function GrantsPage() {
     <>
       <Seo
         title={kindTitle(kinds.grants, open)}
-        description="Grants for entrepreneurs, researchers, innovators and community leaders — seed capital, research funding and prizes, with eligibility, benefits and how to apply."
+        description={kindDescription(kinds.grants)}
       />
 
       <PageHeader

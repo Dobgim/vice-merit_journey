@@ -7,7 +7,7 @@ import WhatsAppGroup from '../components/sections/WhatsAppGroup'
 import Button from '../components/ui/Button'
 import { kinds } from '../data/opportunities'
 import { useOpportunities } from '../hooks/useScholarships'
-import { kindTitle } from '../lib/seo'
+import { kindTitle, kindDescription } from '../lib/seo'
 
 const copy = {
   fellowships: {
@@ -32,7 +32,7 @@ export default function OpportunityPage({ kind }) {
 
   return (
     <>
-      <Seo title={kindTitle(config, open)} description={config.lede} />
+      <Seo title={kindTitle(config, open)} description={kindDescription(config)} />
       <PageHeader crumb={config.title} eyebrow={config.eyebrow} title={c.title} accent={c.accent} lede={c.lede}>
         <OpportunityCount kind={kind} />
         <div className="flex flex-col gap-3 sm:flex-row">

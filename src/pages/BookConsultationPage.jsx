@@ -1,14 +1,12 @@
 import Seo from '../components/layout/Seo'
+import { staticSeo } from '../lib/seo'
 import PageHeader from '../components/layout/PageHeader'
 import Contact from '../components/sections/Contact'
 
 export default function BookConsultationPage() {
   return (
     <>
-      <Seo
-        title="Book a Consultation"
-        description="Book a free 20-minute discovery call with a Merit Leaders advisor, or reach us on WhatsApp and email. No upfront fee, no obligation."
-      />
+      <Seo {...staticSeo.bookConsultation} />
 
       <PageHeader
         crumb="Book a consultation"

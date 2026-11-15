@@ -1,14 +1,12 @@
 import Seo from '../components/layout/Seo'
+import { staticSeo } from '../lib/seo'
 import PageHeader from '../components/layout/PageHeader'
 import FAQ from '../components/sections/FAQ'
 
 export default function FAQPage() {
   return (
     <>
-      <Seo
-        title="Frequently Asked Questions"
-        description="How Merit Leaders works: fees, timelines, eligibility, ethics, success rates and what happens after you book a consultation."
-      />
+      <Seo {...staticSeo.faq} />
 
       <PageHeader
         crumb="FAQ"

@@ -1,4 +1,5 @@
 import Seo from '../components/layout/Seo'
+import { staticSeo } from '../lib/seo'
 import PageHeader from '../components/layout/PageHeader'
 import WhyChooseUs from '../components/sections/WhyChooseUs'
 import HowItWorks from '../components/sections/HowItWorks'
@@ -7,10 +8,7 @@ import Button from '../components/ui/Button'
 export default function About() {
   return (
     <>
-      <Seo
-        title="About Us"
-        description="Merit Leaders is an independent scholarship consultancy. Meet the advisors, the method and the standards behind 200+ students advised since 2025."
-      />
+      <Seo {...staticSeo.about} />
 
       <PageHeader
         crumb="About"

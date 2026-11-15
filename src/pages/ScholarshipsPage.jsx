@@ -8,7 +8,7 @@ import Categories from '../components/sections/Categories'
 import Button from '../components/ui/Button'
 import { kinds } from '../data/opportunities'
 import { useOpportunities } from '../hooks/useScholarships'
-import { kindTitle } from '../lib/seo'
+import { kindTitle, kindDescription } from '../lib/seo'
 
 export default function ScholarshipsPage() {
   const open = useOpportunities('scholarships').length
@@ -16,7 +16,7 @@ export default function ScholarshipsPage() {
     <>
       <Seo
         title={kindTitle(kinds.scholarships, open)}
-        description="Search fully funded and partially funded scholarships for undergraduate, graduate, PhD and postdoctoral applicants — with eligibility, benefits, required documents and live deadlines."
+        description={kindDescription(kinds.scholarships)}
       />
 
       <PageHeader

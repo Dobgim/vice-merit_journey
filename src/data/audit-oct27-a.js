@@ -30,7 +30,7 @@ export const fixes = {
     officialUrl: 'https://funggfp.princeton.edu/applications',
   },
   'abcd-future-environmental-leaders-scholarships': {
-    officialUrl: 'https://www.abcd-centre.org/fel.html',
+    officialUrl: 'https://www.abcd-centre.org/fel',
   },
   'schlumberger-faculty-for-the-future': {
     officialUrl: 'https://www.facultyforthefuture.net/apply-now/',
@@ -68,7 +68,7 @@ export const fixes = {
     officialUrl: 'https://mbzuai.ac.ae/admissions/graduate-masters-admissions',
   },
   'umea-university-doctoral-positions': {
-    officialUrl: 'https://www.umu.se/en/work-with-us/open-positions/phd-students-in-statistics_965375/',
+    officialUrl: 'https://www.umu.se/en/work-with-us/open-positions/',
   },
   'erasmus-mundus-master-in-public-policy-mundus-mapp': {
     officialUrl: 'https://www.mundusmapp.org/how-to-apply/',

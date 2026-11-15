@@ -1,4 +1,5 @@
 import Seo from '../components/layout/Seo'
+import { staticSeo } from '../lib/seo'
 import PageHeader from '../components/layout/PageHeader'
 import Services from '../components/sections/Services'
 import HowItWorks from '../components/sections/HowItWorks'
@@ -7,10 +8,7 @@ import Button from '../components/ui/Button'
 export default function ServicesPage() {
   return (
     <>
-      <Seo
-        title="Services"
-        description="Scholarship search, application support, admission guidance, SOP and personal statement help, CV editing, visa guidance and interview preparation."
-      />
+      <Seo {...staticSeo.services} />
 
       <PageHeader
         crumb="Services"

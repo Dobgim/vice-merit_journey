@@ -1,4 +1,5 @@
 import Seo from '../components/layout/Seo'
+import { staticSeo } from '../lib/seo'
 import PageHeader from '../components/layout/PageHeader'
 import { Section } from '../components/ui/Primitives'
 import { Stagger, StaggerItem } from '../components/ui/Reveal'
@@ -12,10 +13,7 @@ export default function BlogPage() {
 
   return (
     <>
-      <Seo
-        title="Blog"
-        description="Guides from Merit Leaders advisors on finding scholarships, writing strong applications and preparing for interviews and visas."
-      />
+      <Seo {...staticSeo.blog} />
 
       <PageHeader
         crumb="Blog"

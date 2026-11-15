@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import Seo from '../components/layout/Seo'
+import { staticSeo } from '../lib/seo'
 import PageHeader from '../components/layout/PageHeader'
 import Newsletter from '../components/sections/Newsletter'
 import Button from '../components/ui/Button'
@@ -117,7 +118,7 @@ export default function CoursesPage() {
 
   return (
     <>
-      <Seo title="Free Courses with Free Certificates" description={LEDE} jsonLd={jsonLd} />
+      <Seo {...staticSeo.courses} jsonLd={jsonLd} />
       <PageHeader crumb="Free Courses" eyebrow="Free courses & certificates" title="Learn for free, and" accent="keep the certificate." lede={LEDE}>
         <p className="mb-6 inline-flex items-baseline gap-2.5 rounded-2xl bg-white/10 px-5 py-3 ring-1 ring-white/20 backdrop-blur">
           <span className="font-display text-3xl font-semibold leading-none text-gold-300 tabular-nums">{courses.length}</span>

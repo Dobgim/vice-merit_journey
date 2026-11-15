@@ -1,4 +1,5 @@
 import Seo from '../components/layout/Seo'
+import { staticSeo } from '../lib/seo'
 import PageHeader from '../components/layout/PageHeader'
 import Countries from '../components/sections/Countries'
 import Button from '../components/ui/Button'
@@ -6,10 +7,7 @@ import Button from '../components/ui/Button'
 export default function CountriesPage() {
   return (
     <>
-      <Seo
-        title="Study Destinations"
-        description="Scholarship and admission guidance for the UK, USA, Canada, Germany, Australia, the Netherlands and more — funding landscape, visa routes and intake timelines."
-      />
+      <Seo {...staticSeo.countries} />
 
       <PageHeader
         crumb="Countries"

@@ -7,7 +7,7 @@
 export const legal = {
   privacy: {
     title: 'Privacy Policy',
-    description: 'How Merit Leaders collects, uses and protects your personal information.',
+    description: 'How Merit Leaders collects, uses and protects your personal information: what we collect on this website and in our services, why, and your choices.',
     lede: 'What we collect when you use this website or our services, why we collect it, and the choices you have.',
     updated: '15 November 2026',
     sections: [
@@ -94,7 +94,7 @@ export const legal = {
 
   terms: {
     title: 'Terms of Service',
-    description: 'The terms that apply when you use the Merit Leaders website and services.',
+    description: 'The terms that apply when you use the Merit Leaders website and when you buy one of our scholarship application services or packages.',
     lede: 'The rules that apply when you use this website and when you buy one of our services or packages.',
     updated: '11 October 2026',
     sections: [

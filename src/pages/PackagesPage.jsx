@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Seo from '../components/layout/Seo'
+import { staticSeo } from '../lib/seo'
 import PageHeader from '../components/layout/PageHeader'
 import { Badge, Card, IconTile, Section } from '../components/ui/Primitives'
 import SectionHeading from '../components/ui/SectionHeading'
@@ -135,10 +136,7 @@ export default function PackagesPage() {
 
   return (
     <>
-      <Seo
-        title="Packages & Pricing"
-        description="Let us write your full scholarship application. Essay, complete application and premium multi-application packages with clear prices in USD and FCFA."
-      />
+      <Seo {...staticSeo.packages} />
 
       <PageHeader
         crumb="Packages"

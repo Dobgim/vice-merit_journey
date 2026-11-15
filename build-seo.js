@@ -7,8 +7,9 @@
  *    Make.com reads to post to Facebook, Instagram and LinkedIn: each item's
  *    description is the ready-to-post caption (lib/caption.js) and its
  *    enclosure the opportunity's flyer, drawn as dist/flyers/<kind>/<slug>.jpg;
- *  - a pre-rendered HTML file per opportunity, listing page and landing page
- *    (dist/scholarships/<slug>.html …) with its own title, description,
+ *  - a pre-rendered HTML file per opportunity, listing page, landing page
+ *    and fixed page (dist/scholarships/<slug>.html, dist/about.html …, and
+ *    the home page in dist/index.html) with its own title, description,
  *    canonical URL, social preview tags and readable content. Vercel serves
  *    these directly (cleanUrls), so Google and link previews see real content
  *    at once; the React app then takes over as usual.
@@ -16,13 +17,16 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { kinds } from './src/data/opportunities.js'
-import { SITE_URL } from './src/data/site.js'
+import { SITE_URL, benefits, company, countries, faqs, packageAddons, packageFaqs, packageSteps, packages, services, starterOffers, stats, steps } from './src/data/site.js'
+import { courseFields, courses } from './src/data/courses.js'
+import { destinations } from './src/data/destinations.js'
+import { legal } from './src/data/legal.js'
 import { photos } from './src/data/photos.js'
 import { buildLandingPages } from './src/lib/eligibility.js'
 import { socialCaption } from './src/lib/caption.js'
 import { drawFlyer } from './src/lib/flyerImage.js'
 import { parsePost, postJsonLd } from './src/lib/posts.js'
-import { kindTitle, listingSeo, pageTitle } from './src/lib/seo.js'
+import { kindDescription, kindTitle, landingDescription, listingSeo, pageTitle, staticSeo } from './src/lib/seo.js'
 import { buildOverview } from './src/lib/overview.js'
 import { criteriaFor } from './src/data/criteria.js'
 import { requirements } from './src/data/requirements.js'
@@ -59,12 +63,14 @@ const withRequirements = (item) => ({ ...item, ...requirements[item.slug] })
  * (or put in the sitemap) that the app would answer with "not found".
  */
 function allEntries() {
+  const seen = new Set()
   return Object.values(kinds).flatMap((k) =>
     k.items
       .filter((i) => i.slug && !retiredSlugs.has(i.slug))
       .map((i) => withRequirements(withDirectLink(i)))
       .filter((i) => hasFixedDeadline(i) && isOpenYet(i))
       .map((item) => ({ kind: k.key, path: `${k.path}/${item.slug}`, item }))
+      .filter((e) => !seen.has(e.path) && seen.add(e.path))
   )
 }
 const isOpen = (item) => (isoDay(item.deadline) ?? '') >= today()
@@ -148,22 +154,35 @@ function preloadTags(chunks, name) {
   return [...files].map((f) => `<link rel="modulepreload" crossorigin href="/${f}" />`).join('')
 }
 
+/** Links to the main pages, added under every pre-rendered page so each one can be reached by following links. */
+const SITE_LINKS = [
+  ['/', 'Home'], ['/scholarships', 'Scholarships'], ['/fellowships', 'Fellowships'], ['/grants', 'Grants'], ['/internships', 'Internships'],
+  ['/competitions', 'Competitions & Awards'], ['/courses', 'Free Courses'], ['/explore', 'Browse by nationality & level'], ['/eligibility', 'Am I eligible?'],
+  ['/countries', 'Study Destinations'], ['/services', 'Services'], ['/packages', 'Packages & Pricing'], ['/blog', 'Blog'], ['/faq', 'FAQ'],
+  ['/about', 'About Us'], ['/book-consultation', 'Book a Consultation'], ['/privacy', 'Privacy Policy'], ['/terms', 'Terms of Service'],
+]
+const siteNav = () => `<nav aria-label="Site"><h2>${esc(company.name)}</h2><p>${SITE_LINKS.map(([to, label]) => `<a href="${to}">${esc(label)}</a>`).join(' · ')}</p></nav>`
+
 function page(template, { title, description, url, image, body, preload = '', noindex = false }) {
   return template
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(title)}</title>`)
-    .replace(/(<meta\s+name="description"\s+content=")[^"]*(")/, `$1${esc(description)}$2`)
-    .replace(/(<meta property="og:title" content=")[^"]*(")/, `$1${esc(title)}$2`)
-    .replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${esc(description)}$2`)
-    .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${esc(url)}$2`)
-    .replace(/(<meta property="og:image" content=")[^"]*(")/, `$1${esc(image)}$2`)
-    .replace(/(<meta name="twitter:title" content=")[^"]*(")/, `$1${esc(title)}$2`)
-    .replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${esc(description)}$2`)
-    .replace('</head>', `<link rel="canonical" href="${esc(url)}" />${noindex ? '<meta name="robots" content="noindex, follow" />' : ''}${preload}${STYLE}</head>`)
-    .replace('<div id="root"></div>', `<div id="root"><main class="pr">${body}</main></div>`)
+    .replace(/(<meta\s+name="description"\s+content=")[^"]*(")/, (_, a, b) => a + esc(description) + b)
+    .replace(/(<meta property="og:title" content=")[^"]*(")/, (_, a, b) => a + esc(title) + b)
+    .replace(/(<meta property="og:description" content=")[^"]*(")/, (_, a, b) => a + esc(description) + b)
+    .replace(/(<meta property="og:url" content=")[^"]*(")/, (_, a, b) => a + esc(url) + b)
+    .replace(/(<meta property="og:image" content=")[^"]*(")/, (_, a, b) => a + esc(image) + b)
+    .replace(/(<meta name="twitter:title" content=")[^"]*(")/, (_, a, b) => a + esc(title) + b)
+    .replace(/(<meta name="twitter:description" content=")[^"]*(")/, (_, a, b) => a + esc(description) + b)
+    .replace('</head>', () => `<link rel="canonical" href="${esc(url)}" />${noindex ? '<meta name="robots" content="noindex, follow" />' : ''}${preload}${STYLE}</head>`)
+    .replace('<div id="root"></div>', () => `<div id="root"><main class="pr">${body}${siteNav()}</main></div>`)
 }
 
 const linkList = (list) =>
   `<ul>${list.map((e) => `<li><a href="${esc(e.path)}">${esc(e.item.name)}</a> — deadline ${prettyDate(e.item.deadline)}</li>`).join('')}</ul>`
+
+/** As linkList, with each opportunity's one-line summary: used where the list is the page's main content. */
+const summaryList = (list) =>
+  `<ul>${list.map((e) => `<li><a href="${esc(e.path)}">${esc(e.item.name)}</a> — ${esc(kinds[e.kind].singular)}${e.item.country ? `, ${esc(e.item.country)}` : ''}. Deadline ${prettyDate(e.item.deadline)}.${e.item.summary ? ` ${esc(e.item.summary)}` : ''}</li>`).join('')}</ul>`
 
 const items = (list, tag = 'ul') => `<${tag}>${list.map((x) => `<li>${esc(x)}</li>`).join('')}</${tag}>`
 const section = (title, html) => (html ? `<h2>${esc(title)}</h2>${html}` : '')
@@ -220,6 +239,158 @@ function detailBody(entry, open) {
   ].join('\n')
 }
 
+/* ------------------------------------------------------------ Fixed pages */
+
+const money = (p) => (p ? `$${p.USD} / ${p.XAF.toLocaleString('en-US')} FCFA` : '')
+const para = (list) => list.map((t) => `<p>${esc(t)}</p>`).join('')
+const faqHtml = (list) => list.map((q) => `<h3>${esc(q.q)}</h3><p>${esc(q.a)}</p>`).join('')
+const faqJsonLd = (list) => ({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: list.map((q) => ({ '@type': 'Question', name: q.q, acceptedAnswer: { '@type': 'Answer', text: q.a } })),
+})
+const landingLinks = (landing, type) =>
+  `<ul>${landing.filter((p) => p.type === type).map((p) => `<li><a href="${esc(p.path)}">${esc(p.title)}</a> — ${p.matches.length} open now</li>`).join('')}</ul>`
+
+/** The pages of the same type listed just after this one (wrapping round), so every landing page is linked from several others. */
+function neighbours(landing, p, count = 8) {
+  const same = landing.filter((q) => q.type === p.type)
+  const at = same.indexOf(p)
+  return Array.from({ length: Math.min(count, same.length - 1) }, (_, i) => same[(at + 1 + i) % same.length])
+}
+
+/** One legal document (data/legal.js): paragraphs, with nested arrays as bullet lists. */
+const legalBody = (doc) =>
+  `<p class="eb">Legal</p><h1>${esc(doc.title)}</h1><p>${esc(doc.lede)}</p><p>Last updated ${esc(doc.updated)}.</p>` +
+  doc.sections.map((sec) => `<h2>${esc(sec.title)}</h2>${sec.body.map((b) => (Array.isArray(b) ? items(b) : `<p>${esc(b)}</p>`)).join('')}`).join('')
+
+/**
+ * The fixed pages (home, about, services …) as { path, seo, body, jsonLd? }:
+ * the same words the app shows, in plain HTML, so each has its own heading,
+ * text and links instead of an empty shell.
+ */
+function staticPages({ open, landing, posts }) {
+  const byKind = Object.values(kinds).map((k) => ({ k, count: open.filter((e) => e.kind === k.key).length }))
+  const kindLinks = `<ul>${byKind.map(({ k, count }) => `<li><a href="${esc(k.path)}">${esc(k.title)}</a> — ${count} open now. ${esc(k.lede)}</li>`).join('')}</ul>`
+  const postLinks = (list) => `<ul>${list.map((p) => `<li><a href="${esc(p.to)}">${esc(p.title)}</a> — ${esc(p.excerpt)}</li>`).join('')}</ul>`
+  const newest = [...posts].sort((a, b) => (b.date ?? 0) - (a.date ?? 0))
+  const closing = [...open].sort((a, b) => a.item.deadline.localeCompare(b.item.deadline)).slice(0, 12)
+  const studyIn = new Map(landing.filter((p) => p.type === 'study-in').map((p) => [p.label, p]))
+  const whatsapp = `https://wa.me/${company.whatsapp}`
+  const contact = `<p>WhatsApp: <a href="${whatsapp}" rel="noopener">${esc(company.whatsappDisplay)}</a> · Email: <a href="mailto:${esc(company.email)}">${esc(company.email)}</a></p>`
+  const cta = '<p><a href="/book-consultation">Book a free consultation</a> · <a href="/eligibility">Check what you are eligible for</a></p>'
+
+  const pages = [
+    {
+      path: '/about',
+      seo: staticSeo.about,
+      body: `<p class="eb">About us</p><h1>About ${esc(company.name)}</h1><p>${esc(staticSeo.about.description)}</p>` +
+        `<ul>${stats.map((x) => `<li>${x.value}${esc(x.suffix)} ${esc(x.label.toLowerCase())} (${esc(x.hint.toLowerCase())})</li>`).join('')}</ul>` +
+        section('How we work', benefits.map((b) => `<h3>${esc(b.title)}</h3><p>${esc(b.body)}</p>`).join('')) +
+        section('What happens when you contact us', `<ol>${steps.map((x) => `<li><strong>${esc(x.title)}.</strong> ${esc(x.body)}</li>`).join('')}</ol>`) +
+        `<p><a href="/services">Our services</a> · <a href="/packages">Packages and prices</a> · <a href="/faq">Questions students ask</a></p>${cta}`,
+    },
+    {
+      path: '/services',
+      seo: staticSeo.services,
+      body: `<p class="eb">Services</p><h1>Scholarship application services</h1><p>${esc(staticSeo.services.description)}</p>` +
+        services.map((x) => `<h2>${esc(x.title)}</h2><p>${esc(x.body)}</p>${items(x.points)}`).join('') +
+        section('How it works', `<ol>${steps.map((x) => `<li><strong>${esc(x.title)}.</strong> ${esc(x.body)}</li>`).join('')}</ol>`) +
+        `<p><a href="/packages">See packages and prices</a></p>${cta}`,
+    },
+    {
+      path: '/packages',
+      seo: staticSeo.packages,
+      body: `<p class="eb">Packages & pricing</p><h1>Scholarship application packages and prices</h1><p>${esc(staticSeo.packages.description)}</p>` +
+        packages.map((p) => `<h2>${esc(p.name)}: ${money(p.price)} ${esc(p.unit)}</h2><p>${esc(p.tagline)} Delivery: ${esc(p.delivery)}.</p>${items(p.features)}`).join('') +
+        section('Start small', `<ul>${starterOffers.map((o) => `<li><strong>${esc(o.name)}</strong> (${money(o.price)}, ${esc(o.delivery)}). ${esc(o.body)}</li>`).join('')}</ul>`) +
+        section('Add-ons', `<ul>${packageAddons.map((a) => `<li>${esc(a.name)}: ${a.price ? money(a.price) : esc(a.note)}</li>`).join('')}</ul>`) +
+        section('How it works', `<ol>${packageSteps.map((x) => `<li><strong>${esc(x.title)}.</strong> ${esc(x.body)}</li>`).join('')}</ol>`) +
+        section('Questions about packages', faqHtml(packageFaqs)) +
+        `${contact}${cta}`,
+    },
+    {
+      path: '/courses',
+      seo: staticSeo.courses,
+      body: `<p class="eb">Free courses & certificates</p><h1>Free courses with free certificates</h1><p>${esc(staticSeo.courses.description)} ${courses.length} courses across ${courseFields.length} fields.</p>` +
+        courseFields.map((field) => `<h2>${esc(field)}</h2><ul>${courses.filter((c) => c.field === field).map((c) => `<li><a href="${esc(c.url)}" rel="noopener">${esc(c.name)}</a> — ${esc(c.provider)}. ${esc(c.summary ?? '')}</li>`).join('')}</ul>`).join('') +
+        '<p><a href="/scholarships">Scholarships</a> · <a href="/internships">Internships</a> · <a href="/blog">Application guides</a></p>',
+    },
+    {
+      path: '/countries',
+      seo: staticSeo.countries,
+      body: `<p class="eb">Study destinations</p><h1>Where you can study with funding</h1><p>${esc(staticSeo.countries.description)}</p>` +
+        countries.map((c) => {
+          const hub = studyIn.get(c.name)
+          return `<h2>${esc(c.name)}</h2><p>Well-known awards: ${esc(c.note.replace(/ · /g, ', '))}.</p>${para(destinations[c.name] ?? [])}${hub ? `<p><a href="${esc(hub.path)}">${esc(hub.title)}</a> — ${hub.matches.length} open now</p>` : ''}`
+        }).join('') +
+        section('All host countries with open opportunities', landingLinks(landing, 'study-in')) + cta,
+    },
+    {
+      path: '/blog',
+      seo: staticSeo.blog,
+      body: `<p class="eb">Insights & guides</p><h1>${esc(company.name)} blog</h1><p>${esc(staticSeo.blog.description)}</p>${postLinks(newest)}${cta}`,
+    },
+    {
+      path: '/faq',
+      seo: staticSeo.faq,
+      jsonLd: faqJsonLd(faqs),
+      body: `<p class="eb">Before you ask</p><h1>Frequently asked questions</h1><p>${esc(staticSeo.faq.description)}</p>${faqHtml(faqs)}<p><a href="/packages">Packages and prices</a> · <a href="/services">Services</a></p>${cta}`,
+    },
+    {
+      path: '/book-consultation',
+      seo: staticSeo.bookConsultation,
+      body: `<p class="eb">Free consultation</p><h1>Book a free consultation</h1><p>${esc(staticSeo.bookConsultation.description)}</p>` +
+        `<ol>${steps.map((x) => `<li><strong>${esc(x.title)}.</strong> ${esc(x.body)}</li>`).join('')}</ol>${contact}` +
+        '<p><a href="/services">Services</a> · <a href="/packages">Packages and prices</a> · <a href="/faq">FAQ</a></p>',
+    },
+    {
+      path: '/eligibility',
+      seo: staticSeo.eligibility,
+      body: `<p class="eb">Eligibility checker</p><h1>Am I eligible? Find scholarships you can apply for</h1><p>${esc(staticSeo.eligibility.description)}</p>` +
+        section('By study level', landingLinks(landing, 'level')) +
+        section('By type', kindLinks) +
+        '<p><a href="/explore">Browse by your nationality or the country you want to study in</a></p>',
+    },
+    {
+      path: '/explore',
+      seo: staticSeo.explore,
+      body: `<p class="eb">Explore</p><h1>Explore opportunities by country, nationality and level</h1><p>${esc(staticSeo.explore.description)}</p>` +
+        section('By study level', landingLinks(landing, 'level')) +
+        section('By country you want to study in', landingLinks(landing, 'study-in')) +
+        section('By your nationality', landingLinks(landing, 'for')) +
+        '<p><a href="/eligibility">Am I eligible?</a></p>',
+    },
+    ...['privacy', 'terms'].map((key) => ({ path: `/${key}`, seo: { title: legal[key].title, description: legal[key].description }, body: legalBody(legal[key]) })),
+  ]
+  if (isGiveawayOpen()) {
+    const seo = {
+      title: 'Free Scholarship Application Support for 5 Students',
+      description: `Merit Leaders will guide ${giveaway.places} students through a full scholarship application for free. Open to all nationalities. Entries close ${giveaway.closesLabel}.`,
+    }
+    pages.push({
+      path: giveaway.path,
+      seo,
+      body: `<p class="eb">Giveaway</p><h1>${esc(seo.title)}</h1><p>${esc(seo.description)}</p><p>Winners are drawn on ${esc(giveaway.drawLabel)}. Each entrant can pick up to ${giveaway.maxPicks} open scholarships.</p><p><a href="/scholarships">See open scholarships</a> · <a href="/packages">What a full application includes</a></p>`,
+    })
+  }
+  const home = {
+    path: '/',
+    seo: staticSeo.home,
+    body: `<p class="eb">${esc(company.tagline)}</p><h1>Scholarships and fellowships for international students</h1><p>${esc(staticSeo.home.description)}</p>` +
+      (isGiveawayOpen() ? `<p><a href="${esc(giveaway.path)}">Free scholarship application support for ${giveaway.places} students</a> — entries close ${esc(giveaway.closesLabel)}.</p>` : '') +
+      section('Browse open opportunities', kindLinks) +
+      section('Closing soon', linkList(closing)) +
+      section('Find what you can apply for', `${landingLinks(landing, 'level')}<p><a href="/eligibility">Am I eligible?</a> · <a href="/explore">Browse by nationality and host country</a> · <a href="/countries">Study destinations</a> · <a href="/courses">Free courses with certificates</a></p>`) +
+      section('How we help', `<ul>${services.map((x) => `<li><strong>${esc(x.title)}.</strong> ${esc(x.body)}</li>`).join('')}</ul><p><a href="/services">All services</a> · <a href="/packages">Packages and prices</a></p>`) +
+      section('How it works', `<ol>${steps.map((x) => `<li><strong>${esc(x.title)}.</strong> ${esc(x.body)}</li>`).join('')}</ol>`) +
+      section('Latest guides', `${postLinks(newest.slice(0, 6))}<p><a href="/blog">All articles</a></p>`) +
+      section('Common questions', `${faqHtml(faqs.slice(0, 4))}<p><a href="/faq">All questions</a> · <a href="/about">About us</a></p>`) +
+      cta,
+  }
+  return { pages, home }
+}
+
 /** Search terms for one listing; Bing still reads the keywords tag. */
 const listingKeywords = ({ kind, item }) =>
   [
@@ -233,7 +404,7 @@ const listingKeywords = ({ kind, item }) =>
     .filter(Boolean)
     .join(', ')
 
-const withKeywords = (html, keywords) => html.replace(/(<meta\s+name="keywords"\s+content=")[^"]*(")/, `$1${esc(keywords)}$2`)
+const withKeywords = (html, keywords) => html.replace(/(<meta\s+name="keywords"\s+content=")[^"]*(")/, (_, a, b) => a + esc(keywords) + b)
 
 /* ----------------------------------------------------------------- Flyers */
 
@@ -349,7 +520,7 @@ export default function buildSeo() {
         const list = open.filter((e) => e.kind === k.key).sort((a, b) => a.item.deadline.localeCompare(b.item.deadline))
         writeHtml(outDir, k.path, page(template, {
           title: pageTitle(kindTitle(k, list.length)),
-          description: k.lede,
+          description: kindDescription(k),
           url: SITE_URL + k.path,
           image: LOGO,
           body: `<p class="eb">${esc(k.eyebrow)}</p><h1>${esc(k.heading.join(' '))}</h1><p>${esc(k.lede)}</p>${linkList(list)}`,
@@ -370,19 +541,33 @@ export default function buildSeo() {
           body: `<p class="eb">Merit Leaders blog</p><h1>${esc(p.title)}</h1>${p.html}`,
         })
           .replace('<meta property="og:type" content="website" />', '<meta property="og:type" content="article" />')
-          .replace(/(<meta\s+name="keywords"\s+content=")[^"]*(")/, `$1${esc([...p.keywords, ...p.tags].join(', '))}$2`)
-          .replace('</head>', `${head}</head>`)
+          .replace(/(<meta\s+name="keywords"\s+content=")[^"]*(")/, (_, a, b) => a + esc([...p.keywords, ...p.tags].join(', ')) + b)
+          .replace('</head>', () => `${head}</head>`)
         writeHtml(outDir, p.to, html)
       }
       for (const p of landing) {
         writeHtml(outDir, p.path, page(template, {
           title: pageTitle(p.title),
-          description: `${p.lede} ${p.matches.length} open now.`,
+          description: landingDescription(p, p.matches.length),
           url: SITE_URL + p.path,
           image: LOGO,
-          body: `<h1>${esc(p.heading.join(' '))}</h1><p>${esc(p.lede)}</p>${linkList(p.matches)}`,
+          body: `<nav><a href="/">Home</a> › <a href="/explore">Explore</a></nav><h1>${esc(p.heading.join(' '))}</h1><p>${esc(p.lede)} ${p.matches.length} open now, sorted by the nearest deadline.</p>` +
+            (p.type === 'study-in' ? para(destinations[p.label] ?? []) : '') +
+            summaryList([...p.matches].sort((a, b) => a.item.deadline.localeCompare(b.item.deadline))) +
+            section('Related pages', `<ul>${neighbours(landing, p).map((q) => `<li><a href="${esc(q.path)}">${esc(q.title)}</a></li>`).join('')}</ul>`) +
+            '<p><a href="/explore">Browse other countries, nationalities and levels</a> · <a href="/eligibility">Am I eligible?</a> · <a href="/book-consultation">Get expert help applying</a></p>',
         }))
       }
+
+      // Fixed pages, then the home page into index.html. Unknown addresses are also
+      // answered with index.html, so they carry the home page's canonical until the app loads.
+      const fixed = staticPages({ open, landing, posts })
+      const withJsonLd = (html, data) =>
+        data ? html.replace('</head>', () => `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script></head>`) : html
+      for (const p of fixed.pages) {
+        writeHtml(outDir, p.path, withJsonLd(page(template, { title: pageTitle(p.seo.title), description: p.seo.description, url: SITE_URL + p.path, image: LOGO, body: p.body }), p.jsonLd))
+      }
+      fs.writeFileSync(path.join(outDir, 'index.html'), page(template, { title: pageTitle(fixed.home.seo.title), description: fixed.home.seo.description, url: `${SITE_URL}/`, image: LOGO, body: fixed.home.body }))
     },
   }
 }

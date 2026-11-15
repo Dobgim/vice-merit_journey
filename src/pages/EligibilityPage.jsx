@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import Seo from '../components/layout/Seo'
+import { staticSeo } from '../lib/seo'
 import PageHeader from '../components/layout/PageHeader'
 import { Section } from '../components/ui/Primitives'
 import OpportunityGrid from '../components/ui/OpportunityGrid'
@@ -70,10 +71,7 @@ export default function EligibilityPage() {
 
   return (
     <>
-      <Seo
-        title="Am I eligible? Find scholarships you can apply for"
-        description="Enter your nationality and study level to see the open scholarships, fellowships, grants and internships you can apply for, with deadlines and official links."
-      />
+      <Seo {...staticSeo.eligibility} />
       <PageHeader
         crumb="Am I eligible?"
         eyebrow="Eligibility matcher"
