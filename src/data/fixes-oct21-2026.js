@@ -12,6 +12,7 @@ import * as auditB from './audit-oct27-b'
 import * as auditC from './audit-oct27-c'
 import * as auditOct28 from './audit-oct28'
 import * as auditNov02 from './audit-nov02'
+import * as auditNov16 from './audit-nov16'
 
 /** slug → the page with the call's instructions and application route. */
 export const directLinks = {
@@ -256,7 +257,7 @@ export const callFixes = {
 }
 
 // The 27 Oct 2026 audit (one file per part) adds its removals and corrections here.
-for (const part of [auditA, auditB, auditC, auditOct28, auditNov02]) {
+for (const part of [auditA, auditB, auditC, auditOct28, auditNov02, auditNov16]) {
   for (const slug of Object.keys(part.retired)) retiredSlugs.add(slug)
   Object.assign(callFixes, part.fixes)
 }
