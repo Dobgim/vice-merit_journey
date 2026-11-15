@@ -9,7 +9,7 @@ export const legal = {
     title: 'Privacy Policy',
     description: 'How Merit Leaders collects, uses and protects your personal information.',
     lede: 'What we collect when you use this website or our services, why we collect it, and the choices you have.',
-    updated: '11 October 2026',
+    updated: '15 November 2026',
     sections: [
       {
         title: 'Who we are',
@@ -58,6 +58,7 @@ export const legal = {
             'A copy of our contact details and prices, so pages load faster on your next visit.',
           ],
           'Flag images are loaded from flagcdn.com and fonts from Google Fonts, which means those services receive your IP address when the page loads.',
+          'We count visits with Ahrefs Web Analytics, which does not use cookies. It records the page viewed, the site you came from, and your approximate country, browser and device type, and its script is loaded from Ahrefs, which therefore receives your IP address when the page loads.',
         ],
       },
       {
