@@ -2,7 +2,10 @@ Title: Scholarship Recommendation Letter: How to Get a Strong One
 Meta description: How to get a scholarship recommendation letter that helps your application: who to ask, what to give them, when to ask, and mistakes to avoid.
 Keywords: scholarship recommendation letter, how to ask for a recommendation letter, reference letter for scholarship, who should write my recommendation letter, recommendation letter for international students, scholarship referee tips
 Tags: Application skills, Recommendation letters, Scholarships, Application guide
-Suggested image: A student and a professor talking across a desk in a university office, with papers and a laptop open
+Published: 2026-11-15
+Cover: https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/Professor_Warner_R_Schilling_talking_to_students_after_class_2008.jpg/1280px-Professor_Warner_R_Schilling_talking_to_students_after_class_2008.jpg
+Cover alt: A professor talking with a small group of students at the front of a lecture hall after class
+Cover credit: A professor talks with students after a lecture at Columbia University. Photo: Jonathan Schilling, CC BY-SA 3.0 (Wikimedia Commons)
 
 A good **scholarship recommendation letter** can lift an application that is already strong, and a weak one can quietly sink it. Selection panels read hundreds of files. When your grades and essay look similar to the next candidate's, the letters often decide who moves forward.
 
@@ -54,7 +57,7 @@ Here is a simple structure for your email:
 Make their work easy. Send one tidy package:
 
 - [ ] Your CV
-- [ ] Your draft personal statement or statement of purpose
+- [ ] Your draft personal statement or [statement of purpose](https://www.meritleaders.com/blog/statement-of-purpose-scholarship)
 - [ ] A short description of the scholarship and what the panel values
 - [ ] The deadline and how the letter must be submitted (portal link, email, signed PDF)
 - [ ] A short list of the projects, grades or achievements you worked on together

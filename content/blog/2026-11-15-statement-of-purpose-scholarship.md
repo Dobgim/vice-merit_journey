@@ -2,7 +2,10 @@ Title: How to Write a Scholarship Statement of Purpose That Wins
 Meta description: How to write a scholarship statement of purpose: a simple structure, what committees look for, common mistakes and a checklist to use before you submit.
 Keywords: scholarship statement of purpose, how to write a statement of purpose, statement of purpose for scholarship example structure, statement of purpose for international students, motivation letter for scholarship, SOP mistakes, fully funded master's scholarship application
 Tags: Application skills, Statement of purpose, Motivation letter, Scholarships, Application guide
-Suggested image: A student writing at a desk beside a laptop and notebook, with warm morning light from a window
+Published: 2026-11-15
+Cover: https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/Writing_notes_while_using_a_laptop_at_a_desk.jpg/1280px-Writing_notes_while_using_a_laptop_at_a_desk.jpg
+Cover alt: A hand holding a pen over an open notebook full of handwritten notes, beside a laptop on a wooden desk
+Cover credit: Writing notes beside a laptop. Photo: Shixart1985, CC BY 2.0 (Wikimedia Commons)
 
 Most scholarship applications are decided long before an interview. The first real test is a page or two of writing: your **scholarship statement of purpose**. Selection panels may read hundreds of them in a few days, so the ones that stand out are rarely the most dramatic. They are the clearest.
 
@@ -114,6 +117,6 @@ Personal enough that it could only have been written by you, and professional en
 
 ## Ready to write yours?
 
-A strong statement takes a few drafts, so start early. Browse funded options on our [scholarships page](https://www.meritleaders.com/scholarships) to find programmes that match your goals, then tailor your letter to each.
+A strong statement takes a few drafts, so start early. Your referees will need it too: see our guide to [getting a strong recommendation letter](https://www.meritleaders.com/blog/scholarship-recommendation-letter). Browse funded options on our [scholarships page](https://www.meritleaders.com/scholarships) to find programmes that match your goals, then tailor your letter to each.
 
 Check whether you qualify with our [eligibility checker](https://www.meritleaders.com/eligibility), or [book a consultation](https://www.meritleaders.com/book-consultation). Our advisers review your drafts and coach you on structure and clarity, so the final words are always your own.
