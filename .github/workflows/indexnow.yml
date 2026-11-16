@@ -3,21 +3,38 @@
 # /indexnow.json, which the build writes (build-seo.js).
 name: IndexNow
 
-on: deployment_status
+on:
+  deployment_status:
+  workflow_dispatch:
 
 permissions: {}
 
 jobs:
   submit:
-    if: github.event.deployment_status.state == 'success' && startsWith(github.event.deployment.environment, 'Production')
+    if: github.event_name == 'workflow_dispatch' || (github.event.deployment_status.state == 'success' && startsWith(github.event.deployment.environment, 'Production'))
     runs-on: ubuntu-latest
     steps:
       - name: Submit changed pages
+        env:
+          DEPLOYED: ${{ github.event.deployment.sha }}
         run: |
-          set -euo pipefail
-          curl -fsS --retry 3 --retry-delay 10 "https://www.meritleaders.com/indexnow.json?$(date +%s)" -o manifest.json
+          set -uo pipefail
+          # The new version can take a moment to answer on the public address:
+          # wait until /indexnow.json is the one this deployment built.
+          ok=0
+          for try in $(seq 1 12); do
+            code=$(curl -sS -o manifest.json -w '%{http_code}' -A 'meritleaders-indexnow' "https://www.meritleaders.com/indexnow.json?$(date +%s)" || echo 000)
+            live=$(jq -r '.commit // "unknown"' manifest.json 2>/dev/null || echo invalid)
+            echo "Try $try: HTTP $code, live build $live"
+            if [ "$code" = 200 ] && [ "$live" != invalid ]; then
+              ok=1
+              if [ -z "$DEPLOYED" ] || [ "$live" = unknown ] || [ "$live" = "$DEPLOYED" ]; then break; fi
+            fi
+            sleep 20
+          done
+          if [ "$ok" != 1 ]; then echo "Could not read /indexnow.json"; exit 1; fi
           count=$(jq '.changed | length' manifest.json)
-          echo "Live build: $(jq -r '.commit // "unknown"' manifest.json); $count changed pages"
+          echo "$count changed pages"
           if [ "$count" -eq 0 ]; then exit 0; fi
           jq '. as $m | {host: $m.host, key: $m.key, keyLocation: $m.keyLocation, urlList: ($m.changed | keys | map($m.site + .))}' manifest.json > body.json
           code=$(curl -sS -o response.txt -w '%{http_code}' -X POST https://api.indexnow.org/indexnow \
