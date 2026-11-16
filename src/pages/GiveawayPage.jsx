@@ -204,7 +204,7 @@ export default function GiveawayPage() {
     <>
       <Seo
         title="Free Scholarship Application Support for 5 Students"
-        description={`Merit Leaders will guide ${giveaway.places} students through a full scholarship application for free. Open to all nationalities. Entries close ${giveaway.closesLabel}.`}
+        description={`Merit Leaders will guide ${giveaway.places} students through a full scholarship application for free. Open to all nationalities. Entries close ${giveaway.closesShort}.`}
       />
 
       <PageHeader

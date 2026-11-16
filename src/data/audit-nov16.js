@@ -24,4 +24,9 @@ export const fixes = {
     officialUrl: 'https://www.polimi.it/en/prospective-students/how-much-does-it-cost/scholarships',
     amount: 'Tuition waiver; Gold awards add €8,000 and Platinum awards €10,000',
   },
+  // The awards page now redirects to the home page; the call itself (29 Oct 2026)
+  // confirms entries are accepted up to 31 January 2027.
+  'pan-african-re-insurance-journalism-awards-2027-12th-edition': {
+    officialUrl: 'https://www.continental-re.com/entries-open-for-the-12th-pan-african-reinsurance-journalism-awards/?lang=eng',
+  },
 }
