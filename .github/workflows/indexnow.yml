@@ -1,0 +1,27 @@
+# Tells IndexNow (Bing, Yandex and others) which pages changed, once Vercel
+# reports that a production deployment is live. The list comes from
+# /indexnow.json, which the build writes (build-seo.js).
+name: IndexNow
+
+on: deployment_status
+
+permissions: {}
+
+jobs:
+  submit:
+    if: github.event.deployment_status.state == 'success' && startsWith(github.event.deployment.environment, 'Production')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Submit changed pages
+        run: |
+          set -euo pipefail
+          curl -fsS --retry 3 --retry-delay 10 "https://www.meritleaders.com/indexnow.json?$(date +%s)" -o manifest.json
+          count=$(jq '.changed | length' manifest.json)
+          echo "Live build: $(jq -r '.commit // "unknown"' manifest.json); $count changed pages"
+          if [ "$count" -eq 0 ]; then exit 0; fi
+          jq '. as $m | {host: $m.host, key: $m.key, keyLocation: $m.keyLocation, urlList: ($m.changed | keys | map($m.site + .))}' manifest.json > body.json
+          code=$(curl -sS -o response.txt -w '%{http_code}' -X POST https://api.indexnow.org/indexnow \
+            -H 'Content-Type: application/json; charset=utf-8' --data-binary @body.json)
+          echo "IndexNow answered $code"
+          cat response.txt
+          case "$code" in 200|202) ;; *) exit 1 ;; esac

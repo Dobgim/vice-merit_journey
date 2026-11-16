@@ -12,8 +12,12 @@
  *    the home page in dist/index.html) with its own title, description,
  *    canonical URL, social preview tags and readable content. Vercel serves
  *    these directly (cleanUrls), so Google and link previews see real content
- *    at once; the React app then takes over as usual.
+ *    at once; the React app then takes over as usual;
+ *  - dist/indexnow.json — the pages whose content changed since the version
+ *    that is live, which .github/workflows/indexnow.yml submits to IndexNow
+ *    (Bing, Yandex and others) once the deployment is live.
  */
+import crypto from 'node:crypto'
 import fs from 'node:fs'
 import path from 'node:path'
 import { kinds } from './src/data/opportunities.js'
@@ -461,6 +465,54 @@ async function makeFlyers(root, outDir, entries) {
   return flyers
 }
 
+/* --------------------------------------------------------------- IndexNow */
+
+// The key is public by design: search engines read it at /<key>.txt to check
+// that submissions for this site really come from it.
+const INDEXNOW_KEY = '33b1d5e444a6f90d21f8d57f65eea6ec'
+// A changed page stays on the list this long, so that when several updates are
+// pushed in a row none is missed if a later deployment goes live first.
+const INDEXNOW_KEEP_MS = 2 * 60 * 60 * 1000
+
+/** A page's content as a short hash, ignoring the script and style file names that change with every build. */
+const digest = (html) => crypto.createHash('sha256').update(html.replace(/\/assets\/[^"']+/g, '')).digest('hex').slice(0, 16)
+
+/**
+ * Writes the key file and dist/indexnow.json: every page's hash, and under
+ * `changed` the pages that are new or different from the live site's copy
+ * of this file (path → when the change was built). With no live copy to
+ * compare against — the first time — every page counts as changed.
+ */
+async function writeIndexNow(outDir, hashes) {
+  fs.writeFileSync(path.join(outDir, `${INDEXNOW_KEY}.txt`), INDEXNOW_KEY)
+  let live = null
+  try {
+    const res = await fetch(`${SITE_URL}/indexnow.json`, { signal: AbortSignal.timeout(10000) })
+    const data = res.ok ? await res.json() : null
+    if (data?.pages) live = data
+  } catch {
+    // Not there yet, or unreachable: treated as a first run.
+  }
+  const now = Date.now()
+  const changed = {}
+  for (const [route, at] of Object.entries(live?.changed ?? {})) {
+    if (hashes.has(route) && now - new Date(at).getTime() < INDEXNOW_KEEP_MS) changed[route] = at
+  }
+  for (const [route, hash] of hashes) {
+    if (live?.pages[route] !== hash) changed[route] = new Date(now).toISOString()
+  }
+  fs.writeFileSync(path.join(outDir, 'indexnow.json'), JSON.stringify({
+    site: SITE_URL,
+    host: new URL(SITE_URL).host,
+    key: INDEXNOW_KEY,
+    keyLocation: `${SITE_URL}/${INDEXNOW_KEY}.txt`,
+    commit: process.env.VERCEL_GIT_COMMIT_SHA ?? null,
+    changed,
+    pages: Object.fromEntries(hashes),
+  }))
+  console.log(`[build-seo] IndexNow: ${Object.keys(changed).length} of ${hashes.size} pages changed${live ? '' : ' (no live copy to compare with)'}`)
+}
+
 function writeHtml(outDir, route, html) {
   const file = path.join(outDir, `${route.replace(/^\//, '')}.html`)
   fs.mkdirSync(path.dirname(file), { recursive: true })
@@ -502,11 +554,16 @@ export default function buildSeo() {
       fs.writeFileSync(path.join(outDir, 'feeds', 'closing-soon.xml'), rss('Merit Leaders — closing soon', 'Opportunities closing in the next 14 days.', soon, flyers))
 
       const template = fs.readFileSync(path.join(outDir, 'index.html'), 'utf8')
+      const hashes = new Map()
+      const write = (route, html) => {
+        writeHtml(outDir, route, html)
+        hashes.set(route, digest(html))
+      }
       const detailPreload = preloadTags(chunks, 'ScholarshipDetail')
       for (const e of entries) {
         const guides = posts.filter((p) => p.related.includes(e.path))
         const seo = listingSeo(e.item, kinds[e.kind], { closed: !isOpen(e.item) })
-        writeHtml(outDir, e.path, withKeywords(page(template, {
+        write(e.path, withKeywords(page(template, {
           title: pageTitle(seo.title),
           description: seo.description,
           url: SITE_URL + e.path,
@@ -518,7 +575,7 @@ export default function buildSeo() {
       }
       for (const k of Object.values(kinds)) {
         const list = open.filter((e) => e.kind === k.key).sort((a, b) => a.item.deadline.localeCompare(b.item.deadline))
-        writeHtml(outDir, k.path, page(template, {
+        write(k.path, page(template, {
           title: pageTitle(kindTitle(k, list.length)),
           description: kindDescription(k),
           url: SITE_URL + k.path,
@@ -543,10 +600,10 @@ export default function buildSeo() {
           .replace('<meta property="og:type" content="website" />', '<meta property="og:type" content="article" />')
           .replace(/(<meta\s+name="keywords"\s+content=")[^"]*(")/, (_, a, b) => a + esc([...p.keywords, ...p.tags].join(', ')) + b)
           .replace('</head>', () => `${head}</head>`)
-        writeHtml(outDir, p.to, html)
+        write(p.to, html)
       }
       for (const p of landing) {
-        writeHtml(outDir, p.path, page(template, {
+        write(p.path, page(template, {
           title: pageTitle(p.title),
           description: landingDescription(p, p.matches.length),
           url: SITE_URL + p.path,
@@ -565,9 +622,12 @@ export default function buildSeo() {
       const withJsonLd = (html, data) =>
         data ? html.replace('</head>', () => `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script></head>`) : html
       for (const p of fixed.pages) {
-        writeHtml(outDir, p.path, withJsonLd(page(template, { title: pageTitle(p.seo.title), description: p.seo.description, url: SITE_URL + p.path, image: LOGO, body: p.body }), p.jsonLd))
+        write(p.path, withJsonLd(page(template, { title: pageTitle(p.seo.title), description: p.seo.description, url: SITE_URL + p.path, image: LOGO, body: p.body }), p.jsonLd))
       }
-      fs.writeFileSync(path.join(outDir, 'index.html'), page(template, { title: pageTitle(fixed.home.seo.title), description: fixed.home.seo.description, url: `${SITE_URL}/`, image: LOGO, body: fixed.home.body }))
+      const home = page(template, { title: pageTitle(fixed.home.seo.title), description: fixed.home.seo.description, url: `${SITE_URL}/`, image: LOGO, body: fixed.home.body })
+      fs.writeFileSync(path.join(outDir, 'index.html'), home)
+      hashes.set('/', digest(home))
+      await writeIndexNow(outDir, hashes)
     },
   }
 }
