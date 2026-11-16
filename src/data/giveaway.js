@@ -7,10 +7,10 @@ export const giveaway = {
   path: '/free-application',
   places: 5,
   closesAt: '2026-11-16T23:59:00Z',
-  closesLabel: 'Sunday 16 November 2026, 23:59 GMT',
+  closesLabel: 'Monday 16 November 2026, 23:59 GMT',
   // Without the weekday, for the search description (160 characters at most).
   closesShort: '16 November 2026, 23:59 GMT',
-  drawLabel: 'Tuesday 18 November 2026',
+  drawLabel: 'Wednesday 18 November 2026',
   // Scholarships students can pick must close after this, so there is time to prepare.
   pickFrom: '2026-11-25',
   maxPicks: 3,
