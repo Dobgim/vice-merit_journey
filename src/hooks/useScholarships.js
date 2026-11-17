@@ -25,9 +25,12 @@ function withRequirements(item, kind) {
 }
 
 // Saved listings get the same direct application links and retirements as the built-in ones.
-const prepare = (list, kind) =>
+// A listing entered twice is shown once: two cards with the same slug share a
+// React key, which leaves stale cards on screen when a filter changes.
+const prepare = (list, kind, seen = new Set()) =>
   list
     .map((s) => (s.slug ? s : { ...s, slug: slugify(s.name) }))
+    .filter((s) => !seen.has(s.slug) && seen.add(s.slug))
     .filter((s) => !retiredSlugs.has(s.slug))
     .map((s) => withRequirements(withDirectLink(s), kind))
     .filter((s) => hasFixedDeadline(s) && isOpenYet(s))
