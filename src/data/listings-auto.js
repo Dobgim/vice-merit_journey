@@ -330,7 +330,7 @@ const rows = (kind, list) =>
     ...(opensOn ? { opensOn } : {}),
   }))
 
-// Scholarship rows carry ; every other type carries . A scholarship
+// Scholarship rows carry `funding`; every other type carries `category`. A scholarship
 // appended to the wrong array by mistake is still listed as a scholarship.
 const isScholarship = (row) => row.funding && !row.category
 const others = [fellowshipRows, grantRows, internshipRows, competitionRows]
