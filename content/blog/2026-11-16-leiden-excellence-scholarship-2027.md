@@ -5,7 +5,7 @@ Tags: Netherlands, Master's scholarships, Tuition awards, Application guide
 Related: /scholarships/leiden-university-excellence-scholarship-lexs-2027
 Suggested image: Students walking along a canal near Leiden University's historic buildings in autumn
 
-The **Leiden Excellence Scholarship 2027** (LExS) is one of the most useful tuition awards in the Netherlands for international master's students, and the **deadline is 1 December 2026**. If you want to start a master's at Leiden in September 2027 and you come from outside the EEA, you have about two weeks to get your application and your short motivation letter ready.
+The **Leiden Excellence Scholarship 2027** (LExS) is one of the most useful tuition awards in the Netherlands for international master's students, and the **deadline is 1 December 2026**. If you want to start a master's at Leiden in September 2027 and you come from outside the EEA, you have less than two weeks to get your application and your short motivation letter ready.
 
 This guide covers who can apply, what the scholarship is worth, and how to put together a strong application in the time you have left. You can see the key facts on our [Leiden Excellence Scholarship listing](https://www.meritleaders.com/scholarships/leiden-university-excellence-scholarship-lexs-2027).
 
@@ -68,7 +68,7 @@ Five hundred words is short, which makes every sentence count. Panels want to se
 
 Write it yourself, in your own voice, and ask a teacher or adviser for feedback. If you want a second pair of eyes, our advisers review and coach, so the final letter stays yours. Our guide to [writing a scholarship statement of purpose](https://www.meritleaders.com/blog/statement-of-purpose-scholarship) walks through a structure you can adapt.
 
-## Your plan for the next two weeks
+## Your plan for the days before the deadline
 
 ### Now: confirm your programme and eligibility
 
