@@ -3,7 +3,7 @@ Meta description: How to get a scholarship recommendation letter that helps your
 Keywords: scholarship recommendation letter, how to ask for a recommendation letter, reference letter for scholarship, who should write my recommendation letter, recommendation letter for international students, scholarship referee tips
 Tags: Application skills, Recommendation letters, Scholarships, Application guide
 Published: 2026-11-15
-Cover: https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/Professor_Warner_R_Schilling_talking_to_students_after_class_2008.jpg/1280px-Professor_Warner_R_Schilling_talking_to_students_after_class_2008.jpg
+Cover: /blog-covers/scholarship-recommendation-letter.jpg
 Cover alt: A professor talking with a small group of students at the front of a lecture hall after class
 Cover credit: A professor talks with students after a lecture at Columbia University. Photo: Jonathan Schilling, CC BY-SA 3.0 (Wikimedia Commons)
 

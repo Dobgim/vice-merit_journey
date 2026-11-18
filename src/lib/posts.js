@@ -95,7 +95,9 @@ export function parsePost(file, raw) {
     tags: list(meta.tags),
     // Listing pages this article is about (e.g. /scholarships/<slug>); they link back to it.
     related: list(meta.related),
-    image: meta.cover || null,
+    // Covers are kept on this site (public/blog-covers/<slug>.jpg) so they always load;
+    // made absolute because social previews and structured data need a full URL.
+    image: meta.cover ? (meta.cover.startsWith('/') ? `${SITE_URL}${meta.cover}` : meta.cover) : null,
     imageAlt: meta['cover alt'] || meta.title || '',
     imageCredit: meta['cover credit'] || null,
     readTime: `${Math.max(1, Math.round(words / 200))} min read`,

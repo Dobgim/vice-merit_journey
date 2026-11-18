@@ -3,7 +3,7 @@ Meta description: How to write a scholarship statement of purpose: a simple stru
 Keywords: scholarship statement of purpose, how to write a statement of purpose, statement of purpose for scholarship example structure, statement of purpose for international students, motivation letter for scholarship, SOP mistakes, fully funded master's scholarship application
 Tags: Application skills, Statement of purpose, Motivation letter, Scholarships, Application guide
 Published: 2026-11-15
-Cover: https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/Writing_notes_while_using_a_laptop_at_a_desk.jpg/1280px-Writing_notes_while_using_a_laptop_at_a_desk.jpg
+Cover: /blog-covers/statement-of-purpose-scholarship.jpg
 Cover alt: A hand holding a pen over an open notebook full of handwritten notes, beside a laptop on a wooden desk
 Cover credit: Writing notes beside a laptop. Photo: Shixart1985, CC BY 2.0 (Wikimedia Commons)
 

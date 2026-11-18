@@ -4,7 +4,7 @@ Keywords: Swiss Government Excellence Scholarship 2027, Swiss Government Excelle
 Tags: Switzerland, PhD scholarships, Research scholarships, Fully funded, Application guide
 Related: /scholarships/swiss-government-excellence-scholarship
 Published: 2026-10-28
-Cover: https://thumb.wikimedia.org/wikipedia/commons/thumb/d/da/Bundeshaus_1128.jpg/1280px-Bundeshaus_1128.jpg
+Cover: /blog-covers/swiss-government-excellence-scholarship-2027.jpg
 Cover alt: The Federal Palace of Switzerland in Bern
 Cover credit: Federal Palace of Switzerland, Bern. Photo: Mike Lehmann, CC BY-SA 3.0 (Wikimedia Commons)
 

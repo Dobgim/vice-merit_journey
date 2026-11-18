@@ -4,7 +4,7 @@ Keywords: Mundus MAPP 2027 deadline, Mundus MAPP scholarship, Erasmus Mundus pub
 Tags: Europe, Master's scholarships, Erasmus Mundus, Fully funded, Application guide
 Related: /scholarships/erasmus-mundus-master-in-public-policy-mundus-mapp
 Published: 2026-10-30
-Cover: https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/Schoenbrunn_philharmoniker_2012.jpg/1280px-Schoenbrunn_philharmoniker_2012.jpg
+Cover: /blog-covers/mundus-mapp-2027-deadline.jpg
 Cover alt: Vienna
 Cover credit: Vienna. Photo: Superbass, CC BY-SA 3.0 (Wikimedia Commons)
 

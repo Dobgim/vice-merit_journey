@@ -4,6 +4,9 @@ Keywords: Leiden Excellence Scholarship 2027, LExS 2027 deadline, Leiden Univers
 Tags: Netherlands, Master's scholarships, Tuition awards, Application guide
 Related: /scholarships/leiden-university-excellence-scholarship-lexs-2027
 Suggested image: Students walking along a canal near Leiden University's historic buildings in autumn
+Cover: /blog-covers/leiden-excellence-scholarship-2027.jpg
+Cover alt: Leiden University’s Academy Building beside the Rapenburg canal and the Nonnenbrug bridge on a sunny autumn day
+Cover credit: Academy Building, Leiden University, on the Rapenburg. Photo: FrDr, CC BY-SA 4.0 (Wikimedia Commons)
 
 The **Leiden Excellence Scholarship 2027** (LExS) is one of the most useful tuition awards in the Netherlands for international master's students, and the **deadline is 1 December 2026**. If you want to start a master's at Leiden in September 2027 and you come from outside the EEA, you have less than two weeks to get your application and your short motivation letter ready.
 

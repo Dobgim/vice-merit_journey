@@ -4,7 +4,7 @@ Keywords: TU Delft Van Effen scholarship 2027, Justus & Louise van Effen Excelle
 Tags: Netherlands, Master's scholarships, Engineering, Full scholarship, International students, Application guide
 Related: /scholarships/tu-delft-justus-louise-van-effen-excellence-scholarship-2027
 Published: 2026-11-03
-Cover: https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Library_TUDelft.jpg/1280px-Library_TUDelft.jpg
+Cover: /blog-covers/tu-delft-van-effen-scholarship-2027.jpg
 Cover alt: The cone of the TU Delft Library against an evening sky, above its snow-covered roof
 Cover credit: TU Delft Library. Photo: TheSpeedX, CC BY-SA 3.0 (Wikimedia Commons)
 

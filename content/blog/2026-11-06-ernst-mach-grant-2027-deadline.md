@@ -4,7 +4,7 @@ Keywords: Ernst Mach Grant 2027/28, Ernst Mach Grant deadline, Ernst Mach Grant 
 Tags: Austria, Research grants, PhD students, Postdoc, International students, Application guide
 Related: /scholarships/ernst-mach-grant-worldwide-2027-28
 Published: 2026-11-06
-Cover: https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Wien_-_Universit%C3%A4t_%281%29.JPG/1280px-Wien_-_Universit%C3%A4t_%281%29.JPG
+Cover: /blog-covers/ernst-mach-grant-2027-deadline.jpg
 Cover alt: The main building of the University of Vienna on the Ringstraße under a blue spring sky
 Cover credit: University of Vienna. Photo: C.Stadler/Bwag, CC BY-SA 4.0 (Wikimedia Commons)
 
