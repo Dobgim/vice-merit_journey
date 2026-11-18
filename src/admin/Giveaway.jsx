@@ -173,6 +173,7 @@ export default function Giveaway() {
   const { data, loading, error, setData } = useLoad(api.listConsultations)
   const [onlyEligible, setOnlyEligible] = useState(false)
   const [busy, setBusy] = useState(false)
+  const [fullNames, setFullNames] = useState(false)
   const [actionError, setActionError] = useState(null)
   const [flashNode, flash] = useFlash()
 
@@ -206,6 +207,16 @@ export default function Giveaway() {
   const pickEveryone = () => {
     const rest = ranked.filter((e) => !e.winner)
     if (rest.length && window.confirm(`Mark all ${ranked.length} people as winners? You can untick anyone afterwards.`)) setTag(rest, 'winner', true)
+  }
+  // Drawn in this browser; the names are not sent anywhere.
+  const makeFlyer = async () => {
+    setActionError(null)
+    try {
+      const { downloadResultsFlyer } = await import('./resultsFlyer')
+      await downloadResultsFlyer(ranked.filter((e) => e.winner).map((e) => e.full_name), { full: fullNames })
+    } catch (err) {
+      setActionError(err)
+    }
   }
 
   const exportSheet = () =>
@@ -247,6 +258,9 @@ export default function Giveaway() {
         <Btn icon="award" disabled={!ranked.length || busy} onClick={pickEveryone}>
           Pick everyone
         </Btn>
+        <Btn variant="outline" icon="image" disabled={!winnerCount || busy} onClick={makeFlyer}>
+          Download results flyer
+        </Btn>
       </PageTitle>
       <ErrorNote error={error || actionError} />
 
@@ -257,6 +271,10 @@ export default function Giveaway() {
         <label className="flex items-center gap-2">
           <input type="checkbox" checked={onlyEligible} onChange={(e) => setOnlyEligible(e.target.checked)} className="h-4 w-4 accent-navy-900" />
           Show eligible only
+        </label>
+        <label className="flex items-center gap-2">
+          <input type="checkbox" checked={fullNames} onChange={(e) => setFullNames(e.target.checked)} className="h-4 w-4 accent-navy-900" />
+          Full names on flyer (otherwise “Faith N.”)
         </label>
         <span className="text-navy-500">Grades are estimated from what students typed; check them yourself.</span>
       </div>
