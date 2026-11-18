@@ -2,14 +2,15 @@ import { useMemo, useState } from 'react'
 import Icon from '../components/ui/Icon'
 import * as api from './api'
 import { Btn, Empty, ErrorNote, PageTitle, downloadCsv, fmtDateTime, useFlash, useLoad } from './ui'
-import { giveaway } from '../data/giveaway'
 
 /*
  * Free application giveaway entries, ranked. Entries are consultation
  * requests whose message starts with "[Free application]" (see
  * submitGiveawayEntry). "Follows us" and "Commented" can't be checked
  * automatically, so the admin ticks them; the ticks are kept in the
- * request's notes as #follows and #commented.
+ * request's notes as #follows and #commented. Winners are kept the same way
+ * (#winner), so a refresh never loses them. Someone who entered more than once
+ * (same name in any order, phone or email) is shown once, as one merged entry.
  */
 
 const TAG = '[Free application]'
@@ -30,7 +31,37 @@ function parseEntry(r) {
   }
   const docs = (fields['Documents ready'] ?? '').split(', ').filter((d) => d && d !== 'None ticked')
   const picks = (fields['Scholarships chosen'] ?? '').split(' | ').filter(Boolean)
-  return { ...r, fields, docs, picks, follows: /#follows/.test(r.notes ?? ''), commented: /#commented/.test(r.notes ?? '') }
+  const has = (tag) => new RegExp(`#${tag}\\b`).test(r.notes ?? '')
+  return { ...r, fields, docs, picks, follows: has('follows'), commented: has('commented'), winner: has('winner') }
+}
+
+const nameKey = (s = '') =>
+  s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z]+/g, ' ').trim().split(' ').sort().join(' ')
+
+/** One entry per person: the latest entry, with documents, picks and ticks from all of theirs. */
+function mergeDuplicates(entries) {
+  const groups = []
+  const index = new Map()
+  for (const e of entries) {
+    const phone = String(e.phone ?? '').replace(/\D/g, '').slice(-9)
+    const keys = [nameKey(e.full_name) && `n:${nameKey(e.full_name)}`, phone.length >= 7 && `p:${phone}`, e.email && `e:${e.email.trim().toLowerCase()}`].filter(Boolean)
+    let g = keys.map((k) => index.get(k)).find((x) => x !== undefined)
+    if (g === undefined) groups.push([]), (g = groups.length - 1)
+    groups[g].push(e)
+    for (const k of keys) index.set(k, g)
+  }
+  return groups.map((rows) => {
+    rows.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+    const union = (key) => [...new Set(rows.flatMap((r) => r[key]))]
+    const any = (key) => rows.some((r) => r[key])
+    return { ...rows[0], rows, docs: union('docs'), picks: union('picks'), follows: any('follows'), commented: any('commented'), winner: any('winner') }
+  })
+}
+
+/** The notes with #tag added or removed. */
+const withTag = (notes = '', tag, on) => {
+  const without = (notes ?? '').replace(new RegExp(`\\s*#${tag}\\b`, 'g'), '').trim()
+  return on ? `${without} #${tag}`.trim() : without
 }
 
 /** Rough grade band from free text: 15 strong, 10 good, 5 unclear. */
@@ -71,7 +102,8 @@ const waLink = (phone, name) => {
     : null
 }
 
-function Entry({ e, rank, winner, onToggle }) {
+function Entry({ e, rank, onToggle }) {
+  const winner = e.winner
   const [open, setOpen] = useState(false)
   const wa = waLink(e.phone, e.full_name?.split(' ')[0] ?? '')
   return (
@@ -80,12 +112,17 @@ function Entry({ e, rank, winner, onToggle }) {
         <span className="w-8 text-center font-display text-2xl font-semibold text-navy-400">{rank}</span>
         <div className="min-w-0 flex-1">
           <p className="font-semibold text-navy-950">
-            {e.full_name} {winner && <span className="ml-1 rounded-full bg-gold-200 px-2 py-0.5 text-xs font-bold text-navy-950">DRAWN</span>}
+            {e.full_name} {winner && <span className="ml-1 rounded-full bg-gold-200 px-2 py-0.5 text-xs font-bold text-navy-950">WINNER</span>}
+            {e.rows.length > 1 && <span className="ml-1 rounded-full bg-navy-100 px-2 py-0.5 text-xs font-semibold text-navy-700">{e.rows.length} entries merged</span>}
           </p>
           <p className="text-sm text-navy-500">
             {[e.country, e.study_level, e.fields['Field of study'], e.fields['Last qualification and grade']].filter(Boolean).join(' · ')}
           </p>
         </div>
+        <label className="flex items-center gap-2 text-sm font-semibold text-navy-950">
+          <input type="checkbox" checked={winner} onChange={() => onToggle('winner')} className="h-4 w-4 accent-gold-500" />
+          Winner
+        </label>
         <label className="flex items-center gap-2 text-sm font-medium text-navy-800">
           <input type="checkbox" checked={e.follows} onChange={() => onToggle('follows')} className="h-4 w-4 accent-navy-900" />
           Follows us
@@ -135,41 +172,40 @@ function Entry({ e, rank, winner, onToggle }) {
 export default function Giveaway() {
   const { data, loading, error, setData } = useLoad(api.listConsultations)
   const [onlyEligible, setOnlyEligible] = useState(false)
-  const [winners, setWinners] = useState([])
+  const [busy, setBusy] = useState(false)
   const [actionError, setActionError] = useState(null)
   const [flashNode, flash] = useFlash()
 
   const ranked = useMemo(
     () =>
-      (data ?? [])
-        .filter((r) => r.message?.startsWith(TAG))
-        .map((r) => score(parseEntry(r)))
+      mergeDuplicates((data ?? []).filter((r) => r.message?.startsWith(TAG)).map(parseEntry))
+        .map(score)
         .sort((a, b) => b.total - a.total || new Date(a.created_at) - new Date(b.created_at)),
     [data]
   )
   const eligible = ranked.filter((e) => e.eligible)
   const shown = onlyEligible ? eligible : ranked
+  const winnerCount = ranked.filter((e) => e.winner).length
 
-  const toggle = async (e, tag) => {
-    const has = new RegExp(`\\s*#${tag}`)
-    const notes = has.test(e.notes ?? '') ? (e.notes ?? '').replace(has, '') : `${e.notes ?? ''} #${tag}`.trim()
+  /** Turn a tag on or off for these people, on every entry each of them made. */
+  const setTag = async (people, tag, on) => {
+    const notes = new Map(people.flatMap((e) => e.rows.map((r) => [r.id, withTag(r.notes, tag, on)])))
     setActionError(null)
+    setBusy(true)
     try {
-      await api.updateConsultation(e.id, { notes })
-      setData(data.map((r) => (r.id === e.id ? { ...r, notes } : r)))
+      for (const [id, n] of notes) await api.updateConsultation(id, { notes: n })
+      setData(data.map((r) => (notes.has(r.id) ? { ...r, notes: notes.get(r.id) } : r)))
       flash()
     } catch (err) {
       setActionError(err)
+    } finally {
+      setBusy(false)
     }
   }
-
-  const draw = () => {
-    const pool = [...eligible]
-    for (let i = pool.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[pool[i], pool[j]] = [pool[j], pool[i]]
-    }
-    setWinners(pool.slice(0, giveaway.places).map((e) => e.id))
+  const toggle = (e, tag) => setTag([e], tag, !e[tag])
+  const pickEveryone = () => {
+    const rest = ranked.filter((e) => !e.winner)
+    if (rest.length && window.confirm(`Mark all ${ranked.length} people as winners? You can untick anyone afterwards.`)) setTag(rest, 'winner', true)
   }
 
   const exportSheet = () =>
@@ -179,7 +215,8 @@ export default function Giveaway() {
         Rank: i + 1,
         Score: e.total,
         Eligible: e.eligible ? 'Yes' : 'No',
-        Drawn: winners.includes(e.id) ? 'Yes' : '',
+        Winner: e.winner ? 'Yes' : '',
+        'Entries merged': e.rows.length,
         Name: e.full_name,
         Nationality: e.country,
         Level: e.study_level,
@@ -207,8 +244,8 @@ export default function Giveaway() {
         <Btn variant="outline" icon="file" disabled={!ranked.length} onClick={exportSheet}>
           Export ranked sheet
         </Btn>
-        <Btn icon="award" disabled={!eligible.length} onClick={draw}>
-          Draw {giveaway.places} at random
+        <Btn icon="award" disabled={!ranked.length || busy} onClick={pickEveryone}>
+          Pick everyone
         </Btn>
       </PageTitle>
       <ErrorNote error={error || actionError} />
@@ -216,6 +253,7 @@ export default function Giveaway() {
       <div className="flex flex-wrap items-center gap-4 text-sm text-navy-700">
         <span><strong>{ranked.length}</strong> entries</span>
         <span><strong>{eligible.length}</strong> eligible</span>
+        <span><strong>{winnerCount}</strong> winners</span>
         <label className="flex items-center gap-2">
           <input type="checkbox" checked={onlyEligible} onChange={(e) => setOnlyEligible(e.target.checked)} className="h-4 w-4 accent-navy-900" />
           Show eligible only
@@ -228,7 +266,7 @@ export default function Giveaway() {
       ) : shown.length ? (
         <ul className="space-y-3">
           {shown.map((e, i) => (
-            <Entry key={e.id} e={e} rank={i + 1} winner={winners.includes(e.id)} onToggle={(tag) => toggle(e, tag)} />
+            <Entry key={e.id} e={e} rank={i + 1} onToggle={(tag) => !busy && toggle(e, tag)} />
           ))}
         </ul>
       ) : (
