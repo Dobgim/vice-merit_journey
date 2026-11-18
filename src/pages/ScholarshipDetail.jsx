@@ -23,7 +23,7 @@ import FlyerDownload from '../components/ui/FlyerDownload'
 import Countdown from '../components/ui/Countdown'
 import OrgLogo from '../components/ui/OrgLogo'
 import { byDeadline, deadlineStatus, formatDate } from '../lib/deadline'
-import { company } from '../data/site'
+import { company, showPackagesPage } from '../data/site'
 import { buildOverview } from '../lib/overview'
 import { criteriaFor } from '../data/criteria'
 import { photos } from '../data/photos'
@@ -567,12 +567,14 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
                     <Icon name="whatsapp" className="h-4 w-4" />
                     Or ask on WhatsApp
                   </a>
-                  <Link
-                    to="/packages"
-                    className="mt-4 block border-t border-white/10 pt-4 text-center text-sm leading-snug text-navy-100/70 hover:text-white"
-                  >
-                    Already have a draft? <span className="font-semibold text-gold-200">Get your motivation letter reviewed from $9 (5,000 FCFA)</span>
-                  </Link>
+                  {showPackagesPage && (
+                    <Link
+                      to="/packages"
+                      className="mt-4 block border-t border-white/10 pt-4 text-center text-sm leading-snug text-navy-100/70 hover:text-white"
+                    >
+                      Already have a draft? <span className="font-semibold text-gold-200">Get your motivation letter reviewed from $9 (5,000 FCFA)</span>
+                    </Link>
+                  )}
                 </div>
               </div>
 

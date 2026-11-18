@@ -36,10 +36,17 @@ export const company = {
   ],
 }
 
+/**
+ * The Packages & pricing page (/packages). While false it is left out of the
+ * menu, the links and the sitemap, and /packages sends visitors to /services.
+ * Set it back to true to bring the page back as it was.
+ */
+export const showPackagesPage = false
+
 export const navLinks = [
   { label: 'Home', to: '/' },
   { label: 'Services', to: '/services' },
-  { label: 'Packages', to: '/packages' },
+  ...(showPackagesPage ? [{ label: 'Packages', to: '/packages' }] : []),
   {
     label: 'Opportunities',
     children: [

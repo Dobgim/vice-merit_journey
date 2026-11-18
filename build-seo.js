@@ -21,7 +21,7 @@ import crypto from 'node:crypto'
 import fs from 'node:fs'
 import path from 'node:path'
 import { kinds } from './src/data/opportunities.js'
-import { SITE_URL, benefits, company, countries, faqs, packageAddons, packageFaqs, packageSteps, packages, services, starterOffers, stats, steps } from './src/data/site.js'
+import { SITE_URL, benefits, company, countries, faqs, packageAddons, packageFaqs, packageSteps, packages, services, showPackagesPage, starterOffers, stats, steps } from './src/data/site.js'
 import { courseFields, courses } from './src/data/courses.js'
 import { destinations } from './src/data/destinations.js'
 import { legal } from './src/data/legal.js'
@@ -40,7 +40,7 @@ import { giveaway, isGiveawayOpen } from './src/data/giveaway.js'
 
 const LOGO = `${SITE_URL}/merit-leaders-logo.jpg`
 const STATIC_PAGES = [
-  '/', '/about', '/services', '/packages', '/scholarships', '/fellowships', '/grants', '/internships',
+  '/', '/about', '/services', ...(showPackagesPage ? ['/packages'] : []), '/scholarships', '/fellowships', '/grants', '/internships',
   '/competitions', '/courses', '/countries', '/blog', '/faq', '/book-consultation', '/eligibility', '/explore', '/privacy', '/terms',
 ]
 
@@ -165,7 +165,10 @@ const SITE_LINKS = [
   ['/countries', 'Study Destinations'], ['/services', 'Services'], ['/packages', 'Packages & Pricing'], ['/blog', 'Blog'], ['/faq', 'FAQ'],
   ['/about', 'About Us'], ['/book-consultation', 'Book a Consultation'], ['/privacy', 'Privacy Policy'], ['/terms', 'Terms of Service'],
 ]
-const siteNav = () => `<nav aria-label="Site"><h2>${esc(company.name)}</h2><p>${SITE_LINKS.map(([to, label]) => `<a href="${to}">${esc(label)}</a>`).join(' · ')}</p></nav>`
+// "Packages and prices" link for the fixed pages: empty while the page is hidden (data/site.js).
+const packagesLink = (before = ' · ', after = '') => (showPackagesPage ? `${before}<a href="/packages">Packages and prices</a>${after}` : '')
+
+const siteNav = () => `<nav aria-label="Site"><h2>${esc(company.name)}</h2><p>${SITE_LINKS.filter(([to]) => showPackagesPage || to !== '/packages').map(([to, label]) => `<a href="${to}">${esc(label)}</a>`).join(' · ')}</p></nav>`
 
 function page(template, { title, description, url, image, body, preload = '', noindex = false }) {
   return template
@@ -292,7 +295,7 @@ function staticPages({ open, landing, posts }) {
         `<ul>${stats.map((x) => `<li>${x.value}${esc(x.suffix)} ${esc(x.label.toLowerCase())} (${esc(x.hint.toLowerCase())})</li>`).join('')}</ul>` +
         section('How we work', benefits.map((b) => `<h3>${esc(b.title)}</h3><p>${esc(b.body)}</p>`).join('')) +
         section('What happens when you contact us', `<ol>${steps.map((x) => `<li><strong>${esc(x.title)}.</strong> ${esc(x.body)}</li>`).join('')}</ol>`) +
-        `<p><a href="/services">Our services</a> · <a href="/packages">Packages and prices</a> · <a href="/faq">Questions students ask</a></p>${cta}`,
+        `<p><a href="/services">Our services</a>${packagesLink()} · <a href="/faq">Questions students ask</a></p>${cta}`,
     },
     {
       path: '/services',
@@ -300,9 +303,9 @@ function staticPages({ open, landing, posts }) {
       body: `<p class="eb">Services</p><h1>Scholarship application services</h1><p>${esc(staticSeo.services.description)}</p>` +
         services.map((x) => `<h2>${esc(x.title)}</h2><p>${esc(x.body)}</p>${items(x.points)}`).join('') +
         section('How it works', `<ol>${steps.map((x) => `<li><strong>${esc(x.title)}.</strong> ${esc(x.body)}</li>`).join('')}</ol>`) +
-        `<p><a href="/packages">See packages and prices</a></p>${cta}`,
+        `${showPackagesPage ? '<p><a href="/packages">See packages and prices</a></p>' : ''}${cta}`,
     },
-    {
+    ...(showPackagesPage ? [{
       path: '/packages',
       seo: staticSeo.packages,
       body: `<p class="eb">Packages & pricing</p><h1>Scholarship application packages and prices</h1><p>${esc(staticSeo.packages.description)}</p>` +
@@ -312,7 +315,7 @@ function staticPages({ open, landing, posts }) {
         section('How it works', `<ol>${packageSteps.map((x) => `<li><strong>${esc(x.title)}.</strong> ${esc(x.body)}</li>`).join('')}</ol>`) +
         section('Questions about packages', faqHtml(packageFaqs)) +
         `${contact}${cta}`,
-    },
+    }] : []),
     {
       path: '/courses',
       seo: staticSeo.courses,
@@ -339,14 +342,14 @@ function staticPages({ open, landing, posts }) {
       path: '/faq',
       seo: staticSeo.faq,
       jsonLd: faqJsonLd(faqs),
-      body: `<p class="eb">Before you ask</p><h1>Frequently asked questions</h1><p>${esc(staticSeo.faq.description)}</p>${faqHtml(faqs)}<p><a href="/packages">Packages and prices</a> · <a href="/services">Services</a></p>${cta}`,
+      body: `<p class="eb">Before you ask</p><h1>Frequently asked questions</h1><p>${esc(staticSeo.faq.description)}</p>${faqHtml(faqs)}<p>${packagesLink('', ' · ')}<a href="/services">Services</a></p>${cta}`,
     },
     {
       path: '/book-consultation',
       seo: staticSeo.bookConsultation,
       body: `<p class="eb">Free consultation</p><h1>Book a free consultation</h1><p>${esc(staticSeo.bookConsultation.description)}</p>` +
         `<ol>${steps.map((x) => `<li><strong>${esc(x.title)}.</strong> ${esc(x.body)}</li>`).join('')}</ol>${contact}` +
-        '<p><a href="/services">Services</a> · <a href="/packages">Packages and prices</a> · <a href="/faq">FAQ</a></p>',
+        `<p><a href="/services">Services</a>${packagesLink()} · <a href="/faq">FAQ</a></p>`,
     },
     {
       path: '/eligibility',
@@ -386,7 +389,7 @@ function staticPages({ open, landing, posts }) {
       section('Browse open opportunities', kindLinks) +
       section('Closing soon', linkList(closing)) +
       section('Find what you can apply for', `${landingLinks(landing, 'level')}<p><a href="/eligibility">Am I eligible?</a> · <a href="/explore">Browse by nationality and host country</a> · <a href="/countries">Study destinations</a> · <a href="/courses">Free courses with certificates</a></p>`) +
-      section('How we help', `<ul>${services.map((x) => `<li><strong>${esc(x.title)}.</strong> ${esc(x.body)}</li>`).join('')}</ul><p><a href="/services">All services</a> · <a href="/packages">Packages and prices</a></p>`) +
+      section('How we help', `<ul>${services.map((x) => `<li><strong>${esc(x.title)}.</strong> ${esc(x.body)}</li>`).join('')}</ul><p><a href="/services">All services</a>${packagesLink()}</p>`) +
       section('How it works', `<ol>${steps.map((x) => `<li><strong>${esc(x.title)}.</strong> ${esc(x.body)}</li>`).join('')}</ol>`) +
       section('Latest guides', `${postLinks(newest.slice(0, 6))}<p><a href="/blog">All articles</a></p>`) +
       section('Common questions', `${faqHtml(faqs.slice(0, 4))}<p><a href="/faq">All questions</a> · <a href="/about">About us</a></p>`) +

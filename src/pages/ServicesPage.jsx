@@ -4,6 +4,7 @@ import PageHeader from '../components/layout/PageHeader'
 import Services from '../components/sections/Services'
 import HowItWorks from '../components/sections/HowItWorks'
 import Button from '../components/ui/Button'
+import { showPackagesPage } from '../data/site'
 
 export default function ServicesPage() {
   return (
@@ -21,9 +22,11 @@ export default function ServicesPage() {
           <Button to="/book-consultation" variant="gold" size="lg" icon="arrowRight">
             Book a free consultation
           </Button>
-          <Button to="/packages" variant="ghostLight" size="lg" icon="wallet" iconRight={false}>
-            See packages & prices
-          </Button>
+          {showPackagesPage && (
+            <Button to="/packages" variant="ghostLight" size="lg" icon="wallet" iconRight={false}>
+              See packages & prices
+            </Button>
+          )}
         </div>
       </PageHeader>
 

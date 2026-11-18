@@ -1,5 +1,6 @@
 import { Suspense, lazy } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
+import { showPackagesPage } from './data/site'
 import RootLayout from './components/layout/RootLayout'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
@@ -107,7 +108,7 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="services" element={<ServicesPage />} />
-        <Route path="packages" element={<PackagesPage />} />
+        <Route path="packages" element={showPackagesPage ? <PackagesPage /> : <Navigate to="/services" replace />} />
         <Route path="scholarships" element={<ScholarshipsPage />} />
         <Route path="scholarships/:slug" element={<ScholarshipDetail key="scholarships" />} />
         <Route path="grants" element={<GrantsPage />} />
