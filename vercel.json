@@ -10,6 +10,10 @@
       "destination": "https://blog.meritleaders.com/"
     },
     {
+      "source": "/blog-proxy/page/:n",
+      "destination": "https://blog.meritleaders.com/page/:n"
+    },
+    {
       "source": "/(.*)",
       "destination": "/"
     }
