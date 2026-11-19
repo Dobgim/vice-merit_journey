@@ -19,8 +19,11 @@ export function isChinaGov(item) {
   if (!/^china/i.test(item.country ?? '')) return false
   const t = text(item)
   if (/self-financed chinese students/i.test(t)) return false
-  return /chinese government|\bcsc\b|\bcgs\b|cas-anso|\banso\b|great wall|china link/i.test(t)
+  return /chinese government|\bcsc\b|\bcgs\b|cas-anso|\banso\b|great wall|china link/i.test(t) || LOCAL.test(item.name ?? '')
 }
+
+// City and provincial government scholarships (Shanghai, Beijing, Jiangsu Jasmine…).
+const LOCAL = /(shanghai|beijing|jiangsu|zhejiang|guangdong|hubei|tianjin|chongqing|sichuan|shaanxi|xi.an|nanjing|hunan|henan|yunnan|guangxi|liaoning|jilin|shandong|fujian|anhui)\b[^,(]*?\b(municipal |provincial )?government scholarship|jasmine jiangsu/i
 
 /**
  * 'B' (apply through the university), 'A' (through the Chinese embassy) or
@@ -28,6 +31,7 @@ export function isChinaGov(item) {
  */
 export function cscType(item) {
   const t = item.name ?? ''
+  if (!/chinese government|\bcsc\b/i.test(t) && LOCAL.test(t)) return 'local'
   if (/anso|great wall|youth of excellence|china link/i.test(t)) return 'special'
   if (/type b|university program|high[- ]level|silk road/i.test(t)) return 'B'
   if (/type a\b|bilateral/i.test(t)) return 'A'
@@ -53,6 +57,12 @@ export const CSC_GROUPS = [
     title: 'Special programmes',
     short: 'Special programmes',
     body: 'Other awards funded by the Chinese government or the Chinese Academy of Sciences, each with its own call: the CAS-ANSO Scholarship, the Youth of Excellence Scheme of China, the Great Wall Fellowship and China Link.',
+  },
+  {
+    key: 'local',
+    title: 'City and provincial government scholarships',
+    short: 'City and provincial',
+    body: 'Scholarships paid by a Chinese city or province, such as the Shanghai Government Scholarship or Jiangsu’s Jasmine Scholarship. You apply through the university, often with the same cover as the Chinese Government Scholarship, and you can usually only hold one of the two.',
   },
 ]
 

@@ -55,7 +55,7 @@ export default function ChinaGovScholarshipsPage() {
         <div className="container max-w-5xl">
           <h2 className="text-balance text-center font-display text-3xl font-semibold text-navy-950">Type A, Type B and special programmes</h2>
           <p className="mx-auto mt-4 max-w-2xl text-center text-lg leading-relaxed text-navy-700">{CSC_COVER}</p>
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
+          <div className="mt-10 grid gap-5 md:grid-cols-2">
             {CSC_GROUPS.map((g) => (
               <a key={g.key} href={`#csc-${g.key}`} className="rounded-2xl border border-navy-900/[0.07] bg-white p-6 shadow-soft transition-colors hover:border-navy-900/20">
                 <h3 className="font-display text-xl font-semibold text-navy-950">{g.title}</h3>
