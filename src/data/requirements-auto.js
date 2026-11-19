@@ -328,4 +328,215 @@ export const autoRequirements = {
       'Contact details for references, checked at the final stage',
     ],
   },
+  'tarbell-fellowship-2027-28-ai-journalism': {
+    eligibility: [
+      'You must be at least 18 years old by the start date, 7 June 2027',
+      'You should have the right to work in the countries of the partner newsrooms (US, UK and Hong Kong); visa sponsorship is possible but uncommon',
+      'You do not need a university degree',
+      'Applicants with at least seven years of relevant AI or journalism experience and a record of excellence are considered for the Senior Fellowship',
+      'The writing in your application must be your own; AI-generated writing samples are disqualified',
+    ],
+    documents: [
+      'Online application form (takes 1–3 hours)',
+      'CV',
+      'Short written answers',
+      'One to three writing samples, at least one in prose (not a script)',
+      'Work test of 3–5 hours, if you pass the first stage (late December to early January)',
+      'Interviews with Tarbell and possible placement newsrooms (January to March 2027)',
+    ],
+  },
+  'kingston-university-international-merit-based-scholarship-january-2027-entry': {
+    eligibility: [
+      'You must already have an offer for an undergraduate or taught postgraduate course at Kingston University',
+      'You must be an international student',
+      'You cannot be currently enrolled on a Kingston degree or foundation course',
+      'Awards are based on why you want to study at Kingston and your ability to be a champion for the university',
+    ],
+    documents: [
+      'Online scholarship application form',
+      'Your Kingston offer email, uploaded',
+      'Personal statement of 300 words: why you want to study at Kingston, how you will use what you learn, and why you would be a good champion for the university',
+    ],
+  },
+  'acu-edward-boyle-medical-elective-bursaries': {
+    eligibility: [
+      'You must be a UK citizen',
+      'You must be studying medicine at a UK member university of the Association of Commonwealth Universities (ACU)',
+      'Your elective must take place in a low or middle-income Commonwealth country',
+      'Your elective must run between 1 March 2027 and 31 January 2028',
+      'Six grants of up to £1,000 each are available',
+    ],
+    documents: [
+      'Online application form, reached through a MyACU account (register first if you do not have one)',
+      'Letter of support from your current university',
+      'Letter from the host institution abroad',
+    ],
+  },
+  'acu-writing-for-the-media-training': {
+    eligibility: [
+      'You must be a PhD candidate or hold a PhD',
+      'You must be an early career academic at an ACU member university, within seven years of starting your research or teaching career (career breaks do not count)',
+      'There are 20 places, with only one per ACU member university',
+      'You must be able to join group sessions in early to mid 2027, then one-to-one sessions, over about six months',
+    ],
+    documents: [
+      'Online application form, reached through a MyACU account (register first if you do not have one)',
+      'Media pitch of 250–350 words, written during the course (not part of the application)',
+    ],
+  },
+  'beihang-university-chinese-government-scholarship-high-level-postgraduate-program-2027': {
+    eligibility: [
+      'You must not be a Chinese citizen, and you must be in good health',
+      'For a master’s you need a bachelor’s degree and must be under 35',
+      'For a doctorate you need a master’s degree and must be under 40',
+      'Chinese-taught programmes need HSK level 5 or above; English-taught programmes need English test scores',
+      'Applicants from QS or ARWU top-500 universities are especially welcome',
+      'Your passport must be valid beyond September 2027',
+    ],
+    documents: [
+      'Scholarship application form',
+      'Passport information page',
+      'Highest diploma, notarised',
+      'Transcripts',
+      'Language certificates (HSK or English)',
+      'Acceptance letter from a Beihang supervisor',
+      'Study plan of more than 1,000 characters',
+      'Two recommendation letters from professors or associate professors',
+      'Foreigner physical examination form',
+      'Non-criminal record certificate',
+      'Integrity commitment letter',
+      'Resume',
+    ],
+  },
+  'chile-anid-national-doctoral-scholarship-2027-beca-doctorado-nacional': {
+    eligibility: [
+      'You need a bachelor’s degree (licenciatura) or professional title, or the equivalent if earned abroad',
+      'You must be applying to, admitted to, or already studying in an accredited doctoral programme at a Chilean university by the closing date',
+      'You must show academic excellence: an undergraduate average of 5.0 or higher (scale 1 to 7), or a place in the top 30% of your graduating class',
+    ],
+    documents: [
+      'Proof of your bachelor’s degree or professional title',
+      'Proof of academic excellence (grades average or class ranking), as listed in the official rules',
+      'Proof of your doctoral application: a letter from the programme or the ANID-format form',
+      'Certificate from the Chilean Treasury (Tesorería General de la República), valid up to 30 days, showing you have no overdue CAE debt, before signing the agreement if you are selected',
+    ],
+  },
+  'robotx-phd-fellowship-2027-eth-zurich': {
+    eligibility: [
+      'You need a master’s degree finished by August 2027 in mechanical or electrical engineering, computer science, robotics, bioengineering, materials science or a close field',
+      'You need an excellent record in both your bachelor’s and master’s degrees',
+      'You need strong programming skills',
+      'You must apply through the online portal; emails and postal applications are not considered',
+    ],
+    documents: [
+      'One merged PDF (ideally under 10 MB), in this order:',
+      'Cover letter: your research motivation and the groups you want to join',
+      'CV, listing any publications or preprints',
+      'Bachelor’s and master’s transcripts in English, with the local grading scale',
+      'Contact details for three references',
+      'One publication, thesis or project report',
+    ],
+  },
+  'cardiff-university-red-dragon-scholarship-january-2027-entry-round-2': {
+    eligibility: [
+      'You must live in Mainland China or Türkiye and be an international fee-paying student',
+      'You must hold an offer for a full-time, campus-based taught master’s course starting January 2027',
+      'You must accept your offer and submit the scholarship form by the round deadline',
+      'You must meet all conditions of your offer, including English language, by 11 December 2026',
+      'You cannot receive other external scholarships, bursaries, funding or discounts',
+    ],
+    documents: [
+      'Scholarship application form (a link is emailed to eligible offer holders; about 10 minutes)',
+      'Your Cardiff application number',
+      'Your current or most recent institution',
+      'Your average CGPA and percentile mark',
+    ],
+  },
+  'mpiib-international-summer-internship-isi-2027': {
+    eligibility: [
+      'You must be enrolled at a university for the whole internship (1 September to 30 November 2027)',
+      'If you have no bachelor’s degree yet, you need at least 4 semesters (2 years) of study',
+      'The internship must be voluntary; you cannot need it for course credit',
+      'You need a relevant background, a strong academic record and good English',
+      'The programme is aimed at students whose access to education is limited by personal, financial, regional or social issues; students from low- and middle-income countries are strongly encouraged',
+    ],
+    documents: [
+      'CV, maximum two pages',
+      'Motivation letter on the institute’s template: study background, past projects, motivation for up to two ISI projects, and factors limiting your access to higher education',
+      'Reference letter from a professor or postdoc',
+      'Transcripts of all undergraduate and graduate records (unofficial copies are fine; current semester not needed)',
+      'Diploma, if you already have a bachelor’s degree',
+      'Application through the online portal',
+    ],
+  },
+  'dean-of-southampton-business-school-mba-global-talent-award-round-1': {
+    eligibility: [
+      'You must be a permanent resident of an eligible country and a self-funded student',
+      'You need an offer (conditional or unconditional) for the full-time, on-campus MBA, and must exceed the course entry requirements',
+      'You must pass an interview that assesses business excellence',
+      'It is not open to PGCert, PGDip, distance learning, partner-institution or CPD students',
+      'Up to 11 awards of £17,000 to £25,000 are given, in three rounds',
+    ],
+    documents: [
+      'Application to study the MBA at Southampton',
+      'Online scholarship application form',
+      'Supporting statement of up to 500 words: why you chose the course, how it links to your experience and goals, and how your goals help build a more sustainable and inclusive world',
+    ],
+  },
+  'university-of-bath-ursa-phd-studentships-in-engineering-design-october-2027-entry': {
+    eligibility: [
+      'You need at least an upper second-class (2:1) UK honours degree, or the international equivalent, in a subject suited to your project; some projects need a first or a master’s',
+      'Open to home and international students',
+      'International applicants must meet visa rules, including ATAS clearance where required',
+      'You must be based at the University of Bath in person from the start (except during placements)',
+      'Funding lasts up to three and a half years',
+    ],
+    documents: [
+      'Online doctoral application, choosing “University of Bath URSA” under “Funding your studies”',
+      'Doctoral Student Statement Form, submitted with your online application',
+      'Your own research proposal, only if you are not applying to an advertised project',
+    ],
+  },
+  'strathclyde-business-school-international-masters-scholarships-january-2027': {
+    eligibility: [
+      'You must be self-funded (no other scholarship or employer sponsorship) and have international fee status',
+      'You must hold an offer for a full-time MSc at Strathclyde Business School starting January 2027',
+      'Eligible subjects: accounting and finance, business, data analytics, management, management science and marketing',
+      'Online and blended learning programmes are not eligible',
+      'You can receive only one University of Strathclyde scholarship per academic year',
+    ],
+    documents: [
+      'No separate scholarship form: the award (£7,000 to £9,000) is made automatically once you hold an offer',
+      'Accept your offer and pay the deposit by 30 November 2026',
+    ],
+  },
+  'eth-zurich-excellence-scholarship-opportunity-programme-esop-2027': {
+    eligibility: [
+      'You must be in the top 10% of your bachelor’s degree programme (grade A), shown by self-assessment',
+      'You must apply for an ETH Master’s programme starting in autumn semester 2027',
+      'You cannot already be an ETH Master’s student or hold a master’s degree',
+      'You must apply in the first application window (1–30 November 2026)',
+    ],
+    documents: [
+      'Online application through ETH eApply',
+      'The standard ETH Master’s admission documents',
+      'Pre-proposal for your master’s thesis, written by you',
+      'Two recommendation letters from professors (one professor and one non-professor letter is accepted if you work in industry)',
+    ],
+  },
+  'daad-scholarship-for-trophee-tropical-hydrogeology-and-environmental-engineering-2027-28': {
+    eligibility: [
+      'You need a B.Sc. certificate with above-average results, not older than 6 years',
+      'You must not have completed a master’s degree yet',
+      'You need at least 2 years of professional experience, mainly in the water field and preferably outside a university',
+      'You need proof of English: IELTS or TOEFL (institutional TOEFL is not accepted), or proof of English as the language of instruction',
+    ],
+    documents: [
+      'DAAD application form, signed by hand and currently dated',
+      'DAAD checklist, signed by hand and currently dated',
+      'All documents listed on the DAAD checklist',
+      'Proof of English (IELTS, TOEFL or medium of instruction)',
+      'Everything sent by email as one PDF file, in the order of the DAAD checklist',
+    ],
+  },
 }
