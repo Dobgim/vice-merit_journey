@@ -160,4 +160,172 @@ export const autoRequirements = {
       'Online application at is.chd.edu.cn and the RMB 600 application fee',
     ],
   },
+
+  // Checked 2026-11-19 against each call’s official page.
+  'ucl-laws-global-centre-for-democratic-constitutionalism-phd-studentships-2027-28': {
+    eligibility: [
+      'You need at least an upper second-class UK bachelor’s degree and a master’s degree (or an overseas degree of the same standard) in Law or a relevant subject',
+      'Applicants with equivalent research or professional experience may also be considered',
+      'If English is not your first language, you need IELTS 7.5 overall with at least 7 in each part (or the PTE equivalent)',
+      'You apply for the UCL Laws MPhil/PhD and say in your application that you want the Centre’s studentship',
+      'You should have a research project idea and have contacted a suitable supervisor before applying',
+    ],
+    documents: [
+      'Online UCL Laws MPhil/PhD application, marking your interest in the Centre’s studentship',
+      'Academic transcript in English, in electronic form',
+      'Proof of English language level',
+      'Research proposal',
+      'Two academic references, sent in by your referees',
+      'Personal statement (not compulsory, but strongly recommended)',
+    ],
+  },
+  'un-dpoa-mid-term-review-journalism-fellowship-2027-doha': {
+    eligibility: [
+      'You must be a national of one of the 44 Least Developed Countries',
+      'You must be at least 18 years old',
+      'You must be a working journalist whose work is regularly published or broadcast by a recognised outlet',
+      'You need at least two years of professional journalism experience',
+      'You must show an interest in sustainable development, especially the priorities of the Doha Programme of Action',
+      'You must be able to travel to Doha for the whole review (25–27 March 2027)',
+    ],
+    documents: [
+      'Online application through the fellowship portal (no fee)',
+      'Short biography, maximum 300 words',
+      'Two published work samples, at least one on development issues',
+      'Reporting proposal, maximum 400 words',
+    ],
+  },
+  'mozilla-human-scale-ai-incubator-call-2026': {
+    eligibility: [
+      'Your team must be able to receive Mozilla Foundation grant funds, through a US 501(c)(3) route if needed',
+      'You do not have to be a nonprofit, but your project must have a charitable purpose',
+      'AI must be a core part of your solution',
+      'You must already have working technology that people can use, not just an idea or wireframe',
+      'The project must be mainly technical and your team must be able to carry out the work',
+      'Your submission must be in English',
+    ],
+    documents: [
+      'Initial Project Proposal, submitted through the “Apply to the Incubator” link on the Mozilla Foundation site',
+      'Full application, only if you are shortlisted and invited after the first stage',
+    ],
+  },
+  'eni-award-2027-young-talents-from-africa-prize': {
+    eligibility: [
+      'You must be a citizen of an African country listed in the UN World Population Prospects 2024',
+      'You must be under 40 during 2027 (born in or after 1986)',
+      'You must hold a bachelor’s degree and a master’s degree or equivalent',
+      'You must be enrolled in the first or second year of a PhD at an institution in a listed African country',
+      'Your research must relate to energy and the environment, with benefit for Africa',
+      'Your PhD supervisor or programme director must act as your guarantor and write a presentation letter',
+    ],
+    documents: [
+      'Application form (research summary and how you would use the prize)',
+      'CV form with your publications, and your master’s thesis',
+      'Motivation letter',
+      'PhD project description of about two pages',
+      'Presentation letter from your PhD supervisor or programme director (guarantor)',
+      'Budget of no more than €25,000',
+      'Copy of your master’s certificate',
+      'Letter from your institution confirming your PhD enrolment',
+      'Short video of under 3 minutes (recommended, not required)',
+      'Signed “Summary of the Candidature Proposal”, returned by email before the deadline',
+    ],
+  },
+  'eni-award-2027-main-prizes-energy-transition-energy-frontiers-advanced-environmental-solutions': {
+    eligibility: [
+      'You must be the corresponding author of at least one publication',
+      'Your results must be from the last ten years before the Official Announcement',
+      'You need at least three reference letters (maximum five), written in English',
+      'Two main authors can apply together as a double candidature',
+      'You can apply up to three times',
+      'You apply through a personal account on the Eni Award platform, which you request from eniaward@feem.it',
+    ],
+    documents: [
+      'Application form',
+      'CV form',
+      'One to five peer-reviewed publications in PDF',
+      'Three to five reference letters in English',
+      'Up to three patents (optional)',
+      'Graphical abstract (optional)',
+      'Signed “Summary of the Candidature Proposal”, returned by the deadline',
+    ],
+  },
+  'rotary-global-grant-scholarship-district-5890-houston': {
+    eligibility: [
+      'You must study at graduate level in a country other than your own, for at least one academic year',
+      'You must start in the 2027–28 Rotary year and have already chosen your university',
+      'Your field of study must fit one of Rotary’s Seven Areas of Focus',
+      'You cannot be a Rotarian, a Rotary employee or a close relative of one',
+      'You must attend the district interview in Houston on 5 December 2026',
+      'If total costs are $30,000 or less, you must do a service project abroad and present it at the interview',
+    ],
+    documents: [
+      'District 5890 scholarship application with all supplementary sheets, sent through a District 5890 club',
+      'Detailed budget of your expected costs, including other funding sources',
+      'Plan for your service project abroad (if total costs are $30,000 or less)',
+      'Separate Rotary Foundation Global Grant application on rotary.org, filed with your sponsoring club once you are endorsed',
+    ],
+  },
+  'aerc-industrial-policy-and-growth-in-africa-research-grants': {
+    eligibility: [
+      'The lead applicant and every co-applicant must hold a PhD in economics or a closely related field',
+      'The PhD must have been awarded in 2016 or later',
+      'You must already hold the data you need, or have confirmed access to it',
+      'Your proposal must address one of the seven listed themes',
+      'Teams are preferred to single authors; teams pairing African and international institutions are welcome',
+      'Each study must aim for publication in a CABS-AJG 2 (or equivalent) journal and produce a policy brief',
+    ],
+    documents: [
+      'Research proposal of no more than 2,000 words, in English or French',
+      'Short section of descriptive statistics showing your data are suitable',
+      'CVs of all applicants',
+      'Budget table (up to USD 10,000; primary data collection and field travel are not funded)',
+      'References',
+    ],
+  },
+  'a-s-hornby-educational-trust-scholarship-med-tesol-exeter-2027-28': {
+    eligibility: [
+      'You must live and work in a country on the OECD DAC list of low, lower-middle or upper-middle income countries',
+      'You need at least three years of full-time TESOL teaching or related experience after your first degree',
+      'You need a UK upper second-class honours degree or above (or equivalent), or a relevant postgraduate degree',
+      'You must not already hold a doctorate in TESOL, applied linguistics, English or a related area, or a UK master’s in those fields',
+      'You must meet Exeter’s MEd TESOL entry requirements',
+      'The award is for the MEd only, not the PGCert or PGDip',
+    ],
+    documents: [
+      'Hornby Scholarship application form on the University of Exeter award page',
+      'Two-part cover letter: one initiative you have led, and how being a Hornby Scholar would help your future impact',
+      'MEd TESOL programme application, only if you are shortlisted',
+    ],
+  },
+  'crg-international-phd-programme-2027': {
+    eligibility: [
+      'Open to all nationalities',
+      'You need a bachelor’s and a master’s in biomedical sciences (at least 300 ECTS), or an equivalent degree that allows a PhD in Spain',
+      'You can apply if you will finish your degree by September 2027',
+      'You need an excellent academic record, research experience and good English',
+      'You cannot apply if you were invited to interview in a previous CRG call, are doing your master’s at the CRG, or worked at the CRG for more than 3 months before the deadline',
+      'You can choose a maximum of two CRG labs',
+    ],
+    documents: [
+      'Online application (email applications are not accepted)',
+      'Academic transcripts (translated into Catalan, Spanish or English if needed)',
+      'Details of scholarships, prizes and awards, research experience and scientific interests',
+      'Two reference letters, requested automatically from the referees you name',
+    ],
+  },
+  'govai-uk-summer-fellowship-2027-research-track': {
+    eligibility: [
+      'Open to applicants from anywhere in the world who want to contribute to GovAI’s mission',
+      'There are no strict degree requirements; strong applicants usually have graduate study, research or policy experience',
+      'You must be able to be in London from 7 June to 27 August 2027',
+      'You will go through a written application, a short abstract reasoning test, a paid work test in January and an interview with reference checks in February',
+    ],
+    documents: [
+      'Written application on the GovAI website',
+      'Short automated abstract reasoning test (about 20 minutes), if selected',
+      'Paid remote work test in January, if selected',
+      'Contact details for references, checked at the final stage',
+    ],
+  },
 }
