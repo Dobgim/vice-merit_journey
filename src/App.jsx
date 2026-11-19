@@ -32,6 +32,7 @@ const pages = {
   book: () => import('./pages/BookConsultationPage'),
   legal: () => import('./pages/LegalPage'),
   giveaway: () => import('./pages/GiveawayPage'),
+  china: () => import('./pages/ChinaGovScholarshipsPage'),
 }
 
 const About = lazy(pages.about)
@@ -53,6 +54,7 @@ const EligibilityPage = lazy(pages.eligibility)
 const BookConsultationPage = lazy(pages.book)
 const LegalPage = lazy(pages.legal)
 const GiveawayPage = lazy(pages.giveaway)
+const ChinaGovScholarshipsPage = lazy(pages.china)
 
 // The dashboard is a separate download, so visitors never load it.
 const AdminApp = lazy(() => import('./admin/AdminApp'))
@@ -60,6 +62,7 @@ const AdminApp = lazy(() => import('./admin/AdminApp'))
 const routePages = [
   [/^\/(scholarships|grants|internships|fellowships|competitions)\/[^/]+/, pages.detail],
   [/^\/scholarships\/?$/, pages.scholarships],
+  [/^\/chinese-government-scholarship\/?$/, pages.china],
   [/^\/grants\/?$/, pages.grants],
   [/^\/internships\/?$/, pages.internships],
   [/^\/(fellowships|competitions)\/?$/, pages.opportunity],
@@ -126,6 +129,7 @@ export default function App() {
         <Route path="blog/:slug" element={<BlogPostPage />} />
         <Route path="eligibility" element={<EligibilityPage />} />
         <Route path="explore" element={<ExplorePage />} />
+        <Route path="chinese-government-scholarship" element={<ChinaGovScholarshipsPage />} />
         <Route path="for/:slug" element={<LandingPage key="for" type="for" />} />
         <Route path="study-in/:slug" element={<LandingPage key="study-in" type="study-in" />} />
         <Route path="level/:slug" element={<LandingPage key="level" type="level" />} />
