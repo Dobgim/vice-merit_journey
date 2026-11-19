@@ -26,6 +26,7 @@ import { byDeadline, deadlineStatus, formatDate } from '../lib/deadline'
 import { company, showPackagesPage } from '../data/site'
 import { buildOverview } from '../lib/overview'
 import { criteriaFor } from '../data/criteria'
+import { typicalDocuments } from '../lib/typicalDocuments'
 import { photos } from '../data/photos'
 import { posts } from '../data/posts'
 import { listingSeo } from '../lib/seo'
@@ -111,7 +112,7 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
         { id: 'overview', label: 'Overview', show: true },
         { id: 'eligibility', label: 'Eligibility', show: s.eligibility?.length },
         { id: 'benefits', label: 'Benefits', show: s.benefits?.length },
-        { id: 'documents', label: 'Required documents', show: s.documents?.length },
+        { id: 'documents', label: 'Required documents', show: true },
         { id: 'how-to-apply', label: 'How to apply', show: s.howToApply?.length },
         { id: 'key-dates', label: 'Key dates', show: s.timeline?.length },
         { id: 'faq', label: 'FAQ', show: s.faqs?.length },
@@ -403,10 +404,28 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
               </Block>
             )}
 
-            {s.documents?.length > 0 && (
+            {s.documents?.length > 0 ? (
               <Block id="documents" icon="file" title="Required documents">
                 <ul className="grid gap-2.5 sm:grid-cols-2">
                   {s.documents.map((d) => (
+                    <li
+                      key={d}
+                      className="flex gap-3 rounded-xl border border-navy-900/[0.07] bg-mist/60 p-3.5 text-base leading-[1.55] text-navy-800"
+                    >
+                      <Icon name="doc" className="mt-0.5 h-4 w-4 shrink-0 text-navy-500" />
+                      {d}
+                    </li>
+                  ))}
+                </ul>
+              </Block>
+            ) : (
+              <Block id="documents" icon="file" title="Documents you will usually need">
+                <p className="-mt-1 mb-4 text-base leading-relaxed text-navy-700">
+                  Most {config.title.toLowerCase()} like this one ask for the documents below. Start preparing them now, and check
+                  the official call for its exact list before you apply.
+                </p>
+                <ul className="grid gap-2.5 sm:grid-cols-2">
+                  {typicalDocuments(s, kind).map((d) => (
                     <li
                       key={d}
                       className="flex gap-3 rounded-xl border border-navy-900/[0.07] bg-mist/60 p-3.5 text-base leading-[1.55] text-navy-800"

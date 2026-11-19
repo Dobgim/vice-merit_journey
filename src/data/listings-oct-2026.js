@@ -78,9 +78,11 @@ export function make(kind, o) {
       ...(o.note && deadline ? [o.note] : []),
       'This listing comes from public opportunity listings. Read the official call for the full rules, amounts and documents before you apply.',
     ],
-    eligibility: [who && `Open to: ${who}`, o.level && `Level: ${o.level}`].filter(Boolean),
-    benefits: isFunding(coverage) ? [sentence(coverage)] : [],
-    documents: [],
+    // A row may carry its own lists, taken from the official call; otherwise the
+    // listing gets what data/requirements.js (or requirements-auto.js) holds for its slug.
+    eligibility: o.eligibility?.length ? o.eligibility : [who && `Open to: ${who}`, o.level && `Level: ${o.level}`].filter(Boolean),
+    benefits: o.benefits?.length ? o.benefits : isFunding(coverage) ? [sentence(coverage)] : [],
+    documents: o.documents ?? [],
     howToApply: [
       'Open the official call and read the eligibility rules and required documents.',
       'Check that you meet every requirement — nationality, level, field and age limits.',

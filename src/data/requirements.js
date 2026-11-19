@@ -1,3 +1,5 @@
+import { autoRequirements } from './requirements-auto.js'
+
 /**
  * Who can apply and what to prepare, for every listing that was imported with
  * only a summary. Written from each programme's official rules (Oct 2026);
@@ -87,7 +89,7 @@ const fellow = (eligibility, documents) => ({ eligibility, documents })
 
 /* ------------------------------------------------------------- Listings */
 
-export const requirements = {
+const handwritten = {
   /* Scholarships — first import */
   'daad-scholarships-selected-programmes': masters(['Usually at least two years of professional experience for development-related programmes', 'Degree completed no more than six years ago (for most DAAD postgraduate programmes)'], ['DAAD application form via the DAAD portal', 'Employer letter confirming your work experience']),
   'paie-scholars-programme': phd(['Enrolled in or admitted to a PhD in Africa or Asia', 'Research in public administration, economics or policy (including AI evaluation)']),
@@ -398,3 +400,7 @@ export const requirements = {
   'sillerman-first-book-prize-for-african-poets-2027': { eligibility: ['Born in Africa, a national or resident of an African country, or with African parents', 'Has not published a book-length collection of poetry (self-published books that were sold count; editing an anthology does not)', 'Poems written in English, or translated into English', 'Not a past or present employee of the University of Nebraska Press, Akashic Books or Amalion Press, or a current Brown University student or employee'], documents: ['Poetry manuscript of at least 50 pages, submitted on Submittable', 'Cover page with the title only — your name must not appear anywhere in the manuscript', 'Optional acknowledgements page listing where poems were first published', 'No entry fee and no application form'] },
   'arso-continental-essay-competition': { eligibility: ['African university or secondary students (categories in the rules)'], documents: ['Essay on the year’s standardisation theme', 'Proof of enrolment', 'Entry form'] },
 }
+
+// Lists written for the listings the daily runs added (data/requirements-auto.js), then
+// the hand-written ones above, which win if both cover the same listing.
+export const requirements = { ...autoRequirements, ...handwritten }
