@@ -3,7 +3,7 @@ Meta description: Applying for the Hong Kong PhD Fellowship Scheme 2027/28? See 
 Keywords: Hong Kong PhD Fellowship Scheme 2027, HKPFS 2027 deadline, HKPFS 2027/28 application, Hong Kong PhD Fellowship for international students, fully funded PhD scholarship in Hong Kong, HKPFS stipend, how to apply for HKPFS
 Tags: Hong Kong, PhD scholarships, Fully funded, Application guide
 Related: /scholarships/hong-kong-phd-fellowship-scheme
-Cover: https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/HKUST_campus_view_looking_from_above.jpg/1280px-HKUST_campus_view_looking_from_above.jpg
+Cover: /blog-covers/hong-kong-phd-fellowship-scheme-2027.jpg
 Cover alt: Aerial view of the Hong Kong University of Science and Technology campus on the coast at Clear Water Bay
 Cover credit: Aerial view of the HKUST campus. Photo: Martin, CC BY-SA 3.0 (Wikimedia Commons)
 
