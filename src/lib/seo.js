@@ -33,11 +33,21 @@ function fitDescription(options) {
 }
 
 /** A long name cut to fit a search title: brackets go first, then whole words. */
-function shortName(name) {
-  if (name.length <= TITLE_MAX) return name
+function shortName(name, max = TITLE_MAX) {
+  if (name.length <= max) return name
   const plain = name.replace(/\s*\([^)]*\)/g, '').trim()
-  if (plain.length <= TITLE_MAX) return plain
-  const cut = plain.slice(0, TITLE_MAX - 1)
+  if (plain.length <= max) return plain
+  // "X – Sub-programme at Y University 2027": keep the university. A generic sub-programme
+  // ("High-Level Postgraduate Program") is dropped; a distinctive one ("Silk Road Program") is
+  // kept, with "Chinese Government Scholarship" written as "CSC" to make room.
+  const m = plain.match(/^(.*?)\s+[–—]\s+(.*?)(\s+at\s.*)$/)
+  if (m) {
+    const [, head, sub, tail] = m
+    const generic = /high[- ]level|university program|graduate program/i.test(sub)
+    const shorter = generic ? `${head}${tail}` : `${head.replace(/^Chinese Government Scholarship$/, 'CSC')} ${sub}${tail}`
+    if (shorter.length <= max) return shorter
+  }
+  const cut = plain.slice(0, max - 1)
   return `${cut.slice(0, cut.lastIndexOf(' ')).replace(/[\s,:;–—-]+$/, '')}…`
 }
 
@@ -57,9 +67,15 @@ function padDescription(text, extras) {
  */
 export function listingSeo(item, config, { closed = false } = {}) {
   if (closed) {
+    const closedOn = shortDate(item.deadline)
     return {
-      title: `${item.name} (closed)`,
-      description: `Applications for ${item.name} have closed. See open ${config.plural} instead.`,
+      title: `${shortName(item.name, TITLE_MAX - 9)} (closed)`,
+      description: padDescription(fitDescription([`Applications for ${item.name} have closed. See open ${config.plural} instead.`]), [
+        closedOn && `The deadline was ${closedOn}.`,
+        item.org && `Offered by ${item.org}.`,
+        `New ${config.plural} with fixed deadlines are added every day on ${company.name}.`,
+        `Browse open ${config.plural} on ${company.name}.`,
+      ]),
     }
   }
   const date = shortDate(item.deadline)
@@ -71,7 +87,10 @@ export function listingSeo(item, config, { closed = false } = {}) {
   ]
     .filter(Boolean)
     .map((extra) => `${item.name}: ${extra}`)
-  const title = titles.find((t) => t.length <= TITLE_MAX) ?? shortName(item.name)
+  // A long name is shortened; the deadline is added when it still fits.
+  const short = shortName(item.name)
+  const withDate = date && `${short}: Deadline ${date}`
+  const title = titles.find((t) => t.length <= TITLE_MAX) ?? (withDate && withDate.length <= TITLE_MAX ? withDate : short)
 
   const summary = (item.summary ?? '').trim().replace(/([^.!?])$/, '$1.')
   const apply = date ? `Apply by ${date}.` : ''

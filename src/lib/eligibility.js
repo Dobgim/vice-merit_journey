@@ -140,14 +140,17 @@ export function hostCountries(item) {
  */
 export function buildLandingPages(entries) {
   const pages = []
+  // Countries that share a demonym (Congo DRC and Republic) get the country name too, so their pages differ.
+  const shared = new Set(COUNTRIES.filter((c, i) => COUNTRIES.findIndex((d) => d.demonym === c.demonym) !== i).map((c) => c.demonym))
   for (const c of COUNTRIES) {
+    const who = shared.has(c.demonym) ? `students from ${c.name}` : `${c.demonym} students`
     pages.push({
       type: 'for',
       slug: c.slug,
       path: `/for/${c.slug}`,
       label: c.name,
-      title: `Scholarships for ${c.demonym} students`,
-      heading: ['Scholarships & opportunities for', `${c.demonym} students`],
+      title: `Scholarships for ${who}`,
+      heading: ['Scholarships & opportunities for', who],
       lede: `Open scholarships, fellowships, grants and internships that accept applicants from ${c.name}, with fixed deadlines and a direct link to each official call.`,
       test: (e) => isOpenTo(e.item, c),
     })

@@ -1,5 +1,27 @@
 {
   "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/scholarships/eth-zurich-excellence-scholarship-opportunity-programme",
+      "destination": "/scholarships/eth-zurich-excellence-scholarship-opportunity-programme-esop-2027",
+      "permanent": true
+    },
+    {
+      "source": "/scholarships/idcore-offshore-renewable-energy-engineering-doctorate-engd-september-2027-entry",
+      "destination": "/scholarships/idcore-engd-in-offshore-renewable-energy-2027-entry-overseas-places",
+      "permanent": true
+    },
+    {
+      "source": "/competitions/international-schools-essay-competition-and-debate",
+      "destination": "/competitions/international-schools-essay-competition-and-debate-2027-navigating-el-nino",
+      "permanent": true
+    },
+    {
+      "source": "/scholarships/maastricht-university-nl-high-potential-scholarship-2027-28",
+      "destination": "/scholarships/maastricht-university-nl-high-potential-scholarship-2027",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/blog-proxy/feed.xml",

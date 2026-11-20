@@ -34,7 +34,7 @@ export const applyLinks = {
   'daad-epos-scholarship': 'https://www.daad.de/en/studying-in-germany/scholarships/daad-scholarships/development-related-postgraduate-courses/',
   'daad-in-country-and-in-region-scholarships': 'https://www.daad.de/en/studying-in-germany/scholarships/daad-scholarships/in-country-in-region-programme/',
   'daad-scholarships-selected-programmes': 'https://www2.daad.de/deutschland/stipendium/datenbank/en/21148-scholarship-database/',
-  'dalai-lama-fellowship-programme': 'https://dalailamafellows.com/apply',
+  'dalai-lama-fellowship-programme': 'https://dalailamafellows.com/apply/',
   'disability-rights-fund': 'https://disabilityrightsfund.org/',
   'draper-richards-kaplan-foundation': 'https://www.drkfoundation.org/apply-for-funding/',
   'edinburgh-x-mastercard-foundation-online-learning-scholars': 'https://www.ed.ac.uk/student-funding',
