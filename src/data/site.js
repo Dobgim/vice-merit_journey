@@ -19,6 +19,11 @@ export const company = {
   phone: '+237 675146271',
   whatsapp: '237675146271', // digits only (country code, no +), used to build wa.me links
   whatsappDisplay: '+237 675146271',
+  // Advisors students can message directly; shown on the contact section and in the footer.
+  advisors: [
+    { region: 'Cameroon', whatsapp: '237675146271', display: '+237 675146271' },
+    { region: 'United Kingdom', whatsapp: '447853755003', display: '+44 7853 755003' },
+  ],
   whatsappGroup: 'https://chat.whatsapp.com/Kh0dtcUzRpmB8gIJfE4Jdd',
   whatsappGroupName: 'Merit Leaders Scholarships',
   address: '1200 Kingsway Avenue, Suite 410, Toronto, ON',

@@ -10,9 +10,8 @@ import Reveal, { EASE } from '../ui/Reveal'
 import Button from '../ui/Button'
 import Icon from '../ui/Icon'
 
-const whatsappHref = `https://wa.me/${company.whatsapp}?text=${encodeURIComponent(
-  'Hi Merit Leaders — I would like to book a scholarship consultation.'
-)}`
+const whatsappHref = (number) =>
+  `https://wa.me/${number}?text=${encodeURIComponent('Hi Merit Leaders — I would like to book a scholarship consultation.')}`
 
 /* --------------------------------------------------------------- Field shell */
 
@@ -286,24 +285,27 @@ export default function Contact() {
           {/* --------------------------------------------- Direct contact rail */}
           <Reveal delay={0.15} direction="left">
             <div className="flex h-full flex-col gap-4">
-              <a
-                href={whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-4 rounded-2xl bg-[#1FA855] p-5 transition-transform duration-300 hover:-translate-y-1"
-              >
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/15">
-                  <Icon name="whatsapp" className="h-6 w-6 text-white" />
-                </span>
-                <div className="min-w-0 flex-1">
-                  <div className="font-semibold text-white">Chat on WhatsApp</div>
-                  <div className="text-sm text-white/75">Typical reply in under 2 hours</div>
-                </div>
-                <Icon
-                  name="arrowUpRight"
-                  className="h-4 w-4 shrink-0 text-white/70 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                />
-              </a>
+              {company.advisors.map((a) => (
+                <a
+                  key={a.whatsapp}
+                  href={whatsappHref(a.whatsapp)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-4 rounded-2xl bg-[#1FA855] p-5 transition-transform duration-300 hover:-translate-y-1"
+                >
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/15">
+                    <Icon name="whatsapp" className="h-6 w-6 text-white" />
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <div className="font-semibold text-white">WhatsApp an advisor ({a.region})</div>
+                    <div className="text-sm text-white/75">{a.display} · typical reply in under 2 hours</div>
+                  </div>
+                  <Icon
+                    name="arrowUpRight"
+                    className="h-4 w-4 shrink-0 text-white/70 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  />
+                </a>
+              ))}
 
               {[
                 {

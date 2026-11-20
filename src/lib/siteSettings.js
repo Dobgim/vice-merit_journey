@@ -28,6 +28,8 @@ export function applySettings(settings = {}) {
       }
       company[f] = f === 'whatsapp' ? String(contact[f]).replace(/\D/g, '') : contact[f]
     }
+    // The first advisor is the main number, so a number changed in the dashboard shows there too.
+    if (company.advisors?.length) company.advisors[0] = { ...company.advisors[0], whatsapp: company.whatsapp, display: company.whatsappDisplay }
     // The domain was once saved misspelled ("meritleadrs"); never show that to visitors.
     for (const f of ['email', 'domain']) company[f] = company[f].replace(/meritleadrs\./i, 'meritleaders.')
     if (contact.socials) {

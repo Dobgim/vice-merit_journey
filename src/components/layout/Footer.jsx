@@ -111,17 +111,19 @@ export default function Footer() {
                   {company.phone}
                 </a>
               </li>
-              <li>
-                <a
-                  href={`https://wa.me/${company.whatsapp}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-start gap-3 text-navy-100/65 transition-colors hover:text-white"
-                >
-                  <Icon name="whatsapp" className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" />
-                  WhatsApp: {company.whatsappDisplay}
-                </a>
-              </li>
+              {company.advisors.map((a) => (
+                <li key={a.whatsapp}>
+                  <a
+                    href={`https://wa.me/${a.whatsapp}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-3 text-navy-100/65 transition-colors hover:text-white"
+                  >
+                    <Icon name="whatsapp" className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" />
+                    WhatsApp ({a.region}): {a.display}
+                  </a>
+                </li>
+              ))}
               <li>
                 <a
                   href={company.whatsappGroup}
