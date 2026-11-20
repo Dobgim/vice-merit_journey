@@ -285,7 +285,7 @@ export default function Contact() {
           {/* --------------------------------------------- Direct contact rail */}
           <Reveal delay={0.15} direction="left">
             <div className="flex h-full flex-col gap-4">
-              {company.advisors.map((a) => (
+              {company.advisors.map((a, i) => (
                 <a
                   key={a.whatsapp}
                   href={whatsappHref(a.whatsapp)}
@@ -297,7 +297,7 @@ export default function Contact() {
                     <Icon name="whatsapp" className="h-6 w-6 text-white" />
                   </span>
                   <div className="min-w-0 flex-1">
-                    <div className="font-semibold text-white">WhatsApp an advisor ({a.region})</div>
+                    <div className="font-semibold text-white">WhatsApp Advisor {i + 1}</div>
                     <div className="text-sm text-white/75">{a.display} · typical reply in under 2 hours</div>
                   </div>
                   <Icon

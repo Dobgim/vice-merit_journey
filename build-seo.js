@@ -286,7 +286,7 @@ function staticPages({ open, landing, posts }) {
   const closing = [...open].sort((a, b) => a.item.deadline.localeCompare(b.item.deadline)).slice(0, 12)
   const studyIn = new Map(landing.filter((p) => p.type === 'study-in').map((p) => [p.label, p]))
   const whatsapp = `https://wa.me/${company.whatsapp}`
-  const contact = `<p>${company.advisors.map((a) => `WhatsApp (${esc(a.region)}): <a href="https://wa.me/${a.whatsapp}" rel="noopener">${esc(a.display)}</a>`).join(" · ")} · Email: <a href="mailto:${esc(company.email)}">${esc(company.email)}</a></p>`
+  const contact = `<p>${company.advisors.map((a, i) => `WhatsApp Advisor ${i + 1}: <a href="https://wa.me/${a.whatsapp}" rel="noopener">${esc(a.display)}</a>`).join(" · ")} · Email: <a href="mailto:${esc(company.email)}">${esc(company.email)}</a></p>`
   const cta = '<p><a href="/book-consultation">Book a free consultation</a> · <a href="/eligibility">Check what you are eligible for</a></p>'
 
   const pages = [

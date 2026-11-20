@@ -577,15 +577,21 @@ export default function ScholarshipDetail({ kind = 'scholarships' }) {
                   <Button to={helpHref} variant="gold" size="sm" icon="arrowRight" className="mt-5 w-full">
                     Book a free consultation
                   </Button>
-                  <a
-                    href={`https://wa.me/${company.whatsapp}?text=${encodeURIComponent(`Hi ${company.name} — I need help applying for the ${s.name}.`)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-3 flex items-center justify-center gap-2 text-sm font-semibold text-navy-100/80 hover:text-white"
-                  >
-                    <Icon name="whatsapp" className="h-4 w-4" />
-                    Or ask on WhatsApp
-                  </a>
+                  <p className="mt-4 text-center text-sm text-navy-100/70">Or ask an advisor on WhatsApp:</p>
+                  <div className="mt-2 grid gap-2">
+                    {company.advisors.map((a, i) => (
+                      <a
+                        key={a.whatsapp}
+                        href={`https://wa.me/${a.whatsapp}?text=${encodeURIComponent(`Hi ${company.name} — I need help applying for the ${s.name}.`)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2 rounded-xl bg-[#1FA855] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#188f47]"
+                      >
+                        <Icon name="whatsapp" className="h-4 w-4" />
+                        Advisor {i + 1}
+                      </a>
+                    ))}
+                  </div>
                   {showPackagesPage && (
                     <Link
                       to="/packages"

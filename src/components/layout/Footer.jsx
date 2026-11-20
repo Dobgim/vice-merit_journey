@@ -111,7 +111,7 @@ export default function Footer() {
                   {company.phone}
                 </a>
               </li>
-              {company.advisors.map((a) => (
+              {company.advisors.map((a, i) => (
                 <li key={a.whatsapp}>
                   <a
                     href={`https://wa.me/${a.whatsapp}`}
@@ -120,7 +120,7 @@ export default function Footer() {
                     className="flex items-start gap-3 text-navy-100/65 transition-colors hover:text-white"
                   >
                     <Icon name="whatsapp" className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" />
-                    WhatsApp ({a.region}): {a.display}
+                    Advisor {i + 1}: {a.display}
                   </a>
                 </li>
               ))}
