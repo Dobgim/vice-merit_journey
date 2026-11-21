@@ -1044,4 +1044,371 @@ export const autoRequirements = {
       'Phase two, only for semifinalists: references and more work samples if asked',
     ],
   },
+  // Checked 2026-11-21 against each call’s official page.
+  "university-of-westminster-international-postgraduate-excellence-award-january-2027": {
+    eligibility: [
+      "You pay overseas (international) fees",
+      "You hold an offer for a full-time master’s starting in January 2027",
+      "You have at least a UK 2:1 degree or the equivalent",
+      "The award is based mainly on academic excellence",
+      "Professional courses, doctorates, online courses and PG Certificates or Diplomas are not covered",
+      "You cannot also get another fee discount, such as the International Early Acceptance Award",
+    ],
+    documents: [
+      "Online scholarship application (use “Apply now” on the scholarship page)",
+      "Your offer of a place on the master’s course",
+    ],
+  },
+  "dia-al-azzawi-prize-for-public-art-2026-cycle": {
+    eligibility: [
+      "The project is a public artwork, such as a mural, sculpture, monument, installation, public space or graffiti",
+      "It was completed between 1 January 2019 and 31 December 2025",
+      "It is based in one of the Arab countries the prize lists",
+      "It can be one artwork or a group of works shown as one public art project",
+      "Gallery or indoor shows do not count unless they are part of a wider public space project",
+      "Individuals and teams from art, architecture, design, urbanism and landscape can apply",
+    ],
+    documents: [
+      "Completed submission form (download it from the prize page)",
+    ],
+  },
+  "start-up-energy-transition-set-award-2027": {
+    eligibility: [
+      "Your company was founded in August 2016 or later",
+      "The company is registered, or in the process of registering",
+      "Your solution is past the idea stage and shows at least a proof of concept",
+      "You have a client or a partner, or a working prototype (hardware is usually at TRL 4 or above)",
+      "You apply to only one award category",
+      "Everything is in English",
+    ],
+    documents: [
+      "The full online application form (partly filled forms are rejected)",
+      "Evidence of a client or partner, or of a working prototype",
+    ],
+  },
+  "university-of-calgary-international-entrance-scholarships-fall-2027-high-school-prestige-awards": {
+    eligibility: [
+      "You are an international student starting first year of an undergraduate degree in fall 2027",
+      "You meet the university’s English language requirement",
+      "The Prestige Awards list a minimum 90% admission average on transcripts received by the deadline",
+      "The $20,000 award can be renewed if you keep a GPA of 2.60 or more over at least 24 units a year",
+    ],
+    documents: [
+      "Application for admission to the University of Calgary (opens 1 October)",
+      "Prestige Award application in your Student Centre, including essay-style questions",
+      "High school transcripts received by the deadline",
+    ],
+  },
+  "harvard-environmental-fellows-program-2027": {
+    eligibility: [
+      "You hold a PhD or similar terminal degree received between May 2023 and August 2027",
+      "You must have filed your dissertation before starting in September 2027",
+      "Your degree can be from any university in the world, and international applicants are welcome",
+      "You need a Harvard faculty member as your host",
+      "Your project must be clearly different from your PhD work and your host’s current research",
+      "You must live in the Cambridge area during the fellowship",
+    ],
+    documents: [
+      "Research proposal of about five pages",
+      "Letter from your Harvard faculty host",
+      "Three recommendation letters (host and recommendation letters are due 11 December 2026)",
+      "Online application, due 1 December 2026",
+    ],
+  },
+  "nieman-fellowship-2027-28-international-applicants": {
+    eligibility: [
+      "You are not a U.S. citizen (international applicants have a 1 December deadline)",
+      "You have at least five years of full-time experience as a working journalist, freelancers included",
+      "Student work does not count, and public relations or non-media jobs are not eligible",
+      "You read, write and speak English fluently",
+      "There is no age limit and no degree is needed",
+    ],
+    documents: [
+      "Online application",
+      "Personal statement essay",
+      "Study proposal essay",
+      "Professional profile and study proposal summary",
+      "Work samples",
+      "Three confidential recommendation letters",
+    ],
+  },
+  "simons-institute-research-fellowships-fall-2027-diffusion-generative-modeling": {
+    eligibility: [
+      "You are an early-career researcher whose PhD was awarded no more than five years before the 2027–28 academic year",
+      "Current postdocs and junior faculty can apply",
+      "PhD students can apply only if they will finish their PhD before the programme starts",
+      "The fellowship is for the Fall 2027 programme on diffusion and generative modelling",
+    ],
+    documents: [
+      "One PDF with a cover letter, a CV with a full publication list, and a research statement",
+      "Names of three recommenders (the system emails them to send letters)",
+    ],
+  },
+  "belfer-center-energy-climate-and-technology-policy-fellowship-2027-28": {
+    eligibility: [
+      "You are a predoctoral candidate, a recent PhD, a visiting scholar or a junior faculty researcher",
+      "Your work relates to energy, climate and technology policy",
+      "Postdoctoral fellows commit to a full-time appointment",
+      "The appointment lasts one academic year",
+    ],
+    documents: [
+      "CV or résumé",
+      "Research statement of 3 to 5 pages (question, link to policy, planned outputs, project plan)",
+      "Writing sample under 50 pages, written only by you in English",
+      "Contact details for three recommenders, with letters due 15 December",
+      "State whether you want full or partial funding and list other funding sources",
+    ],
+  },
+  "belfer-center-geopolitics-of-energy-fellowship-2027-28": {
+    eligibility: [
+      "You are a predoctoral candidate or a recent PhD",
+      "Your work relates to the geopolitics of energy",
+      "The fellowship runs for the 2027–28 academic year",
+    ],
+    documents: [
+      "CV or résumé",
+      "Research statement of 3 to 5 pages",
+      "Writing sample under 50 pages, written only by you in English",
+      "Contact details for three recommenders",
+      "Transcript (only for predoctoral applicants)",
+    ],
+  },
+  "shorenstein-postdoctoral-fellowship-on-contemporary-asia-2027-28-stanford-aparc": {
+    eligibility: [
+      "You have a recent PhD awarded no more than three years before the fellowship starts",
+      "Your dissertation must be approved for conferral by 30 June 2027, with degree proof by 31 August 2027",
+      "Your research is on political, economic or social change in Asia-Pacific, or international relations in the region",
+      "The fellowship is one academic year starting in fall 2027, and two places are offered",
+    ],
+    documents: [
+      "Completed online application form",
+      "CV (PDF)",
+      "Research statement of up to five double-spaced pages, with the planned research and a publishable product (PDF)",
+      "Letters of recommendation, to arrive by the deadline",
+    ],
+  },
+  "neukom-postdoctoral-fellowship-2027-dartmouth": {
+    eligibility: [
+      "You have a PhD (any subject), a DMA or an MFA, expected by 1 September 2027",
+      "Your research strongly involves computation",
+      "You show interest in working across subjects",
+      "Current Dartmouth postdocs and fellows can apply",
+      "The fellowship lasts two years, with a possible third",
+    ],
+    documents: [
+      "CV and publications list",
+      "Research statement of up to two pages",
+      "Description of the Dartmouth departments and faculty you want to work with",
+      "Three referee letters, sent through the links your referees receive",
+      "Optional: a writing sample, a teaching statement and a cover letter",
+    ],
+  },
+  "asia-health-policy-postdoctoral-fellowship-2027-28-stanford-aparc": {
+    eligibility: [
+      "You are no more than three years past your PhD, or six years past your MD, at the start date",
+      "Your degree must be approved for conferral by 30 June 2027",
+      "You live at Stanford for the full appointment (at least 10 months)",
+      "Your research is on health policy in Asia",
+    ],
+    documents: [
+      "Cover letter (PDF)",
+      "CV (PDF)",
+      "Research statement of up to five double-spaced pages, with the planned research and a publishable product (PDF)",
+      "Two letters of recommendation, sent to the programme contact",
+    ],
+  },
+  "bogliasco-fellowship-fall-2027-session": {
+    eligibility: [
+      "You work in a creative or scholarly field, such as archaeology, literature, music or visual arts",
+      "You show strong achievement for your career stage",
+      "You are not enrolled in a degree programme when you apply",
+      "You speak conversational English",
+      "Past fellows must wait five years before applying again",
+    ],
+    documents: [
+      "Online application only (mail and email are not accepted)",
+      "Short CV of up to three pages",
+      "One-page project description in English",
+      "Three work samples, usually from the last five years",
+      "Two reference letters uploaded by your referees (a third is optional)",
+      "Application fee of $30, or $45 after the early deadline",
+    ],
+  },
+  "imperial-college-business-school-phd-scholarship-september-2027-entry": {
+    eligibility: [
+      "UK applicants need at least an upper second class degree and a master’s with Merit or Distinction",
+      "Strong GMAT or GRE scores (the 90th percentile or higher is considered strong)",
+      "English language level of IELTS 7.0 overall with 6.5 in each part, or equal",
+      "An interview is part of the selection",
+    ],
+    documents: [
+      "Current CV",
+      "Statement of purpose, one to two A4 pages",
+      "Full degree transcripts",
+      "Contact details for two academic referees, and their references",
+      "GMAT or GRE score (applications without one are incomplete)",
+      "Evidence of English proficiency",
+      "All documents must arrive by midnight UK time on 2 December 2026",
+    ],
+  },
+  "oxford-ubs-centre-for-applied-ai-dphil-scholarships-2027": {
+    eligibility: [
+      "You meet the entry requirements for your chosen Oxford doctoral degree",
+      "Business School projects need a strong background in finance, economics, management, operations research or quantitative social science",
+      "Computer Science and Engineering projects need a strong computing or maths background",
+      "You show a commitment to research in applied artificial intelligence",
+      "You start in October 2027",
+    ],
+    documents: [
+      "Application for the DPhil through the University of Oxford online portal",
+      "The reference code for your research pathway, quoted in the application",
+    ],
+  },
+  "john-s-knight-journalism-fellowships-at-stanford-2027-28-international": {
+    eligibility: [
+      "You have at least five years of professional experience (student work and internships do not count)",
+      "You are a journalist, a news organisation strategy or operations worker, or work for a group supporting journalists",
+      "Freelancers need more than half of their work in journalism",
+      "You are not seeking a degree, and you are not in public relations, government or full-time academia",
+      "Citizens of countries where the U.S. has paused J visas cannot receive an offer",
+      "Materials are in English",
+    ],
+    documents: [
+      "Online application form with essays (path to journalism, a proud accomplishment, leadership, what you want to learn from others)",
+      "Résumé",
+      "One work example (an English summary if it is in another language)",
+      "Contact details for three professional references",
+    ],
+  },
+  "stanford-cisac-fellowships-2027-28": {
+    eligibility: [
+      "You are currently in a PhD programme, or a postdoc or junior researcher",
+      "Pre-doctoral applicants outside their final year are rarely accepted",
+      "Non-U.S. citizens can apply, and a visa is available",
+      "Applicants with no funding request are reviewed together with those who ask for funding",
+      "Mid- or late-career professionals should email the programme first",
+      "All materials are in English",
+    ],
+    documents: [
+      "Completed online application form",
+      "Résumé or CV",
+      "Graduate school transcript (unofficial is fine; for pre- and postdoctoral applicants)",
+      "Research project description of up to 1,500 words",
+      "Research abstract of up to 200 words",
+      "Writing sample of up to 50 pages",
+      "Letters of recommendation, uploaded or emailed to the programme",
+    ],
+  },
+  "lse-mphil-phd-law-2027-28-lse-phd-studentships": {
+    eligibility: [
+      "You hold an LLM or another master’s with an average mark of 70% (distinction or first class), or equal",
+      "You can apply while finishing a master’s, but those without final grades by the end of July are not eligible unless they already hold another master’s at the required grade",
+      "You name three possible supervisors from LSE permanent faculty, at least two from the Law School",
+    ],
+    documents: [
+      "Transcripts for existing and pending qualifications",
+      "Statement of academic purpose",
+      "References",
+      "CV",
+      "Outline research proposal of up to 1,500 words",
+      "Sample of written work",
+    ],
+  },
+  "lse-mres-phd-political-science-2027-28-lse-phd-studentships": {
+    eligibility: [
+      "You have an undergraduate degree at 65 or above plus a taught master’s in political science or a close subject, or equal",
+      "English at LSE’s Higher level, unless your first language is English or your last degree was fully in English",
+      "GRE or GMAT scores are not required",
+      "The deadline of 3 December 2026 also counts for funding",
+    ],
+    documents: [
+      "Transcripts for each qualification, including pending ones",
+      "Statement of academic purpose",
+      "CV",
+      "Outline research proposal of about 2,000 words including bibliography",
+      "Sample of written work (a degree essay of 3,000 to 5,000 words, or an extract)",
+      "Two references",
+      "Evidence of English if needed",
+    ],
+  },
+  "lse-mres-phd-international-development-2027-28-lse-phd-studentships": {
+    eligibility: [
+      "You hold, or are working towards, a taught master’s with 65 or above overall and in the dissertation, or equal",
+      "You can apply while your master’s marks are pending",
+      "English at LSE’s Higher level",
+      "GMAT or GRE is highly recommended but not required",
+      "Applications without a research proposal are not considered",
+    ],
+    documents: [
+      "Academic record and transcripts",
+      "Statement of academic purpose",
+      "References",
+      "CV",
+      "GRE or GMAT score (recommended)",
+      "Outline research proposal of 1,500 to 2,000 words, with a title, a short summary and names of proposed supervisors",
+      "Sample of written work",
+    ],
+  },
+  "kyoto-university-international-undergraduate-program-kyoto-iup-october-2027-enrolment": {
+    eligibility: [
+      "You are not a Japanese citizen, and you will have “Student” status when you enrol",
+      "You will have finished 12 years of schooling by 30 September 2027, or hold an IB, Abitur, French Baccalaureate, A Levels or European Baccalaureate",
+      "You will be at least 18 by 1 April 2028",
+      "You do not need to know Japanese when you apply",
+      "You show English with TOEFL iBT or IELTS (at the minimum scores in the guidelines), or Form C",
+      "Applicants using the “recognised equivalent” route send screening documents in English between 1 July and 19 October 2026",
+    ],
+    documents: [
+      "Application Forms A to D",
+      "Form B, the evaluation, from a school staff member or a third party",
+      "Official transcripts for all of secondary school, and university transcripts if you attended",
+      "TOEFL iBT or IELTS result, or Form C",
+      "Certified English translations of any other-language documents",
+      "Online application, open 2 November to 3 December 2026 (5 p.m. Japan time)",
+    ],
+  },
+  "wildlife-photographer-of-the-year-2027": {
+    eligibility: [
+      "Adult competition: you are 18 or older on the closing date, 3 December 2026",
+      "The Young competition is for entrants 17 or younger on the closing date",
+      "Photos show wild, non-captive animals, plants, fungi, landscapes or habitats",
+      "AI-generated images, baiting or luring are not allowed",
+      "Photos must have been taken in the last five years",
+      "People who organise or judge the competition, and museum or sponsor staff, cannot enter",
+      "The rules published are for the 2026 round, so check the 2027 rules",
+    ],
+    documents: [
+      "Online account on the competition website",
+      "Up to 25 photos as JPEG files, 1920 pixels on the longest side, Adobe RGB",
+      "Entry fee of £35 for adults (free for 26 and under, and for photographers from listed countries)",
+      "Original or RAW files, if you are shortlisted",
+    ],
+  },
+  "cardiff-business-school-125th-anniversary-scholarship-january-2027-entry": {
+    eligibility: [
+      "You are an international (overseas fee) student",
+      "You start an eligible MSc at Cardiff Business School in January 2027",
+      "The award is £10,000",
+      "You are considered automatically, with a deadline of 4 December 2026",
+    ],
+    documents: [
+      "Your application to the eligible MSc course (no separate scholarship form is described)",
+    ],
+  },
+  "university-of-manchester-africa-futures-doctoral-scholar-awards-2027": {
+    eligibility: [
+      "You are an international-fee student whose home is in an African country, where you mainly lived in the last five years",
+      "Your PhD is supervised by staff in the Faculty of Science and Engineering",
+      "You meet the usual PhD entry requirements (a 2:1 degree, or a 2:1 plus a relevant master’s at merit)",
+      "You meet the English requirement, for example IELTS 6.5 overall",
+      "You need a supervisor who will nominate you",
+      "Projects that tackle development goals relevant to Africa are preferred",
+    ],
+    documents: [
+      "PhD application by 4 December 2026, saying in the funding section that you want the Africa Futures Scholarship",
+      "Your own research proposal, or a choice of an advertised project",
+      "Short verbal presentation at the interview (by Zoom, week of 22 February 2027) if you are nominated",
+    ],
+  },
+
 }
