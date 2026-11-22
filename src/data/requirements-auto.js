@@ -1411,4 +1411,509 @@ export const autoRequirements = {
     ],
   },
 
+  // Checked 2026-11-22 against each call’s official page.
+
+  "idcore-engd-in-offshore-renewable-energy-2027-entry-overseas-places": {
+    eligibility: [
+      "You hold a UK first class honours degree or an international equivalent",
+      "A UK 2:1 plus an MSc with distinction, with substantial relevant work experience, may also be considered",
+      "If you are not a national of a majority English-speaking country, your degree must be no more than five years old on the 1st of the month the programme starts",
+      "Your degree was taught and assessed in English, or you meet the English requirement another approved way",
+      "You can study full time for four years from September 2027 (joint degree of Edinburgh, Exeter, Strathclyde and Swansea)",
+    ],
+    documents: [
+      "Online application through the University of Edinburgh Degree Finder (no application fee)",
+      "Degree certificates and transcripts, with English translations if needed",
+      "A one-page cover letter explaining why you want to join (leave the personal statement field blank)",
+      "CV",
+      "Two references, ideally one academic and one from an employer, signed, dated within 12 months and on letterhead",
+    ],
+  },
+
+  "inlaks-asia-art-archive-art-grant": {
+    eligibility: [
+      "You are an Indian citizen living in India",
+      "You were born between 1 January 1990 and 1 January 2000",
+      "Collectives can apply if every member is an Indian citizen under 35",
+      "You have never received an Inlaks grant, award or residency",
+      "Your proposal can extend a project you already work on; you do not have to hand in finished work at the end",
+    ],
+    documents: [
+      "Everything in one PDF or ZIP file of up to 25MB",
+      "Two-page CV",
+      "Artist statement of up to 500 words",
+      "Project proposal of up to 1,500 words with a description, timeline, budget and the archives or people you want to access",
+      "Portfolio of three to five recent projects (audio and video can be linked from YouTube or Vimeo)",
+    ],
+  },
+
+  "berlin-mathematical-school-phase-i-master-s-scholarship-2027": {
+    eligibility: [
+      "You finish a bachelor’s degree by summer 2027 (Phase I leads to a master’s degree)",
+      "Your studies are in mathematics or a closely related subject",
+      "You can show English language skills",
+      "You start in October 2027 at one of the three Berlin universities",
+    ],
+    documents: [
+      "Online application (no paper copies)",
+      "Personal statement (motivation letter)",
+      "CV",
+      "All your university transcripts and degrees, including the back page if it shows the grading scale",
+      "Official English or German translations of any document in another language",
+      "Proof of English",
+      "Two recommendation letters, which your referees upload themselves after BMS emails them",
+    ],
+  },
+
+  "max-planck-schools-phd-programmes-2027-cognition-matter-to-life-photonics-biomedical-ai": {
+    eligibility: [
+      "Cognition: a bachelor’s or master’s degree in a related area such as neuroscience, psychology or AI",
+      "Matter to Life: a bachelor’s in natural science or engineering (or a master’s); at least half your credits in natural sciences or maths, and a grade of 1.7 or better on the German scale or top 5% of your class",
+      "Photonics: a master’s with substantial physics, engineering or related coursework (a preliminary transcript is accepted if you have not finished)",
+      "Biomedical AI: a master’s, or one finished before the start, in computer science, maths, statistics, engineering, physics or a related field (life scientists need strong computing skills)",
+      "Proof of English",
+    ],
+    documents: [
+      "Online application on the website of the school you choose",
+      "Degree certificates and official transcripts",
+      "CV (up to two pages for Cognition)",
+      "Motivation letter (one page for Cognition, up to 500 words for Photonics, the portal template for Matter to Life)",
+      "Contact details of two referees (not needed for Matter to Life, which accepts no reference letters)",
+      "Passport or ID copy (Cognition and Biomedical AI)",
+      "Proof of English",
+    ],
+  },
+
+  "tfmasa-erasmus-mundus-joint-master-2027-29-transfers-fluids-materials-in-aeronautical-and-space-applications": {
+    eligibility: [
+      "You hold, or will hold before the programme starts, a bachelor’s degree (180 ECTS or equivalent) in mechanics, physics or a closely related field",
+      "You have strong transcripts (the programme is highly selective)",
+      "You can show English, for example IELTS Academic 6.5 with no band below 6, or TOEFL iBT 93",
+      "The English test must be no more than three years old",
+    ],
+    documents: [
+      "Online application on the TFMASA eMundus platform, filled in in English",
+      "Europass CV",
+      "One-page motivation letter",
+      "Recent reference letters on official letterhead",
+      "Transcripts and diplomas with English translations (an official translation is not needed yet)",
+      "Proof of English",
+      "Files must be PDF or JPG and no bigger than 5 MB each; you cannot edit after you submit",
+    ],
+  },
+
+  "international-trans-fund-11th-grant-cycle-seed-and-thrive-grants": {
+    eligibility: [
+      "Your group is trans-led: trans people hold the key decision-making roles and make up at least 75% of staff, board or decision-makers",
+      "Groups under 75% must show how trans people lead decisions on budget and strategy",
+      "Your annual budget is under USD 100,000",
+      "You apply as a group, not as an individual",
+      "Your work improves the lives and rights of trans people and supports the wider movement",
+      "SEED grants (USD 10,000 to 25,000) are for groups that never had ITF funding; THRIVE grants (USD 25,000 to 50,000) are for past SEED grantees",
+      "You can apply for only one grant type in this cycle",
+    ],
+    documents: [
+      "Organisation profile and online application in ITF’s grants portal",
+      "Written application or a video (English, French, Russian, Spanish or Simplified Chinese)",
+      "Last year’s total spending and your current operating budget in USD",
+      "List of outside funders from the past two years",
+      "Two references who know your work",
+      "Registration is asked about but is not required",
+    ],
+  },
+
+  "jf-nichibunken-fellowship-2027-28": {
+    eligibility: [
+      "You hold a PhD received within six years of 1 April 2027",
+      "Your research is in the humanities or social sciences and looks at Japanese culture in an international, interdisciplinary way",
+      "You are a citizen or permanent resident of a country that has diplomatic relations with Japan, and you live there",
+      "You have arranged a host researcher in Japan by the deadline",
+      "You are not using the fellowship for political or religious purposes or mainly to study Japanese",
+      "You have no other grant covering travel and stay in Japan at the same time",
+      "Your stay is between 6 and 24 months, starting between September 2027 and March 2028",
+    ],
+    documents: [
+      "Application form, applicant information and project information, including an abstract of 200 words or less",
+      "CV and list of research achievements (optional)",
+      "Two reference forms from two different people",
+      "Letter of affiliation from your host researcher in Japan",
+      "Submitted online by 1 December 2026, 1 p.m. Japan time",
+    ],
+  },
+
+  "stanford-next-asia-policy-lab-postdoctoral-fellowships-2027-29": {
+    eligibility: [
+      "You will have received your PhD within three years of the fellowship start date",
+      "Your dissertation is approved by 30 June 2027",
+      "You send proof that your degree was conferred by 31 August 2027",
+      "You choose one of the four research tracks",
+      "The appointment is two years, and may be extended",
+    ],
+    documents: [
+      "Online application form",
+      "Letter of request (PDF) describing your research and experience, including plans for single-author and co-authored publications",
+      "CV of no more than two pages, with your list of publications",
+    ],
+  },
+
+  "ectrims-postdoctoral-research-fellowship-2027": {
+    eligibility: [
+      "You hold, or are a candidate for, an MD, PhD, ScD or equivalent, finished before the fellowship starts",
+      "You are a scientist or physician working on multiple sclerosis research",
+      "Any nationality can apply, but you must train in a European laboratory or clinic",
+      "You have not worked at the host institution or under the proposed mentor before",
+      "Fewer than about five years of postdoctoral experience is advised, and most successful applicants are under 40",
+    ],
+    documents: [
+      "Online application on the ECTRIMS system by 1 December 2026, 23:59 CET",
+      "CV and bibliography on ECTRIMS’ biographical sketch form",
+      "Career plans statement (one page)",
+      "Research project description of up to six pages",
+      "Abstract of 250 words",
+      "Proof of the language of the training site, such as a language certificate",
+      "Letter of endorsement and a CV from your proposed mentor",
+      "Support letter from the host department chair and the signed ECTRIMS payment rules form",
+      "Three reference letters, one from the proposed mentor",
+    ],
+  },
+
+  "european-prize-for-women-innovators-2027": {
+    eligibility: [
+      "You are a woman and apply as a person, not as a company",
+      "You founded or co-founded a company or organisation registered in an EU country, an overseas territory or a Horizon Europe associated country",
+      "The company was registered at least a year before the call year",
+      "You have not already won an EU or Euratom prize for the same activities",
+      "Rising Innovators category: you are under 35 at the start of the call year (the other categories have no age limit)",
+      "You can enter only one category",
+    ],
+    documents: [
+      "Online application on the EU Funding & Tenders Portal, submitted by 1 December 2026, 17:00 CET",
+      "One application for the category you qualify for (Women Innovators, Rising Innovators or EIT Women Leadership)",
+    ],
+  },
+
+  "newberry-library-short-term-fellowships-2027-28": {
+    eligibility: [
+      "You hold a PhD at any career stage, or you are a PhD candidate with all-but-dissertation status",
+      "Curators, librarians and independent scholars can also apply",
+      "Your project needs specific Newberry collection items",
+      "Some awards have extra conditions, such as Midwest Modern Language Association membership or a Renaissance Studies consortium institution",
+      "Chicago-area applicants should explain why they need a fellowship to use the collections",
+    ],
+    documents: [
+      "Online application through SlideRoom",
+      "Project abstract and project description (up to 1,500 words on the general page)",
+      "List of the collection items you plan to use, up to 300 words",
+      "Short selected bibliography of secondary sources",
+      "CV",
+      "One letter of recommendation, in English",
+    ],
+  },
+
+  "ism-international-student-case-competition-2027": {
+    eligibility: [
+      "You are a full-time student in supply chain management, business, finance or a related field",
+      "Your team has up to four members; undergraduates and graduates can mix",
+      "You are not a teaching assistant or faculty member at the university",
+      "Your team has a faculty advisor, who can guide you but cannot help write the case solution",
+      "Each university can send up to two teams",
+      "Your team can attend and register for ISM World 2027 on 16 to 18 May 2027",
+    ],
+    documents: [
+      "Team interest form submitted by 4 December 2026",
+      "Name of your faculty advisor",
+    ],
+  },
+
+  "acumen-southeast-asia-fellowship-2027": {
+    eligibility: [
+      "You are a social entrepreneur or senior decision-maker working on poverty",
+      "You have at least five years of work experience",
+      "You live in Southeast Asia (exceptions if you have a clear link to the region)",
+      "You are over 18; there is no maximum age and no degree needed",
+      "You work on this full time (part time only in exceptional cases)",
+      "You speak English and have a reliable internet connection",
+      "You have never joined an Acumen Fellows programme",
+      "Only one person from the same organisation can move forward",
+    ],
+    documents: [
+      "Online application form with essay questions (it cannot be saved, so write your answers offline first)",
+    ],
+  },
+
+  "leeds-sustainability-case-competition-2027-university-of-colorado-boulder": {
+    eligibility: [
+      "Every team member is currently enrolled in a graduate programme",
+      "At least one team member is studying for a graduate business degree",
+      "Your team has three to five members",
+      "Your team name does not use your school’s name, city, state or mascot",
+      "You may use free-tier ChatGPT only, and must say how you used AI",
+    ],
+    documents: [
+      "Team registration by 6 December 2026",
+      "Registration code if your team is from CU Boulder or the Leeds School (email lscc@colorado.edu)",
+    ],
+  },
+
+  "mrc-laboratory-of-molecular-biology-international-phd-programme-2027": {
+    eligibility: [
+      "You hold, or are about to finish, a relevant degree",
+      "If English is not your first language, you have a recent IELTS-equivalent score of at least 7.0 overall, 7.0 in speaking, listening and writing, and 6.5 in reading",
+      "You can start the four-year full-time PhD in October 2027",
+    ],
+    documents: [
+      "Online application through the University of Cambridge Applicant Portal",
+      "Two academic references, preferably one from senior staff at your latest university and one from a senior scientist who supervised your lab work (a third reference if you want Gates funding)",
+      "Proof of English if needed",
+      "Degree transcripts and certificates",
+    ],
+  },
+
+  "cambridge-trust-international-scholarships-2027-28-phd": {
+    eligibility: [
+      "You are applying for a PhD and are from outside the UK and Ireland",
+      "Awards are made on merit: research potential, exam results and references (money circumstances do not count)",
+      "Your department must rank you highly",
+      "It can be held in any subject and at any college, except premium-rate courses",
+    ],
+    documents: [
+      "Application for admission to Cambridge, submitted by the course’s funding deadline",
+      "Tick this scholarship in the funding section of the application",
+    ],
+  },
+
+  "cambridge-biosciences-dtp-bbsrc-phd-studentships-2027-entry": {
+    eligibility: [
+      "You hold, or expect to get, a high upper second class (high 2:1) degree or international equivalent",
+      "You apply for a project advertised on the programme website and can choose up to two",
+      "You start in October 2027",
+    ],
+    documents: [
+      "Online application through the University of Cambridge Applicant Portal by 8 December 2026 (do not email documents)",
+      "Statement on your interest in the topic and project, any talks with the supervisor, and relevant experience",
+      "Short written answers on your motivation, problem-solving, independence, knowledge of your field, understanding of research and technical skills",
+      "Two academic or professional references",
+      "Transcripts and CV",
+    ],
+  },
+
+  "crossculture-programme-ccp-fellowships-2027": {
+    eligibility: [
+      "You are at least 23 years old",
+      "You have at least two years of proven work or volunteering in a civil society organisation in your home country",
+      "You speak and write English well",
+      "You are not a student",
+      "You do not receive another fellowship or funding in the same year",
+      "Your work fits one of the topics: policy and society, media and culture, human rights and peace, or sustainable development and climate justice (2027 key topic: democratic resilience)",
+    ],
+    documents: [
+      "Online application on the CCP portal between 19 October and 8 December 2026 (it cannot be saved, so have everything ready)",
+      "CV in English with education, work, volunteering and skills",
+      "Recommendation letter from your supervisor at your home organisation, on ifa’s template",
+      "Recent photo (optional)",
+      "You must fill in the form yourself, without AI",
+    ],
+  },
+
+  "maastricht-university-nl-high-potential-scholarship-2027": {
+    eligibility: [
+      "You are not from the EU, EEA, Switzerland or Suriname, and have no dual nationality from an EU/EEA country or Switzerland",
+      "You applied to a taking-part full-time master’s at Maastricht for 2027-28 with a complete file before 10 December 2026",
+      "Your latest transcript shows a GPA of 7.5 out of 10 or higher",
+      "You are not older than 35 on 1 September 2027",
+      "You have never been in a Dutch degree programme (exchange is fine)",
+      "You send only one scholarship application",
+    ],
+    documents: [
+      "Application for the master’s through Studielink",
+      "Online scholarship form (log in with your UM account)",
+      "CV of up to two A4 pages",
+      "Motivation letter on the programme’s template",
+      "Official transcript showing your latest GPA, plus a document explaining your grading system",
+      "Personal statement on your financial need",
+      "Reference letter from a professor, lecturer or employer, dated February 2026 or later, which you upload yourself",
+      "Contact details of your referee",
+    ],
+  },
+
+  "um-social-justice-scholarship-globalisation-and-law-maastricht-2027-28": {
+    eligibility: [
+      "You are not from the EU, EEA, Switzerland or Suriname, and have no dual nationality from one of them",
+      "You applied to the full-time master’s Globalisation and Law with a complete file before 10 December 2026",
+      "You have a proven record of supporting the rule of law or human rights in class and outside it",
+      "You are not older than 35 on 1 September 2027",
+      "You have a GPA of 7.5 out of 10 or higher",
+      "Students without a master’s degree yet are preferred",
+    ],
+    documents: [
+      "Application for the master’s through Studielink",
+      "Online scholarship form (log in with your UM account; you can submit only once)",
+      "CV of up to two A4 pages",
+      "Motivation letter on the template, about what you have already done for human rights",
+      "Official transcript showing your latest GPA, plus a document explaining your grading system",
+      "Personal statement on your financial need",
+    ],
+  },
+
+  "sabanc-graduate-business-school-phd-in-management-spring-2027-term": {
+    eligibility: [
+      "You hold a bachelor’s or master’s degree in management, economics, social sciences, natural sciences or engineering",
+      "With a bachelor’s only, you need at least 3.00 out of 4.00",
+      "A master’s must be a thesis master’s",
+      "You have a GMAT (minimum 600) or another accepted test score",
+      "You have proof of English, such as TOEFL iBT 88 or higher",
+    ],
+    documents: [
+      "Online application form (email applications are not read)",
+      "Official transcript with all courses and grades, plus a grade conversion table if needed",
+      "Two recommendation letters, which your referees upload themselves",
+      "GMAT or other test score report",
+      "English proficiency certificate",
+      "Statement of purpose in English, up to two pages",
+      "CV",
+      "Passport-size photo",
+      "Online affidavit",
+    ],
+  },
+
+  "university-of-manchester-international-partnership-phd-studentships-2027-28-biology-medicine-and-health": {
+    eligibility: [
+      "You hold, or are about to get, at least a UK upper second class honours degree or international equivalent in a relevant subject",
+      "UK and international applicants can apply, but international awards go only to exceptional candidates",
+      "You meet the English language requirement",
+      "You can apply for up to two projects, each as a separate application",
+    ],
+    documents: [
+      "Online application for each project (incomplete applications are not processed)",
+      "Supporting statement written for each project",
+      "Degree certificates and transcripts",
+      "References",
+      "English test certificate if needed",
+      "CV (a research statement is not needed)",
+    ],
+  },
+
+  "tarbell-institutional-grants-for-ai-journalism-december-2026-round": {
+    eligibility: [
+      "You are a media outlet or distribution platform, nonprofit or for-profit, anywhere in the world",
+      "You can accept grant money",
+      "There is no minimum newsroom size",
+      "Individual reporters should use Tarbell’s separate reporting grants instead",
+      "You keep full editorial control",
+    ],
+    documents: [
+      "Description of the activities you want funded and your preferred grant length",
+      "Proposed budget",
+      "Details of any existing funding for the project",
+      "Overview of your team and their roles",
+      "Your current or expected audience and reach, with examples of planned work",
+    ],
+  },
+
+  "2027-wfeo-hackathon-on-sustainable-transport-engineering": {
+    eligibility: [
+      "You are an engineering student or a young engineer under 30",
+      "Teams have three to five members and are led by a student or young engineer under 30",
+      "People under 18 can join with a parent or guardian’s consent",
+      "Registration is free",
+    ],
+    documents: [
+      "Free individual registration",
+      "Five-minute video of your solution (English subtitles if not in English)",
+      "Team photo",
+      "Written description in English",
+      "Submission by 12 December 2026, 23:59 UTC",
+    ],
+  },
+
+  "chen-institute-science-prize-for-ai-accelerated-research-2026": {
+    eligibility: [
+      "You are an early-career scientist in an AI-related field",
+      "You hold an MD, PhD or MD/PhD earned within the last 10 years (extensions for parental or medical leave must be flagged)",
+      "You enter as one individual, and the essay is about your own contribution",
+      "Past winners and runners-up of any Science Prize must wait five years",
+      "You may not use AI tools to write or edit the essay or its figures without permission from Science",
+    ],
+    documents: [
+      "Entry form on the prize’s online system",
+      "Essay of 1,000 words on an advance in empirical science that used an AI technique (one figure or table and up to 15 references)",
+      "One-page recommendation letter from a postdoc adviser, supervisor or senior colleague",
+      "CV listing awards, honours and experience, with full citations of related papers",
+      "Up to two recent papers, at least one peer reviewed and published in the past three calendar years (a preprint can be the second)",
+    ],
+  },
+
+  "wgsss-esrc-doctoral-training-partnership-general-studentships-2027-28-wales": {
+    eligibility: [
+      "You normally hold a first or upper second class degree in a relevant subject, or equal qualifications or experience",
+      "Home and international applicants can apply",
+      "You are not more than one year into a PhD by 1 October",
+      "You propose your own PhD project",
+      "You send only one project proposal and one WGSSS application, to one university",
+    ],
+    documents: [
+      "WGSSS studentship application form, through the advert of your chosen university",
+      "CV of up to two pages",
+      "Two academic or professional references that talk about your research strengths",
+      "Degree certificates and transcripts, with translations if needed",
+      "Proof of English if needed",
+      "ESRC equality and diversity monitoring form",
+    ],
+  },
+
+  "lpi-summer-intern-program-in-planetary-science-2027": {
+    eligibility: [
+      "You are an undergraduate with at least 50 semester hours of credit",
+      "You are enrolled in a bachelor’s degree in the semester before the programme",
+      "US citizens and foreign nationals can apply, except citizens of countries on the US State Department’s designated list",
+      "Physical or natural science, engineering, computer science or maths majors are preferred",
+      "You can be in Houston from 7 June to 13 August 2027",
+    ],
+    documents: [
+      "Online application form (no paper applications) by 14 December 2026, 11:59 p.m. US Central Time",
+      "Three research areas you are interested in, ranked",
+      "CV as a PDF",
+      "Official transcript, sent by your registrar if electronic",
+      "Two or three letters of recommendation sent through the online system",
+      "English test score, or an English reference letter from a professor if you have none",
+    ],
+  },
+
+  "p-e-o-international-peace-scholarship-2027-28": {
+    eligibility: [
+      "You are a woman from outside the US and Canada",
+      "You are not a citizen or permanent resident of the US or Canada",
+      "You are qualified for full-time graduate study at an accredited US or Canadian school and have a full year of coursework left",
+      "You plan to return home to use your education for peace",
+      "Online-only study, research or internships without coursework do not count",
+      "PhD students who are only writing a dissertation cannot apply as first-time applicants",
+    ],
+    documents: [
+      "Eligibility form, accepted from 15 September to 15 December 2026",
+      "Full application after eligibility is confirmed (due 1 February or 15 March 2027, depending on your enrolment)",
+      "Budget of expected costs and all other funding",
+      "Two recommendations, at least one from a professor if you are already enrolled (no relatives or fellow students)",
+      "Proof of admission",
+      "Signed promise to return home",
+      "Transcript if you have one",
+    ],
+  },
+
+  "ens-psl-international-selection-2027": {
+    eligibility: [
+      "You are under 26 on the day applications open (Arts and Humanities: not past your 26th birthday on 1 December)",
+      "You have never applied to the International Selection before",
+      "You have done at least one year of university study abroad and will have two years by enrolment (third-year students can apply)",
+      "You have spent no more than about 10 months in France in the competition year and the year before",
+    ],
+    documents: [
+      "One merged PDF named “Family Name-Given Name.pdf”, uploaded online (no email or post)",
+      "High school diploma and university transcripts in French or English (Spanish, Italian or Portuguese also accepted)",
+      "CV",
+      "Motivation letter of one to three pages (French for humanities; French or English for sciences)",
+      "Arts and Humanities only: research project of up to three pages and a bibliography of about 10 books",
+      "Two to four recommendation letters, requested through the OnePSL30 platform",
+    ],
+  },
+
 }
