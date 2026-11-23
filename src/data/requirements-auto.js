@@ -1916,4 +1916,154 @@ export const autoRequirements = {
     ],
   },
 
+// Checked 2026-11-23 against each call’s official page.
+  "wenner-gren-wadsworth-african-fellowship-2027": {
+    eligibility: [
+      "You are an African citizen and live in an African country when you apply",
+      "You belong to a group that is under-represented in anthropology and archaeology",
+      "You have a doctoral application pending at a South African university (or you are in your first year of the PhD there)",
+      "You are not already past your first year of doctoral training, and you are not applying only for fieldwork or thesis write-up support",
+      "You have a host sponsor at the South African university and a home sponsor from the institution where you earned a previous degree",
+    ],
+    documents: [
+      "Online application forms with your applicant profile, due by 15 December",
+      "Answers to three plan-of-study questions",
+      "Detailed budget",
+      "Official transcripts (with an English translation if needed)",
+      "Evidence of language competence, if it applies to your project",
+      "CV of up to five pages for you, and a CV for your host sponsor, all in English",
+      "A letter from your host sponsor and a letter from your home sponsor, emailed directly to the Foundation by the deadline",
+    ],
+  },
+  "hku-society-of-fellows-in-the-humanities-fellowship-2027-28": {
+    eligibility: [
+      "You have a PhD awarded between 1 January 2025 and 30 June 2027",
+      "You are not in a tenure-track post",
+      "You did not get your PhD from HKU",
+      "You can start between June and August 2027 for a three-year, non-renewable post",
+    ],
+    documents: [
+      "Online application through HKU’s careers site, with all files as PDFs",
+      "CV",
+      "Cover letter of no more than 300 words",
+      "Research proposal of no more than 1,500 words, not counting the bibliography",
+      "One writing sample: a dissertation chapter or a published article",
+      "Three recommendation letters, sent by your referees to sofhku@hku.hk (you must ask them yourself)",
+    ],
+  },
+  "emmir-erasmus-mundus-migration-and-intercultural-relations-2027-29-edition-14": {
+    eligibility: [
+      "You have a first degree in a related field such as social sciences, history, cultural studies, education, law, economics, development studies or journalism",
+      "You finished your degree by the 20 December 2026 deadline (needed for a scholarship)",
+      "Your final grade is at least C+ or equivalent",
+      "Your latest degree is not older than five years (explain it in your statement if it is)",
+      "You can show knowledge of migration studies, intercultural relations and research methods from modules, papers or exam results",
+      "You have English at C1 level, unless an exemption applies (for example a degree from a university in the UK, USA, Canada, Ireland, Australia or New Zealand)",
+      "You have not already received an Erasmus Mundus Joint Master scholarship",
+    ],
+    documents: [
+      "Online application with all files as PDFs",
+      "Passport copy",
+      "CV",
+      "Statement of purpose of one to two pages",
+      "Diploma and transcript for your first degree and any other relevant degrees",
+      "Proof of English level",
+      "Any other relevant documents",
+      "Official English translations of any document in another language",
+    ],
+  },
+  "lumiere-scholars-essay-award-fall-2026-high-school": {
+    eligibility: [
+      "You are a student from any country who will be enrolled in high school on 31 December 2026",
+      "You submit only one essay, written by you alone, with no outside writing services",
+      "Current scholars or alumni of Lumiere programmes can enter, but cannot submit their final Lumiere paper",
+      "There is no entry fee",
+    ],
+    documents: [
+      "Free registration on the Lumiere website by 30 November",
+      "One essay of up to 2,000 words in English (not counting footnotes and bibliography), on one of the five prompts, with MLA 8th edition citations and no personal anecdotes as evidence",
+      "Email address of an academic referee (a school teacher or counsellor) who knows your work",
+    ],
+  },
+  "gbd-fellowship-2027": {
+    eligibility: [
+      "You have a PhD, MD, DPhil or equivalent, or you will finish one before the September 2027 start",
+      "Your degree has a strong quantitative base and you have research experience",
+      "You have strong R or Python skills",
+      "You are no more than five years past your latest degree and have no more than three years of postdoctoral experience",
+      "You can work full time and in person in Seattle, and can get a visa and be there on the first day",
+      "You cannot hold another job or be enrolled in another programme during the fellowship",
+    ],
+    documents: [
+      "CV",
+      "Four short essays: your research (300 words), your contribution to GBD (200), your production work (200), and why you want this fellowship now (250)",
+      "Names and contact details of three references (letters are not needed at this stage)",
+    ],
+  },
+  "utrip-2027-university-of-tokyo-research-internship-program": {
+    eligibility: [
+      "You study a natural science or a related field in a bachelor’s programme at a university outside Japan",
+      "You have finished at least one year of the programme and will go back to your home degree afterwards",
+      "You are not in a final year that ends before the programme finishes",
+      "You can commit full time to all six consecutive weeks",
+      "Third-year students in four-year programmes are given priority, and second-year students are also encouraged to apply",
+    ],
+    documents: [
+      "Online application form, with your first and second choice of host lab",
+      "Personal statement of 700 to 1,000 words",
+      "Resume or CV of up to 800 words",
+      "Scanned transcript (the original is needed only if you are selected)",
+      "English test result such as TOEFL, unless English is your first language or you studied in English for the past eight years",
+      "One recommendation letter from a professor who knows your science work",
+    ],
+  },
+  "planthealth-erasmus-mundus-joint-master-2027-29-plant-health-in-sustainable-cropping-systems": {
+    eligibility: [
+      "You have a bachelor’s degree of 180 ECTS in agronomy, agricultural sciences or a related field",
+      "Your studies include at least 4 ECTS in plant health or crop protection, or the equivalent",
+      "Final-year students can apply, but applicants who already hold the degree are preferred",
+      "You have English at B2 level, unless English is your native language or your bachelor’s was taught fully in English",
+      "Apply in the first call (1 October to 31 December 2026) to be considered for scholarships",
+    ],
+    documents: [
+      "Online application form, in English",
+      "CV (Europass format recommended)",
+      "Degree certificates",
+      "Transcripts (legalised copies and sworn translations are not needed at this stage)",
+      "English certificate, or a letter from your university saying your bachelor’s was taught in English",
+      "Two recommendation letters on the official PlantHealth template, signed and stamped by your referee’s institution or company",
+      "Declaration on honour",
+    ],
+  },
+  "fine-arts-work-center-writing-fellowship-2027-28": {
+    eligibility: [
+      "You are a writer who has not published, or been contracted to publish, a full-length book of creative work",
+      "You apply in either poetry or fiction, and a separate application is read by that genre’s jury",
+      "If you write in both genres, you need two applications, each with its own fee",
+    ],
+    documents: [
+      "Writing sample (poetry or fiction) completed in the last four years, with no name, publications or awards on it",
+      "List of your artistic or professional experience, or a résumé",
+      "Short questionnaire, including two short-answer questions",
+    ],
+  },
+  "politecnico-di-milano-merit-based-international-scholarships-2027-28": {
+    eligibility: [
+      "You are an international student applying to the first year of an English-taught Master of Science at Politecnico di Milano",
+      "You submit your admission application and pay the application fee between 1 October and 1 December 2026",
+      "You also submit the scholarship form by 12:00 noon (Italian time) on 15 December 2026",
+      "You send a valid English language certificate by 4 March 2027",
+    ],
+    documents: [
+      "Admission application with the application fee paid",
+      "Scholarship application form, through Politecnico di Milano Online Services",
+      "University qualification",
+      "Academic transcript (with an official translation if it is not in Italian, English, French or Spanish)",
+      "Cumulative GPA statement",
+      "CV in English or Italian",
+      "Portfolio, for architecture, urban planning and design programmes",
+      "English language certificate",
+    ],
+  },
+
 }
