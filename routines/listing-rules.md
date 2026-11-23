@@ -4,16 +4,16 @@ Every routine that adds opportunities to meritleaders.com follows this file. The
 prompt says which run it is (daily or subject search) and points to its run file in this folder.
 The site owner changes these rules by editing this file; always use the version in the repo.
 
-## Who the site is for
+## The goal: have every scholarship the other sites have
 
-Students and young professionals in Africa (mainly Cameroon and Nigeria, also Ghana, Kenya and the
-rest of the continent) looking for funded study abroad. Most of them want a **master's** or a
-**bachelor's** scholarship. Every listing must be open to them.
+The owner wants meritleaders.com to list **every** open scholarship that other scholarship sites
+and consultancies post, and more. If another site has it and we don't, that's a gap to fix.
 
-- Skip anything limited to citizens, residents or organisations of a single country other than
-  Cameroon or Nigeria. Examples: grants only for Greek NGOs, a US-only scholarship, a UK-home-students
-  award.
-- Skip awards limited to one university's current students.
+- Include anything **international applicants** can apply for, from any country, at any level. Don't
+  skip a call because of the applicant's nationality or region, as long as it is open to
+  international or foreign applicants.
+- Skip only calls that no foreign applicant can join (for example, citizens-only national awards, or
+  awards only for a university's current students).
 
 ## Daily targets (all of today's runs together, UTC)
 
@@ -21,101 +21,115 @@ Scholarships come first. They are the owner's top priority.
 
 | Type | At least per day |
 |---|---|
-| Scholarships | 15 |
+| Scholarships | 25 |
 | Fellowships | 5 |
 | Grants | 5 |
 | Internships | 5 |
 | Competitions | 5 |
 
 **Scholarship level mix per day:**
-- **At least 6 master's.**
-- **At least 4 bachelor's / undergraduate.**
-- **At most 4 that are PhD only.**
+- **At least 8 master's.**
+- **At least 5 bachelor's / undergraduate.**
+- **At most 6 that are PhD only.**
 
-A scholarship open to several levels counts for each of them. When today already has 4 PhD-only
-scholarships, do not add another PhD-only one; look for master's and bachelor's instead.
+A scholarship open to several levels counts for each of them.
 
 **Country spread per day (all types):**
-- **At most 3 new listings from any one country.**
-- **At most 2 from the United Kingdom.**
+- **At most 5 new listings from any one country.**
+- **At most 4 from the United Kingdom.**
 - Multi-country or worldwide calls (Erasmus Mundus, international organisations, online) don't
   count towards any country.
 
 When a country is full, move on to another one.
 
 Check the counts with `node scripts/today-counts.mjs` **at the start of the run and again before each
-addition.** It prints today's numbers by type, the scholarship levels, the countries, and which
-countries are full.
+addition.**
 
-## Where to look: start with today's region
+## Where to look: every region, every day
 
-Start with the region for today's weekday (UTC), then cover the others:
+Search **all regions in every run**, not one region per day:
 
-| Day | Region to start with |
+| Region | Countries |
 |---|---|
-| Monday | Germany, France, Italy, Spain, Portugal |
-| Tuesday | Netherlands, Belgium, Sweden, Finland, Norway, Denmark, Austria, Switzerland |
-| Wednesday | Hungary, Poland, Czech Republic, Romania, Türkiye, Ireland, Greece, Cyprus, Malta |
-| Thursday | Japan, South Korea, China, Taiwan, Malaysia, Singapore, Thailand, Brunei, India |
-| Friday | Canada, United States, Australia, New Zealand |
-| Saturday | Saudi Arabia, UAE, Qatar, Kuwait, Oman; Africa (South Africa, Rwanda, Ghana, Kenya, Egypt, Morocco, Mauritius) |
-| Sunday | Erasmus Mundus joint master's, and multi-country programmes (World Bank, AfDB, OFID, Mastercard Foundation, Commonwealth) |
+| Europe | Germany, France, Italy, Spain, Portugal, Netherlands, Belgium, Sweden, Finland, Norway, Denmark, Austria, Switzerland, Ireland, Hungary, Poland, Czech Republic, Romania, Greece, Cyprus, Malta, the UK |
+| Asia | China, Japan, South Korea, Taiwan, Hong Kong, Malaysia, Singapore, Thailand, Indonesia, Brunei, India, Pakistan |
+| Middle East | Türkiye, Saudi Arabia, UAE, Qatar, Kuwait, Oman, Israel |
+| Americas | Canada, the United States, Latin America |
+| Africa | South Africa, Rwanda, Ghana, Kenya, Egypt, Morocco, Tunisia, Mauritius, Nigeria, Cameroon |
+| Oceania | Australia, New Zealand |
+| Multi-country | Erasmus Mundus, World Bank, AfDB, OFID, Mastercard Foundation, Commonwealth, WAHO, African Union |
 
 **Good sources by level:**
-- **Bachelor's:** government scholarships (Türkiye Bursları, Korea GKS undergraduate, MEXT
-  undergraduate, Stipendium Hungaricum, Brunei Darussalam, Chinese Government and Chinese
-  university scholarships, Romanian, Czech, Mauritius and Gulf state scholarships); international
-  undergraduate scholarships at universities in Canada, the USA, Europe and Asia; Mastercard
-  Foundation partner universities.
-- **Master's:** the Erasmus Mundus catalogue; DAAD (EPOS and others); Swedish Institute; Holland,
-  Orange Tulip and Dutch university excellence scholarships; Belgian (VLIR-UOS, ARES), French (Eiffel
-  and university), Italian (university and regional DSU) and Swiss university scholarships; Japanese,
-  Korean, Chinese, Taiwanese and Malaysian government scholarships; Australian and New Zealand
-  university scholarships; Commonwealth and African Union calls.
-- **PhD:** only after the master's and bachelor's minimums are met.
+- **Bachelor's:**
+  - government scholarships (Türkiye Bursları, Korea GKS undergraduate, MEXT undergraduate,
+    Stipendium Hungaricum, Brunei Darussalam, Chinese Government and Chinese university
+    scholarships, Romanian, Czech, Mauritius and Gulf state scholarships);
+  - international undergraduate scholarships at universities in the USA, Canada, Europe and Asia;
+  - Mastercard Foundation partner universities.
+- **Master's:**
+  - the Erasmus Mundus catalogue;
+  - DAAD (EPOS, In-Region and others) and the Swedish Institute;
+  - Eiffel and French university scholarships;
+  - Holland, Orange Tulip and Dutch university excellence scholarships;
+  - Belgian (VLIR-UOS, ARES), Italian (university and DSU), Spanish and Swiss scholarships;
+  - Qatar (HBKU, Doha Institute) and Saudi scholarships;
+  - Japanese (MEXT university recommendation), Korean, Chinese, Taiwanese and Malaysian scholarships;
+  - Australian and New Zealand university scholarships;
+  - Oxford, Cambridge and other UK named scholarships.
+- **PhD:** funded PhD positions and doctoral schools, after the master's and bachelor's minimums.
 
-**Search ideas** (change the country, field, level and month each time):
-- "master's scholarship <country> 2027 international students deadline"
-- "undergraduate scholarship <country> 2027 international students"
-- "<university> international excellence scholarship 2027"
-- "government scholarship 2027 <country> African students"
+## Coverage check against other scholarship sites (every daily run)
 
-Aggregators are fine for **finding** leads, never as the link.
+Look at the newest posts on these sites and add every qualifying call we don't have yet:
+- scholarshipsads.com (its "latest scholarships" page)
+- opportunitydesk.org
+- scholars4dev.com
+- opportunitiesforafricans.com
+- afterschoolafrica.com
+- scholarshipregion.com
+- wemakescholars.com
+
+Use WebSearch, for example with `allowed_domains: ["scholarshipsads.com"]` and a query like "latest
+scholarships 2027". For each scholarship they list:
+1. `grep` our data for it.
+2. If it's missing, find the funder's own page and check it there (see "Checking official pages").
+3. Add it if it qualifies.
+
+**These sites are for finding calls only. The link we publish is always the funder's own page.**
 
 ## Run length: don't stop early
 
-Earlier runs stopped after about 4 minutes and 40 searches, with 0 scholarships. That is not
-acceptable.
+Earlier runs stopped after about 4 minutes and 40 searches. That is not acceptable.
 
 **Minimum effort per run:**
-- **Daily run:** at least 60 WebSearch queries, at least 35 of them for scholarships, and at least 25
-  candidate calls checked on the funder's own site.
-- **Subject run:** at least 45 queries, at least half of them for scholarships, and at least 20
-  candidates checked.
+- **Daily run:** at least 80 WebSearch queries, at least 50 of them for scholarships (including the
+  coverage check), and at least 35 candidate calls checked on the funder's own site.
+- **Subject run:** at least 45 queries, at least half for scholarships, and at least 20 candidates
+  checked.
 
-Keep a running tally. When a search only finds calls that are already listed, change the angle
-(another country, university, field or level) and keep going. **Ending a run before these minimums is
-a failure.** The final report must state the number of queries and candidates checked, per type.
+Keep a running tally. When a search only finds calls that are already listed, change the angle and
+keep going. **Ending a run before these minimums is a failure.** The final report must state the
+number of queries and candidates checked, per type.
 
 ## What qualifies (all must be true)
 
-1. The application window is open today to new applicants. Not "opening soon", not closed, not
-   invitation-only, not limited to people who passed an earlier stage.
-2. One specific closing date (YYYY-MM-DD), at least 5 days from today, confirmed on the funder's own
-   domain.
-   - Rolling, "varies by country/embassy/course", "year-round" or estimated deadlines do not qualify.
-   - If sources disagree, use the earliest date and say so in `note`.
-3. `url` is the funder's own page for this call. Never a general index, a homepage (unless it is the
-   call), a search link, or an aggregator (opportunitydesk, opportunitiesforyouth,
-   globalsouthopportunities, opportunitiesforafricans, advance-africa, scholars4dev, fundsforngos,
-   scholarshipsads, wemakescholars, scholarshipunion, internshala…).
-4. It is open to applicants from Africa (see "Who the site is for").
-5. It is not already on the site. Run `grep -ri` on the programme name and key words across
+1. **Open now** to new applicants: not "opening soon", not closed, not invitation-only.
+2. **A deadline**, one of two kinds:
+   - **A specific closing date** (YYYY-MM-DD), at least 3 days from today, confirmed on the funder's
+     own domain. If sources disagree, use the earliest date and say so in `note`.
+   - **No single date, but open now** (deadline varies by course, rounds, or rolling). Examples: Gates
+     Cambridge, DAAD In-Region, MEXT university recommendation. Set `deadline: null` and explain the
+     timing in `note` (for example "Deadline depends on your course: 3 December 2026 or 7 January
+     2027"). The site shows this note in place of a date.
+3. **The funder's own link.** `url` is the funder's own page for this call. Never an aggregator,
+   a general index or a search link.
+4. **Open to international applicants** (see the goal above).
+5. **Not already on the site.** Run `grep -ri` on the programme name and key words across
    `src/data/*.js`, and check `retiredSlugs` in `src/data/fixes-oct21-2026.js`.
-6. It is funded (fully or partly), or, for a competition, has a prize. If applying costs money, put
-   the fee in `note` and add 'Application fee' to `tags`.
+6. **Funded** (fully or partly), or, for a competition, a prize. If applying costs money, put the fee
+   in `note` and add 'Application fee' to `tags`.
 
-**The quality rules always win over the numbers.** Never pad.
+**The quality rules always win over the numbers.** Never invent a date or a requirement.
 
 ## Checking official pages in the sandbox
 

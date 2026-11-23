@@ -12,6 +12,7 @@ import DeadlineChip from '../ui/DeadlineChip'
 import Flyer from '../ui/Flyer'
 import OrgLogo from '../ui/OrgLogo'
 import useNow from '../../hooks/useNow'
+import useSearchText from '../../hooks/useSearchText'
 import { COST_FILTERS, hasApplicationFee } from '../../lib/fees'
 import Icon from '../ui/Icon'
 import { TIMING_FILTERS, formatPosted, isNew, postedSortKey } from '../../lib/timing'
@@ -248,7 +249,7 @@ export default function Scholarships({ kind = 'scholarships' }) {
   const when = TIMING_FILTERS[params.get('when')] ? params.get('when') : 'all'
   const saved = useSaved()
   const now = useNow(60_000)
-  const query = params.get('q') ?? ''
+  const [text, setText, query] = useSearchText()
   // Older links carry the full text ("China (Chengdu)"); the menu now lists the country alone.
   const country = (params.get('country') ?? 'All').replace(/\s*\(.*?\)/g, '').trim() || 'All'
   const sort = SORTS[params.get('sort')] ? params.get('sort') : 'deadline'
@@ -304,8 +305,8 @@ export default function Scholarships({ kind = 'scholarships' }) {
               />
               <input
                 type="search"
-                value={query}
-                onChange={(e) => setParam('q', e.target.value, '')}
+                value={text}
+                onChange={(e) => setText(e.target.value)}
                 placeholder={`Search ${config.plural}, countries or your nationality…`}
                 className={`${controlBase} pl-11 pr-4 placeholder:text-navy-400`}
               />

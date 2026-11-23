@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import useSearchText from '../hooks/useSearchText'
 import Seo from '../components/layout/Seo'
 import { staticSeo } from '../lib/seo'
 import PageHeader from '../components/layout/PageHeader'
@@ -97,7 +98,7 @@ export default function CoursesPage() {
   const [params, setParams] = useSearchParams()
   const field = courseFields.includes(params.get('field')) ? params.get('field') : 'All'
   const level = courseLevels.includes(params.get('level')) ? params.get('level') : 'All'
-  const query = params.get('q') ?? ''
+  const [text, setText, query] = useSearchText()
 
   const setParam = (key, value) => {
     const next = new URLSearchParams(params)
@@ -132,8 +133,8 @@ export default function CoursesPage() {
             <span className="sr-only">Search courses</span>
             <input
               type="search"
-              value={query}
-              onChange={(e) => setParam('q', e.target.value)}
+              value={text}
+              onChange={(e) => setText(e.target.value)}
               placeholder="Search by subject or provider"
               className="h-12 w-full rounded-xl border border-navy-900/[0.12] bg-white px-4 text-base text-navy-950 transition-colors duration-300 hover:border-navy-900/25 focus:outline-none focus:ring-2 focus:ring-gold-400/60"
             />

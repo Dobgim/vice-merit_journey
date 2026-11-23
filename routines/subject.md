@@ -13,12 +13,12 @@ Stay on those subjects. A separate daily run covers everything else.
      - "<subject> undergraduate scholarship 2027"
      - "<sub-field> Erasmus Mundus"
      - "<subject> scholarship <country> 2027"
-     PhD-only scholarships only while today has fewer than 4.
+     Search every region (Europe, Asia, Middle East, Americas, Africa, Oceania).
    - **Then the other types:** at least 2 queries each for fellowships, grants, internships and
      competitions in that subject.
    - Use the subject's sub-fields. For example, for civil engineering also search structural,
      geotechnical, transport, construction and water.
-   - Rotate countries using the weekday table in the rules file, and respect the country limits.
+   - Respect the country limits in the rules file.
 5. Commit and push after each subject.
 
 **Commit message:** `Subject search YYYY-MM-DD (<subjects>): add N open calls`, plus a list of names,
