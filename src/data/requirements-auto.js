@@ -2066,4 +2066,270 @@ export const autoRequirements = {
     ],
   },
 
+  // Checked 2026-11-24 against each call’s official page.
+  'jf-fellowship-for-arts-and-culture-in-asia-wa2-0-2027': {
+    eligibility: [
+      "You work in arts and culture, for example as an artist, researcher, curator, producer, administrator or educator",
+      "You live in, and hold nationality, citizenship or permanent residency in, Japan or an ASEAN country",
+      "Your activity must take place outside the country where you live and hold nationality",
+      "You speak Japanese or English well and are in good physical and mental health",
+      "You have a bank account in your own name that can receive money from Japan",
+      "Undergraduate and master’s students are not eligible, and your main aim cannot be language study",
+      "You cannot hold another Japan Foundation grant in the same year",
+    ],
+    documents: [
+      "Application form (the Japan Foundation’s PDF form)",
+      "CV",
+      "Detailed project description, no more than five pages",
+      "Acceptance form from one or two host institutions or individuals (a signed letter is also accepted)",
+      "Online application through the Japan Foundation portal",
+    ],
+  },
+
+  'heidelberg-south-asia-institute-and-max-weber-forum-joint-fellowship-summer-2027': {
+    eligibility: [
+      "You are a young researcher from India, Nepal, Pakistan, Sri Lanka or Bangladesh",
+      "You hold a doctorate",
+      "You want to start a research collaboration with the South Asia Institute in Heidelberg",
+      "The fellowship lasts up to three months and starts between April and June 2027",
+    ],
+    documents: [
+      "Copy of your doctoral certificate",
+      "Project description, written on the template given in the call",
+      "Details of two referees",
+      "Optional letter of reference from a member of the South Asia Institute",
+      "Application through the online portal (applications by email are not accepted)",
+    ],
+  },
+
+  'ucc-futures-scholars-programme-phd-scholarships-2027': {
+    eligibility: [
+      "Open to all nationalities, with no age limit; you may send only one application",
+      "You hold, or expect, a First or Upper Second Class Honours degree, or a master’s degree",
+      "You finish any degree still in progress by 30 September 2027",
+      "You meet UCC’s English language requirements",
+      "You have found a UCC lead supervisor who agrees to support you and submit the application for you",
+      "You do not already hold a doctorate or another doctoral scholarship, and you are not permanent staff at a university or research body",
+    ],
+    documents: [
+      "Application submitted for you by your UCC lead supervisor through the Pure system",
+      "Official academic transcripts",
+      "Proof of English language level, where it applies",
+      "If you are selected: supporting documents uploaded through UCC Apply by 1 April 2027",
+    ],
+  },
+
+  'noha-erasmus-mundus-joint-master-in-international-humanitarian-action-2027-29': {
+    eligibility: [
+      "You hold a bachelor’s degree (EQF level 6) in a subject relevant to humanitarian action",
+      "You finish your degree before the 15 December 2026 deadline",
+      "You have the language certificate for the universities you choose: English C1, French C1 or Spanish B2",
+      "Native speakers from English-speaking countries, or people whose whole bachelor’s was taught in English, may be exempt from the English test",
+      "Some partner universities add their own national admission rules",
+    ],
+    documents: [
+      "Copy of passport",
+      "Certified copy of your diploma (or an official letter from your registrar if you have not graduated yet)",
+      "Certified copies of academic transcripts",
+      "CV in English",
+      "Reference letters",
+      "Language certificate",
+      "Online application on the NOHA apply portal",
+    ],
+  },
+
+  'uc-merced-phd-in-public-health-fall-2027': {
+    eligibility: [
+      "You have a bachelor’s degree with a GPA of at least 3.0",
+      "You passed an introductory statistics course with a grade of B or better",
+      "The GRE is not required",
+      "A master’s in public health (or similar), or two or more years of related work, is strongly encouraged but not required",
+    ],
+    documents: [
+      "Official transcripts of your previous study",
+      "Three letters of recommendation",
+      "Statement of purpose (your research interests, methods, career goals and the faculty whose work fits yours)",
+    ],
+  },
+
+  'merck-foundation-online-scholarships-for-doctors-in-underserved-specialties-2026-call': {
+    eligibility: [
+      "You are a doctor from an African or other developing country, based on the UN Human Development Index",
+      "You hold a medical degree (usually MBBS or MBChB); some specialties ask for more",
+      "You apply for one specialty only",
+      "You can show English language level, as the courses are taught in English",
+      "You need a stable internet connection",
+      "Doctors working in the public sector are preferred",
+    ],
+    documents: [
+      "Online application form",
+      "CV",
+      "Graduation certificate",
+      "Personal statement or letter of interest",
+      "Recommendation letter (for African applicants, from the First Lady’s Office or the Ministry of Health)",
+      "Proof of income, such as a recent payslip, salary certificate or three-month bank statement",
+      "Certified translations of any documents not in English",
+    ],
+  },
+
+  'eth-zurich-computer-science-student-summer-research-fellowship-2027': {
+    eligibility: [
+      "You are enrolled in a bachelor’s or master’s programme in computer science or a close field at a university outside ETH Zurich",
+      "Students of any nationality can apply",
+      "You will have finished two years of study by the start of the fellowship",
+      "You graduate in the year after the fellowship or later",
+      "You can be in Zurich for the whole of July and August",
+      "The programme is in English",
+    ],
+    documents: [
+      "CV in English, preferably Europass format (PDF)",
+      "Official transcript from your university, in English, German, French or Italian (PDF)",
+      "Motivation letter in English, one page at most (PDF)",
+      "Application through the SiROP portal, naming one or two preferred research areas",
+    ],
+  },
+
+  'university-of-sydney-international-stipend-scholarship-2027-research-periods-3-4': {
+    eligibility: [
+      "You are an international student when the scholarship is awarded",
+      "You are applying to a research degree (PhD or similar) at the University of Sydney",
+      "You study full-time; part-time is only allowed in special cases your visa permits",
+      "Selection looks at academic merit, research experience, the research environment and supervision",
+      "People who already hold an Australian Government or University scholarship at the same level may be ranked lower",
+    ],
+    documents: [
+      "Complete admission application for the research degree through Sydney Courses",
+      "Your student ID, which you get after submitting that application",
+      "Scholarship application form",
+      "Official transcripts and qualifications with the grading scheme, combined into one PDF (with English translations if needed)",
+      "Optional evidence of research experience, on the University’s research experience form",
+    ],
+  },
+
+  'max-planck-weizmann-joint-postdoctoral-program-2027-starts': {
+    eligibility: [
+      "You start the programme within four years of finishing your PhD or MD",
+      "You submit your PhD thesis before you start",
+      "Any nationality can apply, and there is no age limit",
+      "You do not apply together with your own PhD advisor",
+      "You have found researchers at both a Max Planck institute and the Weizmann Institute for a joint project, and both have funds to support you",
+    ],
+    documents: [
+      "Detailed CV with your academic background, research experience and publications",
+      "At least three recommendation letters, one from your PhD advisor",
+      "Support letters from the researchers at both host institutes (a joint letter is fine)",
+      "Research statement, up to two pages",
+      "Plan splitting the four years equally between the two institutes",
+    ],
+  },
+
+  'itlos-internship-programme-july-september-2027': {
+    eligibility: [
+      "You have completed at least three years of university study and are enrolled in a degree or postgraduate course, or graduated in the last 12 months",
+      "You are normally no older than 32",
+      "You are a national of a developing country on the OECD list, normally live there, and need help with travel and living costs",
+      "You speak English and/or French well",
+      "Your field is law of the sea, public international law, international relations, political science, library science, translation, or communications or media",
+      "The internship is unpaid",
+    ],
+    documents: [
+      "Online internship application form",
+      "CV",
+      "One-page covering letter",
+      "Writing sample of up to 10 pages",
+      "Proof of enrolment, or your transcripts",
+      "References",
+      "Language certificates",
+      "Translations into English or French of documents in other languages",
+    ],
+  },
+
+  'uncitral-60th-anniversary-global-essay-competition': {
+    eligibility: [
+      "Researchers from all subjects and career stages can enter",
+      "Students must be enrolled in, or have finished, a research-based master’s or PhD programme in law",
+      "You need written endorsement from your university or research institution",
+      "Joint essays are allowed, with no limit on co-authors",
+      "Published and unpublished work are both accepted",
+      "Essays may be in any of the six UN languages",
+    ],
+    documents: [
+      "Essay of no more than 10,000 words (including footnotes, not the bibliography)",
+      "Abstract of up to 300 words, in English or French",
+      "Official communication showing your university or institution endorses your entry",
+      "Everything sent by email to uncitral60@un.org with the subject line “Global Essay Competition”",
+    ],
+  },
+
+  'unesco-internship-priority-africa-and-external-relations-2027': {
+    eligibility: [
+      "You are at least 20 years old",
+      "You are in the last or third-to-last year of a bachelor’s degree, enrolled in a master’s or PhD, or finished one of these within the last 12 months",
+      "You write and speak English or French very well",
+      "You have good computer and communication skills",
+      "The internship is unpaid, and you pay for your own travel, visa and health insurance",
+    ],
+    documents: [
+      "Online application form, completed within one hour",
+      "CV",
+      "Motivation letter",
+    ],
+  },
+
+  'european-youth-assembly-2027-funded-seats-amsterdam': {
+    eligibility: [
+      "Open to all nationalities and regions",
+      "You are generally between 17 and 47 years old",
+      "Any study field or work background is welcome",
+      "Funded seats are given through a competitive, scored selection of leadership, impact and your overall profile",
+    ],
+    documents: [
+      "Online application form (one form covers all participation categories)",
+      "Application fee of USD 17.99 (USD 21.21 with service charges and VAT); paying does not guarantee selection",
+    ],
+  },
+
+  'youth-diplomacy-convention-2027-funded-seats-brussels': {
+    eligibility: [
+      "International applicants should be aged 17 to 47",
+      "No particular field of study is required",
+      "First-time applicants are encouraged to apply",
+      "Scholarship seats are chosen on leadership potential, motivation and fit with the convention’s themes",
+    ],
+    documents: [
+      "Online scholarship application form on the OGPS website",
+      "Motivation statement of 250 to 400 words on why you need financial support",
+      "Confirmation and processing fee (listed at £11.99)",
+    ],
+  },
+
+  'nus-medicine-graduate-studies-award-phd-august-2027-intake': {
+    eligibility: [
+      "You hold an undergraduate degree with First Class Honours or Highest Distinction, or equivalent",
+      "You get an offer to a full-time research programme at NUS Medicine",
+      "You are eligible for the Singapore Ministry of Education subsidy",
+      "You do not apply for the award separately; the admission committee picks up to 10 top candidates each year",
+    ],
+    documents: [
+      "NUS Medicine graduate research programme application (this is also how you are considered for the award)",
+      "Statement of purpose",
+      "Letters of recommendation",
+      "CV",
+    ],
+  },
+
+  'sushi-tech-challenge-2027-startup-pitch-contest-tokyo': {
+    eligibility: [
+      "Your startup has a new technology or business model with room to grow",
+      "You already have a product or service",
+      "Your business fits the SusHi Tech Tokyo idea of building sustainable cities with high technology",
+      "You can pitch in person at the venue on both days of the event",
+    ],
+    documents: [
+      "Online entry form with your company information",
+      "Pitch materials (in English)",
+      "Pitch video, if you reach the second round",
+    ],
+  },
+
 }
