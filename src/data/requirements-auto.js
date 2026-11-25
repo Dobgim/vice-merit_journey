@@ -2332,4 +2332,117 @@ export const autoRequirements = {
     ],
   },
 
+  // Checked 2026-11-25 against each call’s official page.
+  'faspe-journalism-fellowship-2027': {
+    eligibility: [
+      "You have some journalism experience",
+      "You are in a graduate programme and plan to work as a journalist, or you have finished a degree and work as a journalist",
+      "Total professional experience is generally no more than 10 years",
+      "Published or broadcast work from a recognised news organisation is preferred",
+      "Any nationality can apply, but you must arrange your own visa",
+      "You can attend the whole programme, 18 June to 2 July 2027",
+    ],
+    documents: [
+      "Online cover form (contact details, schools attended, recommenders)",
+      "Resume or CV",
+      "Transcripts from every higher-education institution you spent significant time at",
+      "Short essay answers (up to 1,800 words in total, one PDF)",
+      "Recommendation letters sent directly by your recommenders",
+    ],
+  },
+  'reagan-fascell-democracy-fellows-program-2027-28': {
+    eligibility: [
+      "You can work and write in English",
+      "Your project is about political, social, economic, legal or cultural aspects of democratic development",
+      "You can live in Washington, D.C. for the five-month fellowship",
+      "Practitioner track: substantial experience promoting democracy or human rights, usually mid-career; no degree needed",
+      "Scholarly track: a doctorate at the time of applying, a record of publications and a detailed research outline",
+      "Past Reagan-Fascell fellows cannot apply again",
+      "You cannot have been on a J-1 research scholar programme in the 24 months before the fellowship",
+    ],
+    documents: [
+      "Applicant information, entered in the online portal",
+      "Project proposal for the practitioner or scholarly track",
+      "Letters of recommendation",
+      "Resume or CV and a biography of up to 200 words",
+      "All materials in English",
+    ],
+  },
+  'harvard-loeb-fellowship-2027-28': {
+    eligibility: [
+      "You are a mid-career practitioner with at least 8 years of experience in your field",
+      "Students cannot apply",
+      "No degree is needed, and transcripts are not reviewed",
+      "Applicants from outside the US are welcome, but must be able to get a J-1 visa",
+    ],
+    documents: [
+      "Online application",
+      "Three letters of recommendation",
+      "Resume showing the dates of your work history",
+      "Supplementary materials (optional, but recommended)",
+    ],
+  },
+  'the-moth-poetry-prize-2026': {
+    eligibility: [
+      "You are over 16 when you enter",
+      "Anyone in the world can enter",
+      "Poems must be in English (translations are accepted with the translator’s permission)",
+      "The poem is entirely your own work and has never been published, online or in print, or broadcast",
+      "AI-generated work is not allowed",
+      "Any length and any subject, but not a collection",
+    ],
+    documents: [
+      "Your poem, with your name not on the same page",
+      "Entry fee of €17 per poem",
+      "Online entry, or by post with an entry form or cover letter giving your name, contact details and poem title",
+    ],
+  },
+  'underwater-photographer-of-the-year-2027': {
+    eligibility: [
+      "Photographers of any nationality can enter",
+      "Photos in the main categories must be taken underwater (split-level images are allowed)",
+      "British categories need photos taken in UK waters and a British national, passport holder or resident",
+      "Up & Coming is for photographers who have never won an underwater photography award or been published",
+      "AI-generated images are not allowed",
+    ],
+    documents: [
+      "Online registration and image upload",
+      "JPG images, 2,000 pixels on the longest side, with camera EXIF data and no watermark",
+      "Entry fee of £20, £35 or £45 for 3, 10 or 20 images (free categories allow 5 images each), paid by PayPal",
+      "RAW and high-resolution files, only if you are shortlisted",
+    ],
+  },
+  'insead-phd-in-management-2027-fully-funded': {
+    eligibility: [
+      "You have a bachelor’s degree or equivalent, with or without a master’s",
+      "A valid GMAT or GRE score is required and cannot be waived (no minimum score)",
+      "Your test score is less than five years old",
+      "English test (TOEFL) if English is not your first language, unless your degree was taught entirely in English",
+    ],
+    documents: [
+      "GMAT or GRE score report",
+      "CV",
+      "Transcripts",
+      "Statement of purpose (about 1,500 words)",
+      "Three recommendation letters, preferably from professors",
+      "Recorded one-way video interview",
+      "Application fee of €80",
+      "TOEFL score, if required",
+    ],
+  },
+  'gef-small-grants-programme-ethiopia-op8-tranche-2-call-for-proposals': {
+    eligibility: [
+      "Only not-for-profit groups can apply: locally registered NGOs, CSOs and CBOs",
+      "You must show strong capacity to run a small grant project",
+      "The project fits a GEF area: biodiversity, land degradation, sustainable forest management, climate change, chemicals and waste, or capacity development",
+      "Priority landscapes include the Central Rift Valley and listed districts in Oromia, Sidama and Central Ethiopia",
+      "The grant is up to US$75,000 and the project lasts no more than 24 months",
+    ],
+    documents: [
+      "Project proposal on the SGP OP8 project proposal template",
+      "Rough budget set against your activities",
+      "Copy of the proposal sent to the national coordinator of the GEF Small Grants Programme in Ethiopia",
+    ],
+  },
+
 }
