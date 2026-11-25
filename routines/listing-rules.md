@@ -34,6 +34,17 @@ Scholarships come first. They are the owner's top priority.
 
 A scholarship open to several levels counts for each of them.
 
+**Fully funded first:** at least **10 of the day's scholarships must be fully funded**. Search for
+fully funded calls first (government scholarships, Erasmus Mundus, foundation and named university
+scholarships that cover tuition and living costs) and add partly funded ones only after that. Mark a
+call `Fully Funded` only if the official page says it covers full tuition and a living allowance or
+stipend. If you can't find 10 real ones, don't relabel partial awards; say so in the final report.
+
+**The other types count too:** fellowships, grants, internships and competitions have their own
+time in every run (see the run files). Don't spend the whole run on scholarships. For internships,
+look for paid programmes with a fixed application window (UN agencies, international organisations,
+development banks, central banks, research institutes, large companies' international programmes).
+
 **Country spread per day (all types):**
 - **At most 5 new listings from any one country.**
 - **At most 4 from the United Kingdom.**
@@ -102,10 +113,12 @@ scholarships 2027". For each scholarship they list:
 Earlier runs stopped after about 4 minutes and 40 searches. That is not acceptable.
 
 **Minimum effort per run:**
-- **Daily run:** at least 80 WebSearch queries, at least 50 of them for scholarships (including the
-  coverage check), and at least 35 candidate calls checked on the funder's own site.
-- **Subject run:** at least 45 queries, at least half for scholarships, and at least 20 candidates
-  checked.
+- **Daily run:** at least 90 WebSearch queries: at least 50 for scholarships (including the
+  coverage check, and at least 20 aimed at fully funded calls) and **at least 8 for each** of
+  fellowships, grants, internships and competitions. At least 35 candidate calls checked on the
+  funder's own site.
+- **Subject run:** at least 55 queries: at least half for scholarships, and **at least 5 per subject
+  for each** of fellowships, grants, internships and competitions. At least 20 candidates checked.
 
 Keep a running tally. When a search only finds calls that are already listed, change the angle and
 keep going. **Ending a run before these minimums is a failure.** The final report must state the
@@ -148,6 +161,11 @@ Append rows to the right array in `src/data/listings-auto.js` (`scholarshipRows`
 **Fields:** `name`, `org`, `country`, `flag`, `level`, `funding` (scholarships) or `category` (others),
 `focus`, `who`, `amount`, `summary`, `deadline`, `opens` (only if known), `note`, `url`, `logoDomain`,
 `tags`, `added`, `eligibility`, `documents`.
+
+- **`funding`:** exactly `'Fully Funded'` or `'Partially Funded'`, spelled and capitalised like
+  that. The site's filters and badges match this text exactly, so anything else (for example
+  "Partial Funding" or "Fully funded") hides the listing from the funding filters.
+  `node scripts/today-counts.mjs` warns about any other value; fix it before committing.
 
 - **`level`:** write the real levels plainly, so the counts work. Examples: "Master’s",
   "Bachelor’s", "Bachelor’s and Master’s", "PhD".

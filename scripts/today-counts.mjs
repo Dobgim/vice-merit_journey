@@ -22,6 +22,7 @@ let type = '?'
 const types = {}
 const levels = {}
 const countries = {}
+const funding = {}
 for (const line of text.split('\n')) {
   const head = line.match(/^const (\w+)Rows = \[/)
   if (head) type = head[1]
@@ -30,10 +31,19 @@ for (const line of text.split('\n')) {
   if (type === 'scholarship') {
     const lv = levelOf(field(line, 'level'))
     levels[lv] = (levels[lv] ?? 0) + 1
+    const f = field(line, 'funding')
+    funding[f] = (funding[f] ?? 0) + 1
   }
   const c = field(line, 'country')
   if (c && !MULTI.test(c)) countries[countryOf(c)] = (countries[countryOf(c)] ?? 0) + 1
 }
+
+// Any funding label other than these two is missed by the site's funding filters and badges.
+const badFunding = text
+  .split('\n')
+  .filter((line) => line.includes(`added: '${day}`))
+  .map((line) => [field(line, 'funding'), field(line, 'name')])
+  .filter(([f]) => f && f !== 'Fully Funded' && f !== 'Partially Funded')
 
 const count = (o, k) => o[k] ?? 0
 const sum = (pred) => Object.entries(levels).filter(([k]) => pred(k)).reduce((n, [, v]) => n + v, 0)
@@ -42,5 +52,12 @@ console.log('By type:', ['scholarship', 'fellowship', 'grant', 'internship', 'co
 console.log('Scholarships by level:', JSON.stringify(levels))
 console.log(`  master's: ${sum((k) => k.includes('Master'))} (need 8+), bachelor's: ${sum((k) => k.includes('Bachelor'))} (need 5+), PhD only: ${count(levels, 'PhD only')} (max 6)`)
 const full = Object.entries(countries).filter(([c, n]) => n >= (c === 'United Kingdom' ? 4 : 5)).map(([c]) => c)
+console.log(`Scholarships fully funded: ${count(funding, 'Fully Funded')} (need 10+), partially funded: ${count(funding, 'Partially Funded')}`)
+const short = ['fellowship', 'grant', 'internship', 'competition'].filter((t) => count(types, t) < 5)
+console.log('Other types still under 5:', short.length ? short.join(', ') : 'none')
+if (badFunding.length) {
+  console.log("WARNING: funding must be 'Fully Funded' or 'Partially Funded'. Fix these rows:")
+  for (const [f, name] of badFunding) console.log(`  ${f}: ${name}`)
+}
 console.log('By country:', JSON.stringify(countries))
 console.log('Countries already full for today (skip them):', full.length ? full.join(', ') : 'none')

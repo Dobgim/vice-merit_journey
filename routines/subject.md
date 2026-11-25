@@ -8,14 +8,16 @@ Stay on those subjects. A separate daily run covers everything else.
 3. Run `node scripts/today-counts.mjs`.
 4. For each subject, one at a time:
    - **Scholarships first:** at least 6 queries for master's and bachelor's scholarships in that
-     subject, for example:
+     subject, at least 2 of them for fully funded ones, for example:
      - "<subject> master's scholarship 2027 international students"
      - "<subject> undergraduate scholarship 2027"
      - "<sub-field> Erasmus Mundus"
      - "<subject> scholarship <country> 2027"
      Search every region (Europe, Asia, Middle East, Americas, Africa, Oceania).
-   - **Then the other types:** at least 2 queries each for fellowships, grants, internships and
-     competitions in that subject.
+   - **Then the other types:** at least 5 queries each for fellowships, grants, internships and
+     competitions in that subject (for example "<subject> fellowship 2027", "<subject> research
+     grant 2027", "<subject> paid internship 2027 international", "<subject> competition 2027
+     prize").
    - Use the subject's sub-fields. For example, for civil engineering also search structural,
      geotechnical, transport, construction and water.
    - Respect the country limits in the rules file.
