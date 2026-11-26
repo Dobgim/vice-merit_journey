@@ -2445,4 +2445,201 @@ export const autoRequirements = {
     ],
   },
 
+  // Checked 2026-11-26 against each call’s official page.
+  'edinburgh-cdt-in-machine-learning-systems-phd-studentships-2027-entry': {
+    eligibility: [
+      "You need at least a UK 2:1 honours degree, or an equivalent from another country, in a relevant subject",
+      "A master’s degree is not required to apply",
+      "Proof of English: a degree taught in English in a majority English-speaking country, or a test such as IELTS Academic 6.5 overall with at least 6.0 in each part",
+      "A test taken within the last 2 years is accepted; without one by the offer stage you only get a conditional funding offer",
+      "Some non-UK applicants need ATAS clearance, and UKRI limits international students to 3 in each yearly round",
+    ],
+    documents: [
+      "Research proposal of about 2 to 5 pages (student-led route), or a 1 to 2 page Research Approach document (company-linked route)",
+      "Personal statement of no more than 500 words, typed into the online application",
+      "Two references, preferably from academics",
+      "English language test result, if you need one (can follow by the offer stage)",
+    ],
+  },
+
+  'sichuan-university-chinese-government-scholarship-2027-type-b-round-1': {
+    eligibility: [
+      "You must not be a Chinese citizen and must be in good physical and mental health",
+      "Master’s applicants must hold a bachelor’s degree and be under 35",
+      "PhD applicants must hold a master’s degree and be under 40",
+      "Chinese-taught programmes need HSK 4 (science, engineering, medicine, agriculture) or HSK 5 (arts and humanities)",
+      "English-taught programmes need TOEFL iBT above 80 or IELTS above 6 if English is not your first language",
+      "Apply on both the CSC portal (campuschina.org, agency code 10610) and the Sichuan University portal",
+    ],
+    documents: [
+      "Chinese Government Scholarship application form, in Chinese or English",
+      "Passport copy",
+      "Highest degree diploma, notarised (or proof of student status if you are still studying)",
+      "Academic transcripts from undergraduate level onward",
+      "Language certificate: HSK for Chinese-taught programmes, or IELTS/TOEFL for English-taught ones",
+      "Study plan of more than 1,000 characters or words",
+      "Two recommendation letters from professors or associate professors",
+      "Foreigner Physical Examination Form, valid for six months",
+      "Police clearance (non-criminal record) certificate, usually issued within six months",
+    ],
+  },
+
+  'erasmus-mundus-joint-master-in-flood-risk-management-floodrisk-2027-29': {
+    eligibility: [
+      "You need a first degree equal to a BSc (180 ECTS) with a grade of at least B/B+ (US) or UK upper second class",
+      "The degree should be in a related field such as civil or environmental engineering, geosciences or geography, with solid maths and water knowledge",
+      "Final-year students can apply if they have at least 120 ECTS and will finish by 15 August",
+      "You need an English test result (it can be uploaded later, by 1 February 2027)",
+      "You cannot get the scholarship if you already had an Erasmus Mundus joint master scholarship",
+      "Scholarship deadline is 3 January 2027 for partner-country applicants and 7 February 2027 for programme-country applicants",
+    ],
+    documents: [
+      "Certified copy of your diploma (or a university statement if you are in your final year)",
+      "Certified transcripts showing grades and your average",
+      "Two recommendation letters from academic or professional referees, no more than a year old",
+      "English test result",
+      "Passports of both nationalities (if you have two) in a single PDF",
+      "Answers to the five motivation questions in the online form",
+    ],
+  },
+
+  'groundwatch-erasmus-mundus-joint-master-scholarship-2027-29-groundwater-and-global-change': {
+    eligibility: [
+      "You need a first degree equal to a BSc (180 ECTS) with a CGPA of at least B/B+ (US) or UK upper second class",
+      "Your degree should be in a relevant field such as geology, hydraulic, civil, environmental or agricultural engineering, geosciences, environmental or climate sciences or geography",
+      "You need enough maths knowledge",
+      "You need a recognised English language test",
+      "You cannot get the scholarship if you already had an Erasmus Mundus joint master scholarship",
+      "If you have two nationalities, you must choose which one you apply under",
+      "Scholarship deadline is 3 January 2027 for partner-country applicants and 7 February 2027 for programme-country applicants",
+    ],
+    documents: [
+      "Certified copies of your diplomas, with a sworn English translation if needed",
+      "Certified transcripts with grades and average, and an explanation of the grading system",
+      "CV covering work experience and research record, if any",
+      "Answers to the five motivation questions, written in your own words",
+      "English test result (can be uploaded later, before 1 February 2027)",
+      "Passports in a single PDF (both, if you have two nationalities)",
+      "Recommendation letters",
+    ],
+  },
+
+  'faspe-clergy-religious-leaders-fellowship-2027': {
+    eligibility: [
+      "You must be studying at a graduate level for religious leadership (seminary, divinity school, rabbinical school, Muslim chaplaincy programme or similar) when you apply",
+      "Or you already work as a religious leader and got a relevant graduate degree in May 2020 or later",
+      "Ordination is not required",
+      "All faiths are welcome, and there is no citizenship or residency rule",
+      "The fellowship is fully funded; applications close 3 January 2027",
+    ],
+    documents: [
+      "Online cover form on the Submittable portal (contact details, schools, recommender details)",
+      "Resume or CV with education, jobs, honours and publications",
+      "Transcripts from schools where you spent significant time (unofficial copies are accepted)",
+      "Two recommendation letters (due 10 January 2027); early-career applicants may use a supervisor or employer",
+      "Answers to the short essay questions",
+    ],
+  },
+
+  'ilspsd-erasmus-mundus-joint-master-in-international-law-of-security-peace-and-sustainable-development-2027-29': {
+    eligibility: [
+      "You need a first degree of at least 180 ECTS (or equivalent) that gives access to master’s study in the country it was issued",
+      "The LL.M. track needs 60 ECTS in law; the MA track needs 60 ECTS in law, political science, international relations or related subjects",
+      "Scholarship applicants must have finished their degree already; unfinished degrees can only be admitted as self-funded",
+      "Non-native English speakers need CEFR C1, for example IELTS Academic 7.0 or TOEFL iBT 95, taken within two years",
+      "Scholarship deadline is 4 January 2027; self-funded deadline is 31 March 2027",
+    ],
+    documents: [
+      "Diploma and transcript of your first degree (or a transcript plus a university statement that you will finish before 31 August)",
+      "Personal statement, ideally under 1,000 words: motivation, research interests and preferred Semester 3 track",
+      "Two reference letters dated within two years, at least one academic",
+      "Europass CV with a photo",
+      "English language test result",
+      "French language proof, if you choose the Brussels track",
+    ],
+  },
+
+  'w-m-tapp-studentships-in-law-llm-cambridge-2027-28': {
+    eligibility: [
+      "You need a law degree from a UK or overseas university, or must finish it by 1 September of the year you start",
+      "You must not already be a member of Gonville and Caius College",
+      "You must plan to study Law at Cambridge",
+      "The college expects outstanding academic ability, and an award may depend on your final degree result",
+      "The studentship is not available for Criminology, and applications for the Master’s in Corporate Law are unlikely to succeed",
+      "Colleges first consider applicants who name Caius as their first choice",
+    ],
+    documents: [
+      "Application form from the Tapp studentship webpage",
+      "Academic transcript",
+      "Two references written for the Tapp studentship",
+    ],
+  },
+
+  'centa-nerc-phd-studentships-in-environmental-science-2027-entry': {
+    eligibility: [
+      "You generally need a UK 2:1 at BSc level or a pass at UK MSc level, or an equivalent; each case is judged individually",
+      "International students can apply, but only up to 30% of CENTA places go to them",
+      "You apply to a specific advertised project; you can apply to only one project per university",
+      "Student-designed projects are not accepted for autumn 2027 entry",
+      "Apply by 23:59 GMT on 6 January 2027",
+    ],
+    documents: [
+      "CENTA Studentship Application Form 2027, completed without help from the project supervisor (applications without it are rejected)",
+      "CV with at least two referees",
+      "Application to the host university through its portal, quoting the project reference (for example CENTA 2027-W16)",
+      "Extra items some hosts ask for, such as degree certificates and English language proof (see the project advert)",
+    ],
+  },
+
+  'tu-e-scholarship-for-excellence-2027-28-microchip-innovation': {
+    eligibility: [
+      "You must apply for a full-time master’s at TU/e starting 1 September 2027 in a selected programme: Applied Physics, Electrical Engineering, Mechanical Engineering or Mathematics & Computer Science",
+      "You need a non-Dutch high school diploma or bachelor’s degree",
+      "Your latest transcript needs a GPA of at least 7.5 out of 10",
+      "You must be able to meet the Dutch entry visa and residence permit rules",
+      "You cannot have completed higher education in the Netherlands already (exchange programmes are fine)",
+      "Joint Tilburg (JADS) and European Double Degree applicants are not eligible",
+      "Complete your application by 1 January 2027, 23:59 CET",
+    ],
+    documents: [
+      "Complete application to your TU/e master’s programme, meeting its admission requirements",
+      "Brief motivation letter in the application about your commitment to positive impact and relevant experience",
+      "Proof of English proficiency (part of the master’s admission)",
+      "Diploma and transcript (official copies are needed for enrolment)",
+    ],
+  },
+
+  'oxford-pershing-square-graduate-scholarships-2027': {
+    eligibility: [
+      "You must be admitted to both the Oxford 1+1 MBA programme and the Oxford MBA; waitlisted applicants are not considered",
+      "This covers applicants to a partnering master’s programme, to another one-year master’s, or current master’s students who got into the MBA",
+      "Applicants admitted to a partnering master’s programme are considered first",
+      "Selection looks at commitment to world-scale social challenges, leadership potential, academic results and character",
+      "Apply to the 1+1 MBA and your master’s by 6 January 2027",
+    ],
+    documents: [
+      "Full application to the 1+1 MBA and to your chosen master’s",
+      "GMAT or GRE score",
+      "Scholarship essay of up to 500 words, uploaded in the Funding section of the 1+1 MBA form",
+    ],
+  },
+
+  'mastercard-foundation-afox-scholarship-oxford-mba-2027-28': {
+    eligibility: [
+      "You must be a citizen of an African country and ordinarily live in Africa",
+      "You must not already have a master’s degree",
+      "You must show a commitment to Africa’s development",
+      "There is no separate scholarship application: apply to the Oxford MBA and you are considered automatically",
+      "Apply by the January (Stage 4) deadline to be considered for Oxford scholarships",
+      "You need an undergraduate degree and at least two years of work experience for the MBA",
+    ],
+    documents: [
+      "Oxford MBA online application form",
+      "Written supporting statement",
+      "GMAT or GRE score",
+      "Online assessment",
+      "Undergraduate degree record",
+    ],
+  },
+
 }
