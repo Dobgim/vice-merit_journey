@@ -52,7 +52,8 @@ console.log('By type:', ['scholarship', 'fellowship', 'grant', 'internship', 'co
 console.log('Scholarships by level:', JSON.stringify(levels))
 console.log(`  master's: ${sum((k) => k.includes('Master'))} (need 8+), bachelor's: ${sum((k) => k.includes('Bachelor'))} (need 5+), PhD only: ${count(levels, 'PhD only')} (max 6)`)
 const full = Object.entries(countries).filter(([c, n]) => n >= (c === 'United Kingdom' ? 4 : 5)).map(([c]) => c)
-console.log(`Scholarships fully funded: ${count(funding, 'Fully Funded')} (need 10+), partially funded: ${count(funding, 'Partially Funded')}`)
+console.log(`Scholarships fully funded: ${count(funding, 'Fully Funded')} (need 10+), partially funded: ${count(funding, 'Partially Funded')} (max 5)`)
+if (count(funding, 'Partially Funded') >= 5) console.log('Partially funded limit reached for today: add only fully funded scholarships now.')
 const short = ['fellowship', 'grant', 'internship', 'competition'].filter((t) => count(types, t) < 5)
 console.log('Other types still under 5:', short.length ? short.join(', ') : 'none')
 if (badFunding.length) {

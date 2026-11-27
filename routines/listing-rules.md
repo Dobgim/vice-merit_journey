@@ -21,7 +21,7 @@ Scholarships come first. They are the owner's top priority.
 
 | Type | At least per day |
 |---|---|
-| Scholarships | 25 |
+| Scholarships | 25 (only strong ones; see "Strong listings only" below) |
 | Fellowships | 5 |
 | Grants | 5 |
 | Internships | 5 |
@@ -39,6 +39,22 @@ fully funded calls first (government scholarships, Erasmus Mundus, foundation an
 scholarships that cover tuition and living costs) and add partly funded ones only after that. Mark a
 call `Fully Funded` only if the official page says it covers full tuition and a living allowance or
 stipend. If you can't find 10 real ones, don't relabel partial awards; say so in the final report.
+
+**Strong listings only.** The owner wants powerful listings, not weak ones. Fewer strong listings
+are better than many weak ones, so the 25 is a goal, never a reason to add a weak call.
+- **At most 5 partially funded scholarships per day**, across all runs.
+- A partially funded scholarship qualifies only if it gives **at least one** of:
+  - a **full tuition waiver**;
+  - **at least 50% of tuition**;
+  - **at least US$10,000 a year** (or the same in another currency, for example €9,000, £8,000);
+  - a **monthly stipend or living allowance**.
+- **Skip:** small fee discounts (10–30%), one-off awards under US$5,000, "up to" awards with no
+  minimum, early-payment or alumni discounts, and awards that only reduce a fee the university set
+  high on purpose. If the official page gives no amount, skip it.
+- Put the real value in `amount` (for example "50% tuition waiver, about €9,000 a year"), so
+  visitors can see why it is worth applying.
+- The same standard applies to fellowships and grants (a real stipend or a meaningful sum), and
+  internships must be **paid** or come with a stipend.
 
 **The other types count too:** fellowships, grants, internships and competitions have their own
 time in every run (see the run files). Don't spend the whole run on scholarships. For internships,
@@ -139,8 +155,8 @@ number of queries and candidates checked, per type.
 4. **Open to international applicants** (see the goal above).
 5. **Not already on the site.** Run `grep -ri` on the programme name and key words across
    `src/data/*.js`, and check `retiredSlugs` in `src/data/fixes-oct21-2026.js`.
-6. **Funded** (fully or partly), or, for a competition, a prize. If applying costs money, put the fee
-   in `note` and add 'Application fee' to `tags`.
+6. **Funded** (fully, or partly at the level in "Strong listings only"), or, for a competition, a
+   prize. If applying costs money, put the fee in `note` and add 'Application fee' to `tags`.
 
 **The quality rules always win over the numbers.** Never invent a date or a requirement.
 

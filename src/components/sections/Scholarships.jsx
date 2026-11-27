@@ -19,8 +19,14 @@ import { TIMING_FILTERS, formatPosted, isNew, postedSortKey } from '../../lib/ti
 import useSaved, { toggleSaved } from '../../lib/saved'
 import { countriesOf, searchListings } from '../../lib/search'
 
+/** Fully funded awards come first; `fn` orders the rest within each group. */
+const fullyFundedFirst = (fn) => (a, b) =>
+  Number(b.funding === 'Fully Funded') - Number(a.funding === 'Fully Funded') || fn(a, b)
+
 const SORTS = {
-  deadline: { label: 'Deadline (soonest)', fn: byDeadline },
+  // Default order. Only scholarships use 'Fully Funded', so on other pages this is simply by deadline.
+  deadline: { label: 'Recommended', fn: fullyFundedFirst(byDeadline) },
+  soonest: { label: 'Deadline (soonest)', fn: byDeadline },
   newest: {
     label: 'Newest first',
     fn: (a, b) => postedSortKey(b) - postedSortKey(a),
