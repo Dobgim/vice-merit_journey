@@ -194,6 +194,8 @@ export const retiredSlugs = new Set([
   // mandatory info session (15–24 Sep 2026); the declaration stage closed in October.
   'edinburgh-x-mastercard-foundation-online-learning-scholars',
   'university-of-edinburgh-mastercard-foundation-scholars-program',
+  'university-of-toronto-international-scholarships', // Lester B. Pearson 2027 closed 6 Nov 2026 (checked 27 Nov)
+  'wales-graduate-school-for-the-social-sciences-esrc-studentships', // duplicate of the WGSSS ESRC DTP listing (14 Dec 2026)
 ])
 
 /** Corrections found on the official pages. */

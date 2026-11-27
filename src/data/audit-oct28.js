@@ -13,7 +13,7 @@ export const fixes = {
   'swe-golden-gate-section-scholarships': opensOn('2026-12-01', 'Applications open on 1 December 2026.'),
   'wenner-gren-wadsworth-african-fellowship-2027': opensOn('2026-11-01', 'The application portal opens on 1 November 2026. Apply in the first year of your doctorate.'),
   'wenner-gren-engaged-research-grant': opensOn('2027-06-01', 'The application portal opens in June 2027.'),
-  'ikea-foundation-switzerland-scholarships': opensOn('2026-11-16', 'Applications open on a new portal in mid-November 2026.'),
+  'ikea-foundation-switzerland-scholarships': opensOn('2026-11-16', 'Apply by 1 April 2027 for courses starting in autumn 2027, or by 1 August 2027 for courses starting in February 2028.'),
   'ikea-foundation-switzerland-project-and-work-grants': opensOn('2026-11-16', 'Applications open on a new portal in mid-November 2026. Apply at least four months before your project starts.'),
   'prosperous-future-grant-programme-2027-round-5': opensOn('2026-11-18', 'Applications open on 18 November 2026 and close at 23:59 on 27 January 2027.'),
   // Added 30 Oct 2026; windows not open yet.

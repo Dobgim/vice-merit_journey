@@ -30,6 +30,16 @@
       "source": "/fellowships/mims-clinical-research-fellowships-2027",
       "destination": "/fellowships/mims-clinical-research-fellowships-2027-umea-university-infection-medicine",
       "permanent": true
+    },
+    {
+      "source": "/scholarships/um-nl-social-justice-scholarship-2027-28-globalisation-and-law-maastricht",
+      "destination": "/scholarships/um-social-justice-scholarship-globalisation-and-law-maastricht-2027-28",
+      "permanent": true
+    },
+    {
+      "source": "/scholarships/wales-graduate-school-for-the-social-sciences-esrc-studentships",
+      "destination": "/scholarships/wgsss-esrc-doctoral-training-partnership-general-studentships-2027-28-wales",
+      "permanent": true
     }
   ],
   "rewrites": [
