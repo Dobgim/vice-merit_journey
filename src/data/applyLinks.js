@@ -178,7 +178,7 @@ export const applyLinks = {
   'university-college-cork-ai-phd-studentships': 'https://www.ucc.ie/en/graduatestudies/',
   'university-of-galway-robotics-ai-phd': 'https://www.universityofgalway.ie/',
   'erasmus-mundus-master-in-public-policy-mundus-mapp': 'https://mundusmapp.org/application/',
-  'doha-institute-for-graduate-studies-scholarship': 'https://www.dohainstitute.edu.qa/EN/',
+  'doha-institute-for-graduate-studies-scholarship': 'https://www.dohainstitute.edu.qa/ar/Admissions-Office/Pages/Scholarships.aspx',
   'university-of-guelph-vaccarino-president-s-scholarship': 'https://www.uoguelph.ca/admission/undergraduate/finances/scholarships/presidents-scholarship',
   'jefferson-scholarship-university-of-virginia': 'https://www.jeffersonscholars.org/',
   'pierre-elliott-trudeau-foundation-doctoral-scholarship': 'https://www.trudeaufoundation.ca/',
