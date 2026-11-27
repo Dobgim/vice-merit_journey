@@ -40,12 +40,13 @@ import { giveaway, isGiveawayOpen } from './src/data/giveaway.js'
 import { CHINA_PATH, CSC_COVER, CSC_GROUPS, CSC_STEPS, CSC_TIPS, chinaSeo, cscType, isChinaGov } from './src/lib/chinaGov.js'
 import { CALENDAR_PATH, byMonth, calendarSeo, isFullyFunded } from './src/lib/deadlineCalendar.js'
 import { COLLECTIONS, STATS_PATH, scholarshipStats, statsSeo } from './src/lib/collections.js'
+import { WIDGET_PAGE_PATH, WIDGET_PATH, embedCode, widgetHtml, widgetSeo } from './src/lib/widget.js'
 
 const LOGO = `${SITE_URL}/merit-leaders-logo.jpg`
 const STATIC_PAGES = [
   '/', '/about', '/services', ...(showPackagesPage ? ['/packages'] : []), '/scholarships', '/fellowships', '/grants', '/internships',
   '/competitions', '/courses', '/countries', '/blog', '/faq', '/book-consultation', '/eligibility', '/explore', '/privacy', '/terms',
-  CHINA_PATH, CALENDAR_PATH, ...Object.values(COLLECTIONS).map((c) => c.path), STATS_PATH,
+  CHINA_PATH, CALENDAR_PATH, ...Object.values(COLLECTIONS).map((c) => c.path), STATS_PATH, WIDGET_PAGE_PATH,
 ]
 
 const esc = (s = '') => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
@@ -164,7 +165,7 @@ function preloadTags(chunks, name) {
 
 /** Links to the main pages, added under every pre-rendered page so each one can be reached by following links. */
 const SITE_LINKS = [
-  ['/', 'Home'], ['/scholarships', 'Scholarships'], [CALENDAR_PATH, 'Fully Funded Scholarships 2027 Calendar'], [COLLECTIONS.africa.path, 'Fully Funded Scholarships for Africans'], [COLLECTIONS['no-ielts'].path, 'Scholarships Without IELTS'], [STATS_PATH, 'Scholarship Statistics 2027'], [CHINA_PATH, 'Chinese Government Scholarships'], ['/fellowships', 'Fellowships'], ['/grants', 'Grants'], ['/internships', 'Internships'],
+  ['/', 'Home'], ['/scholarships', 'Scholarships'], [CALENDAR_PATH, 'Fully Funded Scholarships 2027 Calendar'], [COLLECTIONS.africa.path, 'Fully Funded Scholarships for Africans'], [COLLECTIONS['no-ielts'].path, 'Scholarships Without IELTS'], [STATS_PATH, 'Scholarship Statistics 2027'], [WIDGET_PAGE_PATH, 'Free Deadlines Widget'], [CHINA_PATH, 'Chinese Government Scholarships'], ['/fellowships', 'Fellowships'], ['/grants', 'Grants'], ['/internships', 'Internships'],
   ['/competitions', 'Competitions & Awards'], ['/courses', 'Free Courses'], ['/explore', 'Browse by nationality & level'], ['/eligibility', 'Am I eligible?'],
   ['/countries', 'Study Destinations'], ['/services', 'Services'], ['/packages', 'Packages & Pricing'], ['/blog', 'Blog'], ['/faq', 'FAQ'],
   ['/about', 'About Us'], ['/book-consultation', 'Book a Consultation'], ['/privacy', 'Privacy Policy'], ['/terms', 'Terms of Service'],
@@ -467,6 +468,14 @@ function staticPages({ open, landing, posts }) {
           `<p>You may quote these figures with a link to this page.</p><p><a href="${CALENDAR_PATH}">Fully funded deadline calendar</a> · <a href="${COLLECTIONS['no-ielts'].path}">Scholarships without IELTS</a></p>${cta}`
       })(),
     },
+    {
+      path: WIDGET_PAGE_PATH,
+      seo: widgetSeo,
+      body: `<p class="eb">For schools, blogs and student groups</p><h1>${esc(widgetSeo.title)}</h1><p>${esc(widgetSeo.description)}</p>` +
+        section('Your code', `<pre>${esc(embedCode(SITE_URL))}</pre>`) +
+        section('How to add it', items(['Copy the code above.', 'WordPress: add a Custom HTML block and paste it. Wix, Squarespace and most school sites have an “Embed code” or “HTML” element that works the same way.', 'Publish. The list updates by itself every day.'])) +
+        `<p><a href="${CALENDAR_PATH}">See the full fully funded deadline calendar</a></p>${cta}`,
+    },
     ...['privacy', 'terms'].map((key) => ({ path: `/${key}`, seo: { title: legal[key].title, description: legal[key].description }, body: legalBody(legal[key]) })),
   ]
   if (isGiveawayOpen()) {
@@ -728,6 +737,7 @@ export default function buildSeo() {
       const home = page(template, { title: pageTitle(fixed.home.seo.title), description: fixed.home.seo.description, url: `${SITE_URL}/`, image: LOGO, body: fixed.home.body })
       fs.writeFileSync(path.join(outDir, 'index.html'), home)
       hashes.set('/', digest(home))
+      writeHtml(outDir, WIDGET_PATH, widgetHtml(open.filter((e) => e.kind === 'scholarships' && isFullyFunded(e.item)), SITE_URL))
       await writeIndexNow(outDir, hashes)
     },
   }

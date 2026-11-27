@@ -36,6 +36,7 @@ const pages = {
   calendar: () => import('./pages/DeadlineCalendarPage'),
   collection: () => import('./pages/CollectionPage'),
   stats: () => import('./pages/StatsPage'),
+  widget: () => import('./pages/WidgetPage'),
 }
 
 const About = lazy(pages.about)
@@ -61,6 +62,7 @@ const ChinaGovScholarshipsPage = lazy(pages.china)
 const DeadlineCalendarPage = lazy(pages.calendar)
 const CollectionPage = lazy(pages.collection)
 const StatsPage = lazy(pages.stats)
+const WidgetPage = lazy(pages.widget)
 
 // The dashboard is a separate download, so visitors never load it.
 const AdminApp = lazy(() => import('./admin/AdminApp'))
@@ -72,6 +74,7 @@ const routePages = [
   [/^\/fully-funded-scholarships-2027\/?$/, pages.calendar],
   [/^\/(scholarships-without-ielts-2027|fully-funded-scholarships-for-africans-2027)\/?$/, pages.collection],
   [/^\/scholarship-statistics-2027\/?$/, pages.stats],
+  [/^\/deadline-widget\/?$/, pages.widget],
   [/^\/grants\/?$/, pages.grants],
   [/^\/internships\/?$/, pages.internships],
   [/^\/(fellowships|competitions)\/?$/, pages.opportunity],
@@ -143,6 +146,7 @@ export default function App() {
         <Route path="scholarships-without-ielts-2027" element={<CollectionPage key="no-ielts" which="no-ielts" />} />
         <Route path="fully-funded-scholarships-for-africans-2027" element={<CollectionPage key="africa" which="africa" />} />
         <Route path="scholarship-statistics-2027" element={<StatsPage />} />
+        <Route path="deadline-widget" element={<WidgetPage />} />
         <Route path="for/:slug" element={<LandingPage key="for" type="for" />} />
         <Route path="study-in/:slug" element={<LandingPage key="study-in" type="study-in" />} />
         <Route path="level/:slug" element={<LandingPage key="level" type="level" />} />
