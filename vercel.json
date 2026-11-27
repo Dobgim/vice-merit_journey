@@ -25,6 +25,11 @@
       "source": "/scholarships/king-s-business-school-doctoral-research-studentships-2027-28",
       "destination": "/scholarships/king-s-business-school-doctoral-research-studentships-2027-28-round-1",
       "permanent": true
+    },
+    {
+      "source": "/fellowships/mims-clinical-research-fellowships-2027",
+      "destination": "/fellowships/mims-clinical-research-fellowships-2027-umea-university-infection-medicine",
+      "permanent": true
     }
   ],
   "rewrites": [
