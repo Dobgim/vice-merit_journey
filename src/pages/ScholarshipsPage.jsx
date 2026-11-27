@@ -12,6 +12,24 @@ import { kinds } from '../data/opportunities'
 import { useOpportunities } from '../hooks/useScholarships'
 import { kindTitle, kindDescription } from '../lib/seo'
 import { CHINA_PATH, isChinaGov } from '../lib/chinaGov'
+import { CALENDAR_PATH } from '../lib/deadlineCalendar'
+
+/** Entry to the fully funded deadline calendar. */
+function CalendarLink() {
+  return (
+    <div className="container pt-4">
+      <Link
+        to={CALENDAR_PATH}
+        className="group flex items-center justify-between gap-4 rounded-2xl border border-gold-400/40 bg-gold-50 px-6 py-4 text-navy-950 shadow-soft transition-colors hover:border-gold-500"
+      >
+        <span className="text-base font-semibold">
+          <span className="text-gold-700">New:</span> Fully funded scholarships 2027, month by month by deadline
+        </span>
+        <Icon name="arrowRight" className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5" />
+      </Link>
+    </div>
+  )
+}
 
 /** Entry to the Chinese Government Scholarship section. */
 function ChinaBanner({ count }) {
@@ -68,6 +86,7 @@ export default function ScholarshipsPage() {
       </PageHeader>
 
       <ChinaBanner count={china} />
+      <CalendarLink />
       <Scholarships kind="scholarships" />
       <div id="alerts" className="scroll-mt-24">
         <WhatsAppGroup />

@@ -38,12 +38,13 @@ import { retiredSlugs, withDirectLink } from './src/data/fixes-oct21-2026.js'
 import { hasFixedDeadline, isOpenYet } from './src/lib/deadline.js'
 import { giveaway, isGiveawayOpen } from './src/data/giveaway.js'
 import { CHINA_PATH, CSC_COVER, CSC_GROUPS, CSC_STEPS, CSC_TIPS, chinaSeo, cscType, isChinaGov } from './src/lib/chinaGov.js'
+import { CALENDAR_PATH, byMonth, calendarSeo, isFullyFunded } from './src/lib/deadlineCalendar.js'
 
 const LOGO = `${SITE_URL}/merit-leaders-logo.jpg`
 const STATIC_PAGES = [
   '/', '/about', '/services', ...(showPackagesPage ? ['/packages'] : []), '/scholarships', '/fellowships', '/grants', '/internships',
   '/competitions', '/courses', '/countries', '/blog', '/faq', '/book-consultation', '/eligibility', '/explore', '/privacy', '/terms',
-  CHINA_PATH,
+  CHINA_PATH, CALENDAR_PATH,
 ]
 
 const esc = (s = '') => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
@@ -162,7 +163,7 @@ function preloadTags(chunks, name) {
 
 /** Links to the main pages, added under every pre-rendered page so each one can be reached by following links. */
 const SITE_LINKS = [
-  ['/', 'Home'], ['/scholarships', 'Scholarships'], [CHINA_PATH, 'Chinese Government Scholarships'], ['/fellowships', 'Fellowships'], ['/grants', 'Grants'], ['/internships', 'Internships'],
+  ['/', 'Home'], ['/scholarships', 'Scholarships'], [CALENDAR_PATH, 'Fully Funded Scholarships 2027 Calendar'], [CHINA_PATH, 'Chinese Government Scholarships'], ['/fellowships', 'Fellowships'], ['/grants', 'Grants'], ['/internships', 'Internships'],
   ['/competitions', 'Competitions & Awards'], ['/courses', 'Free Courses'], ['/explore', 'Browse by nationality & level'], ['/eligibility', 'Am I eligible?'],
   ['/countries', 'Study Destinations'], ['/services', 'Services'], ['/packages', 'Packages & Pricing'], ['/blog', 'Blog'], ['/faq', 'FAQ'],
   ['/about', 'About Us'], ['/book-consultation', 'Book a Consultation'], ['/privacy', 'Privacy Policy'], ['/terms', 'Terms of Service'],
@@ -385,6 +386,17 @@ function staticPages({ open, landing, posts }) {
           section('How to apply', `<ol>${CSC_STEPS.map((s) => `<li>${esc(s)}</li>`).join('')}</ol>`) +
           section('Good to know', `<ul>${CSC_TIPS.map((s) => `<li>${esc(s)}</li>`).join('')}</ul>`) +
           `<p><a href="/scholarships">All scholarships</a> · <a href="/study-in/china">Everything open in China</a></p>${cta}`
+      })(),
+    },
+    {
+      path: CALENDAR_PATH,
+      seo: calendarSeo,
+      body: (() => {
+        const months = byMonth(open.filter((e) => e.kind === 'scholarships' && isFullyFunded(e.item)), (e) => e.item)
+        const total = months.reduce((n, m) => n + m.items.length, 0)
+        return `<p class="eb">Plan your applications</p><h1>Fully Funded Scholarships 2027: Deadline Calendar</h1><p>${esc(calendarSeo.description)}</p><p>${total} fully funded scholarships are open now. Each covers tuition and living costs, and every deadline is checked on the funder’s own website.</p>` +
+          months.map((m) => section(`${m.label} (${m.items.length})`, summaryList(m.items))).join('') +
+          `<p><a href="/scholarships">All scholarships</a> · <a href="${CHINA_PATH}">Chinese Government Scholarships</a></p>${cta}`
       })(),
     },
     ...['privacy', 'terms'].map((key) => ({ path: `/${key}`, seo: { title: legal[key].title, description: legal[key].description }, body: legalBody(legal[key]) })),
