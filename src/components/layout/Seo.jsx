@@ -20,8 +20,19 @@ function setHeadTag(selector, create, attr, value) {
  * current page (without query string), so Google indexes each listing on its
  * own instead of treating every page as the homepage.
  */
+// The address the visitor landed on; its pre-rendered structured data (build-seo.js) applies only there.
+const landingPath = typeof window === 'undefined' ? '' : window.location.pathname
+
+const removePrerenderedLd = () =>
+  document.querySelectorAll('script[type="application/ld+json"][data-prerender]').forEach((s) => s.remove())
+
 export default function Seo({ title, description, jsonLd, noindex = false }) {
   const { pathname } = useLocation()
+
+  // After moving to another page, the landing page's pre-rendered structured data no longer applies.
+  useEffect(() => {
+    if (pathname !== landingPath) removePrerenderedLd()
+  }, [pathname])
 
   // The server answers every path with 200, so pages that should not be in
   // Google (not found, closed listings) say so with a robots tag instead.
@@ -51,6 +62,8 @@ export default function Seo({ title, description, jsonLd, noindex = false }) {
   const json = jsonLd ? JSON.stringify(jsonLd) : null
   useEffect(() => {
     if (!json) return
+    // The app's own copy replaces the pre-rendered one, so the page never has two.
+    removePrerenderedLd()
     const script = document.createElement('script')
     script.type = 'application/ld+json'
     script.dataset.page = 'true'

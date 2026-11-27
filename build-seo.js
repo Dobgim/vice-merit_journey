@@ -207,6 +207,38 @@ function similar(entry, open) {
     .slice(0, 3)
 }
 
+/**
+ * Structured data in pre-rendered HTML. `data-prerender` lets the app (Seo.jsx)
+ * swap it for its own copy, so a page never carries two.
+ */
+const ldScript = (data) => `<script type="application/ld+json" data-prerender>${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`
+const withLd = (html, data) => (data ? html.replace('</head>', () => `${ldScript(data)}</head>`) : html)
+
+/** Same breadcrumb and grant data the detail page adds in the browser. */
+function listingJsonLd({ kind, item, path: p }) {
+  const config = kinds[kind]
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+          { '@type': 'ListItem', position: 2, name: config.title, item: SITE_URL + config.path },
+          { '@type': 'ListItem', position: 3, name: item.name, item: SITE_URL + p },
+        ],
+      },
+      {
+        '@type': 'MonetaryGrant',
+        name: item.name,
+        ...(item.summary ? { description: item.summary } : {}),
+        url: (!item.officialSearch && item.officialUrl) || SITE_URL + p,
+        ...(item.org ? { funder: { '@type': 'Organization', name: item.org } } : {}),
+      },
+    ],
+  }
+}
+
 /** The detail page's content as plain HTML, section for section. */
 function detailBody(entry, open) {
   const { kind, item } = entry
@@ -597,7 +629,7 @@ export default function buildSeo() {
       for (const e of entries) {
         const guides = posts.filter((p) => p.related.includes(e.path))
         const seo = listingSeo(e.item, kinds[e.kind], { closed: !isOpen(e.item) })
-        write(e.path, withKeywords(page(template, {
+        write(e.path, withLd(withKeywords(page(template, {
           title: pageTitle(seo.title),
           description: seo.description,
           url: SITE_URL + e.path,
@@ -605,7 +637,7 @@ export default function buildSeo() {
           preload: detailPreload,
           noindex: !isOpen(e.item),
           body: detailBody(e, open) + guides.map((g) => `<p>Guide: <a href="${esc(g.to)}">${esc(g.title)}</a></p>`).join(''),
-        }), listingKeywords(e)))
+        }), listingKeywords(e)), isOpen(e.item) ? listingJsonLd(e) : null))
       }
       for (const k of Object.values(kinds)) {
         const list = open.filter((e) => e.kind === k.key).sort((a, b) => a.item.deadline.localeCompare(b.item.deadline))
@@ -621,7 +653,7 @@ export default function buildSeo() {
         const head = [
           `<meta property="article:published_time" content="${p.date?.toISOString() ?? ''}" />`,
           ...p.tags.map((t) => `<meta property="article:tag" content="${esc(t)}" />`),
-          `<script type="application/ld+json">${JSON.stringify(postJsonLd(p)).replace(/</g, '\\u003c')}</script>`,
+          ldScript(postJsonLd(p)),
         ].join('')
         const html = page(template, {
           title: pageTitle(p.title),
@@ -653,8 +685,7 @@ export default function buildSeo() {
       // Fixed pages, then the home page into index.html. Unknown addresses are also
       // answered with index.html, so they carry the home page's canonical until the app loads.
       const fixed = staticPages({ open, landing, posts })
-      const withJsonLd = (html, data) =>
-        data ? html.replace('</head>', () => `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script></head>`) : html
+      const withJsonLd = withLd
       for (const p of fixed.pages) {
         write(p.path, withJsonLd(page(template, { title: pageTitle(p.seo.title), description: p.seo.description, url: SITE_URL + p.path, image: LOGO, body: p.body }), p.jsonLd))
       }

@@ -20,6 +20,11 @@
       "source": "/scholarships/maastricht-university-nl-high-potential-scholarship-2027-28",
       "destination": "/scholarships/maastricht-university-nl-high-potential-scholarship-2027",
       "permanent": true
+    },
+    {
+      "source": "/scholarships/king-s-business-school-doctoral-research-studentships-2027-28",
+      "destination": "/scholarships/king-s-business-school-doctoral-research-studentships-2027-28-round-1",
+      "permanent": true
     }
   ],
   "rewrites": [
