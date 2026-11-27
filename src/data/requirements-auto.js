@@ -2642,4 +2642,289 @@ export const autoRequirements = {
     ],
   },
 
+  // Checked 2026-11-27 against each call’s official page.
+
+  'wesleyan-university-african-scholars-program-2027-entry': {
+    eligibility: [
+      "You must be a citizen or permanent resident of one of Africa’s 54 countries",
+      "You must not be a dual U.S. citizen or U.S. permanent resident",
+      "You must not have studied full-time at a college or university before",
+      "You must apply for need-based financial aid and show financial need",
+      "There is no separate scholarship application: you are considered automatically when you apply to Wesleyan",
+      "Selection looks at grades, curiosity, discipline, community involvement, leadership and English ability",
+    ],
+    documents: [
+      "Wesleyan application through the Common Application or the Coalition Application",
+      "CSS Profile for financial aid (Wesleyan’s code is 3959)",
+      "School records and recommendations, as for any international applicant seeking aid",
+      "SAT or ACT scores are optional; students from non-exam school systems are encouraged to send them",
+    ],
+  },
+
+  'wesleyan-university-freeman-asian-scholars-program-2027-entry': {
+    eligibility: [
+      "You must be a citizen or permanent resident of China, Hong Kong, Indonesia, Japan, Malaysia, the Philippines, Singapore, South Korea, Taiwan, Thailand or Vietnam",
+      "You must not be a dual U.S. citizen or U.S. permanent resident",
+      "You must not have studied full-time at a college or university before",
+      "You must apply for need-based financial aid and show financial need",
+      "There is no separate scholarship application: you are considered automatically when you apply to Wesleyan",
+      "Minimum English scores listed by Wesleyan include TOEFL 100, IELTS 7.5 or Duolingo 130",
+    ],
+    documents: [
+      "Wesleyan application through the Common Application or the Coalition Application",
+      "CSS Profile for financial aid, or the International Student Financial Aid Application if the Profile is not possible",
+      "English test score (TOEFL, IELTS or Duolingo) or SAT/ACT benchmark scores",
+      "Interview with Freeman alumni, if you are invited as a finalist",
+    ],
+  },
+
+  'philosophy-essay-prize-2026-humans-and-ai': {
+    eligibility: [
+      "The essay must be about the topic ‘Humans and AI’; the topic is read broadly and any area or tradition of philosophy is welcome",
+      "The essay must not be longer than 8,000 words",
+      "The essay must be anonymised so it can be read blind",
+      "Every entry is also treated as a submission to the journal Philosophy",
+    ],
+    documents: [
+      "Your essay (up to 8,000 words, anonymised)",
+      "An email to assistant@royalinstitutephilosophy.org with the subject line ‘Prize Essay’ (do not use the ScholarOne portal)",
+    ],
+  },
+
+  'a4-residency-art-center-international-residency-fellowship-2028-chengdu': {
+    eligibility: [
+      "Open to international artists and creative practitioners applying for the 2028 year-round intake",
+      "The residency lasts at least 8 weeks",
+      "Materials must be in both English and Chinese",
+      "You are judged on creativity, cross-disciplinary collaboration, feasibility and social and cultural impact",
+    ],
+    documents: [
+      "Personal photo",
+      "Portfolio",
+      "CV, highlighting any work with communities and commercial brands",
+      "Project proposal covering your aims, methods and how you will work with communities or partners",
+      "Everything sent by email to a4residency@a4am.cn, with your name and the cycle in the subject line",
+    ],
+  },
+
+  'imperial-aeronautics-phd-studentships-2027-admissions-round': {
+    eligibility: [
+      "You normally need a good 2:1 or a first-class degree from a UK university, or an equivalent from elsewhere",
+      "Each project lists its own minimum, for example a first-class MEng/MSci in engineering, maths, physics or a related subject",
+      "You can apply for at most two PhD projects in one academic year",
+      "International applicants may also need to meet English-language and visa requirements",
+      "Late applications are not accepted",
+    ],
+    documents: [
+      "Online application through My Imperial for the Aeronautics Research (PhD) programme, naming the project, group and supervisor",
+      "CV (no more than 2 pages)",
+      "Personal statement (no more than 2 pages)",
+      "Academic transcripts",
+      "Contact details for two referees",
+      "No separate research proposal is needed for an advertised studentship",
+    ],
+  },
+
+  'erasmus-mundus-master-in-geospatial-technologies-scholarship-2027-28': {
+    eligibility: [
+      "You need a bachelor’s degree of at least six semesters full time (180 ECTS credits) by the application deadline",
+      "Students from non-EU (partner) countries who have not finished their first degree by the deadline cannot apply for a scholarship",
+      "Students from EU programme countries with 150 credits may be accepted provisionally if they send the diploma by 15 July 2027",
+      "You need proof of English",
+      "You are judged on your degree grade and subject, English, work experience in geo-information, motivation and a complete application",
+    ],
+    documents: [
+      "Online application form",
+      "Bachelor diploma and transcript of records (with an official translation if not in English, Spanish, Portuguese, German or French)",
+      "Master diploma and transcript, if you have one",
+      "Proof of English level",
+      "European-format CV covering at least the last 5.5 years, month by month with no gaps, backed by supporting documents",
+      "Proof of nationality (passport or national ID card)",
+    ],
+  },
+
+  'mespom-erasmus-mundus-joint-master-in-environmental-sciences-policy-and-management-2027-29': {
+    eligibility: [
+      "You need a bachelor’s degree (or equivalent) from a recognised university, with at least three years of full-time study, or proof you will finish it before enrolling",
+      "A GPA of 3.5 or more on a 4.0 scale is required",
+      "The degree should ideally be in environmental studies or a close field; other fields are considered if you show commitment to environmental challenges",
+      "If English is not your first language you must send a test score such as TOEFL (for example 88 on the internet-based test)",
+    ],
+    documents: [
+      "Online application form (through Central European University’s system)",
+      "Scanned official bachelor’s transcript and diploma, in English",
+      "Statement of up to 350 words on your career goals and reasons for applying",
+      "CV or résumé, with a list of publications if you have any",
+      "English test score, if English is not your first language",
+      "Proof of residence issued in the last 12 months, only if you apply for financial aid (passports and bank statements are not accepted)",
+    ],
+  },
+
+  'europubhealth-erasmus-mundus-scholarship-2027-29': {
+    eligibility: [
+      "You need at least a bachelor’s degree (180 ECTS) or a certified equivalent, in any subject",
+      "Open to students from any country",
+      "You must prove language level for your chosen pathway before the deadline; the application cannot be reviewed without it",
+      "For the 2027 intake, B2 Spanish (DELE or SIELE) is needed for the first year in Granada or the second-year Health Services Management track",
+    ],
+    documents: [
+      "Online application on the emundus platform, written fully in English",
+      "Valid passport (or national ID card for European applicants)",
+      "CV (Europass format recommended)",
+      "Motivation letter in English, maximum 600 words",
+      "University degrees and transcripts, with English translations if needed",
+      "Proof of current residence issued within 12 months before the deadline",
+      "Proof of language level for your chosen pathway",
+    ],
+  },
+
+  'nerc-gw4-doctoral-landscape-awards-phd-studentships-for-september-2027-entry': {
+    eligibility: [
+      "Full studentships are for UK and Irish nationals who qualify for home fees",
+      "Only a small number of full studentships are open to international students (about 4 to 6 places this year)",
+      "Each project sets its own entry level, usually a first or upper second-class UK honours degree or equivalent",
+      "You can apply for only one PhD project across the whole GW4+ partnership; extra applications are rejected",
+      "All documents must be in English",
+    ],
+    documents: [
+      "CV",
+      "Personal statement written on the DLTP template (applications without it are not considered)",
+      "Academic transcripts (an interim transcript if you are still studying), with certified translations if needed",
+      "Two references, or the referees’ contact details if they cannot be uploaded",
+      "DLTP equality, diversity and inclusion survey",
+      "Files preferably in PDF, named with your surname and the document name",
+    ],
+  },
+
+  'france-excellence-eiffel-scholarship-2027': {
+    eligibility: [
+      "Master’s applicants must be 29 or younger; PhD applicants must be 35 or younger",
+      "You must be a foreign student and not currently studying in France",
+      "Dual nationals with French nationality cannot apply",
+      "You must not be receiving another French government scholarship",
+      "Only French higher education institutions can submit applications, so you apply through the university that wants you",
+      "PhD awards (36 months) go only to new candidates starting the first year of a doctorate",
+    ],
+    documents: [
+      "Copy of your passport identity page",
+      "CV of 1 to 2 pages",
+      "Transcripts from the last three years",
+      "Certificate or diploma showing your rank and grades",
+      "Language certificate, if relevant",
+      "Assessment of your excellence from the programme director at the French institution",
+    ],
+  },
+
+  'harding-distinguished-postgraduate-scholars-programme-2027': {
+    eligibility: [
+      "Open to PhD study at the University of Cambridge in any subject, full-time or part-time, and to any nationality",
+      "Students moving from a master’s or MPhil into a Cambridge PhD can apply; so can those on an MRes+PhD route",
+      "You cannot apply once you have already started your Cambridge PhD",
+      "People who already hold a PhD or earlier received a Harding scholarship are not normally eligible",
+      "Scholars are expected to live in the UK for most of their studies",
+      "The scholarship can be held at any Cambridge college except Trinity and St John’s",
+    ],
+    documents: [
+      "Cambridge PhD application through the University’s online Applicant Portal",
+      "Tick the box in the ‘Funding your Study’ section to be considered for funding",
+      "Submit by your course’s funding deadline (early December 2026 or early January 2027)",
+    ],
+  },
+
+  'ucl-epsrc-doctoral-landscape-award-uela-studentships-2027': {
+    eligibility: [
+      "You must meet UCL’s entry requirements and any extra ones from the host department",
+      "Open to Home and International fee status, but EPSRC caps international students at 30% of places",
+      "Some standard projects accept only Home fee status applicants; collaborative projects accept both",
+      "You must be a new PhD student; if you are already on a research programme you would have to restart",
+      "You can apply for up to three projects",
+    ],
+    documents: [
+      "Application through the UELA 27-28 portal on SurveyMonkey Apply (no other route is accepted)",
+      "Two references submitted by the deadline (applications with fewer than two are not eligible)",
+      "Later, if you get an informal offer: a UCL admissions application and formal offer",
+    ],
+  },
+
+  'oxford-skoll-scholarship-for-social-entrepreneurship-oxford-mba-2027-28': {
+    eligibility: [
+      "You need a proven record in social entrepreneurship and plan to keep creating social impact after the MBA",
+      "You must apply to the Oxford MBA, which needs an undergraduate degree and about two years of full-time work experience",
+      "Up to four Skoll Scholarships are awarded each year",
+      "Shortlisted candidates are interviewed",
+    ],
+    documents: [
+      "Complete Oxford MBA application",
+      "Skoll essay document, in the ‘Funding’ section of the MBA application form",
+      "GMAT or GRE score",
+      "Supporting statement, CV, references and the online assessment that are part of the MBA application",
+    ],
+  },
+
+  'university-of-the-people-tuition-free-online-degrees-january-2027-term': {
+    eligibility: [
+      "You must be at least 16 years old",
+      "You must have finished high school or an equivalent",
+      "You must be able to study in English",
+      "Everyone starts with Foundations courses; you need at least a 2.00 grade in each of the first two courses (or an overall 2.00 across up to five) to continue",
+      "Tuition is free, but there is an application fee and per-course assessment fees",
+    ],
+    documents: [
+      "Online application",
+      "High school diploma or equivalent (official diploma or transcript, a colour scan or a notarised copy)",
+      "Official notarised translation if the document is not in English",
+      "Non-refundable application fee of $60",
+      "Signed UoPeople Enrollment Agreement",
+    ],
+  },
+
+  'vienna-shorts-2027-film-submissions': {
+    eligibility: [
+      "Open to all genres and formats; competition films can be up to 30 minutes, non-competitive up to 45 minutes",
+      "Competition films must be finished after 1 January 2026 (non-competitive: after 1 January 2025)",
+      "Competition films must not be shown publicly in Vienna between January and May 2027, except at the Tricky Women Festival",
+      "All films need English subtitles",
+      "You must confirm the film and its screening do not break third-party rights",
+      "Rough or work-in-progress cuts are accepted once the picture is locked",
+    ],
+    documents: [
+      "Your film, uploaded digitally through Filmchief or FilmFreeway",
+      "English subtitles on the film",
+      "Submission fee of 5 to 19 euros per entry",
+      "Confirmation of rights for the film",
+    ],
+  },
+
+  'hundred-khalifa-award-spotlight-on-early-learning-impact-2027': {
+    eligibility: [
+      "Applicants from any country are welcome",
+      "The work must improve early learning for children from birth to 8 years old",
+      "Programmes, curricula, teaching methods, research and studies are all accepted",
+      "Individuals, teams and organisations can apply, non-profit or for-profit",
+      "Applications on the Khalifa Award site must be in English",
+    ],
+    documents: [
+      "For programmes, curricula and teaching practices: an innovation page submitted on the HundrED website",
+      "Application form on the Khalifa Award for Education website, in English",
+      "For research and studies: apply directly on the Khalifa Award website",
+    ],
+  },
+
+  'eu4m-erasmus-mundus-joint-master-in-mechatronic-engineering-2027-29': {
+    eligibility: [
+      "You need a bachelor’s degree (180 ECTS) in mechanical or electrical engineering, mechatronics, automotive, aerospace, sensor technology or a related engineering subject",
+      "Final-year students can apply and may get a conditional offer",
+      "You need certified language skills at level B1 (B2 recommended) in the language of your first-year university and at least A2 in the language of the second-year university",
+      "Your academic record is judged from complete grade lists, and work experience helps",
+    ],
+    documents: [
+      "Online application",
+      "Passport copy (preferred) or ID card for EU students",
+      "Bachelor degree and complete grade lists",
+      "Language certificates",
+      "Written statement from your degree office confirming enrolment and expected completion date, if you are in your final year",
+      "Validated paper copies and a legalised diploma are needed only if you are selected",
+    ],
+  },
+
 }
