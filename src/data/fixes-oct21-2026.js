@@ -194,18 +194,6 @@ export const retiredSlugs = new Set([
   // mandatory info session (15–24 Sep 2026); the declaration stage closed in October.
   'edinburgh-x-mastercard-foundation-online-learning-scholars',
   'university-of-edinburgh-mastercard-foundation-scholars-program',
-  // Too small to list (27 Nov 2026 "strong listings only" rule in routines/listing-rules.md):
-  'university-of-westminster-international-postgraduate-excellence-award-january-2027', // £3,000
-  'melbourne-international-excellence-scholarship-undergraduate-2027', // 20% fee remission
-  'waaw-foundation-need-based-scholarship-2026-2027-african-women-in-stem', // one-off $500
-  'tufts-master-of-public-health-25-tuition-scholarship-fall-2027-standalone-mph', // 25% tuition
-  'dorothy-marchus-senesh-fellowship-2027-28-peace-and-development-studies', // $5,000 a year
-  'university-of-groningen-nl-scholarship-2027-28', // one-off €5,000
-  'university-of-twente-nl-scholarship-2027-28', // one-off €5,000
-  'mcgill-university-entrance-scholarships-2027-international-undergraduate-applicants', // $3,000–10,000
-  'dalhousie-university-general-entrance-award-2027-28', // from $500
-  'college-board-bigfuture-scholarships', // small prize draws
-  'swe-golden-gate-section-scholarships', // $1,000–2,000
 ])
 
 /** Corrections found on the official pages. */
