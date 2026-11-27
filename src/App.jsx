@@ -34,6 +34,8 @@ const pages = {
   giveaway: () => import('./pages/GiveawayPage'),
   china: () => import('./pages/ChinaGovScholarshipsPage'),
   calendar: () => import('./pages/DeadlineCalendarPage'),
+  collection: () => import('./pages/CollectionPage'),
+  stats: () => import('./pages/StatsPage'),
 }
 
 const About = lazy(pages.about)
@@ -57,6 +59,8 @@ const LegalPage = lazy(pages.legal)
 const GiveawayPage = lazy(pages.giveaway)
 const ChinaGovScholarshipsPage = lazy(pages.china)
 const DeadlineCalendarPage = lazy(pages.calendar)
+const CollectionPage = lazy(pages.collection)
+const StatsPage = lazy(pages.stats)
 
 // The dashboard is a separate download, so visitors never load it.
 const AdminApp = lazy(() => import('./admin/AdminApp'))
@@ -66,6 +70,8 @@ const routePages = [
   [/^\/scholarships\/?$/, pages.scholarships],
   [/^\/chinese-government-scholarship\/?$/, pages.china],
   [/^\/fully-funded-scholarships-2027\/?$/, pages.calendar],
+  [/^\/(scholarships-without-ielts-2027|fully-funded-scholarships-for-africans-2027)\/?$/, pages.collection],
+  [/^\/scholarship-statistics-2027\/?$/, pages.stats],
   [/^\/grants\/?$/, pages.grants],
   [/^\/internships\/?$/, pages.internships],
   [/^\/(fellowships|competitions)\/?$/, pages.opportunity],
@@ -134,6 +140,9 @@ export default function App() {
         <Route path="explore" element={<ExplorePage />} />
         <Route path="chinese-government-scholarship" element={<ChinaGovScholarshipsPage />} />
         <Route path="fully-funded-scholarships-2027" element={<DeadlineCalendarPage />} />
+        <Route path="scholarships-without-ielts-2027" element={<CollectionPage key="no-ielts" which="no-ielts" />} />
+        <Route path="fully-funded-scholarships-for-africans-2027" element={<CollectionPage key="africa" which="africa" />} />
+        <Route path="scholarship-statistics-2027" element={<StatsPage />} />
         <Route path="for/:slug" element={<LandingPage key="for" type="for" />} />
         <Route path="study-in/:slug" element={<LandingPage key="study-in" type="study-in" />} />
         <Route path="level/:slug" element={<LandingPage key="level" type="level" />} />

@@ -190,6 +190,11 @@ Append rows to the right array in `src/data/listings-auto.js` (`scholarshipRows`
 - **`summary`:** one plain sentence.
 - **`eligibility`:** 3 to 8 short items from the official call (nationality or region, level and
   degree, age, grades, language, work experience, other conditions).
+  - **Always include the English requirement as the call states it**, with every alternative it
+    accepts, for example "English: IELTS 6.5, TOEFL 90 or Duolingo 120; exempt if your degree was
+    taught in English (MOI letter)". Students search for scholarships without IELTS, and the site's
+    "Scholarships without IELTS" page is built from this line. Only write an alternative the
+    official call actually names.
 - **`documents`:** everything the call asks applicants to submit.
 - Write only what the official call states. Never guess.
 - Use ’ or double quotes for apostrophes.

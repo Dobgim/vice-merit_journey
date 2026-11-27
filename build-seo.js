@@ -39,12 +39,13 @@ import { hasFixedDeadline, isOpenYet } from './src/lib/deadline.js'
 import { giveaway, isGiveawayOpen } from './src/data/giveaway.js'
 import { CHINA_PATH, CSC_COVER, CSC_GROUPS, CSC_STEPS, CSC_TIPS, chinaSeo, cscType, isChinaGov } from './src/lib/chinaGov.js'
 import { CALENDAR_PATH, byMonth, calendarSeo, isFullyFunded } from './src/lib/deadlineCalendar.js'
+import { COLLECTIONS, STATS_PATH, scholarshipStats, statsSeo } from './src/lib/collections.js'
 
 const LOGO = `${SITE_URL}/merit-leaders-logo.jpg`
 const STATIC_PAGES = [
   '/', '/about', '/services', ...(showPackagesPage ? ['/packages'] : []), '/scholarships', '/fellowships', '/grants', '/internships',
   '/competitions', '/courses', '/countries', '/blog', '/faq', '/book-consultation', '/eligibility', '/explore', '/privacy', '/terms',
-  CHINA_PATH, CALENDAR_PATH,
+  CHINA_PATH, CALENDAR_PATH, ...Object.values(COLLECTIONS).map((c) => c.path), STATS_PATH,
 ]
 
 const esc = (s = '') => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
@@ -163,7 +164,7 @@ function preloadTags(chunks, name) {
 
 /** Links to the main pages, added under every pre-rendered page so each one can be reached by following links. */
 const SITE_LINKS = [
-  ['/', 'Home'], ['/scholarships', 'Scholarships'], [CALENDAR_PATH, 'Fully Funded Scholarships 2027 Calendar'], [CHINA_PATH, 'Chinese Government Scholarships'], ['/fellowships', 'Fellowships'], ['/grants', 'Grants'], ['/internships', 'Internships'],
+  ['/', 'Home'], ['/scholarships', 'Scholarships'], [CALENDAR_PATH, 'Fully Funded Scholarships 2027 Calendar'], [COLLECTIONS.africa.path, 'Fully Funded Scholarships for Africans'], [COLLECTIONS['no-ielts'].path, 'Scholarships Without IELTS'], [STATS_PATH, 'Scholarship Statistics 2027'], [CHINA_PATH, 'Chinese Government Scholarships'], ['/fellowships', 'Fellowships'], ['/grants', 'Grants'], ['/internships', 'Internships'],
   ['/competitions', 'Competitions & Awards'], ['/courses', 'Free Courses'], ['/explore', 'Browse by nationality & level'], ['/eligibility', 'Am I eligible?'],
   ['/countries', 'Study Destinations'], ['/services', 'Services'], ['/packages', 'Packages & Pricing'], ['/blog', 'Blog'], ['/faq', 'FAQ'],
   ['/about', 'About Us'], ['/book-consultation', 'Book a Consultation'], ['/privacy', 'Privacy Policy'], ['/terms', 'Terms of Service'],
@@ -429,6 +430,41 @@ function staticPages({ open, landing, posts }) {
         return `<p class="eb">Plan your applications</p><h1>Fully Funded Scholarships 2027: Deadline Calendar</h1><p>${esc(calendarSeo.description)}</p><p>${total} fully funded scholarships are open now. Each covers tuition and living costs, and every deadline is checked on the funder’s own website.</p>` +
           months.map((m) => section(`${m.label} (${m.items.length})`, summaryList(m.items))).join('') +
           `<p><a href="/scholarships">All scholarships</a> · <a href="${CHINA_PATH}">Chinese Government Scholarships</a></p>${cta}`
+      })(),
+    },
+    ...Object.entries(COLLECTIONS).map(([key, c]) => ({
+      path: c.path,
+      seo: c.seo,
+      body: (() => {
+        const list = open.filter((e) => e.kind === 'scholarships' && c.test(e.item)).sort((a, b) => a.item.deadline.localeCompare(b.item.deadline))
+        const seen = new Set()
+        // Each listing appears once, in the first group it fits (as on the page).
+        const groups = (c.groups ?? [{ key: 'all', title: null, test: () => true }]).map((g) => {
+          const members = list.filter((e) => !seen.has(e.path) && g.test(e.item))
+          members.forEach((e) => seen.add(e.path))
+          return { title: g.title, members }
+        })
+        return `<p class="eb">${esc(c.eyebrow)}</p><h1>${esc(c.seo.title)}</h1><p>${esc(c.lede)}</p><p>${list.length} open now.</p>` +
+          section('Before you apply', items(c.tips)) +
+          groups.map((g) => (g.members.length ? (g.title ? section(`${g.title} (${g.members.length})`, summaryList(g.members)) : summaryList(g.members)) : '')).join('') +
+          `<p><a href="${CALENDAR_PATH}">Fully funded scholarships by deadline month</a> · <a href="/scholarships">All scholarships</a></p>${cta}`
+      })(),
+    })),
+    {
+      path: STATS_PATH,
+      seo: statsSeo,
+      body: (() => {
+        const count = (k) => open.filter((e) => e.kind === k).length
+        const s = scholarshipStats(open.filter((e) => e.kind === 'scholarships').map((e) => e.item), {
+          fellowships: count('fellowships'), grants: count('grants'), internships: count('internships'), competitions: count('competitions'),
+        })
+        const rows = (list, unit) => `<ul>${list.map((r) => `<li>${esc(r.label ?? r.name)}: ${r.count} ${esc(unit)}</li>`).join('')}</ul>`
+        return `<p class="eb">Research</p><h1>Scholarship Statistics 2027</h1><p>${esc(statsSeo.description)}</p>` +
+          `<ul><li>${s.total} scholarships open now</li><li>${s.fullPct}% fully funded (${s.full} of ${s.total})</li><li>${s.countryCount} host countries</li><li>${s.noIelts} (${s.noIeltsPct}%) accept proof of English without IELTS</li>${s.busiest ? `<li>Busiest deadline month: ${esc(s.busiest.label)} (${s.busiest.count})</li>` : ''}</ul>` +
+          section('Scholarships closing each month', rows(s.byMonth, 'closing')) +
+          section('Top 10 host countries', rows(s.topCountries, 'open scholarships')) +
+          section('By level of study', `<ul>${s.levels.map((l) => `<li>${esc(l.label)}: ${l.count} open, ${l.full} fully funded</li>`).join('')}</ul>`) +
+          `<p>You may quote these figures with a link to this page.</p><p><a href="${CALENDAR_PATH}">Fully funded deadline calendar</a> · <a href="${COLLECTIONS['no-ielts'].path}">Scholarships without IELTS</a></p>${cta}`
       })(),
     },
     ...['privacy', 'terms'].map((key) => ({ path: `/${key}`, seo: { title: legal[key].title, description: legal[key].description }, body: legalBody(legal[key]) })),

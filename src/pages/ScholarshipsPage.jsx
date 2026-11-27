@@ -13,20 +13,29 @@ import { useOpportunities } from '../hooks/useScholarships'
 import { kindTitle, kindDescription } from '../lib/seo'
 import { CHINA_PATH, isChinaGov } from '../lib/chinaGov'
 import { CALENDAR_PATH } from '../lib/deadlineCalendar'
+import { COLLECTIONS, STATS_PATH } from '../lib/collections'
 
-/** Entry to the fully funded deadline calendar. */
+const GUIDES = [
+  [CALENDAR_PATH, 'Fully funded scholarships 2027, by deadline month'],
+  [COLLECTIONS.africa.path, 'Fully funded scholarships for Africans 2027'],
+  [COLLECTIONS['no-ielts'].path, 'Scholarships without IELTS 2027'],
+  [STATS_PATH, 'Scholarship statistics 2027'],
+]
+
+/** Entry to the deadline calendar and the topic pages. */
 function CalendarLink() {
   return (
-    <div className="container pt-4">
-      <Link
-        to={CALENDAR_PATH}
-        className="group flex items-center justify-between gap-4 rounded-2xl border border-gold-400/40 bg-gold-50 px-6 py-4 text-navy-950 shadow-soft transition-colors hover:border-gold-500"
-      >
-        <span className="text-base font-semibold">
-          <span className="text-gold-700">New:</span> Fully funded scholarships 2027, month by month by deadline
-        </span>
-        <Icon name="arrowRight" className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5" />
-      </Link>
+    <div className="container grid gap-3 pt-4 sm:grid-cols-2">
+      {GUIDES.map(([to, label]) => (
+        <Link
+          key={to}
+          to={to}
+          className="group flex items-center justify-between gap-4 rounded-2xl border border-gold-400/40 bg-gold-50 px-6 py-4 text-navy-950 shadow-soft transition-colors hover:border-gold-500"
+        >
+          <span className="text-base font-semibold">{label}</span>
+          <Icon name="arrowRight" className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5" />
+        </Link>
+      ))}
     </div>
   )
 }
