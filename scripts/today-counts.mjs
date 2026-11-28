@@ -45,6 +45,32 @@ const badFunding = text
   .map((line) => [field(line, 'funding'), field(line, 'name')])
   .filter(([f]) => f && f !== 'Fully Funded' && f !== 'Partially Funded')
 
+// Today's rows that repeat a listing already on the site (in any data file), matched by
+// the official link or by the name without years, brackets and filler words.
+const dataDir = new URL('../src/data/', import.meta.url)
+const normName = (n) =>
+  n.toLowerCase().replace(/\([^)]*\)/g, ' ').replace(/[’'`]/g, '').replace(/\b(20\d\d)(\s*[–/-]\s*(20)?\d\d)?\b/g, ' ')
+    .replace(/\b(the|of|for|and|in|at|programme|program|scholarships?|fellowships?|awards?|round|call|intake|entry|university|school)\b/g, ' ')
+    .replace(/[^a-z0-9]+/g, ' ').trim()
+const normUrl = (u) => u.replace(/^https?:\/\/(www\.)?/, '').replace(/[?#].*$/, '').replace(/\/+$/, '').toLowerCase()
+const existing = []
+for (const file of fs.readdirSync(dataDir).filter((f) => /^(listings|scholarships|grants|internships|opportunities|updates)/.test(f) && f.endsWith('.js'))) {
+  fs.readFileSync(new URL(file, dataDir), 'utf8').split('\n').forEach((line, i) => {
+    const name = field(line, 'name')
+    if (!name || line.includes(`added: '${day}`)) return
+    existing.push({ at: `${file}:${i + 1}`, name, key: normName(name), url: normUrl(field(line, 'url')) })
+  })
+}
+const duplicates = []
+for (const line of text.split('\n')) {
+  if (!line.includes(`added: '${day}`)) continue
+  const name = field(line, 'name')
+  const key = normName(name)
+  const url = normUrl(field(line, 'url'))
+  const hit = existing.find((e) => (key && e.key === key) || (url && url.length > 20 && e.url === url))
+  if (hit) duplicates.push(`  "${name}"\n    already listed as "${hit.name}" (${hit.at})`)
+}
+
 const count = (o, k) => o[k] ?? 0
 const sum = (pred) => Object.entries(levels).filter(([k]) => pred(k)).reduce((n, [, v]) => n + v, 0)
 console.log(`Added on ${day} (UTC)`)
@@ -59,6 +85,10 @@ console.log('Other types still under 5:', short.length ? short.join(', ') : 'non
 if (badFunding.length) {
   console.log("WARNING: funding must be 'Fully Funded' or 'Partially Funded'. Fix these rows:")
   for (const [f, name] of badFunding) console.log(`  ${f}: ${name}`)
+}
+if (duplicates.length) {
+  console.log('WARNING: possible duplicates. Open both rows; if it is the same call, delete today’s row (update the old one instead):')
+  console.log(duplicates.join('\n'))
 }
 console.log('By country:', JSON.stringify(countries))
 console.log('Countries already full for today (skip them):', full.length ? full.join(', ') : 'none')

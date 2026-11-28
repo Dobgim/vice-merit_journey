@@ -153,8 +153,13 @@ number of queries and candidates checked, per type.
 3. **The funder's own link.** `url` is the funder's own page for this call. Never an aggregator,
    a general index or a search link.
 4. **Open to international applicants** (see the goal above).
-5. **Not already on the site.** Run `grep -ri` on the programme name and key words across
-   `src/data/*.js`, and check `retiredSlugs` in `src/data/fixes-oct21-2026.js`.
+5. **Not already on the site.** Run `grep -ri` on the programme name, its key words (search the
+   distinctive words, not the full title: "Earth Prize", "Social Justice", "Global Talent"), **and
+   the official URL** across `src/data/*.js`, and check `retiredSlugs` in
+   `src/data/fixes-oct21-2026.js`. The same call is often already listed under a slightly
+   different name. `node scripts/today-counts.mjs` lists any of today's rows that match an
+   existing listing: **before every commit, delete each of today's rows it flags as the same
+   call** (update the existing row instead if something changed).
 6. **Funded** (fully, or partly at the level in "Strong listings only"), or, for a competition, a
    prize. If applying costs money, put the fee in `note` and add 'Application fee' to `tags`.
 
